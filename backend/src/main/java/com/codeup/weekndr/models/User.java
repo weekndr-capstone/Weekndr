@@ -34,10 +34,22 @@ public class User {
 
     public User(){}
 
-    public User(String username, String email, String phone_number, String password, List<Trip> trips, Timestamp created){
+    public User(User copy){
+        id = copy.id;
+        username = copy.username;
+        email = copy.email;
+        phone_number= copy.phone_number;
+        img_path = copy.img_path;
+        password = copy.password;
+        created_at = copy.created_at;
+        trips = copy.trips;
+    }
+
+    public User(String username, String email, String phone_number, String img_path, String password, List<Trip> trips, Timestamp created){
         this.username = username;
         this.email = email;
         this.phone_number= phone_number;
+        this.img_path = img_path;
         this.password = password;
         this.created_at = created.toLocalDateTime();
         this.trips = trips;
