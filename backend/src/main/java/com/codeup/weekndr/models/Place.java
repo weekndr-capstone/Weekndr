@@ -5,6 +5,7 @@ import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "places")
@@ -33,14 +34,25 @@ public class Place {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user_id;
-    @OneToOne
+    @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "trip_id")
-    private Trip trip_id;
+    private Trip trip;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
+    private List<Vote> votes;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
+    private List<Photo> photos;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
+    private List<Comment> comments;
 
     public Place(){}
 
-    public Place(String yelp_uniq, String name, String address, Boolean suggested, String imgURL, String websiteURL, String hotelURL, String phone_number, String rating, String price, Date checkin_date, Date checkout_date, LocalDateTime created_at, User user_id, Trip trip_id) {
+    public Place(String yelp_uniq, String name, String address, Boolean suggested, String imgURL, String websiteURL, String hotelURL, String phone_number, String rating, String price,
+                 Date checkin_date, Date checkout_date, LocalDateTime created_at, User user_id, Trip trip_id,
+                 List<Vote> votes, List<Comment> comments, List<Photo> photos) {
         this.yelp_uniq = yelp_uniq;
         this.name = name;
         this.address = address;
@@ -54,8 +66,11 @@ public class Place {
         this.checkin_date = checkin_date;
         this.checkout_date = checkout_date;
         this.created_at = created_at;
+        this.votes = votes;
+        this.comments = comments;
+        this.photos = photos;
         this.user_id = user_id;
-        this.trip_id = trip_id;
+        this.trip = trip_id;
     }
 
     public Place(String yelp_uniq, String name, String address, Boolean suggested, String imgURL, String websiteURL, String phone_number, String rating, String price, Date event_date, LocalDateTime created_at, User user_id, Trip trip_id) {
@@ -71,7 +86,7 @@ public class Place {
         this.event_date = event_date;
         this.created_at = created_at;
         this.user_id = user_id;
-        this.trip_id = trip_id;
+        this.trip = trip_id;
     }
 
     public long getId() {
@@ -203,10 +218,34 @@ public class Place {
     }
 
     public Trip getTrip_id() {
-        return trip_id;
+        return trip;
     }
 
     public void setTrip_id(Trip trip_id) {
-        this.trip_id = trip_id;
+        this.trip = trip_id;
+    }
+
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
+    }
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
