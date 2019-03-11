@@ -27,6 +27,10 @@ public class Comment {
     @OneToOne
     @JoinColumn(name ="comment_id")
     private Comment parent_comment_id;
+    @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @JoinColumn(name = "trip_id")
+    private Place place;
 
     public Comment() {}
 

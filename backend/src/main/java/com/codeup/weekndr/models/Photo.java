@@ -19,10 +19,10 @@ public class Photo {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToOne
+    @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @JoinColumn(name = "places_id")
-    private Place places;
+    @JoinColumn(name = "trip_id")
+    private Place place;
 
     public Photo() {}
 
@@ -30,7 +30,7 @@ public class Photo {
         this.img_path = img_path;
         this.created_at = created_at;
         this.user = user;
-        this.places = places;
+        this.place = places;
     }
 
     public long getId() {
@@ -66,10 +66,10 @@ public class Photo {
     }
 
     public Place getPlaces() {
-        return places;
+        return place;
     }
 
     public void setPlaces(Place places) {
-        this.places = places;
+        this.place = places;
     }
 }

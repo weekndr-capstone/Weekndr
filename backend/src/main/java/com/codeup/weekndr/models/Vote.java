@@ -20,10 +20,10 @@ public class Vote {
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToOne
+    @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @JoinColumn(name = "places_id")
-    private Place places;
+    @JoinColumn(name = "trip_id")
+    private Place place;
 
     public Vote() {}
 
@@ -31,7 +31,7 @@ public class Vote {
         this.upvote = upvote;
         this.created_at = created_at;
         this.user = user;
-        this.places = places;
+        this.place = places;
     }
 
     public long getId() {
@@ -67,10 +67,10 @@ public class Vote {
     }
 
     public Place getPlaces() {
-        return places;
+        return place;
     }
 
     public void setPlaces(Place places) {
-        this.places = places;
+        this.place = places;
     }
 }
