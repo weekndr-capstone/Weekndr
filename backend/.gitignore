@@ -27,3 +27,5 @@ HELP.md
 
 /src/main/resources/application.properties
 weekndr/backend/src/main/resources/application.properties
+
+**/application.properties
