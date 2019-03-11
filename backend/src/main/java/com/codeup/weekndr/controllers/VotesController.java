@@ -23,12 +23,12 @@ public class VotesController {
         return voteDao.findAll();
     }
 
-    @GetMapping("/trip/{id}")
+    @GetMapping("/vote/{id}")
     public Vote oneTrip(@PathVariable long id){
         return voteDao.findById(id);
     }
 
-    @PostMapping("/trip")
+    @PostMapping("/vote")
     public void userInputed(Vote vote) {
         voteDao.save(vote);
     }
