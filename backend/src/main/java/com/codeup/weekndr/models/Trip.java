@@ -28,13 +28,16 @@ public class Trip {
     @JoinColumn(name = "user_id")
     private User user_id;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
+    private List<Place> places;
+
     @ManyToMany(mappedBy = "trips")
     @JsonBackReference
     private List<User> users;
 
     public Trip() {}
 
-    public Trip(String title, String location, String trip_description, Date start_date, Date end_date, Timestamp created_at, User user_id, List<User> users) {
+    public Trip(String title, String location, String trip_description, Date start_date, Date end_date, Timestamp created_at, User user_id, List<Place> places,List<User> users) {
         this.title = title;
         this.location = location;
         this.trip_description = trip_description;
@@ -43,6 +46,7 @@ public class Trip {
         this.created_at = created_at.toLocalDateTime();
         this.user_id = user_id;
         this.users = users;
+        this.places = places;
     }
 
     public long getId() {
@@ -115,5 +119,13 @@ public class Trip {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public List<Place> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(List<Place> places) {
+        this.places = places;
     }
 }
