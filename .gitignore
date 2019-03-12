@@ -29,9 +29,11 @@ HELP.md
 **ApiKeys
 
 **/application.properties
+**/models/ApiKeys.java
 **/models/ApiKeys
 
 application.properties
-ApiKeys
+ApiKeys.java
 
+**/ApiKeys.java
 
