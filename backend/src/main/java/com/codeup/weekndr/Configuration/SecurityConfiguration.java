@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -23,6 +25,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
+        StrictHttpFirewall firewall = new StrictHttpFirewall();
+        firewall.setAllowUrlEncodedSlash(true);
+        return firewall;
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -33,27 +42,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                /* Login configuration */
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/") // user's home page, it can be any URL
-                .permitAll() // Anyone can go to the login page
-                /* Logout configuration */
-                .and()
-                .logout()
-                .logoutSuccessUrl("/login?logout") // append a query string value
-                /* Pages that can be viewed without having to log in */
-                .and()
-                .authorizeRequests()
-                .antMatchers("/") // anyone can see the home and the ads pages
-                .permitAll()
-                /* Pages that require athentication */
-                .and()
-                .authorizeRequests()
-                .antMatchers(
-                )
-                .authenticated()
-        ;
+//        http
+//                /* Login configuration */
+//                .formLogin()
+//                .loginPage("/login")
+//                .defaultSuccessUrl("/") // user's home page, it can be any URL
+//                .permitAll() // Anyone can go to the login page
+//                /* Logout configuration */
+//                .and()
+//                .logout()
+//                .logoutSuccessUrl("/login?logout") // append a query string value
+//                /* Pages that can be viewed without having to log in */
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/") // anyone can see the home and the ads pages
+//                .permitAll()
+//                /* Pages that require athentication */
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers(
+//                )
+//                .authenticated()
+//        ;
     }
 }

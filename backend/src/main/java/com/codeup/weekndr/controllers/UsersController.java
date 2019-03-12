@@ -21,7 +21,7 @@ public class UsersController {
         return userDao.findAll();
     }
 
-    @GetMapping("/userlist")
+    @GetMapping("/user")
     public User oneUser(@RequestParam long id){
         return userDao.findById(id);
     }
