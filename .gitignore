@@ -27,3 +27,11 @@ HELP.md
 
 **application.properties
 **ApiKeys
+
+**/application.properties
+**/ApiKeys
+
+application.properties
+ApiKeys
+
+backend/src/main/java/com/codeup/weekndr/models/ApiKeys.java
