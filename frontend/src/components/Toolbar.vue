@@ -1,6 +1,6 @@
 <template>
 
-        <v-container id="inspire">
+        <v-app id="inspire">
             <v-toolbar flat>
                 <v-toolbar-side-icon></v-toolbar-side-icon>
                 <v-toolbar-title>Weekndr</v-toolbar-title>
@@ -11,7 +11,7 @@
                     <v-btn flat>Login</v-btn>
                 </v-toolbar-items>
             </v-toolbar>
-        </v-container>
+        </v-app>
 
 </template>
 

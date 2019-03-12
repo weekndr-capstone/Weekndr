@@ -18,7 +18,6 @@
 
 
       <HelloWorld/>
-
   </v-app>
 </template>
 
