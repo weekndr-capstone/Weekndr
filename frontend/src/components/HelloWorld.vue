@@ -4,13 +4,15 @@
           background-position
           aspect-ratio="2.1"
   >
+    <Toolbar/>
     <SearchCard/>
   </v-img>
 </template>
 <script>
   import SearchCard from "./SearchCard";
+  import Toolbar from "./Toolbar";
   export default {
-    components: {SearchCard},
+    components: {Toolbar, SearchCard},
     data: () => ({
       ecosystem: [
         {

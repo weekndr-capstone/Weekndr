@@ -1,5 +1,5 @@
 <template>
-    <v-toolbar flat>
+    <v-toolbar flat class="Navbar">
         <v-toolbar-side-icon></v-toolbar-side-icon>
         <v-toolbar-title>Weekndr</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -18,5 +18,8 @@
 </script>
 
 <style scoped>
-
+    .Navbar {
+        background: transparent;
+        border-color: transparent;
+    }
 </style>
