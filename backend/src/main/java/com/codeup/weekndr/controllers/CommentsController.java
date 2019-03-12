@@ -21,7 +21,7 @@ public class CommentsController {
         return commentDao.findAll();
     }
 
-    @GetMapping("/commentlist")
+    @GetMapping("/comment")
     public Comment oneComment(@RequestParam long id){
         return commentDao.findById(id);
     }
