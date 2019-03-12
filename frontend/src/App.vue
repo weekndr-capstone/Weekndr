@@ -15,7 +15,8 @@ export default {
   components: {
     SearchCard,
     HelloWorld,
-    Toolbar
+    Toolbar,
+      CardItem
   },
   data () {
     return {
