@@ -1,6 +1,5 @@
 package com.codeup.weekndr.controllers;
 
-import com.codeup.weekndr.models.ApiKeys;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

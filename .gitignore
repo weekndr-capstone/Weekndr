@@ -29,9 +29,8 @@ HELP.md
 **ApiKeys
 
 **/application.properties
-**/ApiKeys
+**/models/ApiKeys
 
 application.properties
 ApiKeys
 
-backend/src/main/java/com/codeup/weekndr/models/ApiKeys.java
