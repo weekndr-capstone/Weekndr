@@ -1,6 +1,6 @@
 <template>
 
-        <v-container id="inspire">
+        <v-container>
             <v-toolbar flat>
                 <v-toolbar-side-icon></v-toolbar-side-icon>
                 <v-toolbar-title>Weekndr</v-toolbar-title>
