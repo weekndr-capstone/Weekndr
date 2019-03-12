@@ -1,11 +1,16 @@
 <template>
-    <v-img
-            src="https://picsum.photos/1920/1080"
-            background-position
-    />
+  <v-img
+          src="https://picsum.photos/1920/1080"
+          background-position
+          aspect-ratio="2.1"
+  >
+    <SearchCard/>
+  </v-img>
 </template>
 <script>
+  import SearchCard from "./SearchCard";
   export default {
+    components: {SearchCard},
     data: () => ({
       ecosystem: [
         {
