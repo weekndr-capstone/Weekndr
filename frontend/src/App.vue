@@ -1,35 +1,22 @@
 <template>
   <v-app>
     <Toolbar />
-    <!--<v-toolbar app>-->
-      <!--<v-toolbar-title class="headline text-uppercase">-->
-        <!--<span>Vuetify</span>-->
-        <!--<span class="font-weight-light">MATERIAL DESIGN</span>-->
-      <!--</v-toolbar-title>-->
-      <!--<v-spacer></v-spacer>-->
-      <!--<v-btn-->
-        <!--flat-->
-        <!--href="https://github.com/vuetifyjs/vuetify/releases/latest"-->
-        <!--target="_blank"-->
-      <!--&gt;-->
-        <!--<span class="mr-2">Latest Release</span>-->
-      <!--</v-btn>-->
-    <!--</v-toolbar>-->
-
-
-      <HelloWorld/>
+    <HelloWorld/>
   </v-app>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld'
 import Toolbar from './components/Toolbar'
+import SearchCard from "./components/SearchCard";
 
 export default {
   name: 'App',
   components: {
+    SearchCard,
     HelloWorld,
-    Toolbar
+    Toolbar,
+      CardItem
   },
   data () {
     return {
