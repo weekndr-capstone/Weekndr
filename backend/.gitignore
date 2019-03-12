@@ -25,6 +25,8 @@ HELP.md
 /.nb-gradle/
 /build/
 
+**/ApiKeys
+
 /src/main/resources/application.properties
 weekndr/backend/src/main/resources/application.properties
 
