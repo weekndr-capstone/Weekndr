@@ -6,6 +6,7 @@ public class ApiKeys {
     private String twillio;
 
     public ApiKeys(String weather, String twillio) {
+        this.yelp = "mxTdeKLYylDLLC26lxF50VWBORZ0sOePtNx356IxfUbMBrn3QLYg63Gdukd051KXEK1-4Q7fBV5m0tyr1FBvJvck9CTL7a87m9zVrkhy6sD0VAzfzDX6Ji4sm96GXHYx";
         this.weather = weather;
         this.twillio = twillio;
     }
