@@ -9,14 +9,12 @@
 <script>
 import HelloWorld from './components/HelloWorld'
 import CardItem from './components/CardItem'
-import Toolbar from './components/Toolbar'
 import CardCarousel from './components/CardCarousel'
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    Toolbar,
     CardCarousel,
     CardItem
   },
