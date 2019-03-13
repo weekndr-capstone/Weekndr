@@ -14,15 +14,10 @@
                     </v-container>
                 </v-img>
                 <v-card-actions>
-                    <v-btn icon v-on:click="counter += 1">
-                        <i class="far fa-heart"></i>
+                    <v-btn icon v-on:click="redHeartAndIncrement()">
+                        <i  :class=heartIconClasses></i>
                         <span> {{ counter }}</span>
                     </v-btn>
-                    <!--<v-btn icon v-on:click="comments">-->
-                        <!--<i class="far fa-comment 10x"></i>-->
-                    <!--</v-btn>-->
-
-                    <!--This is the modal on click for comments:-->
                     <v-dialog v-model="dialogue" max-width="600px">
                         <template v-slot:activator="{ on }">
                             <v-spacer>
@@ -71,13 +66,24 @@
                     {title: "hi", src: "hi"}
                 ],
                 counter: 0,
-                dialogue: false
+                dialogue: false,
+                isLiked: false,
+                heartIconClasses: "far fa-heart"
+            }
+        },
+        methods: {
+            redHeartAndIncrement(){
+                this.heartIconClasses = "fas fa-heart color-red";
+                this.counter ++;
             }
         }
     }
 </script>
 
 <style scoped>
-
+.color-red{
+    color: red;
+    background-color: transparent;
+}
 
 </style>
