@@ -2,7 +2,7 @@
     <v-carousel light hide-delimiters :cycle="false" height="270px" class="carousel-transparent">
         <v-carousel-item :key="i" v-for="i in 3">
             <v-layout row>
-                <v-flex xs15 sm6 md4 :key="j" v-for="j in 3">
+                <v-flex xs15 sm6 md4 :key="j" v-for="j in Results">
                     <CardItem class="margin">
                     </CardItem>
                 </v-flex>
@@ -18,6 +18,9 @@
         name: "CardCarousel",
         components: {
             CardItem
+        },
+        props:{
+            Results: Array,
         },
         data() {
             return {
