@@ -1,8 +1,7 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
 <div>
-    <v-container fill-height>
         <v-layout justify-center>
-            <v-card height="350px" width="450px">
+            <v-card height="350px" xs12>
                 <v-container fill-height>
                     <v-layout align-center justify-center>
                         <v-card-text>
@@ -48,7 +47,6 @@
                 </v-container>
             </v-card>
         </v-layout>
-    </v-container>
 </div>
 </template>
 
