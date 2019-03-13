@@ -1,16 +1,16 @@
 <template>
   <v-app>
     <HelloWorld/>
-    <CardItem/>
+    <ItineraryTabs/>
     <CardCarousel />
   </v-app>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld'
-import CardItem from './components/CardItem'
 import Toolbar from './components/Toolbar'
 import CardCarousel from './components/CardCarousel'
+import ItineraryTabs from './components/ItineraryTabs'
 
 export default {
   name: 'App',
@@ -18,7 +18,7 @@ export default {
     HelloWorld,
     Toolbar,
     CardCarousel,
-    CardItem
+    ItineraryTabs
   },
   data () {
     return {
