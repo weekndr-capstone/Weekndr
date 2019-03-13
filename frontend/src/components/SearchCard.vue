@@ -12,59 +12,33 @@
                             </v-flex>
                             <v-flex xs10 offset-xs1>
                                 <p>Where</p>
-                                <v-text-field
-                                        v-model="Where"
-                                        placeholder="Where"
-                                        required
-                                        solo
+                                <v-text-field v-model="Where" placeholder="Where" required solo
                                 ></v-text-field>
                             </v-flex>
                             <v-flex xs5 offset-xs1 class="d-inline-block">
-                                <v-menu
-                                        v-model="menu2"
-                                        :close-on-content-click="false"
-                                        :nudge-right="40"
-                                        lazy
-                                        transition="scale-transition"
-                                        offset-y
-                                        full-width
-                                        min-width="290px"
-                                >
+                                <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40"
+                                        lazy transition="scale-transition" offset-y full-width min-width="290px">
                                     <template v-slot:activator="{ on }">
                                         <p>Start Date</p>
-                                        <v-text-field
-                                                v-model="date"
-                                                label="mm/dd/yyyy"
-                                                readonly
-                                                v-on="on"
-                                                solo
-                                        ></v-text-field>
+                                        <v-text-field v-model="Start" label="mm/dd/yyyy" readonly v-on="on" solo></v-text-field>
                                     </template>
-                                    <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
+                                    <v-date-picker v-model="Start" @input="menu2 = false"></v-date-picker>
                                 </v-menu>
                             </v-flex>
                             <v-flex xs5 class="d-inline-block">
-                                <v-menu
-                                        v-model="menu2"
-                                        :close-on-content-click="false"
-                                        :nudge-right="40"
-                                        lazy
-                                        transition="scale-transition"
-                                        offset-y
-                                        full-width
-                                        min-width="290px"
-                                >
+                                <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40"
+                                        lazy transition="scale-transition" offset-y full-width min-width="290px">
                                     <template v-slot:activator="{ on }">
                                         <p>End Date</p>
                                         <v-text-field
-                                                v-model="date"
+                                                v-model="End"
                                                 label="mm/dd/yyyy"
                                                 readonly
                                                 v-on="on"
                                                 solo
                                         ></v-text-field>
                                     </template>
-                                    <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
+                                    <v-date-picker v-model="End" @input="menu2 = false"></v-date-picker>
                                 </v-menu>
                             </v-flex>
                             <v-flex offset-xs8>
@@ -81,7 +55,14 @@
 
 <script>
     export default {
-        name: "SearchCard"
+        name: "SearchCard",
+        data(){
+            return{
+                Where: '',
+                Start: '',
+                End: ''
+            }
+        }
     }
 </script>
 

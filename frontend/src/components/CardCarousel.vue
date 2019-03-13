@@ -1,24 +1,14 @@
 <template>
-
-
     <v-carousel light hide-delimiters :cycle="false">
         <v-carousel-item :key="i" v-for="i in 5">
             <v-layout row>
-                <v-flex xs4 :key="j" v-for="j in 3">
+                <v-flex xs6 :key="j" v-for="j in 3">
                     <CardItem class="margin">
-
                     </CardItem>
-
                 </v-flex>
             </v-layout>
         </v-carousel-item>
     </v-carousel>
-
-
-
-
-
-
 </template>
 
 <script>
