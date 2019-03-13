@@ -1,18 +1,14 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
             <v-card>
-                <v-img
-                        class="white--text"
-                        height="200px"
-                        src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-                >
+                <v-img class="white--text" height="200px" :src="card.image_url">
                     <v-container fill-height fluid>
                         <v-layout fill-height>
                             <v-flex xs12 align-end flexbox>
-                                <span class="headline">Title Info</span>
+                                <span class="headline">{{card.alias}}</span>
                             </v-flex>
                         </v-layout>
                     </v-container>
-                </v-img>
+                </v-img.lazy>
                 <v-card-actions>
                     <v-btn :ripple="false" icon v-on:click="redHeartAndIncrement()">
                         <i  :class=heartIconClasses></i>
@@ -60,16 +56,15 @@
         // TODO: will receive properties from parent
         data() {
             return {
-                cards: [
-                    {title: "hi", src: "hi"},
-                    {title: "hi", src: "hi"},
-                    {title: "hi", src: "hi"}
-                ],
                 counter: 0,
                 dialogue: false,
                 isLiked: false,
                 heartIconClasses: "far fa-heart",
             }
+        },
+        props:{
+            card: Object,
+            required: true
         },
         methods: {
             redHeartAndIncrement(){
