@@ -96,6 +96,7 @@
             </v-list>
         </v-navigation-drawer>
     </div>
+
 </template>
 
 <script>
