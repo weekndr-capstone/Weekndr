@@ -1,11 +1,11 @@
 <template>
 
 
-    <v-carousel light hide-delimiters>
+    <v-carousel light hide-delimiters :cycle="false">
         <v-carousel-item :key="i" v-for="i in 5">
             <v-layout row>
                 <v-flex xs4 :key="j" v-for="j in 3">
-                    <CardItem>
+                    <CardItem class="margin">
 
                     </CardItem>
 
@@ -45,6 +45,9 @@
 
 <style scoped>
 
-
+.margin {
+    margin-left: 8px;
+    margin-right: 8px;
+}
 
 </style>
