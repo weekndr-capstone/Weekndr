@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <Toolbar />
     <HelloWorld/>
     <CardItem/>
     <CardCarousel />
