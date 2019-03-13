@@ -1,6 +1,4 @@
 <template>
-    <v-layout>
-        <v-flex xs8 sm4 md3 lg2 xl2>
             <v-card>
                 <v-img
                         class="white--text"
@@ -17,15 +15,14 @@
                 </v-img>
                 <v-card-actions>
                     <v-btn icon>
-                        <v-icon>favorite</v-icon>
+                        <i class="far fa-heart"></i>
                     </v-btn>
                     <v-btn icon>
-                        <v-icon>comment</v-icon>
+                        <i class="far fa-comment 10x"></i>
                     </v-btn>
                 </v-card-actions>
             </v-card>
-        </v-flex>
-    </v-layout>
+
 </template>
 
 <script>
@@ -45,5 +42,6 @@
 </script>
 
 <style scoped>
+
 
 </style>

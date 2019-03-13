@@ -1,22 +1,14 @@
 <template>
   <v-app>
-    <Toolbar />
-    <HelloWorld/>
+    <router-view></router-view>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
-import Toolbar from './components/Toolbar'
-import SearchCard from "./components/SearchCard";
 
 export default {
   name: 'App',
   components: {
-    SearchCard,
-    HelloWorld,
-    Toolbar,
-      CardItem
   },
   data () {
     return {
