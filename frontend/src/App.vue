@@ -1,11 +1,9 @@
 <template>
   <v-app>
     <Toolbar />
-
     <HelloWorld/>
     <CardItem/>
     <CardCarousel />
-
   </v-app>
 </template>
 
@@ -20,8 +18,8 @@ export default {
   components: {
     HelloWorld,
     Toolbar,
-      CardCarousel,
-      CardItem
+    CardCarousel,
+    CardItem
   },
   data () {
     return {
