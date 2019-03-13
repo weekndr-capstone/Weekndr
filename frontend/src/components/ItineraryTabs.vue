@@ -19,14 +19,16 @@
             >
                 <v-card flat>
                     <v-card-text>
-                        <h1 class="title-margin">Hotel: </h1>
-                        <CardItem/>
+                        <Timeline />
+                        <!--<h1 class="title-margin">Hotel: </h1>-->
+                        <!--<CardItem/>-->
 
-                        <h1 class="title-margin">Restaurants: </h1>
-                        <CardCarousel/>
+                        <!--<h1 class="title-margin">Restaurants: </h1>-->
+                        <!--<CardCarousel/>-->
 
-                        <h1 class="title-margin">Experiences:</h1>
-                        <CardCarousel/></v-card-text>
+                        <!--<h1 class="title-margin">Experiences:</h1>-->
+                        <!--<CardCarousel/>-->
+                    </v-card-text>
                 </v-card>
             </v-tab-item>
         </v-tabs>
@@ -35,11 +37,12 @@
 </template>
 
 <script>
+    import Timeline from "./Timeline";
     import CardCarousel from "./CardCarousel";
     import CardItem from "./CardItem";
     export default {
         name: "ItineraryTabs",
-        components: {CardCarousel, CardItem},
+        components: {CardCarousel, CardItem, Timeline},
         data() {
             return {
                 cards: [
