@@ -14,14 +14,14 @@
                     </v-container>
                 </v-img>
                 <v-card-actions>
-                    <v-btn icon v-on:click="redHeartAndIncrement()">
+                    <v-btn :ripple="false" icon v-on:click="redHeartAndIncrement()">
                         <i  :class=heartIconClasses></i>
                         <span> {{ counter }}</span>
                     </v-btn>
                     <v-dialog v-model="dialogue" max-width="600px">
                         <template v-slot:activator="{ on }">
                             <v-spacer>
-                            <v-btn icon v-on="on">
+                            <v-btn :ripple="false" icon v-on="on">
                                 <i class="far fa-comment 10x"></i>
                             </v-btn>
                             </v-spacer>
@@ -68,7 +68,7 @@
                 counter: 0,
                 dialogue: false,
                 isLiked: false,
-                heartIconClasses: "far fa-heart"
+                heartIconClasses: "far fa-heart",
             }
         },
         methods: {
@@ -83,6 +83,11 @@
 <style scoped>
 .color-red{
     color: red;
+    background-color: transparent;
+}
+
+
+.v-btn:hover:before {
     background-color: transparent;
 }
 
