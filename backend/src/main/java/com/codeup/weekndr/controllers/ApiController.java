@@ -32,6 +32,7 @@ public class ApiController {
 
     @GetMapping("/yelpList/{location}")
     public ResponseEntity<String> yelpList(@PathVariable String location){
+        System.out.println("Made it here");
         return getyelpList(yelpApi, location);
     }
 
@@ -44,6 +45,7 @@ public class ApiController {
     private static ResponseEntity<String> getyelpList(String bearer, String location)
     {
         final String uri = "https://api.yelp.com/v3/businesses/search?location=" + location;
+        System.out.println(uri);
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_JSON }));

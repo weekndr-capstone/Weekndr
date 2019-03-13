@@ -2,6 +2,12 @@
 node_modules
 /dist
 /node
+**/node
+/node/
+**node_modules
+node_modules
+/node_modules/
+/node_modules
 /target
 
 # local env files
