@@ -1,18 +1,23 @@
 <template>
     <div>
         <HelloWorld/>
-        <CardCarousel />
+
+        <ItineraryTabs />
+
     </div>
 </template>
 
 <script>
+
     import HelloWorld from '../components/HelloWorld'
-    import CardCarousel from '../components/CardCarousel'
+    import ItineraryTabs from '../components/ItineraryTabs'
+    import Map from "../components/Map";
 
   export default {
     components: {
+        Map,
       HelloWorld,
-      CardCarousel
+      ItineraryTabs
     }
   }
 </script>

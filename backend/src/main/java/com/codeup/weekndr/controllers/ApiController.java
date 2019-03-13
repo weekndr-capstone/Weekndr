@@ -30,6 +30,8 @@ public class ApiController {
     private String uberclientId;
     @Value("${api-ubersecretId}")
     private String apiubersecredId;
+    @Value("${api-google}")
+    private String googleApi;
 
     @GetMapping("/yelpList/{location}/{type}")
     public ResponseEntity<String> yelpList(@PathVariable String location, @PathVariable String type){
