@@ -1,18 +1,18 @@
 <template>
     <div>
         <HelloWorld/>
-        <CardCarousel />
+        <ItineraryTabs />
     </div>
 </template>
 
 <script>
     import HelloWorld from '../components/HelloWorld'
-    import CardCarousel from '../components/CardCarousel'
+    import ItineraryTabs from '../components/ItineraryTabs'
 
   export default {
     components: {
       HelloWorld,
-      CardCarousel
+      ItineraryTabs
     }
   }
 </script>
