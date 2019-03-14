@@ -31,3 +31,5 @@ HELP.md
 weekndr/backend/src/main/resources/application.properties
 
 **/application.properties
+
+/public/
