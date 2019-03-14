@@ -3,6 +3,7 @@ package com.codeup.weekndr.controllers;
 import com.twilio.twiml.voice.Sms;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import com.twilio.Twilio;
@@ -29,11 +30,14 @@ public class ApiController {
     private String uberclientId;
     @Value("${api-ubersecretId}")
     private String apiubersecredId;
+    @Value("${api-google}")
+    private String googleApi;
 
-    @GetMapping("/yelpList/{location}")
-    public ResponseEntity<String> yelpList(@PathVariable String location){
+
+    @GetMapping("/yelpList/{location}/{type}")
+    public ResponseEntity<String> yelpList(@PathVariable String location, @PathVariable String type){
         System.out.println("Made it here");
-        return getyelpList(yelpApi, location);
+        return getyelpList(yelpApi, location, type);
     }
 
     @GetMapping("/twillio")
@@ -42,9 +46,22 @@ public class ApiController {
         return "hi";
     }
 
-    private static ResponseEntity<String> getyelpList(String bearer, String location)
+    private static ResponseEntity<String> getyelpList(String bearer, String location, String type)
     {
-        final String uri = "https://api.yelp.com/v3/businesses/search?location=" + location;
+
+        String uri;
+        switch (type){
+            case "1": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=experience&radius=20000&limit=25";
+            break;
+
+            case "2": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=food&radius=20000&limit=25";
+            break;
+
+            case "3": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=hotel&radius=20000&limit=25";
+            break;
+
+            default: uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&radius=20000&limit=25";
+        }
         System.out.println(uri);
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -59,6 +76,26 @@ public class ApiController {
         System.out.println(result);
         return result;
     }
+
+    private static ResponseEntity<String> getyelpListFood(String bearer, String location)
+    {
+        final String uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=food&radius=20000";
+        System.out.println(uri);
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_JSON }));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer " + bearer);
+
+        System.out.println(headers + " HEADERS");
+        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+        ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
+
+        System.out.println(result);
+        return result;
+    }
+
+
 
         public void twillioTest(String Auth, String SID ) {
             Twilio.init(Auth, SID);
