@@ -8,7 +8,7 @@
                             </v-flex>
                         </v-layout>
                     </v-container>
-                </v-img.lazy>
+                </v-img>
                 <v-card-actions>
                     <v-btn :ripple="false" icon v-on:click="redHeartAndIncrement()">
                         <i  :class=heartIconClasses></i>
