@@ -1,7 +1,7 @@
 <template>
     <div>
         <HelloWorld/>
-        <CardCarousel />
+        <CardCarousel/>
         <CustomDestinationModal/>
         <FileUpload/>
         <ItineraryTabs />
