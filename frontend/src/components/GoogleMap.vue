@@ -62,13 +62,5 @@
         width: 100vw;
         height: 100vh;
     }
-    #mapName {
-        width: 100%;
-    }
-    /* Optional: Makes the sample page fill the window. */
-    html, body {
-        height: 100%;
-        margin: 0 auto;
-        padding: 0;
-    }
+
 </style>
