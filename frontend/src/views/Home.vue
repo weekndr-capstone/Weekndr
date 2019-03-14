@@ -1,9 +1,9 @@
 <template>
     <div>
         <HelloWorld/>
-
+        <FileUpload/>
+        <Map/>
         <ItineraryTabs />
-
     </div>
 </template>
 
@@ -12,11 +12,14 @@
     import HelloWorld from '../components/HelloWorld'
     import ItineraryTabs from '../components/ItineraryTabs'
     import Map from "../components/Map";
+    import FileUpload from "../components/FileUpload";
 
   export default {
     components: {
-      HelloWorld,
-      ItineraryTabs
+        FileUpload,
+        Map,
+        HelloWorld,
+        ItineraryTabs
     }
   }
 </script>
