@@ -33,6 +33,7 @@ public class ApiController {
     @Value("${api-google}")
     private String googleApi;
 
+
     @GetMapping("/yelpList/{location}/{type}")
     public ResponseEntity<String> yelpList(@PathVariable String location, @PathVariable String type){
         System.out.println("Made it here");
@@ -47,6 +48,7 @@ public class ApiController {
 
     private static ResponseEntity<String> getyelpList(String bearer, String location, String type)
     {
+
         String uri;
         switch (type){
             case "1": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=experience&radius=20000&limit=50";
