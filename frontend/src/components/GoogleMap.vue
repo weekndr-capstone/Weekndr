@@ -9,6 +9,21 @@
         name: "App",
         async mounted(){
             try {
+                const locations = [
+                    {
+                        position: {
+                            lat: 48.160910,
+                            lng: 16.383330,
+                        },
+                    },
+                    {
+                        position: {
+                            lat: 48.174270,
+                            lng: 16.329620,
+                        },
+                    },
+                    // ...
+                ];
                 const google = await gmapsInit();
                 const geocoder = new google.maps.Geocoder();
                 const map = new google.maps.Map(this.$el);
@@ -21,6 +36,9 @@
                     map.setCenter(results[0].geometry.location);
                     map.fitBounds(results[0].geometry.viewport);
                 });
+
+                const markers = locations
+                    .map(x => new google.maps.Marker({ ...x, map }));
             } catch (error) {
                 console.error(error);
             }

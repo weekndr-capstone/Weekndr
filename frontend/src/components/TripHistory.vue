@@ -12,7 +12,7 @@
         name: "TripHistory",
         components: {
             GoogleMap
-        }
+        },
     }
 </script>
 
