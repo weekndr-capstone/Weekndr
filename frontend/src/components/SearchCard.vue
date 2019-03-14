@@ -1,8 +1,7 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
 <div>
-    <v-container fill-height>
         <v-layout justify-center>
-            <v-card height="350px" width="450px">
+            <v-card height="350px" xs12>
                 <v-container fill-height>
                     <v-layout align-center justify-center>
                         <v-card-text>
@@ -48,13 +47,13 @@
                 </v-container>
             </v-card>
         </v-layout>
-    </v-container>
 </div>
 </template>
 
 <script>
     import store from '../store'
     import router from '../router'
+    import axios from 'axios'
     export default {
         name: "SearchCard",
         data(){
@@ -69,10 +68,23 @@
             }
         },
         methods: {
-            searchLocation(){
+            async searchLocation(){
                 store.commit('changeLocation', this.Where);
                 store.commit('changeStartDate', this.Dates.Start);
                 store.commit('changeEndDate', this.Dates.End);
+                await axios.all([
+                    axios.get('/yelpList/'+ store.state.location + "/4"),
+                    axios.get('/yelpList/'+ store.state.location + "/1"),
+                    axios.get('/yelpList/' + store.state.location + "/2"),
+                    axios.get('/yelpList/' + store.state.location + "/3"),
+                    ]).then(axios.spread((suggestedRes, experiencesRes, foodRes, hotelRes) =>{
+                    store.commit('changeSuggestedResults', suggestedRes.data.businesses);
+                    store.commit('changeFoodResults', experiencesRes.data.businesses);
+                    store.commit('changeExperiencesResults', foodRes.data.businesses);
+                    store.commit('changeHotelResults', hotelRes.data.businesses);
+                    console.log(suggestedRes, experiencesRes, foodRes, hotelRes)
+                }));
+
                 router.push('/search');
                 console.log(store.state.location);
                 console.log(store.state.dates);
