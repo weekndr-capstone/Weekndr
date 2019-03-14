@@ -9,6 +9,7 @@ node_modules
 /node_modules/
 /node_modules
 /target
+/target/
 
 # local env files
 .env.local
