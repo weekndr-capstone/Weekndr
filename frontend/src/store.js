@@ -7,6 +7,11 @@ export default new Vuex.Store({
   state: {
     location: '',
     dates: {start_date: '', end_date: ''},
+    suggestedResults: '',
+    hotelResults: '',
+    foodResults: '',
+    experiencesResults: '',
+
   },
 
   getters:{
@@ -15,6 +20,18 @@ export default new Vuex.Store({
       },
       dates: state => {
           return state.dates
+      },
+      hotel: state => {
+          return state.hotelResults
+      },
+      food: state => {
+          return state.foodResults
+      },
+      experiences: state => {
+          return state.experiencesResults
+      },
+      suggested: state => {
+          return state.suggestedResults
       }
   },
   mutations: {
@@ -30,6 +47,16 @@ export default new Vuex.Store({
       changeDates(state, dates){
           state.dates = dates;
       },
+      changeHotelResults(state, hotels){
+          state.hotelResults = hotels;
+      },
+      changeFoodResults(state, food){
+          state.foodResults = food;
+      },changeExperiencesResults(state, experiences){
+          state.experiencesResults = experiences;
+      },changeSuggestedResults(state, suggested){
+          state.suggestedResults = suggested;
+      }
   },
   actions: {
 
