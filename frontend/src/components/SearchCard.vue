@@ -18,9 +18,9 @@
                                         lazy transition="scale-transition" offset-y full-width min-width="290px">
                                     <template v-slot:activator="{ on }">
                                         <p>Start Date</p>
-                                        <v-text-field v-model="Dates.Start" label="mm/dd/yyyy" readonly v-on="on" solo></v-text-field>
+                                        <v-text-field v-model="Dates.Start" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
                                     </template>
-                                    <v-date-picker v-model="Dates.Start" @input="menu1 = false"></v-date-picker>
+                                    <v-date-picker :min="minDate" v-model="Dates.Start" @input="menu1 = false"></v-date-picker>
                                 </v-menu>
                             </v-flex>
                             <v-flex xs5 class="d-inline-block">
@@ -30,13 +30,13 @@
                                         <p>End Date</p>
                                         <v-text-field
                                                 v-model="Dates.End"
-                                                label="mm/dd/yyyy"
+                                                label="yyyy/mm/dd"
                                                 readonly
                                                 v-on="on"
                                                 solo
                                         ></v-text-field>
                                     </template>
-                                    <v-date-picker v-model="Dates.End" @input="menu2 = false"></v-date-picker>
+                                    <v-date-picker :min="Dates.Start" v-model="Dates.End" @input="menu2 = false"></v-date-picker>
                                 </v-menu>
                             </v-flex>
                             <v-flex offset-xs8>
@@ -54,6 +54,20 @@
     import store from '../store'
     import router from '../router'
     import axios from 'axios'
+    
+    let today= new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1; //January is 0!
+    let yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+    today = yyyy + '-' + mm + '-' + dd;
+
     export default {
         name: "SearchCard",
         data(){
@@ -63,6 +77,8 @@
                     Start: '',
                     End: ''
                 },
+                minDate: today,
+                minEndDate: '',
                 menu1: false,
                 menu2: false
             }
