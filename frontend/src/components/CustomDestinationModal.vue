@@ -11,8 +11,12 @@
                 <v-container grid-list-md>
                     <v-layout wrap>
                         <v-flex xs12>
-                            <p>Where</p>
-                            <v-text-field v-model="Where" placeholder="Where" required solo></v-text-field>
+                            <p>Title</p>
+                            <v-text-field v-model="Title" placeholder="Title" required solo></v-text-field>
+                        </v-flex>
+                        <v-flex xs12>
+                            <p>Address</p>
+                            <v-text-field v-model="Address" placeholder="Address" required solo></v-text-field>
                         </v-flex>
                         <v-flex xs12 class="d-inline-block">
                             <v-menu v-model="menu1" :close-on-content-click="false" :nudge-right="40"
@@ -35,8 +39,24 @@
                             ></v-textarea>
                         </v-flex>
                         <v-flex >
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
+                        <v-card-actions class="ma-0">
+                            <v-menu>
+                                <template v-slot:activator="{ on }">
+                                    <v-btn color="info" v-on="on">
+                                        Category
+                                    </v-btn>
+                                </template>
+                                <v-list>
+                                    <v-list-tile
+                                            v-for="(item, index) in items"
+                                            :key="index"
+                                            @click=""
+                                    >
+                                        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                                    </v-list-tile>
+                                </v-list>
+                            </v-menu>
+                            <FileUpload class="ma-2" />
                                 <v-btn @click="Add = false" flat>Close</v-btn>
                                 <v-btn @click="Add = false" flat>Add to Itinerary</v-btn>
                         </v-card-actions>
@@ -49,6 +69,7 @@
 </template>
 
 <script>
+    import FileUpload from "./FileUpload";
     let today = new Date();
     let dd = today.getDate();
     let mm = today.getMonth() + 1; //January is 0!
@@ -65,14 +86,22 @@
     today = yyyy + '-' + mm + '-' + dd;
     export default {
         name: "CustomDestinationModal",
+        components: {FileUpload},
         data:()=> {
             return ({
-                Where: '',
+                Title: '',
+                Address: '',
+                Description: '',
                 Dates: {
                     Start: ''
                 },
                 minDate: today,
-                Add: false
+                Add: false,
+                items: [
+                    { title: 'Hotel' },
+                    { title: 'Restaurant' },
+                    { title: 'Experience' }
+                ]
             });
         }
     }
