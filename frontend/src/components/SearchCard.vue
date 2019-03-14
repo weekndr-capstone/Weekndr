@@ -20,7 +20,7 @@
                                         <p>Start Date</p>
                                         <v-text-field v-model="Dates.Start" label="mm/dd/yyyy" readonly v-on="on" solo></v-text-field>
                                     </template>
-                                    <v-date-picker v-model="Dates.Start" @input="menu1 = false"></v-date-picker>
+                                    <v-date-picker :min="minDate" v-model="Dates.Start" @input="menu1 = false"></v-date-picker>
                                 </v-menu>
                             </v-flex>
                             <v-flex xs5 class="d-inline-block">
@@ -36,7 +36,7 @@
                                                 solo
                                         ></v-text-field>
                                     </template>
-                                    <v-date-picker v-model="Dates.End" @input="menu2 = false"></v-date-picker>
+                                    <v-date-picker :min="minDate" :max="maxDate" v-model="Dates.End" @input="menu2 = false"></v-date-picker>
                                 </v-menu>
                             </v-flex>
                             <v-flex offset-xs8>
@@ -53,6 +53,20 @@
 <script>
     import store from '../store'
     import router from '../router'
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1; //January is 0!
+    let yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
     export default {
         name: "SearchCard",
         data(){
@@ -62,6 +76,8 @@
                     Start: '',
                     End: ''
                 },
+                minDate: today,
+                maxDate: '',
                 menu1: false,
                 menu2: false
             }
