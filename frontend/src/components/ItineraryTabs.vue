@@ -1,22 +1,10 @@
 <template>
     <div class="container">
-        <v-tabs
-                v-model="active"
-                light
-                slider-color="black"
-        >
-            <v-tab
-                    v-for="n in 3"
-                    :key="n"
-                    ripple
-            >
+        <v-tabs v-model="active" light slider-color="black">
+            <v-tab v-for="n in 3" :key="n" ripple>
                 Day {{ n }}
-
             </v-tab>
-            <v-tab-item
-                    v-for="n in 3"
-                    :key="n"
-            >
+            <v-tab-item v-for="n in 3" :key="n">
                 <v-card flat>
                     <v-card-text>
                         <Timeline />
