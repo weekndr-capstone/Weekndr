@@ -14,33 +14,18 @@
                             <p>Where</p>
                             <v-text-field v-model="Where" placeholder="Where" required solo></v-text-field>
                         </v-flex>
-                        <v-flex xs6 class="d-inline-block">
+                        <v-flex xs12 class="d-inline-block">
                             <v-menu v-model="menu1" :close-on-content-click="false" :nudge-right="40"
                                     lazy transition="scale-transition" offset-y full-width min-width="290px">
                                 <template v-slot:activator="{ on }">
-                                    <p>Start Date</p>
-                                    <v-text-field v-model="Dates.Start" label="mm/dd/yyyy" readonly v-on="on" solo></v-text-field>
+                                    <p>Date</p>
+                                    <v-text-field v-model="Dates.Start" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
                                 </template>
-                                <v-date-picker :allowed-dates="allowedDates" v-model="Dates.Start" @input="menu1 = false"></v-date-picker>
-                            </v-menu>
-                        </v-flex>
-                        <v-flex xs6 class="d-inline-block">
-                            <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40"
-                                    lazy transition="scale-transition" offset-y full-width min-width="290px">
-                                <template v-slot:activator="{ on }">
-                                    <p>End Date</p>
-                                    <v-text-field
-                                            v-model="Dates.End"
-                                            label="mm/dd/yyyy"
-                                            readonly
-                                            v-on="on"
-                                            solo
-                                    ></v-text-field>
-                                </template>
-                                <v-date-picker v-model="Dates.End" @input="menu2 = false"></v-date-picker>
+                                <v-date-picker :min="minDate" v-model="Dates.Start" @input="menu1 = false"></v-date-picker>
                             </v-menu>
                         </v-flex>
                         <v-flex class="xs12">
+                            <p>Description</p>
                             <v-textarea
                                     v-model="Description"
                                     auto-grow
@@ -49,10 +34,11 @@
                                     rows="1"
                             ></v-textarea>
                         </v-flex>
-                        <v-flex offset-xs6 xs6>
+                        <v-flex >
                         <v-card-actions>
+                            <v-spacer></v-spacer>
                                 <v-btn @click="Add = false" flat>Close</v-btn>
-                                <v-btn @click="addToItinerary()" flat>Add to Itinerary</v-btn>
+                                <v-btn @click="Add = false" flat>Add to Itinerary</v-btn>
                         </v-card-actions>
                         </v-flex>
                     </v-layout>
@@ -76,26 +62,18 @@
         mm = '0' + mm;
     }
 
-    today = mm + '/' + dd + '/' + yyyy;
+    today = yyyy + '-' + mm + '-' + dd;
     export default {
         name: "CustomDestinationModal",
         data:()=> {
             return ({
                 Where: '',
                 Dates: {
-                    Start: '',
-                    End: ''
+                    Start: ''
                 },
+                minDate: today,
                 Add: false
             });
-        },
-        methods: {
-            allowedDates: val => {
-
-                },
-            addToItinerary(){
-                console.log(this.Dates.Start)
-            }
         }
     }
 </script>
