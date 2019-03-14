@@ -5,12 +5,14 @@
         <CustomDestinationModal/>
         <FileUpload/>
         <Map/>
+        <ItineraryTabs />
     </div>
 </template>
 
 <script>
+
     import HelloWorld from '../components/HelloWorld'
-    import CardCarousel from '../components/CardCarousel'
+    import ItineraryTabs from '../components/ItineraryTabs'
     import Map from "../components/Map";
     import FileUpload from "../components/FileUpload";
     import CustomDestinationModal from "../components/CustomDestinationModal";
@@ -20,8 +22,8 @@
         CustomDestinationModal,
         FileUpload,
         Map,
-      HelloWorld,
-      CardCarousel
+        HelloWorld,
+        ItineraryTabs
     }
   }
 </script>
