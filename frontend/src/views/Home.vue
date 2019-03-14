@@ -2,8 +2,8 @@
     <div>
         <HelloWorld/>
         <FileUpload/>
-        <Map/>
         <ItineraryTabs />
+        <FullCardItem/>
     </div>
 </template>
 
@@ -13,11 +13,12 @@
     import ItineraryTabs from '../components/ItineraryTabs'
     import Map from "../components/Map";
     import FileUpload from "../components/FileUpload";
+    import FullCardItem from "../components/FullCardItem";
 
   export default {
     components: {
+        FullCardItem,
         FileUpload,
-        Map,
         HelloWorld,
         ItineraryTabs
     }
