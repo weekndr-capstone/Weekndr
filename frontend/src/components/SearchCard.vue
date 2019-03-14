@@ -102,8 +102,6 @@
                 }));
 
                 router.push('/search');
-                console.log(store.state.location);
-                console.log(store.state.dates);
             }
         }
     }
