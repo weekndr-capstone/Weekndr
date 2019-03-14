@@ -53,6 +53,7 @@
 <script>
     import store from '../store'
     import router from '../router'
+    import axios from 'axios'
     export default {
         name: "SearchCard",
         data(){
@@ -67,10 +68,23 @@
             }
         },
         methods: {
-            searchLocation(){
+            async searchLocation(){
                 store.commit('changeLocation', this.Where);
                 store.commit('changeStartDate', this.Dates.Start);
                 store.commit('changeEndDate', this.Dates.End);
+                await axios.all([
+                    axios.get('/yelpList/'+ store.state.location + "/4"),
+                    axios.get('/yelpList/'+ store.state.location + "/1"),
+                    axios.get('/yelpList/' + store.state.location + "/2"),
+                    axios.get('/yelpList/' + store.state.location + "/3"),
+                    ]).then(axios.spread((suggestedRes, experiencesRes, foodRes, hotelRes) =>{
+                    store.commit('changeSuggestedResults', suggestedRes.data.businesses);
+                    store.commit('changeFoodResults', experiencesRes.data.businesses);
+                    store.commit('changeExperiencesResults', foodRes.data.businesses);
+                    store.commit('changeHotelResults', hotelRes.data.businesses);
+                    console.log(suggestedRes, experiencesRes, foodRes, hotelRes)
+                }));
+
                 router.push('/search');
                 console.log(store.state.location);
                 console.log(store.state.dates);
