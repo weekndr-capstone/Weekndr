@@ -1,9 +1,7 @@
 <template>
-    <v-container>
-        <form>
+
             <v-btn id="upload" color="info" @click="fileUpload">Upload Photo</v-btn>
-        </form>
-    </v-container>
+
 </template>
 
 <script>
@@ -19,7 +17,7 @@
         },
         methods: {
             fileUpload(){
-                const apikey = '';
+                const apikey = 'AsNx10Lk3SEiGRvMmw223z';
                 const client = filestack.init(apikey);
                 const options = {
                     maxFiles: 20,
