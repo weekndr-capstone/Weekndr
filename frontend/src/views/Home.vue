@@ -1,11 +1,12 @@
 <template>
     <div>
         <HelloWorld/>
+        <CardCarousel />
+        <CustomDestinationModal/>
         <FileUpload/>
         <ItineraryTabs />
         <TripHistory/>
-
-
+        <FullCardItem/>
     </div>
 </template>
 
@@ -15,9 +16,13 @@
     import ItineraryTabs from '../components/ItineraryTabs'
     import FileUpload from "../components/FileUpload";
     import TripHistory from "../components/TripHistory";
-
+    import CustomDestinationModal from "../components/CustomDestinationModal";
+    import FullCardItem from "../components/FullCardItem";
+    
   export default {
     components: {
+        CustomDestinationModal,
+        FullCardItem,
         FileUpload,
         HelloWorld,
         ItineraryTabs,
