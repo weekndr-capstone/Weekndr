@@ -1,35 +1,17 @@
 <template>
     <div>
-        <HelloWorld/>
-        <CardCarousel/>
-        <CustomDestinationModal/>
-        <FileUpload/>
-        <ItineraryTabs />
+        <Banner/>
         <TripHistory/>
-        <FullCardItem/>
-        <RecommendedDestinations/>
     </div>
 </template>
 
 <script>
-
-    import HelloWorld from '../components/HelloWorld'
-    import ItineraryTabs from '../components/ItineraryTabs'
-    import FileUpload from "../components/FileUpload";
+    import Banner from '../components/Banner'
     import TripHistory from "../components/TripHistory";
-    import CustomDestinationModal from "../components/CustomDestinationModal";
-    import FullCardItem from "../components/FullCardItem";
-    import RecommendedDestinations from "../components/RecommendedDestinations";
-
   export default {
     components: {
-        CustomDestinationModal,
-        FullCardItem,
-        FileUpload,
-        HelloWorld,
-        ItineraryTabs,
-        TripHistory,
-        RecommendedDestinations
+        Banner,
+        TripHistory
     }
   }
 </script>

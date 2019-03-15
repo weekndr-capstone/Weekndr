@@ -159,7 +159,7 @@
                                 end_date:store.state.end_date,
                                 created_at: new Date(),
                                 user_id: {
-                                    id: 1,
+                                    id: store.state.user.id,
                                 }
                             }
                         })

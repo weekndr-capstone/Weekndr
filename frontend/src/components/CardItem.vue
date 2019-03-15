@@ -62,8 +62,7 @@
             }
         },
         props:{
-            card: Object,
-            required: true
+            card: Object
         },
         methods: {
             redHeartAndIncrement(){

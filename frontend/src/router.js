@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import singleView from './views/singleView'
+import Itenerary from './views/Itenerary'
 
 Vue.use(Router)
 
@@ -25,6 +26,11 @@ export default new Router({
       path: '/single',
       name: 'single',
       component: singleView,
+    },
+    {
+      path: '/itenerary/:id',
+      name: 'itenerary',
+      component: Itenerary
     }
   ]
 })
