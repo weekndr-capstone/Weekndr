@@ -124,12 +124,12 @@
                     trip_description: '',
                     start_date: store.state.start_date,
                     end_date:store.state.end_date,
-                    user_id: store.state.user.id
+                    user_id: 1
                 },
                 experience:{
                  name: store.state.singleResult.name,
                  location: store.state.singleResult.address,
-                 // imgurl: store.state.singleResult.image_url,
+                 imgurl: store.state.singleResult.image_url,
                  event_date: '',
                  phone_number: store.state.singleResult.phone_number,
                  yelp_uniq: store.state.singleResult.id,
@@ -146,8 +146,23 @@
             async next () {
                 const active = parseInt(this.active)
                 this.active = (active < 2 ? active + 1 : 0)
-                await axios
-                    .post('/trip', this.trip)
+                await axios(
+                        {
+                            method: 'POST',
+                            url:'/trip',
+                            headers: {'Content-Type': 'application/json'},
+                            data: {
+                                title: this.trip.title,
+                                location: store.state.location,
+                                trip_description: this.trip.trip_description,
+                                start_date: store.state.start_date,
+                                end_date:store.state.end_date,
+                                created_at: new Date(),
+                                user_id: {
+                                    id: 1,
+                                }
+                            }
+                        })
                     .then(res => {
                         this.trip = res.data
                     }).catch(err => {

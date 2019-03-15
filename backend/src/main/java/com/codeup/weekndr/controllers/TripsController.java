@@ -6,7 +6,6 @@ import com.codeup.weekndr.repositories.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 public class TripsController {
 
@@ -14,8 +13,7 @@ public class TripsController {
     private TripRepository tripDao;
 
     @GetMapping("/triplist")
-    public
-    Iterable<Trip> tripList(){
+    public Iterable<Trip> tripList(){
         return tripDao.findAll();
     }
 
@@ -25,7 +23,7 @@ public class TripsController {
     }
 
     @PostMapping("/trip")
-    public void userInputed(Trip trip){
-        tripDao.save(trip);
+    public Trip userInputed(@RequestBody Trip trip){
+        return tripDao.save(trip);
     }
 }

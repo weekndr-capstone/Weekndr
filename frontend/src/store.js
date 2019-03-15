@@ -19,7 +19,6 @@ export default new Vuex.Store({
         email: '',
         phone_number: ''
     }
-
   },
 
   getters:{
