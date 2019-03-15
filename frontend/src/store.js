@@ -11,7 +11,14 @@ export default new Vuex.Store({
     hotelResults: '',
     foodResults: '',
     experiencesResults: '',
-
+    singleResult: '',
+    user: {
+        id: '',
+        username: '',
+        img_path:'',
+        email: '',
+        phone_number: ''
+    }
   },
 
   getters:{
@@ -32,6 +39,9 @@ export default new Vuex.Store({
       },
       suggested: state => {
           return state.suggestedResults
+      },
+      singleResult: state => {
+          return state.singleResult
       }
   },
   mutations: {
@@ -52,11 +62,17 @@ export default new Vuex.Store({
       },
       changeFoodResults(state, food){
           state.foodResults = food;
-      },changeExperiencesResults(state, experiences){
+      },
+      changeExperiencesResults(state, experiences){
           state.experiencesResults = experiences;
-      },changeSuggestedResults(state, suggested){
+      },
+      changeSuggestedResults(state, suggested){
           state.suggestedResults = suggested;
+      },
+      changeSingleResult(state, singleResult){
+          state.singleResult = singleResult;
       }
+
   },
   actions: {
 

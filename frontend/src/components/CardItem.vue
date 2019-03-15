@@ -4,7 +4,7 @@
                     <v-container fill-height fluid>
                         <v-layout fill-height>
                             <v-flex xs12 align-end flexbox>
-                                <span class="headline">{{card.alias}}</span>
+                                <span class="headline" @click="routeSingle()">"{{card.alias}}</span>
                             </v-flex>
                         </v-layout>
                     </v-container>
@@ -43,14 +43,13 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
-
-
                 </v-card-actions>
             </v-card>
 </template>
 
 <script>
-
+    import store from '../store'
+    import router from '../router'
     export default {
         name: "CardItem",
         // TODO: will receive properties from parent
@@ -70,6 +69,10 @@
             redHeartAndIncrement(){
                 this.heartIconClasses = "fas fa-heart color-red";
                 this.counter ++;
+            },
+            async routeSingle() {
+                await store.commit('changeSingleResult', this.card);
+                router.push('/single')
             }
         }
     }
@@ -80,7 +83,6 @@
     color: red;
     background-color: transparent;
 }
-
 
 .v-btn:hover:before {
     background-color: transparent;

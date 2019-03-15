@@ -3,7 +3,7 @@ package com.codeup.weekndr.controllers;
 import com.twilio.twiml.voice.Sms;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.security.core.parameters.P;
+//import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import com.twilio.Twilio;
@@ -51,16 +51,16 @@ public class ApiController {
 
         String uri;
         switch (type){
-            case "1": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=experience&radius=20000&limit=50";
+            case "1": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=experience&radius=20000&limit=25";
             break;
 
-            case "2": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=food&radius=20000&limit=50";
+            case "2": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=food&radius=20000&limit=25";
             break;
 
-            case "3": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=hotel&radius=20000&limit=50";
+            case "3": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=hotel&radius=20000&limit=25";
             break;
 
-            default: uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&radius=20000&limit=50";
+            default: uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&radius=20000&limit=25";
         }
         System.out.println(uri);
         RestTemplate restTemplate = new RestTemplate();
@@ -108,4 +108,7 @@ public class ApiController {
 
             System.out.println(message.getSid());
         }
+
+
+
 }

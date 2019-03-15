@@ -48,6 +48,14 @@ public class Trip {
         this.users = users;
         this.places = places;
     }
+    public Trip(String title, String location, String trip_description, Date start_date, Date end_date, User user_id) {
+        this.title = title;
+        this.location = location;
+        this.trip_description = trip_description;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.user_id = user_id;
+    }
 
     public long getId() {
         return id;
