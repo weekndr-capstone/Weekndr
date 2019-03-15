@@ -1,13 +1,16 @@
 <template>
     <v-container>
-        <v-layout row class="white-background">
-                <v-flex xs3>
-                    <v-img src="https://picsum.photos/300"></v-img>
+        <v-layout row wrap class="white-background" elevation-1>
+                <v-flex class="zero-margin" xs3 sm2 md2 lg2 xl1>
+                    <v-img max-height="100px" max-width="100px" src="https://picsum.photos/300"></v-img>
                 </v-flex>
-                <v-flex xs9 mx-2>
-                    <v-card-title>Trip Title</v-card-title>
-                    <v-card-text>dates here</v-card-text>
-                    <v-card-text>Trip descrption here</v-card-text>
+                <v-flex m0 xs8 sm7 md8 lg8 xl10 mx-2>
+                    <v-flex xs5>
+                    <h4>Trip Title</h4>
+                    </v-flex>
+                    <v-flex xs5>
+                        <p>dates here</p>
+                    </v-flex>
                     <v-avatar  class="avatar-margin" size="36px" v-for="n in 6" :key="n">
                         <img ml-50 src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
                     </v-avatar>
@@ -28,6 +31,7 @@
     }
 
     .avatar-margin{
-        margin-left: 20px;
+        /*margin: 5px;*/
+
     }
 </style>
