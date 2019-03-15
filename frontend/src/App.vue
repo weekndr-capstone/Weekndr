@@ -34,5 +34,8 @@ export default {
   .v-input, .v-text-field, .v-timeline-item, .v-timeline-item__opposite, small {
     font-family: 'Nunito Sans', sans-serif;
   }
+  body {
+    background-color: white;
+  }
 
 </style>
