@@ -28,7 +28,6 @@
 <style scoped>
    .white-background{
        background-color: white;
-       box-shadow: black 2px;
     }
 
     .avatar-margin{
