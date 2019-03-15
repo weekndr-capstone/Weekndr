@@ -1,14 +1,20 @@
 <template>
     <v-container>
-        <v-layout row class="white-background">
-            <v-flex xs3>
-                <v-img src="https://picsum.photos/311"></v-img>
-            </v-flex>
-            <v-flex xs9 mx-2>
-                <v-card-title><h1>Destination City Name</h1></v-card-title>
-            </v-flex>
+        <v-layout row wrap>
+             <v-flex xs6 sm4 md3>
+                 <v-card color="white">
+                     <v-layout>
+                          <v-flex xs4><v-img src="https://picsum.photos/311" height="100%" contain /></v-flex>
+                              <v-flex xs8 align-self-center class="text-xs-center">
+                                      <h2>City Name</h2>
+                          </v-flex>
+                      </v-layout>
+                  </v-card>
+             </v-flex>
         </v-layout>
     </v-container>
+
+
 </template>
 
 
@@ -20,7 +26,7 @@
 
 <style scoped>
     .white-background{
-        background-color: white;
+        background-color: red;
     }
 
 </style>
