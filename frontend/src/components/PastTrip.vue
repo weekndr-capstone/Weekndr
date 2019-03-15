@@ -8,9 +8,9 @@
                     <v-flex xs5>
                     <h4>Trip Title</h4>
                     </v-flex>
-                    <v-vlex xs5>
+                    <v-flex xs5>
                         <p>dates here</p>
-                    </v-vlex>
+                    </v-flex>
                     <v-avatar  class="avatar-margin" size="36px" v-for="n in 6" :key="n">
                         <img ml-50 src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
                     </v-avatar>

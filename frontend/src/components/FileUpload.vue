@@ -1,7 +1,5 @@
 <template>
-
             <v-btn id="upload" color="info" @click="fileUpload">Upload Photo</v-btn>
-
 </template>
 
 <script>
