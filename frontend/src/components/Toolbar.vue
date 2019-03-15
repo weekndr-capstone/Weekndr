@@ -1,9 +1,7 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <v-toolbar flat class="Navbar">
-        <v-flex xs3 md1>
-            <a href="/">
+        <v-flex xs5 sm3 md2 xl1>
                 <v-img :src="require ('../assets/weekdnr_logo.svg')" class="icon"></v-img>
-            </a>
         </v-flex>
 
         <v-layout justify-end fill-height>
@@ -96,9 +94,6 @@
         border-color: transparent;
     }
     .icon {
-        width: 50%;
-    }
-    .icon:hover {
-        transform: scale(1.07);
+        width: 60%;
     }
 </style>

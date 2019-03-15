@@ -1,5 +1,5 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-<div>
+<v-container fill-height fluid>
         <v-layout justify-center>
             <v-card height="400px" xs12>
                 <v-container fill-height>
@@ -19,7 +19,7 @@
                                         lazy transition="scale-transition" offset-y full-width min-width="290px">
                                     <template v-slot:activator="{ on }">
 
-                                        <p>Start Date</p>
+                                        <p class="font-weight-bold">Start Date</p>
                                         <v-text-field v-model="Dates.Start" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
 
                                     </template>
@@ -50,7 +50,7 @@
                 </v-container>
             </v-card>
         </v-layout>
-</div>
+</v-container>
 </template>
 
 <script>
