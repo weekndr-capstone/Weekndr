@@ -3,7 +3,7 @@
         <v-toolbar-title>Weekndr</v-toolbar-title>
         <v-layout justify-end fill-height>
             <v-toolbar-items>
-                <v-dialog v-model="SignUp" max-width="550px">
+                <v-dialog v-if="!loggedIn" v-model="SignUp" max-width="550px">
                     <template v-slot:activator="{ on }">
                         <v-btn flat v-on="on">Sign Up</v-btn>
                     </template>
@@ -13,20 +13,17 @@
                                 <v-toolbar-title class="display-1">Sign Up</v-toolbar-title>
                                 <br>
                                 <v-layout wrap>
-                                    <v-flex xs12 sm6>
-                                        <v-text-field label="First name*" required solo></v-text-field>
-                                    </v-flex>
-                                    <v-flex xs12 sm6>
-                                        <v-text-field label="Last name*" required solo></v-text-field>
+                                    <v-flex xs12>
+                                        <v-text-field v-model="user.phone_number" label="Phone Number*" required solo></v-text-field>
                                     </v-flex>
                                     <v-flex xs12>
-                                        <v-text-field label="Email Address*" required solo></v-text-field>
+                                        <v-text-field v-model="user.email" label="Email Address*" required solo></v-text-field>
                                     </v-flex>
                                     <v-flex xs12>
-                                        <v-text-field label="Username*" required solo></v-text-field>
+                                        <v-text-field v-model="user.username" label="Username*" required solo></v-text-field>
                                     </v-flex>
                                     <v-flex xs12>
-                                        <v-text-field label="Password*" type="password" required solo></v-text-field>
+                                        <v-text-field v-model="user.password" label="Password*" type="password" required solo></v-text-field>
                                     </v-flex>
                                     <v-layout justify-start>
                                     <small>*indicates required field</small>
@@ -34,7 +31,7 @@
                                     <v-layout justify-end>
                                         <v-card-actions>
                                             <v-btn flat @click="SignUp = false">Close</v-btn>
-                                            <v-btn flat @click="SignUp = false">Sign Up</v-btn>
+                                            <v-btn flat @click="signup()">Sign Up</v-btn>
                                         </v-card-actions>
                                     </v-layout>
                                     </v-layout>
@@ -42,8 +39,8 @@
                         </v-card-text>
                     </v-card>
                 </v-dialog>
-                <v-dialog v-model="Login" max-width="550px">
-                    <template v-slot:activator="{ on }">
+                <v-dialog v-if="!loggedIn" v-model="Login" max-width="550px">
+                    <template  v-slot:activator="{ on }">
                         <v-btn flat v-on="on">Login</v-btn>
                     </template>
                     <v-card>
@@ -53,17 +50,17 @@
                                 <br>
                                 <v-layout wrap>
                                     <v-flex xs12>
-                                        <v-text-field label="Email Address" required solo></v-text-field>
+                                        <v-text-field v-model="userLogin.username" label="Email Address" required solo></v-text-field>
                                     </v-flex>
                                     <v-flex xs12>
-                                        <v-text-field label="Password" type="password" required solo></v-text-field>
+                                        <v-text-field v-model="userLogin.password" label="Password" type="password" required solo></v-text-field>
                                     </v-flex>
                                 </v-layout>
                                 <v-layout justify-end>
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
                                         <v-btn flat @click="Login = false">Close</v-btn>
-                                        <v-btn flat @click="Login = false">Login</v-btn>
+                                        <v-btn flat @click="login()">Login</v-btn>
                                     </v-card-actions>
                                 </v-layout>
                             </v-container>
@@ -76,12 +73,58 @@
 </template>
 
 <script>
+    import axios from 'axios'
+    import router from '../router'
+    import store from '../store'
+
     export default {
         name: "Toolbar",
         data: () => ({
             SignUp: false,
-            Login: false
-        })
+            Login: false,
+            user:{
+                username: '',
+                email:'',
+                password:'',
+                phone_number: '',
+            },
+            userLogin: {
+                username:'',
+                password: '',
+            },
+            loggedIn: false,
+        }),
+        methods: {
+            signup(){
+                  axios
+                    .post('/signup', this.user)
+                      .then(res => {
+                          console.log(res.data)
+                      }).catch(err => {
+                          console.log(err.data)
+                  })
+            },
+            login(){
+                axios({
+                    method: 'POST',
+                    url:'/async-login',
+                    headers: {'Content-Type': 'application/json'},
+                    data: {
+                        username:this.userLogin.username,
+                        password:this.userLogin.password
+                    }
+                })
+                    .then(res => {
+                        if (res.data.email != null) {
+                            this.loggedIn = true;
+                            store.state.user =  res.data;
+                            console.log(store.state.user)
+                        }
+                    }).catch(err => {
+                    console.log(err)
+                })
+            }
+        }
     }
 </script>
 

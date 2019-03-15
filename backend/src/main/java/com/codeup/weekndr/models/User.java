@@ -55,6 +55,11 @@ public class User {
         this.trips = trips;
     }
 
+    public User(String username, String password){
+        this.username =username;
+        this.password = password;
+    }
+
     public long getId() {
         return id;
     }
