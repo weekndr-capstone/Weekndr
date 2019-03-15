@@ -8,7 +8,7 @@
                     <v-card-title>Trip Title</v-card-title>
                     <v-card-text>dates here</v-card-text>
                     <v-card-text>Trip descrption here</v-card-text>
-                    <v-avatar  class="avatar-margin" size="36px" v-for="n in 3" :key="n">
+                    <v-avatar  class="avatar-margin" size="36px" v-for="n in 6" :key="n">
                         <img ml-50 src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
                     </v-avatar>
                 </v-flex>

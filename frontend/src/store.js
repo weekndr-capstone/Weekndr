@@ -12,7 +12,13 @@ export default new Vuex.Store({
     foodResults: '',
     experiencesResults: '',
     singleResult: '',
-
+    user: {
+        id: '',
+        username: '',
+        img_path:'',
+        email: '',
+        phone_number: ''
+    }
   },
 
   getters:{
