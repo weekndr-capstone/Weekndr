@@ -2,9 +2,9 @@
     <v-container>
         <v-layout row wrap class="white-background" elevation-1>
                 <v-flex class="zero-margin" xs3 sm2 md2 lg2 xl1>
-                    <v-img max-height="100px" max-width="100px" src="https://picsum.photos/300"></v-img>
+                    <v-img right max-height="100px" min-height="100px"  src="https://picsum.photos/300"></v-img>
                 </v-flex>
-                <v-flex m0 xs8 sm7 md8 lg8 xl10 mx-2>
+                <v-flex class="margin" xs8 sm7 md8 lg8 xl10>
                     <v-flex xs5>
                     <h4 @click="routeSingle()">{{ trip.title}}</h4>
                     </v-flex>
@@ -43,7 +43,15 @@
     }
 
     .avatar-margin{
-        /*margin: 5px;*/
+        margin: 2px;
 
+    }
+
+   .zero-margin{
+       margin: 0;
+   }
+
+    .margin {
+        margin-left: 20px !important;
     }
 </style>
