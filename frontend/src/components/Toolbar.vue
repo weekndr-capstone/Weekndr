@@ -119,7 +119,7 @@
                     .then(res => {
                         if (res.data.email != null) {
                             this.loggedIn = true;
-                            store.state.user =  res.data;
+                            store.commit('changeUser', res.data);
                             console.log(store.state.user)
                         }
                     }).catch(err => {

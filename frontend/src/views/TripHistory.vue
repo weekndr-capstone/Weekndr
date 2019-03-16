@@ -3,7 +3,7 @@
     <!--TODO: list of all of your past trips with a button that will take you to that trips page-->
 <div>
     <GoogleMap/>
-    <PastTrip v-for="n in 3" :key="n"/>
+    <PastTrip v-for="n in trips" :key="n" :trip="n"/>
 </div>
 
 </template>
@@ -17,6 +17,9 @@
             GoogleMap,
             PastTrip
         },
+        props:{
+            trips: Array,
+        }
     }
 </script>
 

@@ -8,11 +8,11 @@
             <CardItem :card="n" />
         </v-timeline-item>
     </v-timeline>
-
 </template>
 
 <script>
-    import CardItem from "./CardItem";
+    import CardItem from './CardItem';
+    import store from '../store';
 
     export default {
         name: "Timeline",
@@ -45,6 +45,11 @@
                 ]
             }
         },
+        computed: {
+            trip(){
+                return store.getters.currentlyViewedTrip
+            }
+        }
     }
 </script>
 
