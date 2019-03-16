@@ -113,7 +113,6 @@
                 axios({
                     method: 'POST',
                     url:'/async-login',
-                    headers: {'Content-Type': 'application/json'},
                     data: {
                         username:this.userLogin.username,
                         password:this.userLogin.password

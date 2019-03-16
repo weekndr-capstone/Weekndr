@@ -7,7 +7,7 @@
 
 <script>
     import Banner from '../components/Banner'
-    import TripHistory from "../components/TripHistory";
+    import TripHistory from "./TripHistory";
   export default {
     components: {
         Banner,

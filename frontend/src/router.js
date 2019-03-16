@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import singleView from './views/singleView'
 import Itenerary from './views/Itenerary'
+import TripHistory from './views/TripHistory'
 
 Vue.use(Router)
 
@@ -31,6 +32,11 @@ export default new Router({
       path: '/itenerary/:id',
       name: 'itenerary',
       component: Itenerary
+    },
+    {
+      path: '/triphistory/:id',
+      name: 'triphistory',
+      component: TripHistory
     }
   ]
 })

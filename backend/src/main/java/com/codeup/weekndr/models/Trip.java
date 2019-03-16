@@ -1,6 +1,9 @@
 package com.codeup.weekndr.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,6 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "trips")
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Trip {
 
     @Id
@@ -32,7 +36,6 @@ public class Trip {
     private List<Place> places;
 
     @ManyToMany(mappedBy = "trips")
-    @JsonBackReference
     private List<User> users;
 
     public Trip() {}

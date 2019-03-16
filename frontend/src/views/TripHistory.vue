@@ -11,7 +11,6 @@
 <script>
     import GoogleMap from '../components/GoogleMap';
     import PastTrip from '../components/PastTrip';
-
     export default {
         name: "TripHistory",
         components: {
