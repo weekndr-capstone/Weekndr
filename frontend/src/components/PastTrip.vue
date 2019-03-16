@@ -6,13 +6,13 @@
                 </v-flex>
                 <v-flex m0 xs8 sm7 md8 lg8 xl10 mx-2>
                     <v-flex xs5>
-                    <h4>Trip Title</h4>
+                    <h4 @click="routeSingle()">{{ trip.title}}</h4>
                     </v-flex>
                     <v-flex xs5>
                         <p>dates here</p>
                     </v-flex>
                     <v-avatar  class="avatar-margin" size="36px" v-for="n in 6" :key="n">
-                        <img ml-50 src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+                        <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
                     </v-avatar>
                 </v-flex>
         </v-layout>
@@ -20,8 +20,20 @@
 </template>
 
 <script>
+    import store from '../store'
+    import router from '../router'
+
     export default {
-        name: "PastTrip"
+        name: "PastTrip",
+        props:{
+            trip: Object,
+        },
+        methods:{
+            async routeSingle() {
+                await store.commit('changeCurrentlyViewedTrip', this.trip);
+                router.push('/itenerary')
+            }
+        }
     }
 </script>
 

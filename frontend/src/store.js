@@ -18,7 +18,8 @@ export default new Vuex.Store({
         img_path:'',
         email: '',
         phone_number: ''
-    }
+    },
+    currentViewedTrip: ''
   },
 
   getters:{
@@ -42,6 +43,12 @@ export default new Vuex.Store({
       },
       singleResult: state => {
           return state.singleResult
+      },
+      user: state => {
+          return state.user
+      },
+      currentlyViewedTrip: state => {
+          return state.currentViewedTrip
       }
   },
   mutations: {
@@ -71,6 +78,12 @@ export default new Vuex.Store({
       },
       changeSingleResult(state, singleResult){
           state.singleResult = singleResult;
+      },
+      changeUser(state, user){
+          state.user = user;
+      },
+      changeCurrentlyViewedTrip(state, trip){
+          state.currentViewedTrip = trip;
       }
 
   },

@@ -29,12 +29,12 @@ export default new Router({
       component: singleView,
     },
     {
-      path: '/itenerary/:id',
+      path: '/itenerary',
       name: 'itenerary',
       component: Itenerary
     },
     {
-      path: '/triphistory/:id',
+      path: '/triphistory',
       name: 'triphistory',
       component: TripHistory
     }
