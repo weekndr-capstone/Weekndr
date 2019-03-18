@@ -8,14 +8,6 @@
                 <v-card flat>
                     <v-card-text>
                         <Timeline />
-                        <!--<h1 class="title-margin">Hotel: </h1>-->
-                        <!--<CardItem/>-->
-
-                        <!--<h1 class="title-margin">Restaurants: </h1>-->
-                        <!--<CardCarousel/>-->
-
-                        <!--<h1 class="title-margin">Experiences:</h1>-->
-                        <!--<CardCarousel/>-->
                     </v-card-text>
                 </v-card>
             </v-tab-item>

@@ -6,7 +6,7 @@
                 </v-flex>
                 <v-flex class="margin" xs8 sm7 md8 lg8 xl10>
                     <v-flex xs5>
-                    <h4 @click="routeSingle()">{{ trip.title}}</h4>
+                    <h4 @click="routeSingle()">{{trip.title}}</h4>
                     </v-flex>
                     <v-flex xs5>
                         <p>dates here</p>

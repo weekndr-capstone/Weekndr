@@ -17,9 +17,6 @@
     export default {
         name: "Timeline",
         components: {CardItem},
-        props:{
-
-        },
         data(){
             return{
                 places: [{
