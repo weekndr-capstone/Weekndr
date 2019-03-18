@@ -11,6 +11,7 @@
             </v-carousel-item>
         </v-carousel>
         <TripHistory v-if="userTrips.trips != null" :trips="userTrips.trips"/>
+    <CardItem :card="fake"/>
     </div>
 </template>
 
@@ -19,6 +20,7 @@
     import store from '../store'
     import TripHistory from "./TripHistory";
     import RecommendedDestinations from "../components/RecommendedDestinations";
+    import CardItem from "../components/CardItem";
   export default {
     data(){
         return {
@@ -37,13 +39,18 @@
                 {name: 'new york', image: 'image'},
                 {name: 'lisbon', image: 'image'},
                 {name: 'san jose',image: 'image'},
-            ]
+            ],
+            fake: {
+                image_url: 'https://picsum.photos/305',
+                name: 'Fake Name'
+            }
         }
     },
     components: {
         RecommendedDestinations,
         TripHistory,
-        Banner
+        Banner,
+        CardItem
     },
     computed: {
         userTrips(){
