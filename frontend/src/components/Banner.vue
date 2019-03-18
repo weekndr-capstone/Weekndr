@@ -1,6 +1,5 @@
 <template>
   <v-img src="https://picsum.photos/1920/1080" background-position aspect-ratio="2">
-    <Toolbar/>
     <SearchCard/>
   </v-img>
 </template>

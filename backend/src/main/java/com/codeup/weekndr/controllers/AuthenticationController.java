@@ -11,17 +11,21 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.HashMap;
 
 @RestController
 public class AuthenticationController {
 
     @Autowired
     private UserRepository userDao;
-    private TripRepository tripDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public void authenticate(User user) {
         // Notice how we're using an empty list for the roles
@@ -36,21 +40,34 @@ public class AuthenticationController {
     }
 
     @PostMapping("/async-login")
-    public User loginUser(@RequestBody User user) {
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
-        System.out.println(user.getPhone_number());
-        authenticate(user);
-        User loggedIn = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (loggedIn.getUsername() != null){
-            User finaluser = userDao.findByUsername(loggedIn.getUsername());
-            for(Trip t : finaluser.getTrips())
-            {
-                System.out.println(t + "TRIPS");
-            }
-            return finaluser;
-        }else   {
-            return null;
+    @ResponseBody
+    public User doLogin(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password){
+        User dbUser = userDao.findByUsername(username);
+        if(dbUser != null && passwordEncoder.matches(password, dbUser.getPassword())) {
+            System.out.println("Here");
+            authenticate(dbUser);
+        }else{
+            System.out.println("Blere");
+            dbUser = null;
         }
+        return dbUser;
     }
+
+//    public User loginUser(@RequestBody User user) {
+//        System.out.println(user.getUsername());
+//        System.out.println(user.getPassword());
+//        System.out.println(user.getPhone_number());
+//        authenticate(user);
+//        User loggedIn = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        if (loggedIn.getUsername() != null){
+//            User finaluser = userDao.findByUsername(loggedIn.getUsername());
+//            for(Trip t : finaluser.getTrips())
+//            {
+//                System.out.println(t + "TRIPS");
+//            }
+//            return finaluser;
+//        }else   {
+//            return null;
+//        }
+//    }
 }
