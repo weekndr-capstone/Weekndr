@@ -53,7 +53,7 @@
                                 <br>
                                 <v-layout wrap>
                                     <v-flex xs12>
-                                        <v-text-field v-model="userLogin.username" label="Email Address" required solo></v-text-field>
+                                        <v-text-field v-model="userLogin.username" label="Username" required solo></v-text-field>
                                     </v-flex>
                                     <v-flex xs12>
                                         <v-text-field v-model="userLogin.password" label="Password" type="password" required solo></v-text-field>
@@ -112,7 +112,7 @@
                 axios({
                     method: 'POST',
                     url:'/async-login',
-                    data: {
+                    params: {
                         username:this.userLogin.username,
                         password:this.userLogin.password
                     }
@@ -138,5 +138,9 @@
     }
     .icon {
         width: 60%;
+    }
+
+    body {
+        background: transparent;
     }
 </style>
