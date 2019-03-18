@@ -102,6 +102,7 @@
                   axios
                     .post('/signup', this.user)
                       .then(res => {
+                          this.signup = true;
                           console.log(res.data)
                       }).catch(err => {
                           console.log(err.data)
