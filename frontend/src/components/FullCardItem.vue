@@ -37,8 +37,9 @@
                                     </v-flex>
                                     <v-flex xs12>
                                         <h2>Invite Friends</h2>
-                                        <v-text-field v-for="f in friends" :key="f" label="Friends Number*" hint="We will shoot them a text and help them join in on the fun"></v-text-field>
+                                        <v-text-field v-for="f in friends" :key="f" label="Friends Number*" hint="We will shoot them a text and help them join in on the fun" v-model="to"></v-text-field>
                                         <v-btn @click="addFriend()"><v-icon>person_add</v-icon></v-btn>
+                                        <v-btn @click="inviteFriends()">Invite all Friends</v-btn>
                                         <small v-if="!premium">*Add another friend</small>
                                         <small class="red--text" v-if="premium">*beyond 6 friends requires a premium account</small>
                                     </v-flex>
@@ -117,6 +118,8 @@
                 active: null,
                 friends: [1,2],
                 premium: false,
+                to: '',
+                fromNumber: '',
                 trip:{
                     id:'',
                     title: '',
@@ -138,14 +141,15 @@
                  rating: store.state.singleResult.rating,
                  suggested: false,
                  trip_id: '',
-                 user_id: store.state.user.id
+                 user_id: store.state.user.id,
+                    user_phone_number: store.state.user.phone_number
                 }
             }
         },
         methods:{
             async next () {
-                const active = parseInt(this.active)
-                this.active = (active < 2 ? active + 1 : 0)
+                const active = parseInt(this.active);
+                this.active = (active < 2 ? active + 1 : 0);
                 await axios(
                         {
                             method: 'POST',
@@ -176,6 +180,23 @@
                 }else{
                     this.premium = true;
                 }
+            },
+            async inviteFriends(){
+                await axios({
+                    method: 'POST',
+                    url:'/twilio',
+                    headers: {'Content-Type': 'application/json'},
+                    params: {
+                        to: this.to,
+                        fromNumber: this.user_phone_number
+                    }
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             },
             saveExperience(){
 

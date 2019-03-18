@@ -21,9 +21,9 @@ public class ApiController {
     @Value("${api-weather}")
     private String weatherApi;
     @Value("${api-authtwillio}")
-    private String authtwillio;
+    private String authtwilio;
     @Value("${api-twillioSID}")
-    private String twillioSID;
+    private String twilioSID;
     @Value("${api-uberserver}")
     private String uberserver;
     @Value("${api-uberclientId}")
@@ -40,15 +40,17 @@ public class ApiController {
         return getyelpList(yelpApi, location, type);
     }
 
-    @GetMapping("/twillio")
-    public String twillio(){
-        twillioTest(authtwillio, twillioSID);
-        return "hi";
+    @PostMapping("/twilio")
+    public String twilio(@RequestParam(name = "to") String to, @RequestParam(name = "fromNumber") String from){
+        String body = "You have been invited on a trip. Click the link to join in on the fun!";
+        Twilio.init(authtwilio, twilioSID);
+        String testNum = "+13022447485";
+        twilioMessage(to, testNum, body);
+        return "message sent";
     }
 
     private static ResponseEntity<String> getyelpList(String bearer, String location, String type)
     {
-
         String uri;
         switch (type){
             case "1": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=experience&radius=20000&limit=26";
@@ -106,6 +108,15 @@ public class ApiController {
                             "Where's Wallace?")
                     .create();
 
+            System.out.println(message.getSid());
+        }
+
+        public void twilioMessage(String to, String from, String body){
+            Message message = Message
+                    .creator(new PhoneNumber(to),
+                            new PhoneNumber(from),
+                            body)
+                    .create();
             System.out.println(message.getSid());
         }
 
