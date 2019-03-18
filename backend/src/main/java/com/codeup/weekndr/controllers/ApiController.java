@@ -51,16 +51,16 @@ public class ApiController {
 
         String uri;
         switch (type){
-            case "1": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=experience&radius=20000&limit=25";
+            case "1": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=experience&radius=20000&limit=26";
             break;
 
-            case "2": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=food&radius=20000&limit=25";
+            case "2": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=food&radius=20000&limit=26";
             break;
 
-            case "3": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=hotel&radius=20000&limit=25";
+            case "3": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=hotel&radius=20000&limit=26";
             break;
 
-            default: uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&radius=20000&limit=25";
+            default: uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&radius=20000&limit=26";
         }
         System.out.println(uri);
         RestTemplate restTemplate = new RestTemplate();
