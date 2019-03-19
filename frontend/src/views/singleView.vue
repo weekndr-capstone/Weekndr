@@ -1,12 +1,17 @@
 <template>
-    <FullCardItem/>
+    <div>
+        <Toolbar/>
+        <FullCardItem/>
+    </div>
 </template>
 <script>
     import FullCardItem from '../components/FullCardItem'
+    import Toolbar from '../components/Toolbar'
     export default {
         name: "singleView",
         components:{
-            FullCardItem
+            FullCardItem,
+            Toolbar
         },
         props: {
             singleResult: Object

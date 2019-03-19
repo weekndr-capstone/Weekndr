@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Toolbar/>
     <CardCarousel  :results = "suggested"/>
     <CardCarousel  :results = "hotels" />
     <CardCarousel  :results = "food"/>
@@ -9,11 +10,13 @@
 
 <script>
     import store from '../store'
-    import axios from 'axios'
     import CardCarousel from '../components/CardCarousel'
+    import Toolbar from '../components/Toolbar'
+
     export default {
         components: {
-            CardCarousel
+            CardCarousel,
+            Toolbar
         },
 
         data(){

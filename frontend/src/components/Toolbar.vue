@@ -42,6 +42,9 @@
                         </v-card-text>
                     </v-card>
                 </v-dialog>
+                <v-layout v-if="loggedIn" justify-end fill-height>
+                    <v-btn flat @click="logout()">Logout</v-btn>
+                </v-layout>
                 <v-dialog v-if="!loggedIn" v-model="Login" max-width="550px">
                     <template  v-slot:activator="{ on }">
                         <v-btn flat v-on="on">Login</v-btn>
@@ -94,9 +97,13 @@
             userLogin: {
                 username:'',
                 password: '',
-            },
-            loggedIn: false,
+            }
         }),
+        computed:{
+            loggedIn() {
+                return store.getters.loggedIn
+            }
+        },
         methods: {
             signup(){
                   axios
@@ -119,13 +126,19 @@
                 })
                     .then(res => {
                         if (res.data.email != null) {
-                            this.loggedIn = true;
+                            store.commit('changeLoggedIn', true);
                             store.commit('changeUser', res.data);
+                            this.Login = false;
                             console.log(store.state.user)
                         }
                     }).catch(err => {
                     console.log(err)
                 })
+            },
+            logout(){
+                store.commit('changeUser', '');
+                store.commit('changeLoggedIn', false);
+                this.Login = false;
             }
         }
     }
@@ -137,10 +150,7 @@
         border-color: transparent;
     }
     .icon {
-        width: 60%;
-    }
-
-    body {
-        background: transparent;
+        width: 50px;
+        height: 50px;
     }
 </style>

@@ -19,9 +19,9 @@
                         <v-btn outline color="indigo" dark v-on="on">Add to Itinerary</v-btn>
                     </template>
                     <v-tabs v-model="active">
-                        <v-tab ripple>Create Trip</v-tab>
+                        <v-tab v-if="currentViewedTrip === ''" ripple>Create Trip</v-tab>
                         <v-tab ripple>Add to Itinerary</v-tab>
-                        <v-tab-item>
+                        <v-tab-item v-if="currentViewedTrip === ''">
                     <v-card>
                         <v-card-title class="pb-0">
                             <span class="headline">New Trip</span>
@@ -41,10 +41,6 @@
                                         <v-btn @click="addFriend()"><v-icon>person_add</v-icon></v-btn>
                                         <small v-if="!premium">*Add another friend</small>
                                         <small class="red--text" v-if="premium">*beyond 6 friends requires a premium account</small>
-                                    </v-flex>
-                                    <v-flex xs12>
-                                        <h3>Upload Trip Photo</h3>
-                                        <file-upload class="ml-0"/>
                                     </v-flex>
                                 </v-layout>
                             </v-container>
@@ -76,7 +72,7 @@
                                                            <p>Date</p>
                                                            <v-text-field v-model="experience.event_date" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
                                                        </template>
-                                                       <v-date-picker :min="Dates.start_date" v-model="experience.event_date" @input="menu1 = false"></v-date-picker>
+                                                       <v-date-picker :min="Dates.start_date" :max="Dates.end_date" v-model="experience.event_date" @input="menu1 = false"></v-date-picker>
                                                    </v-menu>
                                                </v-flex>
                                            </v-flex>
@@ -114,6 +110,7 @@
                 active: null,
                 friends: [1,2],
                 premium: false,
+                currentViewedTrip: store.state.currentViewedTrip,
                 trip:{
                     id:'',
                     title: '',
@@ -153,8 +150,8 @@
                                 title: this.trip.title,
                                 location: store.state.location,
                                 trip_description: this.trip.trip_description,
-                                start_date: store.state.start_date,
-                                end_date:store.state.end_date,
+                                start_date: store.state.dates.start_date,
+                                end_date:store.state.dates.end_date,
                                 created_at: new Date(),
                                 user_id: {
                                     id: store.state.user.id,
@@ -163,7 +160,7 @@
                         })
                     .then(res => {
                         this.trip = res.data;
-                        store.commit('currentViewedTrip', res.data);
+                        store.commit('changeCurrentlyViewedTrip', res.data);
                         console.log(res.data)
                     }).catch(err => {
                         console.log(err)
@@ -207,7 +204,7 @@
                     })
                     .then(res => {
                         this.experience = res.data;
-                        this.dialogue = true;
+                        this.dialog = false;
                     }).catch(err => {
                         console.log(err.data)
                     })

@@ -26,8 +26,6 @@ public class PlacesController {
 
    @PostMapping("/place")
     public Place savePlace(@RequestBody Place place){
-       System.out.println(place.getImage_url());
-       System.out.println(place.getWebsiteURL());
        placeDao.save(place);
        Trip trip = tripDao.findById(place.getTrip_id().getId());
        trip.getPlaces().add(place);
