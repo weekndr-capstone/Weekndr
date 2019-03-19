@@ -1,8 +1,6 @@
 <template>
     <div>
-        <v-img src="https://picsum.photos/1920/1080" background-position aspect-ratio="2">
-            <SearchCard/>
-        </v-img>
+        <Banner/>
         <div>
             <v-carousel light hide-delimiters :cycle="false" height="auto" class="carousel-transparent">
                 <v-carousel-item :key="i" v-for="i in 3">
@@ -23,8 +21,7 @@
     import store from '../store'
     import TripHistory from "./TripHistory";
     import RecommendedDestinations from "../components/RecommendedDestinations";
-    import CardItem from "../components/CardItem";
-    import SearchCard from '../components/SearchCard';
+
   export default {
     data(){
         return {
@@ -50,8 +47,6 @@
         RecommendedDestinations,
         TripHistory,
         Banner,
-        CardItem,
-        SearchCard
     },
     computed: {
         userTrips(){
