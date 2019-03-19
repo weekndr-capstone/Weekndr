@@ -37,8 +37,9 @@
                                     </v-flex>
                                     <v-flex xs12>
                                         <h2>Invite Friends</h2>
-                                        <v-text-field v-for="f in friends" :key="f" label="Friends Number*" hint="We will shoot them a text and help them join in on the fun"></v-text-field>
+                                        <v-text-field v-for="f in friends" :key="f" label="Friends Number*" hint="We will shoot them a text and help them join in on the fun" v-model="f.to"></v-text-field>
                                         <v-btn @click="addFriend()"><v-icon>person_add</v-icon></v-btn>
+                                        <v-btn @click="inviteFriends()" solo>Invite all Friends</v-btn>
                                         <small v-if="!premium">*Add another friend</small>
                                         <small class="red--text" v-if="premium">*beyond 6 friends requires a premium account</small>
                                     </v-flex>
@@ -108,8 +109,16 @@
                 menu1: false,
                 Dates: store.state.dates,
                 active: null,
-                friends: [1,2],
+                friends: [{
+                   number: 1,
+                    to: ''
+                },{
+                    number: 2,
+                    to: ''
+                }],
                 premium: false,
+                to: '',
+                fromNumber: '',
                 currentViewedTrip: store.state.currentViewedTrip,
                 trip:{
                     id:'',
@@ -138,6 +147,11 @@
             }
         },
         methods:{
+            loop(){
+              for(var i = 0; i < this.friends.length; i++){
+
+              }
+            },
             async next () {
                 const active = parseInt(this.active);
                 this.active = (active < 2 ? active + 1 : 0);
@@ -168,12 +182,32 @@
             },
             addFriend(){
                 if (this.friends.length < 6){
-                    this.friends.push(this.friends.length +1);
+                    this.friends.push({number: this.friends.length + 1,
+                    to: ''});
                     this.premium = false;
                 }else{
                     this.premium = true;
                 }
             },
+
+            inviteFriends(){
+                this.friends.forEach((e) => {
+                axios({
+                    method: 'POST',
+                    url:'/twilio',
+                    headers: {'Content-Type': 'application/json'},
+                    params: {
+                        friends: e,
+                        fromNumber: store.state.user.phone_number
+                    }
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            })},
             async saveExperience(){
                 await axios(
                     {

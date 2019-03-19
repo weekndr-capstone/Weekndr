@@ -1,6 +1,10 @@
 package com.codeup.weekndr.controllers;
 
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.twilio.twiml.voice.Sms;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 //import org.springframework.security.core.parameters.P;
@@ -10,7 +14,10 @@ import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping(name = "/api")
@@ -21,9 +28,9 @@ public class ApiController {
     @Value("${api-weather}")
     private String weatherApi;
     @Value("${api-authtwillio}")
-    private String authtwillio;
+    private String authtwilio;
     @Value("${api-twillioSID}")
-    private String twillioSID;
+    private String twilioSID;
     @Value("${api-uberserver}")
     private String uberserver;
     @Value("${api-uberclientId}")
@@ -40,15 +47,19 @@ public class ApiController {
         return getyelpList(yelpApi, location, type);
     }
 
-    @GetMapping("/twillio")
-    public String twillio(){
-        twillioTest(authtwillio, twillioSID);
-        return "hi";
+    @PostMapping("/twilio")
+    public String twilio(@RequestParam("friends") String friends, @RequestParam("fromNumber") String fromNumber){
+        System.out.println(friends);
+        System.out.println(fromNumber);
+        String body = "You have been invited on a trip. Click the link to join in on the fun!";
+        String toNumber = "+12105188350";
+        String testNum = "+13022447485";
+        twilioMessage(toNumber, testNum, body, authtwilio, twilioSID);
+        return "message sent";
     }
 
     private static ResponseEntity<String> getyelpList(String bearer, String location, String type)
     {
-
         String uri;
         switch (type){
             case "1": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=experience&radius=20000&limit=26";
@@ -106,6 +117,17 @@ public class ApiController {
                             "Where's Wallace?")
                     .create();
 
+            System.out.println(message.getSid());
+        }
+
+        public void twilioMessage(String to, String from, String body, String Auth, String SID ){
+            Twilio.init(Auth, SID);
+
+            Message message = Message
+                    .creator(new PhoneNumber(to),
+                            new PhoneNumber(from),
+                            body)
+                    .create();
             System.out.println(message.getSid());
         }
 
