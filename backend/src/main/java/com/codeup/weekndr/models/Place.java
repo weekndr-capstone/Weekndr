@@ -48,7 +48,7 @@ public class Place {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
     private List<Photo> photos;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "place_id")
     private List<Comment> comments;
 
     public Place(){}

@@ -31,7 +31,7 @@
                                             <p>Display the comments here</p>
                                         </v-flex>
                                         <v-flex xs12>
-                                            <v-textarea v-model="comment.commentText" label="Add Comment" required solo></v-textarea>
+                                            <v-textarea v-model="comment.comment" label="Add Comment" required solo></v-textarea>
                                         </v-flex>
                                     </v-layout>
                                 </v-container>
@@ -62,11 +62,11 @@
                 isLiked: false,
                 heartIconClasses: "far fa-heart",
                 comment: {
-                    commentText: '',
-                    created_at: '',
-                    place_id: '',
-                    parent_comment_id: '',
-                    user: store.state.user
+                    comment: '',
+                    created_at: new Date(),
+                    user: store.state.user,
+                    place: this.card,
+                    comment_id: null,
                 }
             }
         },
@@ -85,14 +85,20 @@
                         url:'/commentPost',
                         headers: {'Content-Type' : 'application/json'},
                         data: {
-                            commentText: this.comment.commentText,
-                            created_at: new Date(),
-                            place_id: this.comment.place_id,
-                            parent_comment_id: this.comment.parent_comment_id,
+                            comment: this.comment.comment,
+                            created_at: this.comment.created_at,
+                            place_id: {
+                                id: this.card.id
+                            },
+                            comment_id: this.comment.comment_id,
                             user: {
-                                  user: store.state.user,
+                                  id: store.state.user.id,
                             }
                         }
+
+                        // public Comment(String comment, LocalDateTime created_at, User user_id, Place place_id, Comment parent_comment_id)
+
+
                     })
                     .then(res => {
                         this.comment = res.data
