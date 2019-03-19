@@ -27,8 +27,11 @@
                                 <v-container grid-list-md>
                                     <v-layout wrap>
                                         <v-flex xs12>
-                                            <h3>{{ card.title }}</h3>
                                             <p>Display the comments here</p>
+                                            <h3>{{ card.title }}</h3>
+                                            <ul>
+                                                <li v-for="comment in comments">{{ comment.comment }}</li>
+                                            </ul>
                                         </v-flex>
                                         <v-flex xs12>
                                             <v-textarea v-model="comment.comment" label="Add Comment" required solo></v-textarea>
@@ -67,7 +70,8 @@
                     user: store.state.user,
                     place: this.card,
                     comment_id: null,
-                }
+                },
+                comments: []
             }
         },
         props:{
@@ -95,13 +99,10 @@
                                   id: store.state.user.id,
                             }
                         }
-
-                        // public Comment(String comment, LocalDateTime created_at, User user_id, Place place_id, Comment parent_comment_id)
-
-
                     })
                     .then(res => {
-                        this.comment = res.data
+                        console.log(res.data)
+                        this.comments = res.data;
                     }).catch(err => {
                         console.log(err)
                     })
