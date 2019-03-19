@@ -30,7 +30,7 @@ public class CommentsController {
         System.out.println(comment.getComment() + " --COMMENT");
         System.out.println(comment.getCreated_at() + " --CREATED AT");
         System.out.println(comment.getParent_comment_id() + " --PARENT COMMENT ID");
-        System.out.println(comment.getPlace_id().getId() + " --PLACE ID");
+        System.out.println(comment.getPlace().getId() + " --PLACE ID");
 
         commentDao.save(comment);
         return commentDao.findAll();

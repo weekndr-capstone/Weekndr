@@ -52,22 +52,4 @@ public class AuthenticationController {
         }
         return dbUser;
     }
-
-//    public User loginUser(@RequestBody User user) {
-//        System.out.println(user.getUsername());
-//        System.out.println(user.getPassword());
-//        System.out.println(user.getPhone_number());
-//        authenticate(user);
-//        User loggedIn = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        if (loggedIn.getUsername() != null){
-//            User finaluser = userDao.findByUsername(loggedIn.getUsername());
-//            for(Trip t : finaluser.getTrips())
-//            {
-//                System.out.println(t + "TRIPS");
-//            }
-//            return finaluser;
-//        }else   {
-//            return null;
-//        }
-//    }
 }

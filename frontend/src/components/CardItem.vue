@@ -69,7 +69,7 @@
                     created_at: new Date(),
                     user: store.state.user,
                     place: this.card,
-                    comment_id: null,
+                    parent_comment: null,
                 },
                 comments: []
             }
@@ -91,10 +91,10 @@
                         data: {
                             comment: this.comment.comment,
                             created_at: this.comment.created_at,
-                            place_id: {
+                            place: {
                                 id: this.card.id
                             },
-                            comment_id: this.comment.comment_id,
+                            parent_comment: this.comment.parent_comment,
                             user: {
                                   id: store.state.user.id,
                             }

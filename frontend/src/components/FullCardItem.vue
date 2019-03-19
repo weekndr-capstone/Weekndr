@@ -127,7 +127,7 @@
                     trip_description: '',
                     start_date: store.state.start_date,
                     end_date:store.state.end_date,
-                    user_id: 1
+                    user: store.state.user.id
                 },
                 experience:{
                  name: store.state.singleResult.name,
@@ -142,16 +142,11 @@
                  suggested: false,
                  description: '',
                  trip_id: store.state.currentViewedTrip.id,
-                 user_id: store.state.user.id
+                 user: store.state.user.id
                 }
             }
         },
         methods:{
-            loop(){
-              for(var i = 0; i < this.friends.length; i++){
-
-              }
-            },
             async next () {
                 const active = parseInt(this.active);
                 this.active = (active < 2 ? active + 1 : 0);
@@ -167,7 +162,7 @@
                                 start_date: store.state.dates.start_date,
                                 end_date:store.state.dates.end_date,
                                 created_at: new Date(),
-                                user_id: {
+                                user: {
                                     id: store.state.user.id,
                                 }
                             }
@@ -227,8 +222,8 @@
                             suggested: false,
                             description: this.experience.description,
                             created_at: new Date(),
-                            user_id: {
-                                id: this.experience.user_id,
+                            user: {
+                                id: this.experience.user,
                             },
                             trip_id: {
                                 id: this.trip.id,
