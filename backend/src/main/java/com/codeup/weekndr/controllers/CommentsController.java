@@ -2,10 +2,7 @@ package com.codeup.weekndr.controllers;
 
 import com.codeup.weekndr.models.Comment;
 import com.codeup.weekndr.repositories.CommentRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CommentsController {
@@ -27,8 +24,15 @@ public class CommentsController {
     }
 
     @PostMapping("/commentPost")
-    public Iterable<Comment> userInput(Comment comment){
+    public Iterable<Comment> userInput(@RequestBody Comment comment){
         commentDao.save(comment);
         return commentDao.findAll();
     }
+
+    @GetMapping("/placeComments")
+    public Iterable<Comment> placesComments(long place_id){
+        return commentDao.findByPlaceId(place_id);
+    }
+
+
 }

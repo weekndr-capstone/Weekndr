@@ -27,11 +27,11 @@
                                 <v-container grid-list-md>
                                     <v-layout wrap>
                                         <v-flex xs12>
-                                            <h3>Card title that's being commented on goes here</h3>
+                                            <h3>{{ card.title }}</h3>
                                             <p>Display the comments here</p>
                                         </v-flex>
                                         <v-flex xs12>
-                                            <v-textarea label="Add Comment" required solo></v-textarea>
+                                            <v-textarea v-model="comment.commentText" label="Add Comment" required solo></v-textarea>
                                         </v-flex>
                                     </v-layout>
                                 </v-container>
@@ -39,7 +39,7 @@
                             <v-card-actions>
                                 <v-spacer> </v-spacer>
                                 <v-btn flat v-on:click="dialogue = false">Close</v-btn>
-                                <v-btn flat v-on:click="">Add Comment</v-btn>
+                                <v-btn flat v-on:click="userInput()">Add Comment</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
@@ -50,6 +50,8 @@
 <script>
     import store from '../store'
     import router from '../router'
+    import axios from 'axios'
+
     export default {
         name: "CardItem",
         // TODO: will receive properties from parent
@@ -59,6 +61,13 @@
                 dialogue: false,
                 isLiked: false,
                 heartIconClasses: "far fa-heart",
+                comment: {
+                    commentText: '',
+                    created_at: '',
+                    place_id: '',
+                    parent_comment_id: '',
+                    user: store.state.user
+                }
             }
         },
         props:{
@@ -69,12 +78,36 @@
                 this.heartIconClasses = "fas fa-heart color-red";
                 this.counter ++;
             },
+            async userInput(){
+                await axios(
+                    {
+                        method: 'POST',
+                        url:'/commentPost',
+                        headers: {'Content-Type' : 'application/json'},
+                        data: {
+                            commentText: this.comment.commentText,
+                            created_at: new Date(),
+                            place_id: this.comment.place_id,
+                            parent_comment_id: this.comment.parent_comment_id,
+                            user: {
+                                  user: store.state.user,
+                            }
+                        }
+                    })
+                    .then(res => {
+                        this.comment = res.data
+                    }).catch(err => {
+                        console.log(err)
+                    })
+            },
             async routeSingle() {
                 await store.commit('changeSingleResult', this.card);
                 router.push('/single')
             }
         }
     }
+
+
 </script>
 
 <style scoped>

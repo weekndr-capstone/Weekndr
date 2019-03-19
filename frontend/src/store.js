@@ -19,7 +19,8 @@ export default new Vuex.Store({
         email: '',
         phone_number: ''
     },
-    currentViewedTrip: ''
+    currentViewedTrip: '',
+    loggedIn: false
   },
 
   getters:{
@@ -49,6 +50,9 @@ export default new Vuex.Store({
       },
       currentlyViewedTrip: state => {
           return state.currentViewedTrip
+      },
+      loggedIn: state => {
+          return state.loggedIn
       }
   },
   mutations: {
@@ -84,6 +88,9 @@ export default new Vuex.Store({
       },
       changeCurrentlyViewedTrip(state, trip){
           state.currentViewedTrip = trip;
+      },
+      changeLoggedIn(state, boolean){
+          state.loggedIn = boolean;
       }
 
   },

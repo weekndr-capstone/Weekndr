@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -27,12 +28,13 @@ public class Trip {
     private Date start_date;
     private Date end_date;
     @Column(nullable = false)
+    @CreationTimestamp
     private LocalDateTime created_at;
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user_id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
+    @OneToMany(mappedBy = "trip")
     private List<Place> places;
 
     @ManyToMany(mappedBy = "trips")
@@ -40,13 +42,12 @@ public class Trip {
 
     public Trip() {}
 
-    public Trip(String title, String location, String trip_description, Date start_date, Date end_date, Timestamp created_at, User user_id, List<Place> places,List<User> users) {
+    public Trip(String title, String location, String trip_description, Date start_date, Date end_date, User user_id, List<Place> places,List<User> users) {
         this.title = title;
         this.location = location;
         this.trip_description = trip_description;
         this.start_date = start_date;
         this.end_date = end_date;
-        this.created_at = created_at.toLocalDateTime();
         this.user_id = user_id;
         this.users = users;
         this.places = places;
