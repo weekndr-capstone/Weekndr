@@ -1,6 +1,7 @@
 package com.codeup.weekndr.models;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -20,22 +21,24 @@ public class Place {
     private String address;
     private Boolean suggested;
     @Column
-    private String imgURL;
+    private String image_url;
     private String websiteURL;
     private String hotelURL;
     private String phone_number;
     private String rating;
     private String price;
+    private String description;
     private Date checkin_date;
     private Date checkout_date;
     private Date event_date;
     @Column(nullable = false)
+    @CreationTimestamp
     private LocalDateTime created_at;
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user_id;
     @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @Cascade(org.hibernate.annotations.CascadeType.MERGE)
     @JoinColumn(name = "trip_id")
     private Trip trip;
 
@@ -50,14 +53,14 @@ public class Place {
 
     public Place(){}
 
-    public Place(String yelp_uniq, String name, String address, Boolean suggested, String imgURL, String websiteURL, String hotelURL, String phone_number, String rating, String price,
-                 Date checkin_date, Date checkout_date, LocalDateTime created_at, User user_id, Trip trip_id,
+    public Place(String yelp_uniq, String name, String address, Boolean suggested, String image_url, String websiteURL, String hotelURL, String phone_number, String rating, String price,
+                 Date checkin_date, Date checkout_date, User user_id, Trip trip_id,
                  List<Vote> votes, List<Comment> comments, List<Photo> photos) {
         this.yelp_uniq = yelp_uniq;
         this.name = name;
         this.address = address;
         this.suggested = suggested;
-        this.imgURL = imgURL;
+        this.image_url = image_url;
         this.websiteURL = websiteURL;
         this.hotelURL = hotelURL;
         this.phone_number = phone_number;
@@ -65,7 +68,6 @@ public class Place {
         this.price = price;
         this.checkin_date = checkin_date;
         this.checkout_date = checkout_date;
-        this.created_at = created_at;
         this.votes = votes;
         this.comments = comments;
         this.photos = photos;
@@ -73,18 +75,34 @@ public class Place {
         this.trip = trip_id;
     }
 
-    public Place(String yelp_uniq, String name, String address, Boolean suggested, String imgURL, String websiteURL, String phone_number, String rating, String price, Date event_date, LocalDateTime created_at, User user_id, Trip trip_id) {
+    public Place(String name, String address, String image_url, Date event_date, String phone_number, String yelp_uniq, String websiteURL, String price, String rating, Boolean suggested,
+                 String description, User user_id, Trip trip_id){
+        this.name = name;
+        this.address = address;
+        this.image_url = image_url;
+        this.event_date = event_date;
+        this.yelp_uniq = yelp_uniq;
+        this.websiteURL = websiteURL;
+        this.phone_number = phone_number;
+        this.price = price;
+        this.rating = rating;
+        this.description = description;
+        this.suggested = suggested;
+        this.user_id = user_id;
+        this.trip = trip_id;
+    }
+
+    public Place(String yelp_uniq, String name, String address, Boolean suggested, String image_url, String websiteURL, String phone_number, String rating, String price, Date event_date, User user_id, Trip trip_id) {
         this.yelp_uniq = yelp_uniq;
         this.name = name;
         this.address = address;
         this.suggested = suggested;
-        this.imgURL = imgURL;
+        this.image_url = image_url;
         this.websiteURL = websiteURL;
         this.phone_number = phone_number;
         this.rating = rating;
         this.price = price;
         this.event_date = event_date;
-        this.created_at = created_at;
         this.user_id = user_id;
         this.trip = trip_id;
     }
@@ -129,12 +147,12 @@ public class Place {
         this.suggested = suggested;
     }
 
-    public String getImgURL() {
-        return imgURL;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setImgURL(String imgURL) {
-        this.imgURL = imgURL;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
     public String getWebsiteURL() {
@@ -247,5 +265,13 @@ public class Place {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

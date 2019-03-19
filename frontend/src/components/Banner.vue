@@ -6,9 +6,13 @@
 </template>
 <script>
   import SearchCard from "./SearchCard";
-  import Toolbar from "./Toolbar";
+  import Toolbar from "../components/Toolbar";
+
   export default {
-    components: {Toolbar, SearchCard},
+    components: {
+        Toolbar,
+        SearchCard
+    },
     data: () => ({
 
     })

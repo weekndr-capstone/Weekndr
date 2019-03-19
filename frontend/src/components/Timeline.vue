@@ -1,9 +1,9 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
 
     <v-timeline>
-        <v-timeline-item v-for="n in places" :key="n.id" color="black lighten-2" small>
+        <v-timeline-item v-for="n in trip.places" :key="n.id" color="black lighten-2" small>
             <template v-slot:opposite>
-                <span>Title of event here</span>
+                <span>{{n.name}}</span>
             </template>
             <CardItem :card="n" />
         </v-timeline-item>

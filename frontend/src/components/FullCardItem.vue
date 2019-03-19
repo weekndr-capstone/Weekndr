@@ -19,9 +19,9 @@
                         <v-btn outline color="indigo" dark v-on="on">Add to Itinerary</v-btn>
                     </template>
                     <v-tabs v-model="active">
-                        <v-tab ripple>Create Trip</v-tab>
+                        <v-tab v-if="currentViewedTrip === ''" ripple>Create Trip</v-tab>
                         <v-tab ripple>Add to Itinerary</v-tab>
-                        <v-tab-item>
+                        <v-tab-item v-if="currentViewedTrip === ''">
                     <v-card>
                         <v-card-title class="pb-0">
                             <span class="headline">New Trip</span>
@@ -43,10 +43,6 @@
                                         <small v-if="!premium">*Add another friend</small>
                                         <small class="red--text" v-if="premium">*beyond 6 friends requires a premium account</small>
                                     </v-flex>
-                                    <v-flex xs12>
-                                        <h3>Upload Trip Photo</h3>
-                                        <file-upload/>
-                                    </v-flex>
                                 </v-layout>
                             </v-container>
                             <small>*indicates required field</small>
@@ -67,7 +63,7 @@
                                    <v-container grid-list-md>
                                        <v-layout wrap>
                                            <v-flex xs12>
-                                               <v-text-field label="Description*" required></v-text-field>
+                                               <v-text-field v-model="experience.description" label="Description*" required></v-text-field>
                                            </v-flex>
                                            <v-flex xs12>
                                                <v-flex xs5 class="d-inline-block">
@@ -77,7 +73,7 @@
                                                            <p>Date</p>
                                                            <v-text-field v-model="experience.event_date" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
                                                        </template>
-                                                       <v-date-picker :min="Dates.start_date" v-model="chosenDate" @input="menu1 = false"></v-date-picker>
+                                                       <v-date-picker :min="Dates.start_date" :max="Dates.end_date" v-model="experience.event_date" @input="menu1 = false"></v-date-picker>
                                                    </v-menu>
                                                </v-flex>
                                            </v-flex>
@@ -109,9 +105,6 @@
         data(){
             return {
                 place: store.state.singleResult,
-                    // {location: {
-                    // address1: 'hi'
-                    // }},
                 dialog:false,
                 menu1: false,
                 Dates: store.state.dates,
@@ -126,6 +119,7 @@
                 premium: false,
                 to: '',
                 fromNumber: '',
+                currentViewedTrip: store.state.currentViewedTrip,
                 trip:{
                     id:'',
                     title: '',
@@ -137,16 +131,17 @@
                 },
                 experience:{
                  name: store.state.singleResult.name,
-                 location: store.state.singleResult.address,
-                 imgurl: store.state.singleResult.image_url,
+                 address: store.state.singleResult.location.address1,
+                 image_url: store.state.singleResult.image_url,
                  event_date: '',
-                 phone_number: store.state.singleResult.phone_number,
+                 phone_number: store.state.singleResult.phone,
                  yelp_uniq: store.state.singleResult.id,
                  websiteurl: store.state.singleResult.url,
                  price: store.state.singleResult.price,
                  rating: store.state.singleResult.rating,
                  suggested: false,
-                 trip_id: '',
+                 description: '',
+                 trip_id: store.state.currentViewedTrip.id,
                  user_id: store.state.user.id
                 }
             }
@@ -164,8 +159,8 @@
                                 title: this.trip.title,
                                 location: store.state.location,
                                 trip_description: this.trip.trip_description,
-                                start_date: store.state.start_date,
-                                end_date:store.state.end_date,
+                                start_date: store.state.dates.start_date,
+                                end_date:store.state.dates.end_date,
                                 created_at: new Date(),
                                 user_id: {
                                     id: store.state.user.id,
@@ -173,7 +168,9 @@
                             }
                         })
                     .then(res => {
-                        this.trip = res.data
+                        this.trip = res.data;
+                        store.commit('changeCurrentlyViewedTrip', res.data);
+                        console.log(res.data)
                     }).catch(err => {
                         console.log(err)
                     })
@@ -187,6 +184,7 @@
                     this.premium = true;
                 }
             },
+
             inviteFriends(){
                 this.friends.forEach((e) => {
                 axios({
@@ -205,8 +203,40 @@
                         console.log(error);
                     });
             })},
-            saveExperience(){
-
+            async saveExperience(){
+                await axios(
+                    {
+                        method: 'POST',
+                        url:'/place',
+                        headers: {'Content-Type': 'application/json'},
+                        data: {
+                            name: this.experience.name,
+                            address: this.experience.address,
+                            image_url: this.experience.image_url,
+                            event_date: this.experience.event_date,
+                            phone_number: this.experience.phone_number,
+                            yelp_uniq: this.experience.yelp_uniq,
+                            websiteURL: this.experience.websiteurl,
+                            price: this.experience.price,
+                            rating: this.experience.rating,
+                            suggested: false,
+                            description: this.experience.description,
+                            created_at: new Date(),
+                            user_id: {
+                                id: this.experience.user_id,
+                            },
+                            trip_id: {
+                                id: this.trip.id,
+                                title: this.trip.title
+                            }
+                        }
+                    })
+                    .then(res => {
+                        this.experience = res.data;
+                        this.dialog = false;
+                    }).catch(err => {
+                        console.log(err.data)
+                    })
             }
         }
     }
