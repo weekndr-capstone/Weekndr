@@ -127,7 +127,7 @@
                     trip_description: '',
                     start_date: store.state.start_date,
                     end_date:store.state.end_date,
-                    user_id: 1
+                    user_id: store.state.user.id
                 },
                 experience:{
                  name: store.state.singleResult.name,
