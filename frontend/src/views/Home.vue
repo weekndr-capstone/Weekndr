@@ -21,6 +21,7 @@
     import store from '../store'
     import TripHistory from "./TripHistory";
     import RecommendedDestinations from "../components/RecommendedDestinations";
+    import Itenerary from "./Itenerary";
 
   export default {
     data(){
@@ -44,6 +45,7 @@
         }
     },
     components: {
+        Itenerary,
         RecommendedDestinations,
         TripHistory,
         Banner,
