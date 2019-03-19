@@ -3,8 +3,8 @@
         <Toolbar/>
         <v-item-group>
             <v-container grid-list-md>
-                <v-layout wrap>
-                    <v-flex v-for="t in tabs" :key="t.id" xs4 md4>
+                <v-layout style="overflow-x: scroll;">
+                    <v-flex v-for="t in tabs" :key="t.id">
                         <v-item>
                             <RecommendedDestinations :place="t"/>
                         </v-item>
