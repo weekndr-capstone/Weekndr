@@ -3,8 +3,6 @@ package com.codeup.weekndr.controllers;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.twilio.twiml.voice.Sms;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 //import org.springframework.security.core.parameters.P;
@@ -14,10 +12,8 @@ import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+
 
 @RestController
 @RequestMapping(name = "/api")
@@ -48,13 +44,9 @@ public class ApiController {
     }
 
     @PostMapping("/twilio")
-    public String twilio(@RequestParam("friends") String friends, @RequestParam("fromNumber") String fromNumber){
-        System.out.println(friends);
-        System.out.println(fromNumber);
+    public String twilio(@RequestParam("friends") String friendsNumber, @RequestParam("fromNumber") String usersNumber){
         String body = "You have been invited on a trip. Click the link to join in on the fun!";
-        String toNumber = "+12105188350";
-        String testNum = "+13022447485";
-        twilioMessage(toNumber, testNum, body, authtwilio, twilioSID);
+        twilioMessage(friendsNumber, usersNumber, body, authtwilio, twilioSID);
         return "message sent";
     }
 

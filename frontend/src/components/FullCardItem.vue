@@ -152,11 +152,6 @@
             }
         },
         methods:{
-            loop(){
-              for(var i = 0; i < this.friends.length; i++){
-
-              }
-            },
             async next () {
                 const active = parseInt(this.active);
                 this.active = (active < 2 ? active + 1 : 0);
@@ -199,7 +194,7 @@
                     url:'/twilio',
                     headers: {'Content-Type': 'application/json'},
                     params: {
-                        friends: e,
+                        friends: e.to,
                         fromNumber: store.state.user.phone_number
                     }
                 })
