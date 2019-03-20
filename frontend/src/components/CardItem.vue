@@ -78,10 +78,38 @@
             card: Object
         },
         methods: {
-            redHeartAndIncrement(){
-                this.heartIconClasses = "fas fa-heart color-red";
-                this.counter ++;
-            },
+                async redHeartAndIncrement(){
+                    await axios(
+                   {
+                       method: 'POST',
+                       url: '/vote',
+                       headers: {'Content-Type': 'application/json'},
+                       data: {
+                           user: {
+                               id: store.state.user.id,
+                           },
+                           place: {
+                               id: this.card.id,
+                           },
+                           created_at: new Date(),
+                           upvote: true,
+                       }
+                   })
+                   .then(res => {
+                       console.log(res.data)
+                       if(res.data === true){
+                           this.counter++;
+                           this.heartIconClasses = "fas fa-heart color-red"
+                       } else {
+                           this.counter--;
+                           this.heartIconClasses = "far fa-heart"
+                       }
+
+                   }).catch(err => {
+                       console.log(err)
+                   })
+                 },
+
             async userInput(){
                 await axios(
                     {
@@ -123,6 +151,17 @@
             }).then(res => {
                 this.comments = res.data;
             })
+                this.card.votes.forEach((v)=>{
+                    if(v.upvote === true){
+
+                        if(v.user === store.state.user.id){
+                            this.heartIconClasses = "fas fa-heart color-red";
+                        }
+
+                        console.log("in the votes foreach");
+                        this.counter++;
+                    }
+                })
         }
     }
 

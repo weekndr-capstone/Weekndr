@@ -1,15 +1,15 @@
 package com.codeup.weekndr.controllers;
 
 
-import com.codeup.weekndr.models.Trip;
+import com.codeup.weekndr.models.Place;
+import com.codeup.weekndr.models.User;
 import com.codeup.weekndr.models.Vote;
-import com.codeup.weekndr.repositories.TripRepository;
 import com.codeup.weekndr.repositories.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 
 @RestController
 public class VotesController {
@@ -28,8 +28,45 @@ public class VotesController {
         return voteDao.findById(id);
     }
 
+
+//    @GetMapping("/itenerary")
+//    public int getVoteCount(@RequestBody Trip trip){
+//        Place place = vote.getPlace();
+//        List<Vote> voteList =  voteDao.findVotesByPlaceId(place);
+//        int voteCount = 0;
+//
+//            for(Vote singleVote: voteList){
+//                voteCount++;
+//            }
+//
+//            return voteCount;
+//    }
+
+
     @PostMapping("/vote")
-    public void userInputed(Vote vote) {
-        voteDao.save(vote);
+    public boolean userVote(@RequestBody Vote vote) {
+        User user = vote.getUser();
+        Place place = vote.getPlace();
+        System.out.println(user);
+        System.out.println(place);
+
+        Vote voteFromDb = voteDao.findByUserAndPlace(user, place);
+
+        if (voteFromDb != null) {
+            boolean upVoteStatusFromDb = voteFromDb.getUpvote();
+            if (!upVoteStatusFromDb) {
+                voteFromDb.setUpvote(true);
+                voteDao.save(voteFromDb);
+                return voteFromDb.getUpvote();
+            } else if (upVoteStatusFromDb) {
+                voteFromDb.setUpvote(false);
+                voteDao.save(voteFromDb);
+                return voteFromDb.getUpvote();
+            }
+        } else {
+            voteDao.save(vote);
+            return vote.getUpvote();
+        }
+        return false;
     }
 }
