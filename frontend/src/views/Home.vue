@@ -1,5 +1,6 @@
 <template>
     <div>
+        <LoadingScreen v-if="isLoading"/>
         <Banner/>
         <div>
             <v-carousel light hide-delimiters :cycle="false" height="auto" class="carousel-transparent">
@@ -22,6 +23,8 @@
     import TripHistory from "./TripHistory";
     import RecommendedDestinations from "../components/RecommendedDestinations";
     import Itenerary from "./Itenerary";
+    import WeekndrLogo from "../components/WeekndrLogo";
+    import LoadingScreen from "../components/LoadingScreen";
 
   export default {
     data(){
@@ -42,9 +45,17 @@
                 {name: 'lisbon', image: 'image'},
                 {name: 'san jose',image: 'image'},
             ],
+            isLoading: true
         }
     },
+      mounted () {
+          setTimeout(() => {
+              this.isLoading = false
+          }, 3600)
+      },
     components: {
+        LoadingScreen,
+        WeekndrLogo,
         Itenerary,
         RecommendedDestinations,
         TripHistory,
