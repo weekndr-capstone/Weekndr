@@ -31,4 +31,14 @@ public class PlacesController {
        trip.getPlaces().add(place);
        return placeDao.findById(place.getId());
    }
+
+//   @PostMapping("/editItem")
+//    public Place editPlace(@RequestBody Place place){
+//
+//   }
+
+//    @PostMapping("/deleteItem")
+//    public Place deletePlace(){
+//
+//    }
 }

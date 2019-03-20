@@ -15,34 +15,125 @@
                         <span> {{ counter }}</span>
                     </v-btn>
                     <v-dialog v-model="dialogue" max-width="600px">
-                        <template v-slot:activator="{ on }">
-                            <v-spacer>
+                    <template v-slot:activator="{ on }">
+                        <v-spacer>
                             <v-btn :ripple="false" icon v-on="on">
                                 <i class="far fa-comment 10x"></i>
                             </v-btn>
-                            </v-spacer>
+                        </v-spacer>
+                    </template>
+                    <v-card>
+                        <v-card-text>
+                            <v-container grid-list-md>
+                                <v-layout wrap>
+                                    <v-flex xs12>
+                                        <p>Display the comments here</p>
+                                        <h3>{{ card.title }}</h3>
+                                        <ul>
+                                            <li v-for="comment in comments">{{ comment.comment }}</li>
+                                        </ul>
+                                    </v-flex>
+                                    <v-flex xs12>
+                                        <v-textarea v-model="comment.comment" label="Add Comment" required solo></v-textarea>
+                                    </v-flex>
+                                </v-layout>
+                            </v-container>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer> </v-spacer>
+                            <v-btn flat v-on:click="dialogue = false">Close</v-btn>
+                            <v-btn flat v-on:click="userInput()">Add Comment</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+        <!--information about the place card displays here-->
+                    <v-dialog v-model="dialogue4" max-width="600px">
+                        <template v-slot:activator="{ on }">
+                            <v-btn :ripple="false" icon v-on="on">
+                                <i :class=infoIconClasses></i>
+                            </v-btn>
                         </template>
                         <v-card>
                             <v-card-text>
                                 <v-container grid-list-md>
                                     <v-layout wrap>
                                         <v-flex xs12>
-                                            <p>Display the comments here</p>
-                                            <h3>{{ card.title }}</h3>
-                                            <ul>
-                                                <li v-for="comment in comments">{{ comment.comment }}</li>
-                                            </ul>
-                                        </v-flex>
-                                        <v-flex xs12>
-                                            <v-textarea v-model="comment.comment" label="Add Comment" required solo></v-textarea>
+                                            <h1>{{ card.name }}</h1>
+
+                                            <p>{{  card.description }}</p>
+
+                                            <p><i class="fas fa-map-marker-alt"></i>{{  card.address }}</p>
+
+                                            <p><i class="fas fa-phone"></i>{{  card.phone_number }}</p>
+
+                                            <p>{{  card.price }}</p>
+
+                                            <p>{{  card.rating }}</p>
+
+                                            <p><a :href="card.websiteURL" target="_blank">go to website</a></p>
                                         </v-flex>
                                     </v-layout>
                                 </v-container>
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer> </v-spacer>
-                                <v-btn flat v-on:click="dialogue = false">Close</v-btn>
-                                <v-btn flat v-on:click="userInput()">Add Comment</v-btn>
+                                <v-btn flat v-on:click="dialogue4 = false">Close</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+
+
+                    <!--editItem() method doesn't do anything yet-->
+                    <v-dialog v-model="dialogue2" max-width="600px">
+                        <template v-slot:activator="{ on }">
+                            <v-btn :ripple="false" icon v-on="on">
+                                <i  :class=editIconClasses />
+                            </v-btn>
+                        </template>
+                        <v-card>
+                            <v-card-text>
+                                <v-container grid-list-md>
+                                    <v-layout wrap>
+                                        <v-flex xs12>
+                                            <h1>{{ card.name }}</h1>
+                                            <br/>
+                                            <p>Edit Description:</p>
+                                            <v-flex xs12>
+                                                <v-textarea v-model="card.description" label="{{  card.description }}" required solo></v-textarea>
+                                            </v-flex>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-container>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer> </v-spacer>
+                                <v-btn flat v-on:click="dialogue2 = false">Close</v-btn>
+                                <v-btn flat v-on:click="editItem()">Save Changes</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+
+            <!--deleteItem() method doesn't do anything yet-->
+                    <v-dialog v-model="dialogue3" max-width="600px">
+                        <template v-slot:activator="{ on }">
+                            <v-btn :ripple="false" icon v-on="on">
+                                <i  :class=deleteIconClasses />
+                            </v-btn>
+                        </template>
+                        <v-card>
+                            <v-card-text>
+                                <v-container grid-list-md>
+                                    <v-layout wrap>
+                                        <v-flex xs12>
+                                           <p>Are you sure you want to delete <strong><em>{{ card.name }}</em></strong> from your itinerary?</p>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-container>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer> </v-spacer>
+                                <v-btn flat v-on:click="dialogue3 = false">No</v-btn>
+                                <v-btn flat v-on:click="deleteItem()">Yes, Delete</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
@@ -62,8 +153,17 @@
             return {
                 counter: 0,
                 dialogue: false,
+                dialogue2: false,
+                dialogue3: false,
+                dialogue4: false,
                 isLiked: false,
                 heartIconClasses: "far fa-heart",
+                editIconClasses: "far fa-edit",
+                deleteIconClasses: "far fa-trash-alt",
+                infoIconClasses: "far fa-question-circle",
+                card: {
+                    description: '',
+                },
                 comment: {
                     comment: '',
                     created_at: new Date(),
@@ -109,7 +209,16 @@
                        console.log(err)
                    })
                  },
+            editItem(){
+            //   sends to an edit modal where you can change the date and time
+            //   "save changes" button
+            //   saves the changes to the db and store
+            },
 
+            deleteItem(){
+            //   sends to "are you sure you want to delete?" modal with "yes" / "no" buttons
+            //   if confirmed then deleted from the db and store
+            },
             async userInput(){
                 await axios(
                     {
