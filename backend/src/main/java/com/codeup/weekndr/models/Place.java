@@ -1,5 +1,7 @@
 package com.codeup.weekndr.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -10,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "places")
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Place {
 
     @Id

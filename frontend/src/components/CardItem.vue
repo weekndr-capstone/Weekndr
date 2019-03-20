@@ -78,8 +78,8 @@
             card: Object
         },
         methods: {
-            async redHeartAndIncrement(){
-               await axios(
+                async redHeartAndIncrement(){
+                    await axios(
                    {
                        method: 'POST',
                        url: '/vote',
@@ -109,6 +109,7 @@
                        console.log(err)
                    })
                  },
+
             async userInput(){
                 await axios(
                     {
@@ -150,6 +151,12 @@
             }).then(res => {
                 this.comments = res.data;
             })
+                this.card.votes.forEach((v)=>{
+                    if(v.upvote === true){
+                        console.log("in the votes foreach");
+                        this.counter++;
+                    }
+                })
         }
     }
 
