@@ -49,14 +49,6 @@ public class VotesController {
         Place place = vote.getPlace();
         System.out.println(user);
         System.out.println(place);
-    //find the vote by place id so that you can get the number of upvotes to dispaly:
-        List<Vote> voteList =  voteDao.findVotesByPlaceId(place);
-        int voteCount = 0;
-
-        for(Vote singleVote: voteList){
-            voteCount++;
-        }
-
 
         Vote voteFromDb = voteDao.findByUserAndPlace(user, place);
 
