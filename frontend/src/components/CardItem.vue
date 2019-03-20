@@ -111,9 +111,20 @@
                 await store.commit('changeSingleResult', this.card);
                 router.push('/single')
             }
+        },
+        async mounted(){
+            await axios({
+                method: 'GET',
+                url:'/placeComments',
+                headers: {'Content-Type' : 'application/json'},
+                params:{
+                    place: this.card.id
+                }
+            }).then(res => {
+                this.comments = res.data;
+            })
         }
     }
-
 
 </script>
 
