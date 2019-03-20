@@ -35,8 +35,8 @@ public class Place {
     @CreationTimestamp
     private LocalDateTime created_at;
     @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user_id;
+    @JoinColumn(name = "user")
+    private User user;
     @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.MERGE)
     @JoinColumn(name = "trip_id")
@@ -48,13 +48,13 @@ public class Place {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
     private List<Photo> photos;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "place_id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
     private List<Comment> comments;
 
     public Place(){}
 
     public Place(String yelp_uniq, String name, String address, Boolean suggested, String image_url, String websiteURL, String hotelURL, String phone_number, String rating, String price,
-                 Date checkin_date, Date checkout_date, User user_id, Trip trip_id,
+                 Date checkin_date, Date checkout_date, User user, Trip trip_id,
                  List<Vote> votes, List<Comment> comments, List<Photo> photos) {
         this.yelp_uniq = yelp_uniq;
         this.name = name;
@@ -71,12 +71,12 @@ public class Place {
         this.votes = votes;
         this.comments = comments;
         this.photos = photos;
-        this.user_id = user_id;
+        this.user = user;
         this.trip = trip_id;
     }
 
     public Place(String name, String address, String image_url, Date event_date, String phone_number, String yelp_uniq, String websiteURL, String price, String rating, Boolean suggested,
-                 String description, User user_id, Trip trip_id){
+                 String description, User user, Trip trip_id){
         this.name = name;
         this.address = address;
         this.image_url = image_url;
@@ -88,11 +88,11 @@ public class Place {
         this.rating = rating;
         this.description = description;
         this.suggested = suggested;
-        this.user_id = user_id;
+        this.user = user;
         this.trip = trip_id;
     }
 
-    public Place(String yelp_uniq, String name, String address, Boolean suggested, String image_url, String websiteURL, String phone_number, String rating, String price, Date event_date, User user_id, Trip trip_id) {
+    public Place(String yelp_uniq, String name, String address, Boolean suggested, String image_url, String websiteURL, String phone_number, String rating, String price, Date event_date, User user, Trip trip_id) {
         this.yelp_uniq = yelp_uniq;
         this.name = name;
         this.address = address;
@@ -103,7 +103,7 @@ public class Place {
         this.rating = rating;
         this.price = price;
         this.event_date = event_date;
-        this.user_id = user_id;
+        this.user = user;
         this.trip = trip_id;
     }
 
@@ -227,12 +227,12 @@ public class Place {
         this.created_at = created_at;
     }
 
-    public User getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Trip getTrip_id() {

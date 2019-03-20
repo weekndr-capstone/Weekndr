@@ -1,6 +1,7 @@
 package com.codeup.weekndr.controllers;
 
 import com.codeup.weekndr.models.Comment;
+import com.codeup.weekndr.models.Place;
 import com.codeup.weekndr.repositories.CommentRepository;
 import com.codeup.weekndr.repositories.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,14 @@ public class CommentsController {
         System.out.println(comment.getComment() + " --COMMENT");
         System.out.println(comment.getCreated_at() + " --CREATED AT");
         System.out.println(comment.getParent_comment_id() + " --PARENT COMMENT ID");
-        System.out.println(comment.getPlace_id().getId() + " --PLACE ID");
-
+        System.out.println(comment.getPlace().getId() + " --PLACE ID");
         commentDao.save(comment);
-        return commentDao.findAll();
+        return commentDao.findAllByPlace(comment.getPlace());
+    }
+
+    @GetMapping("/placeComments")
+    public Iterable<Comment> placeComments(@RequestParam Place place){
+        return commentDao.findAllByPlace(place);
     }
 
 

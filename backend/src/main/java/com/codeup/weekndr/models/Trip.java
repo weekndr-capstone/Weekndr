@@ -1,13 +1,10 @@
 package com.codeup.weekndr.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +29,7 @@ public class Trip {
     private LocalDateTime created_at;
     @OneToOne
     @JoinColumn(name = "user_id")
-    private User user_id;
+    private User user;
 
     @OneToMany(mappedBy = "trip")
     private List<Place> places;
@@ -42,23 +39,23 @@ public class Trip {
 
     public Trip() {}
 
-    public Trip(String title, String location, String trip_description, Date start_date, Date end_date, User user_id, List<Place> places,List<User> users) {
+    public Trip(String title, String location, String trip_description, Date start_date, Date end_date, User user, List<Place> places, List<User> users) {
         this.title = title;
         this.location = location;
         this.trip_description = trip_description;
         this.start_date = start_date;
         this.end_date = end_date;
-        this.user_id = user_id;
+        this.user = user;
         this.users = users;
         this.places = places;
     }
-    public Trip(String title, String location, String trip_description, Date start_date, Date end_date, User user_id) {
+    public Trip(String title, String location, String trip_description, Date start_date, Date end_date, User user) {
         this.title = title;
         this.location = location;
         this.trip_description = trip_description;
         this.start_date = start_date;
         this.end_date = end_date;
-        this.user_id = user_id;
+        this.user = user;
     }
 
     public long getId() {
@@ -117,12 +114,12 @@ public class Trip {
         this.created_at = created_at;
     }
 
-    public User getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<User> getUsers() {

@@ -29,7 +29,8 @@ public class TripsController {
     @PostMapping("/trip")
     public Trip userInputed(@RequestBody Trip trip){
         tripDao.save(trip);
-        User user = userDao.findById(trip.getUser_id().getId());
+        System.out.println(trip.getUser().getId() + "USER ID");
+        User user = userDao.findById(trip.getUser().getId());
         user.getTrips().add(trip);
         userDao.save(user);
         return trip;

@@ -69,7 +69,7 @@
                     created_at: new Date(),
                     user: store.state.user,
                     place: this.card,
-                    comment_id: null,
+                    parent_comment: null,
                 },
                 comments: []
             }
@@ -118,10 +118,10 @@
                         data: {
                             comment: this.comment.comment,
                             created_at: this.comment.created_at,
-                            place_id: {
+                            place: {
                                 id: this.card.id
                             },
-                            comment_id: this.comment.comment_id,
+                            parent_comment: this.comment.parent_comment,
                             user: {
                                   id: store.state.user.id,
                             }
@@ -138,9 +138,20 @@
                 await store.commit('changeSingleResult', this.card);
                 router.push('/single')
             }
+        },
+        async mounted(){
+            await axios({
+                method: 'GET',
+                url:'/placeComments',
+                headers: {'Content-Type' : 'application/json'},
+                params:{
+                    place: this.card.id
+                }
+            }).then(res => {
+                this.comments = res.data;
+            })
         }
     }
-
 
 </script>
 
