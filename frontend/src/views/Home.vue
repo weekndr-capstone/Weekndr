@@ -1,6 +1,6 @@
 <template>
     <div>
-        <LoadingScreen v-if="isLoading"/>
+        <LoadingScreen :class="fadeout"/>
         <Banner/>
         <div>
             <v-carousel light hide-delimiters :cycle="false" height="auto" class="carousel-transparent">
@@ -45,13 +45,13 @@
                 {name: 'lisbon', image: 'image'},
                 {name: 'san jose',image: 'image'},
             ],
-            isLoading: true
+            fadeout: ''
         }
     },
       mounted () {
           setTimeout(() => {
-              this.isLoading = false
-          }, 3600)
+              this.fadeout = "fade-out";
+          }, 3000)
       },
     components: {
         LoadingScreen,
@@ -68,3 +68,10 @@
     }
   }
 </script>
+<style>
+    .fade-out {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s 2s, opacity 2s linear;
+    }
+</style>
