@@ -153,6 +153,11 @@
             })
                 this.card.votes.forEach((v)=>{
                     if(v.upvote === true){
+
+                        if(v.user === store.state.user.id){
+                            this.heartIconClasses = "fas fa-heart color-red";
+                        }
+
                         console.log("in the votes foreach");
                         this.counter++;
                     }
