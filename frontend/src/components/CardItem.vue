@@ -245,7 +245,7 @@
                      console.log(err)
                  })
             }));
-            })
+
                 this.card.votes.forEach((v)=>{
                     if(v.upvote === true){
 

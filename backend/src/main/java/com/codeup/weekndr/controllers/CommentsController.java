@@ -28,13 +28,9 @@ public class CommentsController {
 
     @PostMapping("/commentPost")
     public Iterable<Comment> userInput(@RequestBody Comment comment){
-        System.out.println(comment.getComment() + " --COMMENT");
-        System.out.println(comment.getCreated_at() + " --CREATED AT");
-        System.out.println(comment.getParentComment().getId() + " --PARENT COMMENT ID");
         if (comment.getParentComment().getId() == 0){
             comment.setParentComment(null);
         }
-        System.out.println(comment.getPlace().getId() + " --PLACE ID");
         commentDao.save(comment);
         return commentDao.findByPlaceAndParentCommentIsNull(comment.getPlace());
     }
