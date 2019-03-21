@@ -1,5 +1,6 @@
 <template>
   <div>
+    <LoadingScreen :class="fadeout"/>
     <Toolbar/>
     <CardCarousel  :results = "suggested"/>
     <CardCarousel  :results = "hotels" />
@@ -12,9 +13,11 @@
     import store from '../store'
     import CardCarousel from '../components/CardCarousel'
     import Toolbar from '../components/Toolbar'
+    import LoadingScreen from "../components/LoadingScreen";
 
     export default {
         components: {
+          LoadingScreen,
             CardCarousel,
             Toolbar
         },
@@ -29,7 +32,8 @@
                     {title: "card test", description: "this is a card description", src: "12345"},
                     {title: "woot woot test", description: "woot woot test card description", src: "12345"},
                     {title: "wahoo test", description: "wahoo test card description", src: "12345"}
-                ]
+                ],
+              fadeout: 'fade-out'
             }
         },
     }

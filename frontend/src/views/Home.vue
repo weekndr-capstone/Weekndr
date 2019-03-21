@@ -1,5 +1,6 @@
 <template>
     <div>
+        <LoadingScreen :class="fadeout"/>
         <Banner/>
         <div>
             <v-carousel light hide-delimiters :cycle="false" height="auto" class="carousel-transparent">
@@ -22,7 +23,8 @@
     import TripHistory from "./TripHistory";
     import RecommendedDestinations from "../components/RecommendedDestinations";
     import Itenerary from "./Itenerary";
-    import YelpCardItem from "../components/yelpCardItem";
+    import WeekndrLogo from "../components/WeekndrLogo";
+    import LoadingScreen from "../components/LoadingScreen";
 
   export default {
     data(){
@@ -43,10 +45,17 @@
                 {name: 'lisbon', image: 'image'},
                 {name: 'san jose',image: 'image'},
             ],
+            fadeout: ''
         }
     },
+      mounted () {
+          setTimeout(() => {
+              this.fadeout = "fade-out";
+          }, 3000)
+      },
     components: {
-        YelpCardItem,
+        LoadingScreen,
+        WeekndrLogo,
         Itenerary,
         RecommendedDestinations,
         TripHistory,
@@ -59,3 +68,10 @@
     }
   }
 </script>
+<style>
+    .fade-out {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s 2s, opacity 2s linear;
+    }
+</style>
