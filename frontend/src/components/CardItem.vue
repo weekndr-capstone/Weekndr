@@ -223,9 +223,6 @@
                    })
                  },
 
-            //   sends to an edit modal where you can change the date and time
-            //   "save changes" button
-            //   saves the changes to the db and store
             async editPlace(){
                     await axios (
                         {
@@ -244,12 +241,23 @@
                         console.log(err);
                     })
             },
+            async deletePlace(){
+                await axios (
+                    {
+                        method: 'POST',
+                        url: '/deletePlace',
+                        headers: {'Content-Type': 'application/json'},
+                        params: {
+                            id: this.card.id,
+                        }
 
-            //   sends to "are you sure you want to delete?" modal with "yes" / "no" buttons
-            //   if confirmed then deleted from the db and store
-            deletePlace(){
-
+                    }).then(res => {
+                    console.log(res.data)
+                }).catch(err =>{
+                    console.log(err);
+                })
             },
+
             async userInput(){
                 await axios(
                     {

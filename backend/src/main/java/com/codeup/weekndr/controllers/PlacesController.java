@@ -32,7 +32,7 @@ public class PlacesController {
 
            return placeDao.findById(place.getId());
    }
-//
+
    @PostMapping("/editPlace{id}{description}")
     public Place editPlace(@RequestParam long id, @RequestParam String description){
 
@@ -44,10 +44,13 @@ public class PlacesController {
         return exists;
     }
 
+    @PostMapping("/deletePlace{id}")
+    public void deletePlace(@RequestParam long id){
+        Place placeToDelete = placeDao.findById(id);
+        placeDao.delete(placeToDelete);
+    }
 
 
-//    @PostMapping("/deleteItem")
-//    public Place deletePlace(){
-//
-//    }
+
+//    Closes the class:
 }
