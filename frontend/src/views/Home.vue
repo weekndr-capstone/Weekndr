@@ -22,6 +22,7 @@
     import TripHistory from "./TripHistory";
     import RecommendedDestinations from "../components/RecommendedDestinations";
     import Itenerary from "./Itenerary";
+    import YelpCardItem from "../components/yelpCardItem";
 
   export default {
     data(){
@@ -45,6 +46,7 @@
         }
     },
     components: {
+        YelpCardItem,
         Itenerary,
         RecommendedDestinations,
         TripHistory,
