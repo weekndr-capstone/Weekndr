@@ -37,7 +37,7 @@
                                     </v-flex>
                                     <v-flex xs12>
                                         <h2>Invite Friends</h2>
-                                        <v-text-field v-for="f in friends" :key="f" label="Friends Number*" hint="We will shoot them a text and help them join in on the fun" v-model="f.to"></v-text-field>
+                                        <v-text-field v-for="f in friends" :key="f" label="Friends Number*" hint="We will shoot them a text and help them join in on the fun" v-model="f.phone_number"></v-text-field>
                                         <v-btn @click="addFriend()"><v-icon>person_add</v-icon></v-btn>
                                         <v-btn @click="inviteFriends()" solo>Invite all Friends</v-btn>
                                         <small v-if="!premium">*Add another friend</small>
@@ -110,14 +110,11 @@
                 Dates: store.state.dates,
                 active: null,
                 friends: [{
-                   number: 1,
-                    to: ''
+                    phone_number: ''
                 },{
-                    number: 2,
-                    to: ''
+                    phone_number: ''
                 }],
                 premium: false,
-                to: '',
                 fromNumber: '',
                 currentViewedTrip: store.state.currentViewedTrip,
                 trip:{
@@ -177,8 +174,7 @@
             },
             addFriend(){
                 if (this.friends.length < 6){
-                    this.friends.push({number: this.friends.length + 1,
-                    to: ''});
+                    this.friends.push({phone_number: ''});
                     this.premium = false;
                 }else{
                     this.premium = true;
@@ -228,7 +224,10 @@
                             trip_id: {
                                 id: this.trip.id,
                                 title: this.trip.title
-                            }
+                            },
+                            users: [
+                                this.friends
+                            ]
                         }
                     })
                     .then(res => {
