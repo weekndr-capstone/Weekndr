@@ -17,21 +17,27 @@ public class Vote {
     private Boolean upvote;
     private LocalDateTime created_at;
     @OneToOne
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @Cascade(org.hibernate.annotations.CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @JoinColumn(name = "trip_id")
+    @Cascade(org.hibernate.annotations.CascadeType.MERGE)
+    @JoinColumn(name = "place_id")
     private Place place;
 
     public Vote() {}
 
-    public Vote(Boolean upvote, LocalDateTime created_at, User user, Place places) {
-        this.upvote = upvote;
+    public Vote(LocalDateTime created_at, User user, Place place, Boolean upvote) {
         this.created_at = created_at;
         this.user = user;
-        this.place = places;
+        this.place = place;
+        this.upvote = upvote;
+    }
+
+    public Vote(LocalDateTime created_at, User user, Place place) {
+        this.created_at = created_at;
+        this.user = user;
+        this.place = place;
     }
 
     public long getId() {
@@ -66,11 +72,11 @@ public class Vote {
         this.user = user;
     }
 
-    public Place getPlaces() {
+    public Place getPlace() {
         return place;
     }
 
-    public void setPlaces(Place places) {
+    public void setPlace(Place places) {
         this.place = places;
     }
 }
