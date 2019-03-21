@@ -28,24 +28,24 @@ public class Comment {
     private Place place;
     @OneToOne
     @JoinColumn(name ="parent_comment_id")
-    private Comment parent_comment;
+    private Comment parentComment;
 
     public Comment() {}
 
-    public Comment(String comment, LocalDateTime created_at, User user, Place place, Comment parent_comment) {
+    public Comment(String comment, LocalDateTime created_at, User user, Place place, Comment parentComment) {
         this.comment = comment;
         this.created_at = created_at;
         this.user = user;
         this.place = place;
-        this.parent_comment = parent_comment;
+        this.parentComment = parentComment;
     }
 
-    public Comment(String comment, LocalDateTime created_at, User user, Place place) {
-        this.comment = comment;
-        this.created_at = created_at;
-        this.user = user;
-        this.place = place;
-    }
+//    public Comment(String comment, LocalDateTime created_at, User user, Place place) {
+//        this.comment = comment;
+//        this.created_at = created_at;
+//        this.user = user;
+//        this.place = place;
+//    }
 
     public long getId() {
         return id;
@@ -79,15 +79,15 @@ public class Comment {
         this.user = user;
     }
 
-    public Comment getParent_comment_id() {
-        return parent_comment;
-    }
-
-    public void setParent_comment_id(Comment parent_comment_id) {
-        this.parent_comment = parent_comment_id;
-    }
-
     public Place getPlace() { return place; }
 
     public void setPlace(Place place) { this.place = place; }
+
+    public Comment getParentComment() {
+        return parentComment;
+    }
+
+    public void setParentComment(Comment parent_comment) {
+        this.parentComment = parent_comment;
+    }
 }
