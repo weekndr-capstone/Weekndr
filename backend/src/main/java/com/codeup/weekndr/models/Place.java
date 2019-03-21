@@ -110,6 +110,12 @@ public class Place {
         this.trip = trip_id;
     }
 
+//  this is used for editing the description of a place:
+    public Place(long id, String description){
+        this.id = id;
+        this.description = description;
+    }
+
     public long getId() {
         return id;
     }
