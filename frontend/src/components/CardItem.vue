@@ -173,6 +173,7 @@
                 deleteIconClasses: "far fa-trash-alt",
                 infoIconClasses: "far fa-question-circle",
                 card: {
+                    id: this.card.id,
                     description: '',
                 },
                 loadingDone: true,
@@ -229,29 +230,13 @@
                     await axios (
                         {
                             method: 'POST',
-                            url: '/place',
+                            url: '/editPlace',
                             headers: {'Content-Type': 'application/json'},
-                            data: {
-                                place: {
+                            params: {
+                                    id: this.card.id,
+                                    description: this.card.description
 
-                                    name: this.card.name,
-                                    address: this.card.address,
-                                    image_url: this.card.image_url,
-                                    event_date: this.card.event_date,
-                                    phone_number: this.card.phone_number,
-                                    yelp_uniq: this.card.yelp_uniq,
-                                    websiteURL: this.card.websiteURL,
-                                    price: this.card.price,
-                                    rating: this.card.rating,
-                                    suggested: this.card.suggested,
-                                //description is what is changing in the edit
-                                    description: this.description,
-                                    user: store.state.user,
-                                    trip_id: this.card.trip_id,
-
-                                    id: this.card.id
                                 }
-                            }
 
                         }).then(res => {
                             console.log(res.data)

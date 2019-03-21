@@ -33,22 +33,18 @@ public class PlacesController {
            return placeDao.findById(place.getId());
    }
 //
-//   @PostMapping("/editPlace")
-//    public Place editPlace(@RequestBody Place place){
-//
-//        Place exists = placeDao.findById(place.getId());
-//        exists.setDescription(place.getDescription());
-//
-//        placeDao.save(exists);
-//        Trip trip = tripDao.findById(place.getTrip_id().getId());
-//        trip.getPlaces().add(place);
-//
-//        return placeDao.findById(place.getId());
-//    }
+   @PostMapping("/editPlace{id}{description}")
+    public Place editPlace(@RequestParam long id, @RequestParam String description){
+
+        Place exists = placeDao.findById(id);
+        exists.setDescription(description);
+
+        placeDao.save(exists);
+
+        return exists;
+    }
 
 
-
-//   }
 
 //    @PostMapping("/deleteItem")
 //    public Place deletePlace(){
