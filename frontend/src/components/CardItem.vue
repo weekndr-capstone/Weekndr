@@ -30,7 +30,7 @@
                                             <p>Display the comments here</p>
                                             <h3>{{ card.title }}</h3>
                                             <div>
-                                                <comment v-if="comments.length !== undefined"  :key="index" v-for="(comment, index) in comments"
+                                                <comment v-if="comments[index] !== undefined"  :key="index" v-for="(comment, index) in comments"
                                                          :comments="comment.childComments"
                                                          :label="comment.comment"
                                                          :id="comment.id"
@@ -88,11 +88,6 @@
         props:{
             card: Object
         },
-        // computed: {
-        //   comments(){
-        //       return store.getters.comments
-        //   }
-        // },
         methods: {
             redHeartAndIncrement(){
                 this.heartIconClasses = "fas fa-heart color-red";
@@ -119,28 +114,28 @@
                         }
                     })
                     .then(res => {
-                        function childF(child){
-                            child.forEach((c)=> {
-                                axios ({
-                                    method: 'GET',
-                                    url: '/childComment',
-                                    headers: {'Content-Type' : 'application/json'},
-                                    params:{
-                                        comment: c.id
-                                    }
-                                }).then(res => {
-                                    if (res.data.length !== 0){
-                                        c.childComments = res.data;
-                                        childF(c.childComments);
-                                    }
-                                }).catch(err => {
-                                    console.log(err)
+                            function childF(child) {
+                                child.forEach((c) => {
+                                    axios({
+                                        method: 'GET',
+                                        url: '/childComment',
+                                        headers: {'Content-Type': 'application/json'},
+                                        params: {
+                                            comment: c.id
+                                        }
+                                    }).then(res => {
+                                        if (res.data.length !== 0) {
+                                            c.childComments = res.data;
+                                            childF(c.childComments);
+                                        }
+                                    }).catch(err => {
+                                        console.log(err)
+                                    })
                                 })
-                            })
-                        }
+                            }
 
-                        res.data.forEach((c => {
-                               axios({
+                            res.data.forEach((c => {
+                                axios({
                                     method: 'GET',
                                     url: '/childComment',
                                     headers: {'Content-Type': 'application/json'},
@@ -156,22 +151,15 @@
                                     console.log(err)
                                 });
                             }));
-                        console.log(res.data);
                         this.comments = res.data;
-                        console.log(this.comments);
-                        console.log(this.comments[0]);
-                        console.log(this.comments[0].childComments);
-                        this.Trying();
+                        this.dialogue = false;
                     }).catch(err => {
                         console.log(err)
-                    })
+                    });
             },
             async routeSingle() {
                 await store.commit('changeSingleResult', this.card);
                 router.push('/single')
-            },
-            Trying(){
-                this.$forceUpdate();
             },
 
             parent(id){
@@ -180,7 +168,6 @@
             }
         },
         async mounted(){
-
             function childF(child){
                 child.forEach((c)=> {
                     axios ({
