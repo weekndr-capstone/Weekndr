@@ -1,6 +1,5 @@
 <template>
     <div>
-        <LoadingScreen :class="fadeout"/>
         <Banner/>
         <div>
             <v-carousel light hide-delimiters :cycle="false" height="auto" class="carousel-transparent">
@@ -22,7 +21,6 @@
     import store from '../store'
     import TripHistory from "./TripHistory";
     import RecommendedDestinations from "../components/RecommendedDestinations";
-    import Itenerary from "./Itenerary";
     import WeekndrLogo from "../components/WeekndrLogo";
     import LoadingScreen from "../components/LoadingScreen";
 
@@ -45,18 +43,14 @@
                 {name: 'lisbon', image: 'image'},
                 {name: 'san jose',image: 'image'},
             ],
-            fadeout: ''
         }
     },
       mounted () {
-          setTimeout(() => {
-              this.fadeout = "fade-out";
-          }, 3000)
+          store.commit('changeCurrentlyViewedTrip', '');
       },
     components: {
         LoadingScreen,
         WeekndrLogo,
-        Itenerary,
         RecommendedDestinations,
         TripHistory,
         Banner,

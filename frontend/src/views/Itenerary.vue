@@ -6,7 +6,7 @@
                 <v-layout style="overflow-x: scroll;">
                     <v-flex v-for="t in tabs" :key="t.id">
                         <v-item>
-                            <RecommendedDestinations :place="t"/>
+                            <FHEBlock :place="t"/>
                         </v-item>
                     </v-flex>
                 </v-layout>
@@ -20,13 +20,14 @@
     import Timeline from "../components/Timeline";
     import Toolbar from '../components/Toolbar';
     import RecommendedDestinations from '../components/RecommendedDestinations'
+    import FHEBlock from "../components/FHEBlock";
 
     export default {
         name: "Itenerary",
         components: {
+            FHEBlock,
             Timeline,
             Toolbar,
-            RecommendedDestinations
         },
         data(){
             return {

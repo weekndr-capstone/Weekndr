@@ -10,7 +10,7 @@
             <v-flex xs12 align-end flexbox>
                 <span @click="routeSingle()">"{{card.name}}</span>
                 <v-icon half-icon half-increment readonly color="green">{{card.price}}</v-icon>
-                <v-rating v-model="card.rating" background-color="pink lighten-3" color="pink"></v-rating>
+                <v-rating v-model="card.rating" readonly background-color="pink lighten-3" color="pink"></v-rating>
             </v-flex>
         </v-card-actions>
     </v-card>

@@ -9,7 +9,7 @@
               <v-card-title>Address:{{place.location.address1}} City: {{place.location.city}}</v-card-title>
               <v-card-text>Phone: {{place.phone}}</v-card-text>
               <v-icon half-icon half-increment readonly color="green">{{place.price}}</v-icon>
-              <v-rating v-model="place.rating" background-color="pink lighten-3" color="pink"></v-rating>
+              <v-rating v-model="place.rating" readonly background-color="pink lighten-3" color="pink"></v-rating>
               <v-card-text>I am a really awesome Description</v-card-text>
            </v-flex>
         </v-layout>
