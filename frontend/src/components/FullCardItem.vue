@@ -111,8 +111,6 @@
                 active: null,
                 friends: [{
                     phone_number: ''
-                },{
-                    phone_number: ''
                 }],
                 premium: false,
                 fromNumber: '',
@@ -161,7 +159,8 @@
                                 created_at: new Date(),
                                 user: {
                                     id: store.state.user.id,
-                                }
+                                },
+                                users:this.friends
                             }
                         })
                     .then(res => {
@@ -188,7 +187,7 @@
                     url:'/twilio',
                     headers: {'Content-Type': 'application/json'},
                     params: {
-                        friends: e,
+                        friends: e.phone_number,
                         fromNumber: store.state.user.phone_number
                     }
                 })
@@ -224,10 +223,7 @@
                             trip_id: {
                                 id: this.trip.id,
                                 title: this.trip.title
-                            },
-                            users: [
-                                this.friends
-                            ]
+                            }
                         }
                     })
                     .then(res => {
