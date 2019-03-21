@@ -26,15 +26,28 @@ public class PlacesController {
 
    @PostMapping("/place")
     public Place savePlace(@RequestBody Place place){
-       placeDao.save(place);
-       Trip trip = tripDao.findById(place.getTrip_id().getId());
-       trip.getPlaces().add(place);
-       return placeDao.findById(place.getId());
-   }
+           placeDao.save(place);
+           Trip trip = tripDao.findById(place.getTrip_id().getId());
+           trip.getPlaces().add(place);
 
-//   @PostMapping("/editItem")
+           return placeDao.findById(place.getId());
+   }
+//
+//   @PostMapping("/editPlace")
 //    public Place editPlace(@RequestBody Place place){
 //
+//        Place exists = placeDao.findById(place.getId());
+//        exists.setDescription(place.getDescription());
+//
+//        placeDao.save(exists);
+//        Trip trip = tripDao.findById(place.getTrip_id().getId());
+//        trip.getPlaces().add(place);
+//
+//        return placeDao.findById(place.getId());
+//    }
+
+
+
 //   }
 
 //    @PostMapping("/deleteItem")

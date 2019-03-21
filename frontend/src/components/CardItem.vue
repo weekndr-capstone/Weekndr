@@ -108,7 +108,7 @@
                             <v-card-actions>
                                 <v-spacer> </v-spacer>
                                 <v-btn flat v-on:click="dialogue2 = false">Close</v-btn>
-                                <v-btn flat v-on:click="editItem()">Save Changes</v-btn>
+                                <v-btn flat v-on:click="editPlace()">Save Changes</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
@@ -133,7 +133,7 @@
                             <v-card-actions>
                                 <v-spacer> </v-spacer>
                                 <v-btn flat v-on:click="dialogue3 = false">No</v-btn>
-                                <v-btn flat v-on:click="deleteItem()">Yes, Delete</v-btn>
+                                <v-btn flat v-on:click="deletePlace()">Yes, Delete</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
@@ -209,15 +209,49 @@
                        console.log(err)
                    })
                  },
-            editItem(){
+
             //   sends to an edit modal where you can change the date and time
             //   "save changes" button
             //   saves the changes to the db and store
+            async editPlace(){
+                    await axios (
+                        {
+                            method: 'POST',
+                            url: '/place',
+                            headers: {'Content-Type': 'application/json'},
+                            data: {
+                                place: {
+
+                                    name: this.card.name,
+                                    address: this.card.address,
+                                    image_url: this.card.image_url,
+                                    event_date: this.card.event_date,
+                                    phone_number: this.card.phone_number,
+                                    yelp_uniq: this.card.yelp_uniq,
+                                    websiteURL: this.card.websiteURL,
+                                    price: this.card.price,
+                                    rating: this.card.rating,
+                                    suggested: this.card.suggested,
+                                //description is what is changing in the edit
+                                    description: this.description,
+                                    user: store.state.user,
+                                    trip_id: this.card.trip_id,
+
+                                    id: this.card.id
+                                }
+                            }
+
+                        }).then(res => {
+                            console.log(res.data)
+                    }).catch(err =>{
+                        console.log(err);
+                    })
             },
 
-            deleteItem(){
             //   sends to "are you sure you want to delete?" modal with "yes" / "no" buttons
             //   if confirmed then deleted from the db and store
+            deletePlace(){
+
             },
             async userInput(){
                 await axios(
