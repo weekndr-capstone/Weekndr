@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 public interface CommentRepository extends CrudRepository<Comment, Long> {
     Comment findById(long place_id);
 
-    @Query(value = "SELECT * FROM comments WHERE place = :place", nativeQuery = true)
-    Iterable<Comment> findAllByPlace(@Param("place") Place place);
+    Iterable<Comment> findByPlaceAndParentCommentIsNull(Place place);
 
+    Iterable<Comment> findByParentComment(Comment comment);
 }

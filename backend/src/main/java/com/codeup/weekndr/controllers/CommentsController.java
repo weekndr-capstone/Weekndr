@@ -30,17 +30,19 @@ public class CommentsController {
     public Iterable<Comment> userInput(@RequestBody Comment comment){
         System.out.println(comment.getComment() + " --COMMENT");
         System.out.println(comment.getCreated_at() + " --CREATED AT");
-        System.out.println(comment.getParent_comment_id() + " --PARENT COMMENT ID");
+        System.out.println(comment.getParentComment() + " --PARENT COMMENT ID");
         System.out.println(comment.getPlace().getId() + " --PLACE ID");
         commentDao.save(comment);
-        return commentDao.findAllByPlace(comment.getPlace());
+        return commentDao.findByPlaceAndParentCommentIsNull(comment.getPlace());
     }
 
     @GetMapping("/placeComments")
     public Iterable<Comment> placeComments(@RequestParam Place place){
-        return commentDao.findAllByPlace(place);
+        return commentDao.findByPlaceAndParentCommentIsNull(place);
     }
 
-
-
+    @GetMapping("/childComment")
+    public Iterable<Comment> childComment(@RequestParam Comment comment){
+        return commentDao.findByParentComment(comment);
+    }
 }
