@@ -140,6 +140,7 @@
             logout(){
                 store.commit('changeUser', '');
                 store.commit('changeLoggedIn', false);
+                store.commit('changeCurrentlyViewedTrip', '');
                 this.Login = false;
             }
         }
