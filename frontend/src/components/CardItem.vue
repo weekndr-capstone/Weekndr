@@ -15,34 +15,130 @@
                         <span> {{ counter }}</span>
                     </v-btn>
                     <v-dialog v-model="dialogue" max-width="600px">
-                        <template v-slot:activator="{ on }">
-                            <v-spacer>
+                    <template v-slot:activator="{ on }">
+                        <v-spacer>
                             <v-btn :ripple="false" icon v-on="on">
                                 <i class="far fa-comment 10x"></i>
                             </v-btn>
-                            </v-spacer>
+                        </v-spacer>
+                    </template>
+                    <v-card>
+                        <v-card-text>
+                            <v-container grid-list-md>
+                                <v-layout wrap>
+                                    <v-flex xs12>
+                                        <p>Display the comments here</p>
+                                        <h3>{{ card.title }}</h3>
+                                        <div>
+                                            <comment v-if="comments[index] !== undefined"  :key="index" v-for="(comment, index) in comments"
+                                                     :comments="comment.childComments"
+                                                     :label="comment.comment"
+                                                     :id="comment.id"
+                                                     :depth="0">
+                                            </comment>
+                                        </div>
+                                    </v-flex>
+                                    <v-flex xs12>
+                                        <v-textarea v-model="comment.comment" label="Add Comment" required solo></v-textarea>
+                                    </v-flex>
+                                </v-layout>
+                            </v-container>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer> </v-spacer>
+                            <v-btn flat v-on:click="dialogue = false">Close</v-btn>
+                            <v-btn flat v-on:click="userInput()">Add Comment</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+        <!--information about the place card displays here-->
+                    <v-dialog v-model="dialogue4" max-width="600px">
+                        <template v-slot:activator="{ on }">
+                            <v-btn :ripple="false" icon v-on="on">
+                                <i :class=infoIconClasses></i>
+                            </v-btn>
                         </template>
                         <v-card>
                             <v-card-text>
                                 <v-container grid-list-md>
                                     <v-layout wrap>
                                         <v-flex xs12>
-                                            <p>Display the comments here</p>
-                                            <h3>{{ card.title }}</h3>
-                                            <ul>
-                                                <li v-for="comment in comments">{{ comment.comment }}</li>
-                                            </ul>
-                                        </v-flex>
-                                        <v-flex xs12>
-                                            <v-textarea v-model="comment.comment" label="Add Comment" required solo></v-textarea>
+                                            <h1>{{ card.name }}</h1>
+
+                                            <p>{{  card.description }}</p>
+
+                                            <p><i class="fas fa-map-marker-alt"></i>{{  card.address }}</p>
+
+                                            <p><i class="fas fa-phone"></i>{{  card.phone_number }}</p>
+
+                                            <p>{{  card.price }}</p>
+
+                                            <p>{{  card.rating }}</p>
+
+                                            <p><a :href="card.websiteURL" target="_blank">go to website</a></p>
                                         </v-flex>
                                     </v-layout>
                                 </v-container>
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer> </v-spacer>
-                                <v-btn flat v-on:click="dialogue = false">Close</v-btn>
-                                <v-btn flat v-on:click="userInput()">Add Comment</v-btn>
+                                <v-btn flat v-on:click="dialogue4 = false">Close</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+
+
+                    <!--editItem() method doesn't do anything yet-->
+                    <v-dialog v-model="dialogue2" max-width="600px">
+                        <template v-slot:activator="{ on }">
+                            <v-btn :ripple="false" icon v-on="on">
+                                <i  :class=editIconClasses />
+                            </v-btn>
+                        </template>
+                        <v-card>
+                            <v-card-text>
+                                <v-container grid-list-md>
+                                    <v-layout wrap>
+                                        <v-flex xs12>
+                                            <h1>{{ card.name }}</h1>
+                                            <br/>
+                                            <p>Edit Description:</p>
+                                            <v-flex xs12>
+                                                <v-textarea v-model="card.description" label="{{  card.description }}" required solo></v-textarea>
+                                            </v-flex>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-container>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer> </v-spacer>
+                                <v-btn flat v-on:click="dialogue2 = false">Close</v-btn>
+                                <v-btn flat v-on:click="editPlace()">Save Changes</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+
+            <!--deleteItem() method doesn't do anything yet-->
+                    <v-dialog v-model="dialogue3" max-width="600px">
+                        <template v-slot:activator="{ on }">
+                            <v-btn :ripple="false" icon v-on="on">
+                                <i  :class=deleteIconClasses />
+                            </v-btn>
+                        </template>
+                        <v-card>
+                            <v-card-text>
+                                <v-container grid-list-md>
+                                    <v-layout wrap>
+                                        <v-flex xs12>
+                                           <p>Are you sure you want to delete <strong><em>{{ card.name }}</em></strong> from your itinerary?</p>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-container>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer> </v-spacer>
+                                <v-btn flat v-on:click="dialogue3 = false">No</v-btn>
+                                <v-btn flat v-on:click="deletePlace()">Yes, Delete</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
@@ -54,33 +150,105 @@
     import store from '../store'
     import router from '../router'
     import axios from 'axios'
+    import comment from '../components/comment'
+    import Vue from 'vue'
 
     export default {
         name: "CardItem",
+        components:{
+            comment
+        },
         // TODO: will receive properties from parent
         data() {
             return {
                 counter: 0,
                 dialogue: false,
+                dialogue2: false,
+                dialogue3: false,
+                dialogue4: false,
                 isLiked: false,
                 heartIconClasses: "far fa-heart",
+
+                editIconClasses: "far fa-edit",
+                deleteIconClasses: "far fa-trash-alt",
+                infoIconClasses: "far fa-question-circle",
+                card: {
+                    id: this.card.id,
+                    description: '',
+                },
+                loadingDone: true,
                 comment: {
                     comment: '',
                     created_at: new Date(),
                     user: store.state.user,
                     place: this.card,
-                    comment_id: null,
+                    parent_comment: null,
                 },
-                comments: []
+                comments: '',
             }
         },
         props:{
             card: Object
         },
         methods: {
-            redHeartAndIncrement(){
-                this.heartIconClasses = "fas fa-heart color-red";
-                this.counter ++;
+                async redHeartAndIncrement(){
+                    await axios(
+                   {
+                       method: 'POST',
+                       url: '/vote',
+                       headers: {'Content-Type': 'application/json'},
+                       data: {
+                           user: {
+                               id: store.state.user.id,
+                           },
+                           place: {
+                               id: this.card.id,
+                           },
+                           created_at: new Date(),
+                           upvote: true,
+                       }
+                   })
+                   .then(res => {
+                       console.log(res.data)
+                       if(res.data === true){
+                           this.counter++;
+                           this.heartIconClasses = "fas fa-heart color-red"
+                       } else {
+                           this.counter--;
+                           this.heartIconClasses = "far fa-heart"
+                       }
+
+                   }).catch(err => {
+                       console.log(err)
+                   })
+                 },
+
+            //   sends to an edit modal where you can change the date and time
+            //   "save changes" button
+            //   saves the changes to the db and store
+            async editPlace(){
+                    await axios (
+                        {
+                            method: 'POST',
+                            url: '/editPlace',
+                            headers: {'Content-Type': 'application/json'},
+                            params: {
+                                    id: this.card.id,
+                                    description: this.card.description
+
+                                }
+
+                        }).then(res => {
+                            console.log(res.data)
+                    }).catch(err =>{
+                        console.log(err);
+                    })
+            },
+
+            //   sends to "are you sure you want to delete?" modal with "yes" / "no" buttons
+            //   if confirmed then deleted from the db and store
+            deletePlace(){
+
             },
             async userInput(){
                 await axios(
@@ -91,29 +259,135 @@
                         data: {
                             comment: this.comment.comment,
                             created_at: this.comment.created_at,
-                            place_id: {
-                                id: this.card.id
-                            },
-                            comment_id: this.comment.comment_id,
                             user: {
                                   id: store.state.user.id,
+                            },
+                            place: {
+                                id: this.card.id
+                            },
+                            parentComment: {
+                                id: store.state.parentComment
                             }
                         }
                     })
                     .then(res => {
-                        console.log(res.data)
+                            function childF(child) {
+                                child.forEach((c) => {
+                                    axios({
+                                        method: 'GET',
+                                        url: '/childComment',
+                                        headers: {'Content-Type': 'application/json'},
+                                        params: {
+                                            comment: c.id
+                                        }
+                                    }).then(res => {
+                                        if (res.data.length !== 0) {
+                                            c.childComments = res.data;
+                                            childF(c.childComments);
+                                        }
+                                    }).catch(err => {
+                                        console.log(err)
+                                    })
+                                })
+                            }
+
+                            res.data.forEach((c => {
+                                axios({
+                                    method: 'GET',
+                                    url: '/childComment',
+                                    headers: {'Content-Type': 'application/json'},
+                                    params: {
+                                        comment: c.id
+                                    }
+                                }).then(res => {
+                                    if (res.data.length !== 0) {
+                                        c.childComments = res.data;
+                                        childF(c.childComments);
+                                    }
+                                }).catch(err => {
+                                    console.log(err)
+                                });
+                            }));
                         this.comments = res.data;
+                        this.dialogue = false;
                     }).catch(err => {
                         console.log(err)
-                    })
+                    });
             },
             async routeSingle() {
                 await store.commit('changeSingleResult', this.card);
                 router.push('/single')
+            },
+
+            parent(id){
+                this.comment.parent_comment = id;
+                console.log(this.comment.parent_comment)
             }
+        },
+        async mounted(){
+            function childF(child){
+                child.forEach((c)=> {
+                    axios ({
+                        method: 'GET',
+                        url: '/childComment',
+                        headers: {'Content-Type' : 'application/json'},
+                        params:{
+                            comment: c.id
+                        }
+                    }).then(res => {
+                        if (res.data.length !== 0){
+                            c.childComments = res.data;
+                            childF(c.childComments);
+                        }
+                    }).catch(err => {
+                        console.log(err)
+                    })
+                })
+            }
+            await axios({
+                method: 'GET',
+                url:'/placeComments',
+                headers: {'Content-Type' : 'application/json'},
+                params:{
+                    place: this.card.id
+                }
+            }).then(res => {
+                this.comments = res.data;
+            }).catch(err => {
+                console.log(err.data);
+            });
+
+             await this.comments.forEach((c => {
+                 axios ({
+                    method: 'GET',
+                    url: '/childComment',
+                     headers: {'Content-Type' : 'application/json'},
+                     params:{
+                         comment: c.id
+                     }
+                }).then(res => {
+                    if (res.data.length !== 0){
+                        c.childComments = res.data;
+                        childF(c.childComments);
+                    }
+                 }).catch(err => {
+                     console.log(err)
+                 })
+            }));
+
+                this.card.votes.forEach((v)=>{
+                    if(v.upvote === true){
+
+                        if(v.user === store.state.user.id){
+                            this.heartIconClasses = "fas fa-heart color-red";
+                        }
+
+                        console.log("in the votes foreach");
+                        this.counter++;
+                    }
+                })
         }
     }
-
 
 </script>
 

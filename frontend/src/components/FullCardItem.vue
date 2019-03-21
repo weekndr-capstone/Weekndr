@@ -37,7 +37,7 @@
                                     </v-flex>
                                     <v-flex xs12>
                                         <h2>Invite Friends</h2>
-                                        <v-text-field v-for="f in friends" :key="f" label="Friends Number*" hint="We will shoot them a text and help them join in on the fun" v-model="f.to"></v-text-field>
+                                        <v-text-field v-for="f in friends" :key="f" label="Friends Number*" hint="We will shoot them a text and help them join in on the fun" v-model="f.phone_number"></v-text-field>
                                         <v-btn @click="addFriend()"><v-icon>person_add</v-icon></v-btn>
                                         <v-btn @click="inviteFriends()" solo>Invite all Friends</v-btn>
                                         <small v-if="!premium">*Add another friend</small>
@@ -110,14 +110,9 @@
                 Dates: store.state.dates,
                 active: null,
                 friends: [{
-                   number: 1,
-                    to: ''
-                },{
-                    number: 2,
-                    to: ''
+                    phone_number: ''
                 }],
                 premium: false,
-                to: '',
                 fromNumber: '',
                 currentViewedTrip: store.state.currentViewedTrip,
                 trip:{
@@ -127,7 +122,7 @@
                     trip_description: '',
                     start_date: store.state.start_date,
                     end_date:store.state.end_date,
-                    user_id: 1
+                    user: store.state.user.id
                 },
                 experience:{
                  name: store.state.singleResult.name,
@@ -142,16 +137,11 @@
                  suggested: false,
                  description: '',
                  trip_id: store.state.currentViewedTrip.id,
-                 user_id: store.state.user.id
+                 user: store.state.user.id
                 }
             }
         },
         methods:{
-            loop(){
-              for(var i = 0; i < this.friends.length; i++){
-
-              }
-            },
             async next () {
                 const active = parseInt(this.active);
                 this.active = (active < 2 ? active + 1 : 0);
@@ -167,9 +157,10 @@
                                 start_date: store.state.dates.start_date,
                                 end_date:store.state.dates.end_date,
                                 created_at: new Date(),
-                                user_id: {
+                                user: {
                                     id: store.state.user.id,
-                                }
+                                },
+                                users:this.friends
                             }
                         })
                     .then(res => {
@@ -182,8 +173,7 @@
             },
             addFriend(){
                 if (this.friends.length < 6){
-                    this.friends.push({number: this.friends.length + 1,
-                    to: ''});
+                    this.friends.push({phone_number: ''});
                     this.premium = false;
                 }else{
                     this.premium = true;
@@ -197,7 +187,7 @@
                     url:'/twilio',
                     headers: {'Content-Type': 'application/json'},
                     params: {
-                        friends: e,
+                        friends: e.phone_number,
                         fromNumber: store.state.user.phone_number
                     }
                 })
@@ -227,8 +217,8 @@
                             suggested: false,
                             description: this.experience.description,
                             created_at: new Date(),
-                            user_id: {
-                                id: this.experience.user_id,
+                            user: {
+                                id: this.experience.user,
                             },
                             trip_id: {
                                 id: this.trip.id,

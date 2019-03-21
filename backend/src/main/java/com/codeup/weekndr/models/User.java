@@ -20,7 +20,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
     private String email;
-    private String phone_number;
+    private String phoneNumber;
     @Column(length = 255)
     private String img_path;
     @Column(nullable = false)
@@ -40,7 +40,7 @@ public class User {
         id = copy.id;
         username = copy.username;
         email = copy.email;
-        phone_number= copy.phone_number;
+        phoneNumber= copy.phoneNumber;
         img_path = copy.img_path;
         password = copy.password;
         created_at = copy.created_at;
@@ -50,7 +50,7 @@ public class User {
     public User(String username, String email, String phone_number, String img_path, String password, List<Trip> trips, Timestamp created){
         this.username = username;
         this.email = email;
-        this.phone_number= phone_number;
+        this.phoneNumber= phone_number;
         this.img_path = img_path;
         this.password = password;
         this.created_at = created.toLocalDateTime();
@@ -87,11 +87,11 @@ public class User {
     }
 
     public String getPhone_number() {
-        return phone_number;
+        return phoneNumber;
     }
 
     public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+        this.phoneNumber = phone_number;
     }
 
     public String getImg_path() {

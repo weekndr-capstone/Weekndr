@@ -1,6 +1,7 @@
 package com.codeup.weekndr.controllers;
 
 import com.codeup.weekndr.models.Comment;
+import com.codeup.weekndr.models.Place;
 import com.codeup.weekndr.repositories.CommentRepository;
 import com.codeup.weekndr.repositories.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +28,20 @@ public class CommentsController {
 
     @PostMapping("/commentPost")
     public Iterable<Comment> userInput(@RequestBody Comment comment){
-        System.out.println(comment.getComment() + " --COMMENT");
-        System.out.println(comment.getCreated_at() + " --CREATED AT");
-        System.out.println(comment.getParent_comment_id() + " --PARENT COMMENT ID");
-        System.out.println(comment.getPlace_id().getId() + " --PLACE ID");
-
+        if (comment.getParentComment().getId() == 0){
+            comment.setParentComment(null);
+        }
         commentDao.save(comment);
-        return commentDao.findAll();
+        return commentDao.findByPlaceAndParentCommentIsNull(comment.getPlace());
     }
 
+    @GetMapping("/placeComments")
+    public Iterable<Comment> placeComments(@RequestParam Place place){
+        return commentDao.findByPlaceAndParentCommentIsNull(place);
+    }
 
-
+    @GetMapping("/childComment")
+    public Iterable<Comment> childComment(@RequestParam Comment comment){
+        return commentDao.findByParentComment(comment);
+    }
 }

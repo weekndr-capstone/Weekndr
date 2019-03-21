@@ -20,7 +20,9 @@ export default new Vuex.Store({
         phone_number: ''
     },
     currentViewedTrip: '',
-    loggedIn: false
+    loggedIn: false,
+    parentComment: null,
+    comments: [],
   },
 
   getters:{
@@ -53,6 +55,12 @@ export default new Vuex.Store({
       },
       loggedIn: state => {
           return state.loggedIn
+      },
+      parentComment: state => {
+          return state.parentComment
+      },
+      comments: state =>{
+          return state.comments
       }
   },
   mutations: {
@@ -91,8 +99,13 @@ export default new Vuex.Store({
       },
       changeLoggedIn(state, boolean){
           state.loggedIn = boolean;
+      },
+      changeParentComment(state, id){
+          state.parentComment = id;
+      },
+      changeComments(state, comments){
+          state.comments = comments
       }
-
   },
   actions: {
 

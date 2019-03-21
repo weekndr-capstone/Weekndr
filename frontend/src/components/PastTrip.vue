@@ -9,9 +9,9 @@
                     <h4 @click="routeSingle()">{{trip.title}}</h4>
                     </v-flex>
                     <v-flex xs5>
-                        <p>dates here</p>
+                        <p>{{trip.start_date.split('T')[0] +"  -  " + trip.end_date.split('T')[0]}}</p>
                     </v-flex>
-                    <v-avatar  class="avatar-margin" size="36px" v-for="n in 6" :key="n">
+                    <v-avatar  class="avatar-margin" size="36px" v-for="n in trip.users" :key="n">
                         <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
                     </v-avatar>
                 </v-flex>

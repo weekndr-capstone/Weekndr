@@ -11,7 +11,7 @@
                             <v-flex xs10 offset-xs1>
                                 <v-divider></v-divider>
                                 <h4 class="font-weight-bold mt-3 mb-4">Where</h4>
-                                <v-text-field v-model="Where" placeholder="Where" required solo
+                                <v-text-field :ref="autocomplete" class="search-location"onfocus="value = ''"  v-model="Where" placeholder="Where" required solo
                                 ></v-text-field>
                             </v-flex>
                             <v-flex xs5 offset-xs1 class="d-inline-block">
@@ -105,8 +105,31 @@
                 }));
 
                 router.push('/search');
-            }
-        }
+            },
+                initialize() {
+                    var input = document.getElementById('searchTextField');
+                    new google.maps.places.Autocomplete(input);
+                }
+        },
+        mounted() {
+            let AutoComplete = document.createElement('script');
+            AutoComplete.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAih6iqhzWmzLIe11sF9yMDuwPhVyFYP2w&libraries=places"');
+            AutoComplete.async = true;
+
+            this.autocomplete = new google.maps.places.Autocomplete(
+                (this.$refs.autocomplete),
+                {types: ['geocode']}
+            );
+            this.autocomplete.addListener('place_changed', () => {
+                let place = this.autocomplete.getPlace();
+                let ac = place.address_components;
+                let lat = place.geometry.location.lat();
+                let lon = place.geometry.location.lng();
+                let city = ac[0]["short_name"];
+
+                console.log(`The user picked ${city} with the coordinates ${lat}, ${lon}`);
+            });
+        },
     }
 </script>
 
