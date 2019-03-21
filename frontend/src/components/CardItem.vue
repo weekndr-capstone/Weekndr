@@ -224,6 +224,7 @@
                  },
 
             async editPlace(){
+
                     await axios (
                         {
                             method: 'POST',
@@ -235,13 +236,16 @@
 
                                 }
 
+
                         }).then(res => {
+                            this.dialogue2 = false;
                             console.log(res.data)
                     }).catch(err =>{
                         console.log(err);
                     })
             },
             async deletePlace(){
+
                 await axios (
                     {
                         method: 'POST',
@@ -252,6 +256,7 @@
                         }
 
                     }).then(res => {
+                    this.dialogue3 = false;
                     console.log(res.data)
                 }).catch(err =>{
                     console.log(err);
