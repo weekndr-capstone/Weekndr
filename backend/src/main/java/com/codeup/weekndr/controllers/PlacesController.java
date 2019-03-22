@@ -26,11 +26,13 @@ public class PlacesController {
 
    @PostMapping("/place")
     public Place savePlace(@RequestBody Place place){
-           placeDao.save(place);
-           Trip trip = tripDao.findById(place.getTrip_id().getId());
-           trip.getPlaces().add(place);
+        System.out.println(place.getTrip());
+        Trip trip = tripDao.findById(place.getTrip().getId());
+        System.out.println(trip.getPlaces());
+        trip.getPlaces().add(place);
+        placeDao.save(place);
 
-           return placeDao.findById(place.getId());
+        return placeDao.findById(place.getId());
    }
 //
    @PostMapping("/editPlace{id}{description}")

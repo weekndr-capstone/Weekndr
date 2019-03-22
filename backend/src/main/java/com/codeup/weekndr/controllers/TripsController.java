@@ -31,12 +31,13 @@ public class TripsController {
     public Trip userInputed(@RequestBody Trip trip){
         tripDao.save(trip);
         System.out.println(trip.getUsers());
-        for(User user : trip.getUsers()){
-            System.out.println(user.getPhone_number());
-          User follower =  userDao.findByPhoneNumber(user.getPhone_number());
-          follower.getTrips().add(trip);
-          userDao.save(follower);
-
+        if (trip.getUsers().toArray().length >= 1){
+            for(User user : trip.getUsers()) {
+                System.out.println(user.getPhone_number());
+                User follower = userDao.findByPhoneNumber(user.getPhone_number());
+                follower.getTrips().add(trip);
+                userDao.save(follower);
+            }
         }
         System.out.println(trip.getUser().getId() + "USER ID");
         User user = userDao.findById(trip.getUser().getId());

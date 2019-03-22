@@ -109,9 +109,7 @@
                 menu1: false,
                 Dates: store.state.dates,
                 active: null,
-                friends: [{
-                    phone_number: ''
-                }],
+                friends: [],
                 premium: false,
                 fromNumber: '',
                 currentViewedTrip: store.state.currentViewedTrip,
@@ -136,7 +134,7 @@
                  rating: store.state.singleResult.rating,
                  suggested: false,
                  description: '',
-                 trip_id: store.state.currentViewedTrip.id,
+                 trip: store.state.currentViewedTrip.id,
                  user: store.state.user.id
                 }
             }
@@ -220,17 +218,18 @@
                             user: {
                                 id: this.experience.user,
                             },
-                            trip_id: {
-                                id: this.trip.id,
-                                title: this.trip.title
-                            }
+                            trip: {
+                                id:this.experience.trip
+                            },
                         }
                     })
                     .then(res => {
                         this.experience = res.data;
                         this.dialog = false;
                     }).catch(err => {
-                        console.log(err.data)
+                        console.log(store.state.currentViewedTrip);
+                        console.log(this.experience.trip);
+                        console.log(err)
                     })
             }
         }

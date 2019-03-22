@@ -57,7 +57,7 @@ public class Place {
     public Place(){}
 
     public Place(String yelp_uniq, String name, String address, Boolean suggested, String image_url, String websiteURL, String hotelURL, String phone_number, String rating, String price,
-                 Date checkin_date, Date checkout_date, User user, Trip trip_id,
+                 Date checkin_date, Date checkout_date, User user, Trip trip,
                  List<Vote> votes, List<Comment> comments, List<Photo> photos) {
         this.yelp_uniq = yelp_uniq;
         this.name = name;
@@ -75,11 +75,11 @@ public class Place {
         this.comments = comments;
         this.photos = photos;
         this.user = user;
-        this.trip = trip_id;
+        this.trip = trip;
     }
 
     public Place(String name, String address, String image_url, Date event_date, String phone_number, String yelp_uniq, String websiteURL, String price, String rating, Boolean suggested,
-                 String description, User user, Trip trip_id){
+                 String description, User user, Trip trip){
         this.name = name;
         this.address = address;
         this.image_url = image_url;
@@ -92,10 +92,10 @@ public class Place {
         this.description = description;
         this.suggested = suggested;
         this.user = user;
-        this.trip = trip_id;
+        this.trip = trip;
     }
 
-    public Place(String yelp_uniq, String name, String address, Boolean suggested, String image_url, String websiteURL, String phone_number, String rating, String price, Date event_date, User user, Trip trip_id) {
+    public Place(String yelp_uniq, String name, String address, Boolean suggested, String image_url, String websiteURL, String phone_number, String rating, String price, Date event_date, User user, Trip trip) {
         this.yelp_uniq = yelp_uniq;
         this.name = name;
         this.address = address;
@@ -107,7 +107,7 @@ public class Place {
         this.price = price;
         this.event_date = event_date;
         this.user = user;
-        this.trip = trip_id;
+        this.trip = trip;
     }
 
 //  this is used for editing the description of a place:
@@ -244,12 +244,12 @@ public class Place {
         this.user = user;
     }
 
-    public Trip getTrip_id() {
+    public Trip getTrip() {
         return trip;
     }
 
-    public void setTrip_id(Trip trip_id) {
-        this.trip = trip_id;
+    public void setTrip(Trip trip) {
+        this.trip = trip;
     }
 
     public List<Vote> getVotes() {

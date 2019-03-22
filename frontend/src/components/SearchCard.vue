@@ -91,7 +91,7 @@
         },
         methods: {
             async searchLocation(){
-                isLoading = true;
+                this.isLoading = true;
                 setTimeout(() => {
                     this.fadeout = "fade-out";
                 }, 3000);
