@@ -20,17 +20,17 @@ public class Photo {
     @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @Cascade(org.hibernate.annotations.CascadeType.MERGE)
     @JoinColumn(name = "place_id")
     private Place place;
 
     public Photo() {}
 
-    public Photo(String img_path, LocalDateTime created_at, User user, Place places) {
+    public Photo(String img_path, LocalDateTime created_at, User user, Place place) {
         this.img_path = img_path;
         this.created_at = created_at;
         this.user = user;
-        this.place = places;
+        this.place = place;
     }
 
     public long getId() {
@@ -65,11 +65,11 @@ public class Photo {
         this.user = user;
     }
 
-    public Place getPlaces() {
+    public Place getPlace() {
         return place;
     }
 
-    public void setPlaces(Place places) {
-        this.place = places;
+    public void setPlace(Place place) {
+        this.place = place;
     }
 }

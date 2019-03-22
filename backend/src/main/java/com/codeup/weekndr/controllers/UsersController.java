@@ -1,5 +1,6 @@
 package com.codeup.weekndr.controllers;
 
+import com.codeup.weekndr.models.Photo;
 import com.codeup.weekndr.models.User;
 import com.codeup.weekndr.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +34,6 @@ public class UsersController {
         userDao.save(user);
         return userDao.findById(user.getId());
     }
+
+
 }
