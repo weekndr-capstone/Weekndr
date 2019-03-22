@@ -110,6 +110,7 @@
                     store.commit('changeHotelResults', hotelRes.data.businesses);
                     console.log(suggestedRes, experiencesRes, foodRes, hotelRes)
                 }));
+                store.commit('changeMainUser', true);
                 router.push('/search');
             },
         },

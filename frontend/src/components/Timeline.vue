@@ -1,7 +1,7 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
 
     <v-timeline>
-        <v-timeline-item v-for="n in trip.places" :key="n.id" color="black lighten-2" small>
+        <v-timeline-item v-for="n in trip" :key="n.id" color="black lighten-2" small>
             <template v-slot:opposite>
                 <span>{{n.name}}</span>
             </template>
@@ -23,7 +23,11 @@
         },
         computed: {
             trip(){
-                return store.getters.currentlyViewedTrip
+                return store.state.currentViewedTrip.places.filter(place => {
+                    if (place.suggested === false){
+                        return place;
+                    }
+                })
             }
         }
     }
