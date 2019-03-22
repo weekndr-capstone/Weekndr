@@ -51,7 +51,26 @@
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
-        <!--information about the place card displays here-->
+
+
+                    <!--this is the photo upload and view photos modal that will have tabs -->
+                    <v-dialog v-model="dialogue5" max-width="600px">
+                        <template v-slot:activator="{ on }">
+                            <v-btn :ripple="false" icon v-on="on">
+                                <i  :class=photoIconClasses></i>
+                            </v-btn>
+                        </template>
+                        <v-card>
+                            <FileUpload :card="this.card" :pictureLocation="'placePicture'"></FileUpload>
+                            <v-card-actions>
+                                <v-spacer> </v-spacer>
+                                <v-btn flat v-on:click="dialogue2 = false">Close</v-btn>
+                                <v-btn flat v-on:click="">Save</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+
+
                     <v-dialog v-model="dialogue4" max-width="600px">
                         <template v-slot:activator="{ on }">
                             <v-btn :ripple="false" icon v-on="on">
@@ -86,9 +105,6 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
-
-
-                    <!--editItem() method doesn't do anything yet-->
                     <v-dialog v-model="dialogue2" max-width="600px">
                         <template v-slot:activator="{ on }">
                             <v-btn :ripple="false" icon v-on="on">
@@ -117,8 +133,6 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
-
-            <!--deleteItem() method doesn't do anything yet-->
                     <v-dialog v-model="dialogue3" max-width="600px">
                         <template v-slot:activator="{ on }">
                             <v-btn :ripple="false" icon v-on="on">
@@ -152,13 +166,15 @@
     import axios from 'axios'
     import comment from '../components/comment'
     import Vue from 'vue'
+    import FileUpload from '../components/FileUpload'
 
     export default {
         name: "CardItem",
         components:{
-            comment
+            comment,
+            FileUpload
         },
-        // TODO: will receive properties from parent
+
         data() {
             return {
                 counter: 0,
@@ -166,12 +182,13 @@
                 dialogue2: false,
                 dialogue3: false,
                 dialogue4: false,
+                dialogue5: false,
                 isLiked: false,
                 heartIconClasses: "far fa-heart",
-
                 editIconClasses: "far fa-edit",
                 deleteIconClasses: "far fa-trash-alt",
                 infoIconClasses: "far fa-question-circle",
+                photoIconClasses: "far fa-images",
                 card: {
                     id: this.card.id,
                     description: '',
@@ -185,6 +202,7 @@
                     parent_comment: null,
                 },
                 comments: '',
+
             }
         },
         props:{
