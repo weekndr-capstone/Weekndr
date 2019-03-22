@@ -48,10 +48,9 @@
                     </v-card>
                 </v-dialog>
                 <v-layout v-if="loggedIn" justify-end fill-height>
-                    <v-btn flat @click="logout()">Logout</v-btn>
                     <v-avatar  id="avatar" class="avatar-margin" size="40px">
-
                     </v-avatar>
+                    <v-btn flat @click="logout()">Logout</v-btn>
                 </v-layout>
                 <v-dialog v-if="!loggedIn" v-model="Login" max-width="550px">
                     <template  v-slot:activator="{ on }">
