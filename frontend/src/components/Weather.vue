@@ -13,10 +13,9 @@
 </template>
 
 <script>
-    import Vue from "vue";
     import CardItem from "./CardItem";
-    import axios, {AxiosResponse} from "axios";
-    import {store} from '../store/store';
+    import axios from "axios";
+    import store from '../store';
     export default {
         name: "Weather",
         components: {CardItem},
@@ -59,8 +58,8 @@
         methods: {
             getWeatherCall: function () {
                 console.log('getting weather');
-                const lat = this.weatherResults.lat;
-                const lon = this.weatherResults.lng;
+                const lat = this.direction.lat;
+                const lon = this.direction.lng;
                 const options = {
                     params: {
                         lat: lat,

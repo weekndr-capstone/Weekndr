@@ -126,13 +126,13 @@ public class ApiController {
     }
 
     @GetMapping("/api/weather")
-    public ResponseEntity<String> Weather(@RequestParam String lat, RequestParam lon){
-        return getWeatherResults(weatherApi, lat, lon);
+    public ResponseEntity<String> Weather(@RequestParam String lat, @RequestParam String lon){
+        return getWeatherResults(weatherApi,lat, lon);
     }
 
     private static ResponseEntity<String> getWeatherResults(String bearer, String lat, String lon)
     {
-        String uri = " https://api.darksky.net/forecast/"+ bearer +"/"+ lat + "," + lon;
+        String uri = "https://api.darksky.net/forecast/"+ bearer +"/"+ lat + "," + lon;
         System.out.println(uri);
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
