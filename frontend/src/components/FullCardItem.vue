@@ -9,7 +9,7 @@
               <v-card-title>Address:{{place.location.address1}} City: {{place.location.city}}</v-card-title>
               <v-card-text>Phone: {{place.phone}}</v-card-text>
               <v-icon half-icon half-increment readonly color="green">{{place.price}}</v-icon>
-              <v-rating v-model="place.rating" background-color="pink lighten-3" color="pink"></v-rating>
+              <v-rating v-model="place.rating" readonly background-color="pink lighten-3" color="pink"></v-rating>
               <v-card-text>I am a really awesome Description</v-card-text>
            </v-flex>
         </v-layout>
@@ -37,7 +37,7 @@
                                     </v-flex>
                                     <v-flex xs12>
                                         <h2>Invite Friends</h2>
-                                        <v-text-field v-for="f in friends" :key="f" label="Friends Number*" hint="We will shoot them a text and help them join in on the fun" v-model="f.phone_number"></v-text-field>
+                                        <v-text-field v-for="f in friends" :key="f" label="Friends Number*" hint="We will shoot them a text and help them join in on the fun" v-model="f.phoneNumber"></v-text-field>
                                         <v-btn @click="addFriend()"><v-icon>person_add</v-icon></v-btn>
                                         <v-btn @click="inviteFriends()" solo>Invite all Friends</v-btn>
                                         <small v-if="!premium">*Add another friend</small>
@@ -109,9 +109,7 @@
                 menu1: false,
                 Dates: store.state.dates,
                 active: null,
-                friends: [{
-                    phone_number: ''
-                }],
+                friends: [],
                 premium: false,
                 fromNumber: '',
                 currentViewedTrip: store.state.currentViewedTrip,
@@ -136,7 +134,7 @@
                  rating: store.state.singleResult.rating,
                  suggested: false,
                  description: '',
-                 trip_id: store.state.currentViewedTrip.id,
+                 trip: store.state.currentViewedTrip.id,
                  user: store.state.user.id
                 }
             }
@@ -173,7 +171,7 @@
             },
             addFriend(){
                 if (this.friends.length < 6){
-                    this.friends.push({phone_number: ''});
+                    this.friends.push({phoneNumber: ''});
                     this.premium = false;
                 }else{
                     this.premium = true;
@@ -220,17 +218,18 @@
                             user: {
                                 id: this.experience.user,
                             },
-                            trip_id: {
-                                id: this.trip.id,
-                                title: this.trip.title
-                            }
+                            trip: {
+                                id:this.experience.trip
+                            },
                         }
                     })
                     .then(res => {
                         this.experience = res.data;
                         this.dialog = false;
                     }).catch(err => {
-                        console.log(err.data)
+                        console.log(store.state.currentViewedTrip);
+                        console.log(this.experience.trip);
+                        console.log(err)
                     })
             }
         }

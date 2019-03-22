@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class TripsController {
@@ -27,21 +29,27 @@ public class TripsController {
         return tripDao.findById(id);
     }
 
+    @GetMapping("/checkUserMain{trip}{user}")
+    public boolean checkIfUserIsMain(@RequestParam long user, @RequestParam long trip){
+
+        User Check = tripDao.findById(trip).getUser();
+        return Check.getId() == user;
+    }
+
     @PostMapping("/trip")
     public Trip userInputed(@RequestBody Trip trip){
-        tripDao.save(trip);
-        System.out.println(trip.getUsers());
-        for(User user : trip.getUsers()){
-            System.out.println(user.getPhone_number());
-          User follower =  userDao.findByPhoneNumber(user.getPhone_number());
-          follower.getTrips().add(trip);
-          userDao.save(follower);
 
+        List<User> users = new ArrayList<>();
+        users.add(userDao.findById(trip.getUser().getId()));
+        if (trip.getUsers().toArray().length >= 1){
+            for(User user : trip.getUsers()) {
+                System.out.println(user.getPhoneNumber());
+                users.add(userDao.findByPhoneNumber(user.getPhoneNumber().trim()));
+            }
         }
-        System.out.println(trip.getUser().getId() + "USER ID");
-        User user = userDao.findById(trip.getUser().getId());
-        user.getTrips().add(trip);
-        userDao.save(user);
+
+        trip.setUsers(users);
+        tripDao.save(trip);
         return trip;
     }
 }

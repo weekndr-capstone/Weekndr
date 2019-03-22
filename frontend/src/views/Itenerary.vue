@@ -6,7 +6,7 @@
                 <v-layout style="overflow-x: scroll;">
                     <v-flex v-for="t in tabs" :key="t.id">
                         <v-item>
-                            <RecommendedDestinations :place="t"/>
+                            <FHEBlock :place="t"/>
                         </v-item>
                     </v-flex>
                 </v-layout>
@@ -17,16 +17,18 @@
 </template>
 
 <script>
-    import Timeline from "../components/Timeline";
-    import Toolbar from '../components/Toolbar';
-    import RecommendedDestinations from '../components/RecommendedDestinations'
+    import Timeline from '../components/Timeline'
+    import Toolbar from '../components/Toolbar'
+    import FHEBlock from "../components/FHEBlock"
+    import axios from 'axios'
+    import store from '../store'
 
     export default {
         name: "Itenerary",
         components: {
+            FHEBlock,
             Timeline,
             Toolbar,
-            RecommendedDestinations
         },
         data(){
             return {
@@ -46,8 +48,24 @@
                         name: 'Experience',
                         url: 'experience.jpg'
                     }
-                ]
+                ],
             }
+        },
+        mounted(){
+            axios({
+                method: 'GET',
+                url: '/checkUserMain',
+                headers: {'Content-Type': 'application/json'},
+                params: {
+                    trip: store.state.currentViewedTrip.id,
+                    user: store.state.user.id
+                }
+            }).then(res => {
+                console.log(res.data);
+                store.commit('changeMainUser', res.data);
+            }).catch(err => {
+                console.log(err)
+            });
         }
     }
 </script>

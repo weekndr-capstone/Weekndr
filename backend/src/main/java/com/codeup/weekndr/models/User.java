@@ -26,12 +26,7 @@ public class User {
     @Column(nullable = false)
     private String password;
     private LocalDateTime created_at;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name="users_trips",
-            joinColumns={@JoinColumn(name="trip_id")},
-            inverseJoinColumns={@JoinColumn(name="user_id")}
-    )
+    @ManyToMany(mappedBy = "users")
     private List<Trip> trips;
 
     public User(){}
@@ -47,10 +42,10 @@ public class User {
         trips = copy.trips;
     }
 
-    public User(String username, String email, String phone_number, String img_path, String password, List<Trip> trips, Timestamp created){
+    public User(String username, String email, String phoneNumber, String img_path, String password, List<Trip> trips, Timestamp created){
         this.username = username;
         this.email = email;
-        this.phoneNumber= phone_number;
+        this.phoneNumber= phoneNumber;
         this.img_path = img_path;
         this.password = password;
         this.created_at = created.toLocalDateTime();
@@ -86,12 +81,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPhone_number() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phoneNumber = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getImg_path() {
