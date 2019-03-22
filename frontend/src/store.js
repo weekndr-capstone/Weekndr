@@ -11,6 +11,7 @@ export default new Vuex.Store({
     hotelResults: '',
     foodResults: '',
     experiencesResults: '',
+    weatherResults: '',
     singleResult: '',
     user: {
         id: '',
@@ -41,6 +42,9 @@ export default new Vuex.Store({
       },
       experiences: state => {
           return state.experiencesResults
+      },
+      weather: state => {
+          return state.weatherResults
       },
       suggested: state => {
           return state.suggestedResults
@@ -95,6 +99,10 @@ export default new Vuex.Store({
       changeSingleResult(state, singleResult){
           state.singleResult = singleResult;
       },
+      changeWeatherResults(state, weather){
+          state.weatherResults = weather;
+      }
+      ,
       changeUser(state, user){
           state.user = user;
       },
