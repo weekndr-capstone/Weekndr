@@ -57,7 +57,7 @@
     import store from '../store'
     import router from '../router'
     import axios from 'axios'
-    
+
     let today= new Date();
     let dd = today.getDate();
     let mm = today.getMonth() + 1; //January is 0!
@@ -96,6 +96,7 @@
                     axios.get('/yelpList/'+ store.state.location + "/1"),
                     axios.get('/yelpList/' + store.state.location + "/2"),
                     axios.get('/yelpList/' + store.state.location + "/3"),
+                    axios.get('/Weather/' + store.state.location)
                     ]).then(axios.spread((suggestedRes, experiencesRes, foodRes, hotelRes) =>{
                     store.commit('changeSuggestedResults', suggestedRes.data.businesses);
                     store.commit('changeFoodResults', experiencesRes.data.businesses);
@@ -109,7 +110,7 @@
                 initialize() {
                     var input = document.getElementById('searchTextField');
                     new google.maps.places.Autocomplete(input);
-                }
+                },
         },
         mounted() {
             let AutoComplete = document.createElement('script');
