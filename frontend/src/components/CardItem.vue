@@ -52,8 +52,6 @@
                     </v-card>
                 </v-dialog>
 
-
-                    <!--this is the photo upload and view photos modal that will have tabs -->
                     <v-dialog v-model="dialogue5" max-width="600px">
                         <template v-slot:activator="{ on }">
                             <v-btn :ripple="false" icon v-on="on">
