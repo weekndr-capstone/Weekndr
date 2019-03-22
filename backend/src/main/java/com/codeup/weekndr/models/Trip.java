@@ -34,7 +34,12 @@ public class Trip {
     @OneToMany(mappedBy = "trip")
     private List<Place> places;
 
-    @ManyToMany(mappedBy = "trips")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="trips_users",
+            joinColumns={@JoinColumn(name="trip_id")},
+            inverseJoinColumns={@JoinColumn(name="user_id")}
+    )
     private List<User> users;
 
     public Trip() {}

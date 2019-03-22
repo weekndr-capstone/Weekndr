@@ -21,7 +21,7 @@ public class Photo {
     private User user;
     @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @JoinColumn(name = "trip_id")
+    @JoinColumn(name = "place_id")
     private Place place;
 
     public Photo() {}

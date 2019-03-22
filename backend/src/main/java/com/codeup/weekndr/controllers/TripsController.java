@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class TripsController {
@@ -29,20 +31,36 @@ public class TripsController {
 
     @PostMapping("/trip")
     public Trip userInputed(@RequestBody Trip trip){
-        tripDao.save(trip);
-        System.out.println(trip.getUsers());
+//        System.out.println(trip.getUsers());
+//
+//        if (trip.getUsers().toArray().length >= 1){
+//            for(User user : trip.getUsers()) {
+//                System.out.println(user.getPhoneNumber());
+//                User follower = userDao.findByPhoneNumber(user.getPhoneNumber());
+//                System.out.println(follower.getTrips());
+//                follower.getTrips().add(trip);
+//                userDao.save(follower);
+//            }
+//        }
+//        System.out.println(trip.getUser().getId() + "USER ID");
+//        User main = userDao.findById(trip.getUser().getId());
+//        main.getTrips().add(trip);
+//        userDao.save(main);
+        List<User> users = new ArrayList<>();
+        users.add(userDao.findById(trip.getUser().getId()));
         if (trip.getUsers().toArray().length >= 1){
             for(User user : trip.getUsers()) {
-                System.out.println(user.getPhone_number());
-                User follower = userDao.findByPhoneNumber(user.getPhone_number());
-                follower.getTrips().add(trip);
-                userDao.save(follower);
+                System.out.println(user.getPhoneNumber());
+                users.add(userDao.findByPhoneNumber(user.getPhoneNumber().trim()));
             }
         }
-        System.out.println(trip.getUser().getId() + "USER ID");
-        User user = userDao.findById(trip.getUser().getId());
-        user.getTrips().add(trip);
-        userDao.save(user);
+
+        for (User usertest : users){
+            System.out.println(usertest.getPhoneNumber());
+        }
+
+        trip.setUsers(users);
+        tripDao.save(trip);
         return trip;
     }
 }
