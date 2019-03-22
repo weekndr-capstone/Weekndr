@@ -49,6 +49,9 @@
                 </v-dialog>
                 <v-layout v-if="loggedIn" justify-end fill-height>
                     <v-btn flat @click="logout()">Logout</v-btn>
+                    <v-avatar  id="avatar" class="avatar-margin" size="40px">
+
+                    </v-avatar>
                 </v-layout>
                 <v-dialog v-if="!loggedIn" v-model="Login" max-width="550px">
                     <template  v-slot:activator="{ on }">
@@ -89,6 +92,7 @@
     import router from '../router'
     import store from '../store'
     import FileUpload from "./FileUpload";
+
 
     export default {
         name: "Toolbar",
@@ -140,6 +144,7 @@
                             store.commit('changeUser', res.data);
                             this.Login = false;
                             console.log(store.state.user)
+                            this.displayAvatar();
                         }
                     }).catch(err => {
                     console.log(err)
@@ -165,7 +170,29 @@
                     }
                 }
                 client.picker(options).open();
+            },
+            displayAvatar(){
+                const apikey = 'AsNx10Lk3SEiGRvMmw223z';
+                const client = filestack.init(apikey);
+
+                let handler = store.state.user.img_path;
+                console.log(handler);
+
+                client.retrieve(handler).then((blob) => {
+                    let imgLocation = document.getElementById('avatar');
+                    const urlCreator = window.URL || window.webkitURL;
+                    const img = document.createElement('img');
+                    img.src = urlCreator.createObjectURL(blob);
+                    img.height = 36;
+                    img.width = 36;
+                    imgLocation.appendChild(img);
+                }).catch((error) => {
+                    console.error(error);
+                });
             }
+        },
+        mounted () {
+
         }
     }
 </script>
