@@ -11,6 +11,7 @@ export default new Vuex.Store({
     hotelResults: '',
     foodResults: '',
     experiencesResults: '',
+    weatherResults: '',
     singleResult: '',
     user: {
         id: '',
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     loggedIn: false,
     parentComment: null,
     comments: [],
+    mainUser: false
   },
 
   getters:{
@@ -40,6 +42,9 @@ export default new Vuex.Store({
       },
       experiences: state => {
           return state.experiencesResults
+      },
+      weather: state => {
+          return state.weatherResults
       },
       suggested: state => {
           return state.suggestedResults
@@ -61,6 +66,9 @@ export default new Vuex.Store({
       },
       comments: state =>{
           return state.comments
+      },
+      mainUser: state => {
+          return state.mainUser
       }
   },
   mutations: {
@@ -91,6 +99,10 @@ export default new Vuex.Store({
       changeSingleResult(state, singleResult){
           state.singleResult = singleResult;
       },
+      changeWeatherResults(state, weather){
+          state.weatherResults = weather;
+      }
+      ,
       changeUser(state, user){
           state.user = user;
       },
@@ -105,6 +117,9 @@ export default new Vuex.Store({
       },
       changeComments(state, comments){
           state.comments = comments
+      },
+      changeMainUser(state, user){
+          state.mainUser = user;
       }
   },
   actions: {

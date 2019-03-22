@@ -212,7 +212,7 @@
                             websiteURL: this.experience.websiteurl,
                             price: this.experience.price,
                             rating: this.experience.rating,
-                            suggested: false,
+                            suggested: !store.state.mainUser,
                             description: this.experience.description,
                             created_at: new Date(),
                             user: {

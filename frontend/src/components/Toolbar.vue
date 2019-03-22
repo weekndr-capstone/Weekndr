@@ -5,7 +5,6 @@
                 <v-img :src="require ('../assets/weekdnr_logo.svg')" class="icon"></v-img>
             </router-link>
         </v-flex>
-
         <v-layout justify-end fill-height>
             <v-toolbar-items>
                 <v-dialog v-if="!loggedIn" v-model="SignUp" max-width="550px">

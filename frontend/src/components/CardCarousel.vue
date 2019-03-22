@@ -1,7 +1,7 @@
 <template>
     <v-carousel light hide-delimiters :cycle="false" height="270px" class="carousel-transparent">
         <v-carousel-item :key="i" v-for="i in 7">
-            <v-layout row>'
+            <v-layout row>
                     <v-flex xs15 sm6 md4 :key="j" v-for="j in Results.slice((3 * (i-1)),(-Results.length + (3*(i))))">
                         <yelp-card-item :card="j" class="margin">
                         </yelp-card-item>

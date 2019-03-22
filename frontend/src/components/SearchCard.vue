@@ -58,7 +58,7 @@
     import store from '../store'
     import router from '../router'
     import axios from 'axios'
-    
+
     let today= new Date();
     let dd = today.getDate();
     let mm = today.getMonth() + 1; //January is 0!
@@ -103,15 +103,22 @@
                     axios.get('/yelpList/'+ store.state.location + "/1"),
                     axios.get('/yelpList/' + store.state.location + "/2"),
                     axios.get('/yelpList/' + store.state.location + "/3"),
-                    ]).then(axios.spread((suggestedRes, experiencesRes, foodRes, hotelRes) =>{
+                    axios.get('/weather/' + store.state.location)
+                    ]).then(axios.spread((suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes) =>{
                     store.commit('changeSuggestedResults', suggestedRes.data.businesses);
                     store.commit('changeFoodResults', experiencesRes.data.businesses);
                     store.commit('changeExperiencesResults', foodRes.data.businesses);
                     store.commit('changeHotelResults', hotelRes.data.businesses);
-                    console.log(suggestedRes, experiencesRes, foodRes, hotelRes)
+                    store.commit('changeWeatherResults', weatherRes.data.results[0].geometry.location);
+                    console.log(suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes)
                 }));
+                store.commit('changeMainUser', true);
                 router.push('/search');
             },
+                initialize() {
+                    var input = document.getElementById('searchTextField');
+                    new google.maps.places.Autocomplete(input);
+                },
         },
         mounted() {
         },
