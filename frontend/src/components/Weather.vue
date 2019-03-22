@@ -61,14 +61,7 @@
                 console.log('getting weather');
                 const lat = this.weatherResults.lat;
                 const lon = this.weatherResults.lng;
-                const options = {
-                    params: {
-                        lat: lat,
-                        lon: lon,
-                    }
-                };
-                console.log(options);
-                axios.get('/api/weather', options).then((res) => {
+                axios.get('/api/weather/' + lat + "/" + lon).then((res) => {
                     console.log('success');
                     console.log(res);
                     this.onSuccess(res.data);
