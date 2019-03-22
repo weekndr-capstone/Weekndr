@@ -19,7 +19,7 @@
                                 <br>
                                 <v-layout wrap>
                                     <v-flex xs12>
-                                        <v-text-field v-model="user.phone_number" label="Phone Number*" required solo></v-text-field>
+                                        <v-text-field v-model="user.phoneNumber" label="Phone Number*" required solo></v-text-field>
                                     </v-flex>
                                     <v-flex xs12>
                                         <v-text-field v-model="user.email" label="Email Address*" required solo></v-text-field>
@@ -94,7 +94,7 @@
                 username: '',
                 email:'',
                 password:'',
-                phone_number: '',
+                phoneNumber: '',
             },
             userLogin: {
                 username:'',
@@ -111,7 +111,7 @@
                   axios
                     .post('/signup', this.user)
                       .then(res => {
-                          this.signup = true;
+                          this.SignUp = false;
                           console.log(res.data)
                       }).catch(err => {
                           console.log(err.data)
@@ -140,6 +140,7 @@
             logout(){
                 store.commit('changeUser', '');
                 store.commit('changeLoggedIn', false);
+                store.commit('changeCurrentlyViewedTrip', '');
                 this.Login = false;
             }
         }

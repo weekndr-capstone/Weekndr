@@ -20,18 +20,13 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
     private String email;
-    private String phone_number;
+    private String phoneNumber;
     @Column(length = 255)
     private String img_path;
     @Column(nullable = false)
     private String password;
     private LocalDateTime created_at;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name="users_trips",
-            joinColumns={@JoinColumn(name="trip_id")},
-            inverseJoinColumns={@JoinColumn(name="user_id")}
-    )
+    @ManyToMany(mappedBy = "users")
     private List<Trip> trips;
 
     public User(){}
@@ -40,17 +35,17 @@ public class User {
         id = copy.id;
         username = copy.username;
         email = copy.email;
-        phone_number= copy.phone_number;
+        phoneNumber= copy.phoneNumber;
         img_path = copy.img_path;
         password = copy.password;
         created_at = copy.created_at;
         trips = copy.trips;
     }
 
-    public User(String username, String email, String phone_number, String img_path, String password, List<Trip> trips, Timestamp created){
+    public User(String username, String email, String phoneNumber, String img_path, String password, List<Trip> trips, Timestamp created){
         this.username = username;
         this.email = email;
-        this.phone_number= phone_number;
+        this.phoneNumber= phoneNumber;
         this.img_path = img_path;
         this.password = password;
         this.created_at = created.toLocalDateTime();
@@ -86,12 +81,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getImg_path() {

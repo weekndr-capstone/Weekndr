@@ -27,12 +27,12 @@ public class UsersController {
     }
 
     @PostMapping("/signup")
-    public Iterable<User> userInput(@RequestBody User user){
+    public User userInput(@RequestBody User user){
         System.out.println(user);
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
         userDao.save(user);
-        return userDao.findAll();
+        return userDao.findById(user.getId());
     }
 
 
