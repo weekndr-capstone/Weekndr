@@ -102,7 +102,7 @@
                     store.commit('changeFoodResults', experiencesRes.data.businesses);
                     store.commit('changeExperiencesResults', foodRes.data.businesses);
                     store.commit('changeHotelResults', hotelRes.data.businesses);
-                    store.commit('changeWeatherResults', weatherRes.data.results);
+                    store.commit('changeWeatherResults', weatherRes.data.results[0].geometry.location);
                     console.log(suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes)
                 }));
 
