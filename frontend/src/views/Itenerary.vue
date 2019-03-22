@@ -17,10 +17,11 @@
 </template>
 
 <script>
-    import Timeline from "../components/Timeline";
-    import Toolbar from '../components/Toolbar';
-    import RecommendedDestinations from '../components/RecommendedDestinations'
-    import FHEBlock from "../components/FHEBlock";
+    import Timeline from '../components/Timeline'
+    import Toolbar from '../components/Toolbar'
+    import FHEBlock from "../components/FHEBlock"
+    import axios from 'axios'
+    import store from '../store'
 
     export default {
         name: "Itenerary",
@@ -47,8 +48,24 @@
                         name: 'Experience',
                         url: 'experience.jpg'
                     }
-                ]
+                ],
             }
+        },
+        mounted(){
+            axios({
+                method: 'GET',
+                url: '/checkUserMain',
+                headers: {'Content-Type': 'application/json'},
+                params: {
+                    trip: store.state.currentViewedTrip.id,
+                    user: store.state.user.id
+                }
+            }).then(res => {
+                console.log(res.data);
+                store.commit('changeMainUser', res.data);
+            }).catch(err => {
+                console.log(err)
+            });
         }
     }
 </script>

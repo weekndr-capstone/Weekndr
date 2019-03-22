@@ -103,7 +103,7 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
-                    <v-dialog v-model="dialogue2" max-width="600px">
+                    <v-dialog v-if="mainUser === true" v-model="dialogue2" max-width="600px">
                         <template v-slot:activator="{ on }">
                             <v-btn :ripple="false" icon v-on="on">
                                 <i  :class=editIconClasses />
@@ -131,7 +131,7 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
-                    <v-dialog v-model="dialogue3" max-width="600px">
+                    <v-dialog v-if="mainUser === true" v-model="dialogue3" max-width="600px">
                         <template v-slot:activator="{ on }">
                             <v-btn :ripple="false" icon v-on="on">
                                 <i  :class=deleteIconClasses />
@@ -200,7 +200,13 @@
                     parent_comment: null,
                 },
                 comments: '',
+                // mainUser: store.state.mainUser
 
+            }
+        },
+        computed:{
+            mainUser(){
+                return store.getters.mainUser
             }
         },
         props:{

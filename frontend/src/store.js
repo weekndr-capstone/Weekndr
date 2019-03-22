@@ -23,6 +23,7 @@ export default new Vuex.Store({
     loggedIn: false,
     parentComment: null,
     comments: [],
+    mainUser: false
   },
 
   getters:{
@@ -61,6 +62,9 @@ export default new Vuex.Store({
       },
       comments: state =>{
           return state.comments
+      },
+      mainUser: state => {
+          return state.mainUser
       }
   },
   mutations: {
@@ -105,6 +109,9 @@ export default new Vuex.Store({
       },
       changeComments(state, comments){
           state.comments = comments
+      },
+      changeMainUser(state, user){
+          state.mainUser = user;
       }
   },
   actions: {
