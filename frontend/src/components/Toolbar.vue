@@ -30,6 +30,9 @@
                                     <v-flex xs12>
                                         <v-text-field v-model="user.password" label="Password*" type="password" required solo></v-text-field>
                                     </v-flex>
+                                    <v-flex xs12>
+                                        <v-btn id="upload" color="info" v-on:click="fileUpload()">Upload Photo</v-btn>
+                                    </v-flex>
                                     <v-layout justify-start>
                                     <small>*indicates required field</small>
                                     </v-layout>
@@ -81,12 +84,15 @@
 </template>
 
 <script>
+    import * as filestack from 'filestack-js'
     import axios from 'axios'
     import router from '../router'
     import store from '../store'
+    import FileUpload from "./FileUpload";
 
     export default {
         name: "Toolbar",
+        components: {FileUpload},
         data: () => ({
             SignUp: false,
             Login: false,
@@ -95,6 +101,8 @@
                 email:'',
                 password:'',
                 phoneNumber: '',
+                img_path: '',
+                created_at: new Date()
             },
             userLogin: {
                 username:'',
@@ -142,6 +150,21 @@
                 store.commit('changeLoggedIn', false);
                 store.commit('changeCurrentlyViewedTrip', '');
                 this.Login = false;
+            },
+            fileUpload() {
+                const apikey = 'AsNx10Lk3SEiGRvMmw223z';
+                const client = filestack.init(apikey);
+                const options = {
+                    maxFiles: 1,
+                    uploadInBackground: false,
+
+                    onOpen: () => console.log("opened!"),
+                    onUploadDone: (res) => {
+                        console.log(res);
+                        this.user.img_path = res.filesUploaded[0].handle;
+                    }
+                }
+                client.picker(options).open();
             }
         }
     }

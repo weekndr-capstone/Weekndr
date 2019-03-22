@@ -38,8 +38,6 @@
                         }
                         axios(
                             {
-                                // This is what Photo obj takes in:
-                                // (String img_path, LocalDateTime created_at, User user, Place places)
                                 method: 'POST',
                                 url: this.url,
                                 headers: {'Content-Type': 'application/json'},
