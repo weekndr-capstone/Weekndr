@@ -19,27 +19,6 @@
         components: {CardItem},
         data(){
             return{
-                places: [{
-                    id: 1,
-                    alias: 'Hello',
-                    image_url:'Bob'
-                },
-                    {
-                    id: 2,
-                    alias: 'Hello',
-                    image_url:'Bob'
-                },
-                    {
-                    id: 3,
-                    alias: 'Hello',
-                    image_url:'Bob'
-                },
-                    {
-                    id: 4,
-                    alias: 'Hello',
-                    image_url:'Bob'
-                }
-                ]
             }
         },
         computed: {

@@ -29,23 +29,16 @@ public class TripsController {
         return tripDao.findById(id);
     }
 
+    @GetMapping("/checkUserMain{trip}{user}")
+    public boolean checkIfUserIsMain(@RequestParam long user, @RequestParam long trip){
+
+        User Check = tripDao.findById(trip).getUser();
+        return Check.getId() == user;
+    }
+
     @PostMapping("/trip")
     public Trip userInputed(@RequestBody Trip trip){
-//        System.out.println(trip.getUsers());
-//
-//        if (trip.getUsers().toArray().length >= 1){
-//            for(User user : trip.getUsers()) {
-//                System.out.println(user.getPhoneNumber());
-//                User follower = userDao.findByPhoneNumber(user.getPhoneNumber());
-//                System.out.println(follower.getTrips());
-//                follower.getTrips().add(trip);
-//                userDao.save(follower);
-//            }
-//        }
-//        System.out.println(trip.getUser().getId() + "USER ID");
-//        User main = userDao.findById(trip.getUser().getId());
-//        main.getTrips().add(trip);
-//        userDao.save(main);
+
         List<User> users = new ArrayList<>();
         users.add(userDao.findById(trip.getUser().getId()));
         if (trip.getUsers().toArray().length >= 1){
@@ -53,10 +46,6 @@ public class TripsController {
                 System.out.println(user.getPhoneNumber());
                 users.add(userDao.findByPhoneNumber(user.getPhoneNumber().trim()));
             }
-        }
-
-        for (User usertest : users){
-            System.out.println(usertest.getPhoneNumber());
         }
 
         trip.setUsers(users);
