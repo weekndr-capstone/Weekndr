@@ -21,7 +21,8 @@
     import store from '../store'
     import TripHistory from "./TripHistory";
     import RecommendedDestinations from "../components/RecommendedDestinations";
-    import Itenerary from "./Itenerary";
+    import WeekndrLogo from "../components/WeekndrLogo";
+    import LoadingScreen from "../components/LoadingScreen";
 
   export default {
     data(){
@@ -44,8 +45,12 @@
             ],
         }
     },
+      mounted () {
+          store.commit('changeCurrentlyViewedTrip', '');
+      },
     components: {
-        Itenerary,
+        LoadingScreen,
+        WeekndrLogo,
         RecommendedDestinations,
         TripHistory,
         Banner,
@@ -57,3 +62,10 @@
     }
   }
 </script>
+<style>
+    .fade-out {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s 2s, opacity 2s linear;
+    }
+</style>

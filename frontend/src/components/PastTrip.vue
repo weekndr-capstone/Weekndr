@@ -9,7 +9,7 @@
                     <h4 @click="routeSingle()">{{trip.title}}</h4>
                     </v-flex>
                     <v-flex xs5>
-                        <p>{{trip.start_date.split('T')[0] +"  -  " + trip.end_date.split('T')[0]}}</p>
+                        <p v-if="trip.start_date !== null && trip.end_date !== null">{{trip.start_date.split('T')[0] +"  -  " + trip.end_date.split('T')[0]}}</p>
                     </v-flex>
                     <v-avatar  class="avatar-margin" size="36px" v-for="n in trip.users" :key="n">
                         <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">

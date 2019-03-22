@@ -1,5 +1,6 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
 <v-container fill-height fluid>
+    <LoadingScreen v-if="isLoading" :class="fadeout"/>
         <v-layout justify-center>
             <v-card height="400px" xs12>
                 <v-container fill-height>
@@ -83,11 +84,17 @@
                 minDate: today,
                 minEndDate: '',
                 menu1: false,
-                menu2: false
+                menu2: false,
+                fadeout: 'fade-out',
+                isLoading: false
             }
         },
         methods: {
             async searchLocation(){
+                this.isLoading = true;
+                setTimeout(() => {
+                    this.fadeout = "fade-out";
+                }, 3000);
                 store.commit('changeLocation', this.Where);
                 store.commit('changeStartDate', this.Dates.Start);
                 store.commit('changeEndDate', this.Dates.End);
@@ -105,7 +112,6 @@
                     store.commit('changeWeatherResults', weatherRes.data.results[0].geometry.location);
                     console.log(suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes)
                 }));
-
                 router.push('/search');
             },
                 initialize() {
@@ -114,23 +120,6 @@
                 },
         },
         mounted() {
-            let AutoComplete = document.createElement('script');
-            AutoComplete.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAih6iqhzWmzLIe11sF9yMDuwPhVyFYP2w&libraries=places"');
-            AutoComplete.async = true;
-
-            this.autocomplete = new google.maps.places.Autocomplete(
-                (this.$refs.autocomplete),
-                {types: ['geocode']}
-            );
-            this.autocomplete.addListener('place_changed', () => {
-                let place = this.autocomplete.getPlace();
-                let ac = place.address_components;
-                let lat = place.geometry.location.lat();
-                let lon = place.geometry.location.lng();
-                let city = ac[0]["short_name"];
-
-                console.log(`The user picked ${city} with the coordinates ${lat}, ${lon}`);
-            });
         },
     }
 </script>
