@@ -37,7 +37,7 @@
                                     </v-flex>
                                     <v-flex xs12>
                                         <h2>Invite Friends</h2>
-                                        <v-text-field v-for="f in friends" :key="f" label="Friends Number*" hint="We will shoot them a text and help them join in on the fun" v-model="f.phone_number"></v-text-field>
+                                        <v-text-field v-for="f in friends" :key="f" label="Friends Number*" hint="We will shoot them a text and help them join in on the fun" v-model="f.phoneNumber"></v-text-field>
                                         <v-btn @click="addFriend()"><v-icon>person_add</v-icon></v-btn>
                                         <v-btn @click="inviteFriends()" solo>Invite all Friends</v-btn>
                                         <small v-if="!premium">*Add another friend</small>
@@ -171,7 +171,7 @@
             },
             addFriend(){
                 if (this.friends.length < 6){
-                    this.friends.push({phone_number: ''});
+                    this.friends.push({phoneNumber: ''});
                     this.premium = false;
                 }else{
                     this.premium = true;
