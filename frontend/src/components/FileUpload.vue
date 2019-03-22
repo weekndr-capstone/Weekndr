@@ -2,6 +2,7 @@
             <v-btn id="upload" color="info" v-on:click="fileUpload()">Upload Photo</v-btn>
 </template>
 
+
 <script>
     import * as filestack from 'filestack-js'
     import axios from 'axios'
