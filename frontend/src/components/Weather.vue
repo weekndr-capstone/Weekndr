@@ -28,16 +28,16 @@
         data() {
             return {
                 weatherConditions: {
-                    'clear-day': ['wi-day-sunny', 'under clear skies'],
-                    'clear-night': ['wi-night-clear', 'under starry skies'],
-                    'rain': ['wi-rain', 'with rain'],
-                    'snow': ['wi-snow', 'with snow'],
-                    'sleet': ['wi-sleet', 'with sleet'],
-                    'wind': ['wi-strong-wind', 'with windy conditions'],
-                    'fog': ['wi-fog', 'with foggy conditions'],
-                    'cloudy': ['wi-cloudy', 'under cloudy skies'],
-                    'partly-cloudy-day': ['wi-day-sunny-overcast', 'under partly cloudy skies'],
-                    'partly-cloudy-night': ['wi-night-alt-partly-cloudy', 'under partly cloudy skies']
+                    'clear-day': ['fas fa-sun', 'under clear skies'],
+                    'clear-night': ['fas fa-moon', 'under starry skies'],
+                    'rain': ['fas fa-cloud-rain', 'with rain'],
+                    'snow': ['fas fa-snowflake', 'with snow'],
+                    'sleet': ['fas fa-sleet', 'with sleet'],
+                    'wind': ['fas fa-wind', 'with windy conditions'],
+                    'fog': ['fas fa-smog', 'with foggy conditions'],
+                    'cloudy': ['fas fa-cloudy', 'under cloudy skies'],
+                    'partly-cloudy-day': ['fas fa-cloud-sun', 'under partly cloudy skies'],
+                    'partly-cloudy-night': ['fas fa-cloud-moon', 'under partly cloudy skies']
                 },
                 weatherLoaded: true,
                 weatherData: {},
