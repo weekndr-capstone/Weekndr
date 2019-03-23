@@ -141,7 +141,7 @@
                             store.commit('changeLoggedIn', true);
                             store.commit('changeUser', res.data);
                             this.Login = false;
-                            console.log(store.state.user)
+                            console.log(store.state.user);
                             this.displayAvatar();
                         }
                     }).catch(err => {

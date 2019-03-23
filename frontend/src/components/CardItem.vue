@@ -295,7 +295,7 @@
                             comment: this.comment.comment,
                             created_at: this.comment.created_at,
                             user: {
-                                  id: store.state.user.id,
+                                  id: store.state.user.id
                             },
                             place: {
                                 id: this.card.id
