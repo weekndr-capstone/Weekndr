@@ -44,7 +44,7 @@
                 condition: '',
                 summary: '',
                 forecastArr: [''],
-                weatherIconClass: ['wi', ''],
+                weatherIconClass: ['fa', ''],
             }
         },
         mounted() {
