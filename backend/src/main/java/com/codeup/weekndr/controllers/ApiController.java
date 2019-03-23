@@ -50,37 +50,13 @@ public class ApiController {
 
             default: uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&radius=20000&limit=26";
         }
-        System.out.println(uri);
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_JSON }));
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer " + bearer);
-
-        System.out.println(headers + " HEADERS");
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-        ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-
-        System.out.println(result);
-        return result;
+        return getStringResponseEntity(bearer, uri);
     }
 
     private static ResponseEntity<String> getyelpListFood(String bearer, String location)
     {
         final String uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=food&radius=20000";
-        System.out.println(uri);
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_JSON }));
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer " + bearer);
-
-        System.out.println(headers + " HEADERS");
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-        ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-
-        System.out.println(result);
-        return result;
+        return getStringResponseEntity(bearer, uri);
     }
 
     @PostMapping("/twilio")
@@ -110,19 +86,7 @@ public class ApiController {
     private static ResponseEntity<String> getLatLon(String bearer, String location)
     {
         String uri = "https://maps.googleapis.com/maps/api/geocode/json?address="+ location +"&key=" + bearer;
-        System.out.println(uri);
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_JSON }));
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer " + bearer);
-
-        System.out.println(headers + " HEADERS");
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-        ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-
-        System.out.println(result);
-        return result;
+        return getStringResponseEntity(bearer, uri);
     }
 
     @GetMapping("/api/weather")
@@ -133,6 +97,7 @@ public class ApiController {
     private static ResponseEntity<String> getWeatherResults(String bearer, String lat, String lon)
     {
         String uri = "https://api.darksky.net/forecast/"+ bearer +"/"+ lat + "," + lon;
+      
         System.out.println(uri);
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
