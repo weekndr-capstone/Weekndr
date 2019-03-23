@@ -112,6 +112,7 @@
                     store.commit('changeWeatherResults', weatherRes.data.results[0].geometry.location);
                     console.log(suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes)
                 }));
+                store.commit('changeMainUser', true);
                 router.push('/search');
             },
                 initialize() {

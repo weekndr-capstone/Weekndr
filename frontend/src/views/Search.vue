@@ -1,7 +1,7 @@
 <template>
   <div>
     <Toolbar/>
-    <Weather :results="weather"/>
+    <Weather :results= "weather"/>
     <CardCarousel  :results = "suggested"/>
     <CardCarousel  :results = "hotels" />
     <CardCarousel  :results = "food"/>
@@ -15,6 +15,7 @@
     import Toolbar from '../components/Toolbar'
     import Weather from "../components/Weather";
     import LoadingScreen from "../components/LoadingScreen";
+
     export default {
         components: {
           Weather,
@@ -31,11 +32,6 @@
                 food: store.state.foodResults,
                 experiences: store.state.experiencesResults,
                 weather: store.state.weatherResults,
-                cards: [
-                    {title: "card test", description: "this is a card description", src: "12345"},
-                    {title: "woot woot test", description: "woot woot test card description", src: "12345"},
-                    {title: "wahoo test", description: "wahoo test card description", src: "12345"}
-                ]
                 fadeout: 'fade-out'
             }
         },

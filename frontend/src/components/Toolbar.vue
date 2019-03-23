@@ -5,7 +5,6 @@
                 <v-img :src="require ('../assets/weekdnr_logo.svg')" class="icon"></v-img>
             </router-link>
         </v-flex>
-
         <v-layout justify-end fill-height>
             <v-toolbar-items>
                 <v-dialog v-if="!loggedIn" v-model="SignUp" max-width="550px">
@@ -48,6 +47,8 @@
                     </v-card>
                 </v-dialog>
                 <v-layout v-if="loggedIn" justify-end fill-height>
+                    <v-avatar  id="avatar" class="avatar-margin" size="40px">
+                    </v-avatar>
                     <v-btn flat @click="logout()">Logout</v-btn>
                 </v-layout>
                 <v-dialog v-if="!loggedIn" v-model="Login" max-width="550px">
@@ -89,6 +90,7 @@
     import router from '../router'
     import store from '../store'
     import FileUpload from "./FileUpload";
+
 
     export default {
         name: "Toolbar",
@@ -140,6 +142,7 @@
                             store.commit('changeUser', res.data);
                             this.Login = false;
                             console.log(store.state.user)
+                            this.displayAvatar();
                         }
                     }).catch(err => {
                     console.log(err)
@@ -165,7 +168,29 @@
                     }
                 }
                 client.picker(options).open();
+            },
+            displayAvatar(){
+                const apikey = 'AsNx10Lk3SEiGRvMmw223z';
+                const client = filestack.init(apikey);
+
+                let handler = store.state.user.img_path;
+                console.log(handler);
+
+                client.retrieve(handler).then((blob) => {
+                    let imgLocation = document.getElementById('avatar');
+                    const urlCreator = window.URL || window.webkitURL;
+                    const img = document.createElement('img');
+                    img.src = urlCreator.createObjectURL(blob);
+                    img.height = 36;
+                    img.width = 36;
+                    imgLocation.appendChild(img);
+                }).catch((error) => {
+                    console.error(error);
+                });
             }
+        },
+        mounted () {
+
         }
     }
 </script>

@@ -89,18 +89,15 @@ public class ApiController {
         return getStringResponseEntity(bearer, uri);
     }
 
-    @GetMapping("/api/weather/{lat}/{lon}")
-    public ResponseEntity<String> Weather(@PathVariable String lat, @PathVariable String lon){
-        return getWeatherResults(weatherApi, lat, lon);
+    @GetMapping("/api/weather")
+    public ResponseEntity<String> Weather(@RequestParam String lat, @RequestParam String lon){
+        return getWeatherResults(weatherApi,lat, lon);
     }
 
     private static ResponseEntity<String> getWeatherResults(String bearer, String lat, String lon)
     {
-        String uri = " https://api.darksky.net/forecast/"+ bearer +"/"+ lat + "," + lon;
-        return getStringResponseEntity(bearer, uri);
-    }
-
-    private static ResponseEntity<String> getStringResponseEntity(String bearer, String uri) {
+        String uri = "https://api.darksky.net/forecast/"+ bearer +"/"+ lat + "," + lon;
+      
         System.out.println(uri);
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
