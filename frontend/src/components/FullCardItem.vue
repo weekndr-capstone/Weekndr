@@ -127,6 +127,7 @@
                  address: store.state.singleResult.location.address1,
                  image_url: store.state.singleResult.image_url,
                  event_date: '',
+                 event_time:'',
                  phone_number: store.state.singleResult.phone,
                  yelp_uniq: store.state.singleResult.id,
                  websiteurl: store.state.singleResult.url,
