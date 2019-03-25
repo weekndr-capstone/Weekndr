@@ -81,17 +81,11 @@
                                     <v-layout wrap>
                                         <v-flex xs12>
                                             <h1>{{ card.name }}</h1>
-
                                             <p>{{  card.description }}</p>
-
                                             <p><i class="fas fa-map-marker-alt"></i>{{  card.address }}</p>
-
                                             <p><i class="fas fa-phone"></i>{{  card.phone_number }}</p>
-
                                             <p>{{  card.price }}</p>
-
                                             <p>{{  card.rating }}</p>
-
                                             <p><a :href="card.websiteURL" target="_blank">go to website</a></p>
                                         </v-flex>
                                     </v-layout>
