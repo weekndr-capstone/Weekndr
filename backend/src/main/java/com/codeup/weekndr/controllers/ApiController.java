@@ -114,4 +114,5 @@ public class ApiController {
         String uri = "https://api.darksky.net/forecast/"+ bearer +"/"+ lat + "," + lon;
         return getStringResponseEntity(bearer, uri);
     }
+
 }
