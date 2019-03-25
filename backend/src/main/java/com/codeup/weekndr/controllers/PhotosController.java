@@ -32,10 +32,10 @@ public class PhotosController {
         System.out.println(photo.getPlace());
         photoDao.save(photo);
     }
-//
-//    @PostMapping("/profilePicture")
-//    public void saveProfilePhoto(@RequestBody Photo photo){
-//        photoDao.save(photo);
-//    }
+
+    @GetMapping("/placePhotos")
+    public Iterable<Photo> placePhotos(@RequestParam (name="place") Place place) {
+        return photoDao.findAllByPlaceId(place.getId());
+    }
 
 }

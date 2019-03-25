@@ -27,8 +27,7 @@
                             <v-container grid-list-md>
                                 <v-layout wrap>
                                     <v-flex xs12>
-                                        <p>Display the comments here</p>
-                                        <h3>{{ card.title }}</h3>
+                                        <h3>{{ card.name }}</h3>
                                         <div>
                                             <comment v-if="comments[index] !== undefined"  :key="index" v-for="(comment, index) in comments"
                                                      :comments="comment.childComments"
@@ -52,21 +51,37 @@
                     </v-card>
                 </v-dialog>
 
+
+
                     <v-dialog v-model="dialogue5" max-width="600px">
-                        <template v-slot:activator="{ on }">
-                            <v-btn :ripple="false" icon v-on="on">
-                                <i  :class=photoIconClasses></i>
-                            </v-btn>
-                        </template>
-                        <v-card>
-                            <FileUpload :card="this.card" :pictureLocation="'placePicture'"></FileUpload>
-                            <v-card-actions>
+                                <template v-slot:activator="{ on }">
+                                    <v-btn :ripple="false" icon v-on="on">
+                                        <i  :class=photoIconClasses></i>
+                                    </v-btn>
+                                </template>
+                            <v-card>
+                                <v-card-actions>
+                                    <v-layout align-end>
+                                        <v-flex xs12 align-end>
+                                            <v-btn  flat v-on:click="dialogue5 = false"><i class="fas fa-times"></i></v-btn>
+                                        </v-flex>
+                                    </v-layout>
+                                    <v-layout>
+                                        <v-flex xs12>
+                                            <h2>{{ card.name }}</h2>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-card-actions>
+                                <PictureGrid :photos="this.card.photos"></PictureGrid>
+                                <v-layout justify-content-center>
+                                    <v-flex>
+                                        <FileUpload :card="this.card" :pictureLocation="'placePicture'"></FileUpload>
+                                    </v-flex>
+                                </v-layout>
                                 <v-spacer> </v-spacer>
-                                <v-btn flat v-on:click="dialogue2 = false">Close</v-btn>
-                                <v-btn flat v-on:click="">Save</v-btn>
-                            </v-card-actions>
-                        </v-card>
+                            </v-card>
                     </v-dialog>
+
 
 
                     <v-dialog v-model="dialogue4" max-width="600px">
@@ -159,12 +174,14 @@
     import comment from '../components/comment'
     import Vue from 'vue'
     import FileUpload from '../components/FileUpload'
+    import PictureGrid from '../components/PictureGrid'
 
     export default {
         name: "CardItem",
         components:{
             comment,
-            FileUpload
+            FileUpload,
+            PictureGrid
         },
 
         data() {
@@ -289,7 +306,7 @@
                             comment: this.comment.comment,
                             created_at: this.comment.created_at,
                             user: {
-                                  id: store.state.user.id,
+                                  id: store.state.user.id
                             },
                             place: {
                                 id: this.card.id
