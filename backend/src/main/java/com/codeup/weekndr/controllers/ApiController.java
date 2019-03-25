@@ -61,8 +61,6 @@ public class ApiController {
 
     @PostMapping("/twilio")
     public String twilio(@RequestParam("friends") String friends, @RequestParam("fromNumber") String fromNumber){
-        System.out.println(friends);
-        System.out.println(fromNumber);
         String body = "You have been invited on a trip. Click the link to join in on the fun!";
         twilioMessage(friends, fromNumber, body, authtwilio, twilioSID);
         return "message sent";
@@ -80,6 +78,7 @@ public class ApiController {
         }
         @GetMapping("/weather/{location}")
         public ResponseEntity<String> Weather(@PathVariable String location){
+            System.out.println("this is the weather/location");
             return getLatLon(googleApi, location);
         }
 
@@ -90,18 +89,15 @@ public class ApiController {
     }
 
     private static ResponseEntity<String> getStringResponseEntity(String bearer, String uri) {
-        System.out.println(uri);
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_JSON }));
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Authorization", "Bearer " + bearer);
 
-        System.out.println(headers + " HEADERS");
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
         ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
 
-        System.out.println(result);
         return result;
     }
 

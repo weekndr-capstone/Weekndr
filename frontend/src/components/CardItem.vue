@@ -118,7 +118,7 @@
                                             <br/>
                                             <p>Edit Description:</p>
                                             <v-flex xs12>
-                                                <v-textarea v-model="card.description" label="{{  card.description }}" required solo></v-textarea>
+                                                <v-textarea v-model="card.description" required solo></v-textarea>
                                             </v-flex>
                                         </v-flex>
                                     </v-layout>

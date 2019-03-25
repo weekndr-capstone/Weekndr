@@ -1,29 +1,40 @@
 <template>
-    <div class="weather-tile" v-if="weatherLoaded">
-        <span class="weather-container">
-            <span class="top-row">
-                <span class="weather-desc">
-                    <span class="temp">{{`${temp}&#176;F `}}</span>
-                    <i :class="weatherIconClass"></i>
-                </span>
-            </span>
-            <span class="bottom-row condition">{{` ${condition} `}}</span>
-        </span>
-    </div>
+    <v-container  grid-list-md text-xs-center>
+        <h1 class="align-center">{{this.direction.formatted_address}}</h1>
+        <v-divider></v-divider>
+        <h2 class="align-center">Weather Forecast</h2>
+        <v-layout row wrap v-if="weatherLoaded">
+            <v-flex v-if="forecastArr.length > 1" v-for="day in forecastArr" :key="forecastArr">
+                <v-card dark color="secondary" xs1>
+                    <v-card-text class="px-0">
+                            <span class="top-row">
+                            <span class="weather-desc">
+                                <h3>{{day.time}}</h3>
+                                <span class="temp"><h4>High</h4>{{` ${day.apparentTemperatureHigh}&#176;F `}}</span>
+                                <i :class="weatherIconClass"></i>
+                                <span class="temp"><h4>Low</h4>{{` ${day.apparentTemperatureLow}&#176;F `}}</span>
+                                <i :class="weatherIconClass"></i>
+                            </span>
+                        </span>
+                        <p>{{day.summary}}</p>
+                    </v-card-text>
+                </v-card>
+            </v-flex>
+        </v-layout>
+    </v-container>
 </template>
 
 <script>
     import CardItem from "./CardItem";
     import axios from "axios";
     import store from '../store';
+
     export default {
         name: "Weather",
         components: {CardItem},
         props:{
-        Results: Array,
-        lat: Array.lat,
-        lon: Array.lon
-    },
+            Results: Array
+        },
         data() {
             return {
                 weatherConditions: {
@@ -44,7 +55,7 @@
                 condition: '',
                 summary: '',
                 forecastArr: [''],
-                weatherIconClass: ['wi', ''],
+                weatherIconClass: ['fa', ''],
             }
         },
         mounted() {
@@ -57,34 +68,43 @@
         },
         methods: {
             getWeatherCall: function () {
-                console.log('getting weather');
-                const lat = this.direction.lat;
-                const lon = this.direction.lng;
+                const lat = this.direction.geometry.location.lat;
+                const lon = this.direction.geometry.location.lng;
+                const address = this.direction.formatted_address;
+                const location = store.state.location;
+                const Start = store.state.dates.start_date;
                 const options = {
                     params: {
                         lat: lat,
                         lon: lon,
+                        location: location,
+                        address: address,
+                        Start: Start
                     }
                 };
                 console.log(options);
-                axios.get('/api/weather', options).then((res) => {
+                axios.get('/api/weather/', options).then((res) => {
                     console.log('success');
                     console.log(res);
+                    console.log(Start);
                     this.onSuccess(res.data);
                 }).catch(err => {
                     console.log(err);
                 })
             },
-            onSuccess: function (data) {
+            onSuccess: function (data){
                 this.weatherLoaded = true;
                 this.temp = Math.round(data.currently.temperature);
-                this.weatherIconClass[1] = this.setWeatherIcon(data.currently.icon);
                 this.condition = this.setCondition(data.currently.icon);
                 this.summary = data.daily.summary;
                 this.forecastArr = data.daily.data;
+                this.forecastArr.forEach(function(element){
+                    for(let i =0; i < this.forecastArr.length; i++){
+                        this.weatherIconClass[1] = this.setWeatherIcon(data.currently.icon);
+                    }
+                });
             },
             setWeatherIcon: function (icon) {
-                console.log(this.weatherConditions[icon]);
                 return this.weatherConditions[icon][0];
             },
             setCondition: function (icon) {
