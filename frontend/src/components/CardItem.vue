@@ -27,8 +27,7 @@
                             <v-container grid-list-md>
                                 <v-layout wrap>
                                     <v-flex xs12>
-                                        <p>Display the comments here</p>
-                                        <h3>{{ card.title }}</h3>
+                                        <h3>{{ card.name }}</h3>
                                         <div>
                                             <comment v-if="comments[index] !== undefined"  :key="index" v-for="(comment, index) in comments"
                                                      :comments="comment.childComments"
@@ -61,15 +60,25 @@
                                     </v-btn>
                                 </template>
                             <v-card>
-
-                                <PictureGrid :photos="this.card.photos"></PictureGrid>
-
-                                    <FileUpload :card="this.card" :pictureLocation="'placePicture'"></FileUpload>
-                                <v-spacer> </v-spacer>
                                 <v-card-actions>
-                                    <v-btn flat v-on:click="dialogue2 = false">Close</v-btn>
-                                    <v-btn flat v-on:click="dialogue2 = false">Save</v-btn>
+                                    <v-layout align-end>
+                                        <v-flex xs12 align-end>
+                                            <v-btn  flat v-on:click="dialogue5 = false"><i class="fas fa-times"></i></v-btn>
+                                        </v-flex>
+                                    </v-layout>
+                                    <v-layout>
+                                        <v-flex xs12>
+                                            <h2>{{ card.name }}</h2>
+                                        </v-flex>
+                                    </v-layout>
                                 </v-card-actions>
+                                <PictureGrid :photos="this.card.photos"></PictureGrid>
+                                <v-layout justify-content-center>
+                                    <v-flex>
+                                        <FileUpload :card="this.card" :pictureLocation="'placePicture'"></FileUpload>
+                                    </v-flex>
+                                </v-layout>
+                                <v-spacer> </v-spacer>
                             </v-card>
                     </v-dialog>
 
