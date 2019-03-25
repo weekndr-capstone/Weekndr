@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <div>
         <Banner/>
         <div>
@@ -21,8 +21,6 @@
     import store from '../store'
     import TripHistory from "./TripHistory";
     import RecommendedDestinations from "../components/RecommendedDestinations";
-    import WeekndrLogo from "../components/WeekndrLogo";
-    import LoadingScreen from "../components/LoadingScreen";
 
   export default {
     data(){
@@ -49,8 +47,6 @@
           store.commit('changeCurrentlyViewedTrip', '');
       },
     components: {
-        LoadingScreen,
-        WeekndrLogo,
         RecommendedDestinations,
         TripHistory,
         Banner,
