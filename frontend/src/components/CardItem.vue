@@ -4,7 +4,7 @@
                     <v-container fill-height fluid>
                         <v-layout fill-height>
                             <v-flex xs12 align-end flexbox>
-                                <span class="headline" @click="routeSingle()">"{{card.name}}</span>
+                                <span class="headline">"{{card.name}}</span>
                             </v-flex>
                         </v-layout>
                     </v-container>
@@ -343,11 +343,6 @@
                         console.log(err)
                     });
             },
-            async routeSingle() {
-                await store.commit('changeSingleResult', this.card);
-                router.push('/single')
-            },
-
             parent(id){
                 this.comment.parent_comment = id;
                 console.log(this.comment.parent_comment)
