@@ -175,7 +175,7 @@
                  rating: store.state.singleResult.rating,
                  suggested: false,
                  description: '',
-                 trip: store.state.currentViewedTrip.id,
+                 // trip: store.state.currentViewedTrip.id,
                  user: store.state.user.id
                 }
             }
@@ -190,7 +190,10 @@
                 }else{
                     return null
                 }
-            }
+            },
+            // testTrip(){
+            //     return store.getters.currentViewedTrip
+            // }
         },
 
         methods:{
@@ -275,7 +278,7 @@
                                 id: this.experience.user,
                             },
                             trip: {
-                                id:this.experience.trip
+                                id:store.getters.currentViewedTrip.id
                             },
                         }
                     })

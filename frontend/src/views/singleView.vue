@@ -14,7 +14,6 @@
             Toolbar
         },
         props: {
-            singleResult: Object,
             hotel: Boolean
         }
     }
