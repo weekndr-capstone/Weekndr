@@ -34,8 +34,8 @@ public class PhotosController {
     }
 
     @GetMapping("/placePhotos")
-    public Iterable<Photo> placePhotos(Place place) {
-        return photoDao.findByPlaceId(place.getId());
+    public Iterable<Photo> placePhotos(@RequestParam (name="place") Place place) {
+        return photoDao.findAllByPlaceId(place.getId());
     }
 
 }

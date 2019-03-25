@@ -52,21 +52,27 @@
                     </v-card>
                 </v-dialog>
 
+
+
                     <v-dialog v-model="dialogue5" max-width="600px">
-                        <template v-slot:activator="{ on }">
-                            <v-btn :ripple="false" icon v-on="on">
-                                <i  :class=photoIconClasses></i>
-                            </v-btn>
-                        </template>
-                        <v-card>
-                            <FileUpload :card="this.card" :pictureLocation="'placePicture'"></FileUpload>
-                            <v-card-actions>
+                                <template v-slot:activator="{ on }">
+                                    <v-btn :ripple="false" icon v-on="on">
+                                        <i  :class=photoIconClasses></i>
+                                    </v-btn>
+                                </template>
+                            <v-card>
+
+                                <PictureGrid :photos="this.card.photos"></PictureGrid>
+
+                                    <FileUpload :card="this.card" :pictureLocation="'placePicture'"></FileUpload>
                                 <v-spacer> </v-spacer>
-                                <v-btn flat v-on:click="dialogue2 = false">Close</v-btn>
-                                <v-btn flat v-on:click="">Save</v-btn>
-                            </v-card-actions>
-                        </v-card>
+                                <v-card-actions>
+                                    <v-btn flat v-on:click="dialogue2 = false">Close</v-btn>
+                                    <v-btn flat v-on:click="dialogue2 = false">Save</v-btn>
+                                </v-card-actions>
+                            </v-card>
                     </v-dialog>
+
 
 
                     <v-dialog v-model="dialogue4" max-width="600px">
@@ -165,12 +171,14 @@
     import comment from '../components/comment'
     import Vue from 'vue'
     import FileUpload from '../components/FileUpload'
+    import PictureGrid from '../components/PictureGrid'
 
     export default {
         name: "CardItem",
         components:{
             comment,
-            FileUpload
+            FileUpload,
+            PictureGrid
         },
 
         data() {

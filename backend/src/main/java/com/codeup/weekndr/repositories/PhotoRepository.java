@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface PhotoRepository extends CrudRepository<Photo, Long> {
     Photo findById(long id);
-    Iterable <Photo> findByPlaceId(long id);
+    Iterable <Photo> findAllByPlaceId(long id);
 }

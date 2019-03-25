@@ -122,6 +122,7 @@
                     .post('/signup', this.user)
                       .then(res => {
                           this.SignUp = false;
+                          this.displayAvatar();
                           console.log(res.data)
                       }).catch(err => {
                           console.log(err.data)
