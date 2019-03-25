@@ -190,7 +190,10 @@
                 }else{
                     return null
                 }
-            }
+            },
+            // testTrip(){
+            //     return store.getters.currentViewedTrip
+            // }
         },
 
         methods:{
@@ -275,7 +278,7 @@
                                 id: this.experience.user,
                             },
                             trip: {
-                                id:this.trip.id
+                                id:store.getters.currentViewedTrip.id
                             },
                         }
                     })
