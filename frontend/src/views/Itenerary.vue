@@ -84,7 +84,6 @@
                     user: store.state.user.id
                 }
             }).then(res => {
-                console.log(res.data);
                 store.commit('changeMainUser', res.data);
             }).catch(err => {
                 console.log(err)

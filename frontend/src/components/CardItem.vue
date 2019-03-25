@@ -4,7 +4,7 @@
                     <v-container fill-height fluid>
                         <v-layout fill-height>
                             <v-flex xs12 align-end flexbox>
-                                <span class="headline" @click="routeSingle()">"{{card.name}}</span>
+                                <span class="headline">"{{card.name}}</span>
                             </v-flex>
                         </v-layout>
                     </v-container>
@@ -96,17 +96,11 @@
                                     <v-layout wrap>
                                         <v-flex xs12>
                                             <h1>{{ card.name }}</h1>
-
                                             <p>{{  card.description }}</p>
-
                                             <p><i class="fas fa-map-marker-alt"></i>{{  card.address }}</p>
-
                                             <p><i class="fas fa-phone"></i>{{  card.phone_number }}</p>
-
                                             <p>{{  card.price }}</p>
-
                                             <p>{{  card.rating }}</p>
-
                                             <p><a :href="card.websiteURL" target="_blank">go to website</a></p>
                                         </v-flex>
                                     </v-layout>
@@ -133,7 +127,7 @@
                                             <br/>
                                             <p>Edit Description:</p>
                                             <v-flex xs12>
-                                                <v-textarea v-model="card.description" label="{{  card.description }}" required solo></v-textarea>
+                                                <v-textarea v-model="card.description" required solo></v-textarea>
                                             </v-flex>
                                         </v-flex>
                                     </v-layout>
@@ -366,11 +360,6 @@
                         console.log(err)
                     });
             },
-            async routeSingle() {
-                await store.commit('changeSingleResult', this.card);
-                router.push('/single')
-            },
-
             parent(id){
                 this.comment.parent_comment = id;
                 console.log(this.comment.parent_comment)

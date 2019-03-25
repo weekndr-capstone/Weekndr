@@ -1,7 +1,7 @@
 <template>
     <div class="comment-tree">
         <div :style="indent">
-            {{label}} CHILD
+            {{label}}
             <v-btn :ripple="false" icon @click="parent(id)">
                 <i class="far fa-comment 10x"></i>
             </v-btn>

@@ -55,7 +55,7 @@ export default new Vuex.Store({
       user: state => {
           return state.user
       },
-      currentlyViewedTrip: state => {
+      currentViewedTrip: state => {
           return state.currentViewedTrip
       },
       loggedIn: state => {

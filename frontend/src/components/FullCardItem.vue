@@ -11,6 +11,7 @@
               <v-icon half-icon half-increment readonly color="green">{{place.price}}</v-icon>
               <v-rating v-model="place.rating" readonly background-color="pink lighten-3" color="pink"></v-rating>
               <v-card-text>I am a really awesome Description</v-card-text>
+              <v-card-text>{{this.hotel}}</v-card-text>
            </v-flex>
         </v-layout>
             <v-layout row justify-center>
@@ -65,15 +66,49 @@
                                            <v-flex xs12>
                                                <v-text-field v-model="experience.description" label="Description*" required></v-text-field>
                                            </v-flex>
-                                           <v-flex xs12>
+                                           <!-- NOT HOTEL-->
+                                           <v-flex v-if="hotel === false" xs12>
                                                <v-flex xs5 class="d-inline-block">
                                                    <v-menu v-model="menu1" :close-on-content-click="false" :nudge-right="40"
                                                            lazy transition="scale-transition" offset-y full-width min-width="290px">
                                                        <template v-slot:activator="{ on }">
                                                            <p>Date</p>
-                                                           <v-text-field v-model="experience.event_date" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
+                                                           <v-text-field v-model="eDate" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
                                                        </template>
-                                                       <v-date-picker :min="Dates.start_date" :max="Dates.end_date" v-model="experience.event_date" @input="menu1 = false"></v-date-picker>
+                                                       <v-date-picker :min="Dates.start_date" :max="Dates.end_date" v-model="eDate" @input="menu1 = false"></v-date-picker>
+                                                   </v-menu>
+                                               </v-flex>
+                                               <v-flex xs5 class="d-inline-block">
+                                                   <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40"
+                                                           lazy transition="scale-transition" offset-y full-width min-width="290px">
+                                                       <template v-slot:activator="{ on }">
+                                                           <p>Time</p>
+                                                           <v-text-field v-model="eTime" label="00:00" readonly v-on="on" solo></v-text-field>
+                                                       </template>
+                                                       <v-time-picker  v-model="eTime" type="month" width="290" @input="menu2 = false"></v-time-picker>
+                                                   </v-menu>
+                                               </v-flex>
+                                           </v-flex>
+                                           <!--HOTEL-->
+                                           <v-flex v-if="hotel === true" xs12>
+                                               <v-flex xs5 class="d-inline-block">
+                                                   <v-menu v-model="menu3" :close-on-content-click="false" :nudge-right="40"
+                                                           lazy transition="scale-transition" offset-y full-width min-width="290px">
+                                                       <template v-slot:activator="{ on }">
+                                                           <p>Check-In Date</p>
+                                                           <v-text-field v-model="checkIn" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
+                                                       </template>
+                                                       <v-date-picker :min="Dates.start_date" :max="Dates.end_date" v-model="checkIn" @input="menu3 = false"></v-date-picker>
+                                                   </v-menu>
+                                               </v-flex>
+                                               <v-flex xs5 class="d-inline-block">
+                                                   <v-menu v-model="menu4" :close-on-content-click="false" :nudge-right="40"
+                                                           lazy transition="scale-transition" offset-y full-width min-width="290px">
+                                                       <template v-slot:activator="{ on }">
+                                                           <p>Check-Out Date</p>
+                                                           <v-text-field v-model="checkOut" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
+                                                       </template>
+                                                       <v-date-picker :min="checkIn" :max="Dates.end_date"  v-model="checkOut"  @input="menu4 = false"></v-date-picker>
                                                    </v-menu>
                                                </v-flex>
                                            </v-flex>
@@ -105,8 +140,15 @@
         data(){
             return {
                 place: store.state.singleResult,
-                dialog:false,
+                dialog: false,
                 menu1: false,
+                eDate: null,
+                menu2: false,
+                eTime: null,
+                menu3: false,
+                checkIn: null,
+                menu4: false,
+                checkOut: null,
                 Dates: store.state.dates,
                 active: null,
                 friends: [],
@@ -126,7 +168,6 @@
                  name: store.state.singleResult.name,
                  address: store.state.singleResult.location.address1,
                  image_url: store.state.singleResult.image_url,
-                 event_date: '',
                  phone_number: store.state.singleResult.phone,
                  yelp_uniq: store.state.singleResult.id,
                  websiteurl: store.state.singleResult.url,
@@ -134,11 +175,27 @@
                  rating: store.state.singleResult.rating,
                  suggested: false,
                  description: '',
-                 trip: store.state.currentViewedTrip.id,
+                 // trip: store.state.currentViewedTrip.id,
                  user: store.state.user.id
                 }
             }
         },
+        props:{
+            hotel: Boolean
+        },
+        computed:{
+            event_date(){
+                if (this.eDate !== null) {
+                    return this.eDate +"T" + this.eTime
+                }else{
+                    return null
+                }
+            },
+            // testTrip(){
+            //     return store.getters.currentViewedTrip
+            // }
+        },
+
         methods:{
             async next () {
                 const active = parseInt(this.active);
@@ -206,7 +263,9 @@
                             name: this.experience.name,
                             address: this.experience.address,
                             image_url: this.experience.image_url,
-                            event_date: this.experience.event_date,
+                            event_date: this.event_date,
+                            checkin_date: this.checkIn,
+                            checkout_date: this.checkOut,
                             phone_number: this.experience.phone_number,
                             yelp_uniq: this.experience.yelp_uniq,
                             websiteURL: this.experience.websiteurl,
@@ -219,7 +278,7 @@
                                 id: this.experience.user,
                             },
                             trip: {
-                                id:this.experience.trip
+                                id:store.getters.currentViewedTrip.id
                             },
                         }
                     })

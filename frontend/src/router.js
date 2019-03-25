@@ -27,6 +27,7 @@ export default new Router({
       path: '/single',
       name: 'single',
       component: singleView,
+      props: true
     },
     {
       path: '/itenerary',
