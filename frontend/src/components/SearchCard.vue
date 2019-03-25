@@ -1,6 +1,5 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
 <v-container fill-height fluid>
-    <LoadingScreen v-if="isLoading" :class="fadeout"/>
         <v-layout justify-center>
             <v-card height="400px" xs12>
                 <v-container fill-height>
@@ -109,7 +108,7 @@
                     store.commit('changeFoodResults', experiencesRes.data.businesses);
                     store.commit('changeExperiencesResults', foodRes.data.businesses);
                     store.commit('changeHotelResults', hotelRes.data.businesses);
-                    store.commit('changeWeatherResults', weatherRes.data.results[0].geometry.location);
+                    store.commit('changeWeatherResults', weatherRes.data.results[0]);
                     console.log(suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes)
                 }));
                 store.commit('changeMainUser', true);
