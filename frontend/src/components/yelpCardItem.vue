@@ -26,12 +26,28 @@
             }
         },
         props:{
-            card: Object
+            card: Object,
+            hotel: Boolean
         },
         methods: {
             async routeSingle() {
-                await store.commit('changeSingleResult', this.card);
-                router.push('/single')
+                if (this.hotel === true){
+                    await store.commit('changeSingleResult', this.card);
+                    router.push({
+                        name: 'single',
+                        params: {
+                            hotel: true
+                        }
+                    })
+                } else {
+                    await store.commit('changeSingleResult', this.card);
+                    router.push({
+                        name: 'single',
+                        params: {
+                            hotel: false
+                        }
+                    })
+                }
             }
         }
     }

@@ -2,10 +2,10 @@
   <div>
     <Toolbar/>
     <Weather :results= "weather"/>
-    <CardCarousel  :results = "suggested"/>
-    <CardCarousel  :results = "hotels" />
-    <CardCarousel  :results = "food"/>
-    <CardCarousel  :results = "experiences"/>
+    <CardCarousel  :results = "suggested" :hotel="false"/>
+    <CardCarousel  :results = "hotels" :hotel="true" />
+    <CardCarousel  :results = "food" :hotel="false"/>
+    <CardCarousel  :results = "experiences" :hotel="false"/>
   </div>
 </template>
 

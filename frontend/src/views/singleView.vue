@@ -1,7 +1,7 @@
 <template>
     <div>
         <Toolbar/>
-        <FullCardItem/>
+        <FullCardItem :hotel="hotel"/>
     </div>
 </template>
 <script>
@@ -14,7 +14,8 @@
             Toolbar
         },
         props: {
-            singleResult: Object
+            singleResult: Object,
+            hotel: Boolean
         }
     }
 </script>
