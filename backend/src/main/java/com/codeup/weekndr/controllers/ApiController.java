@@ -1,13 +1,13 @@
 package com.codeup.weekndr.controllers;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
+        import org.springframework.beans.factory.annotation.Value;
+        import org.springframework.http.*;
+        import org.springframework.web.bind.annotation.*;
+        import org.springframework.web.client.RestTemplate;
+        import com.twilio.Twilio;
+        import com.twilio.rest.api.v2010.account.Message;
+        import com.twilio.type.PhoneNumber;
 
-import java.util.Arrays;
+        import java.util.Arrays;
 
 @RestController
 @RequestMapping(name = "/api")
@@ -40,13 +40,13 @@ public class ApiController {
         String uri;
         switch (type){
             case "1": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=experience&radius=20000&limit=26";
-            break;
+                break;
 
             case "2": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=food&radius=20000&limit=26";
-            break;
+                break;
 
             case "3": uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&term=hotel&radius=20000&limit=26";
-            break;
+                break;
 
             default: uri = "https://api.yelp.com/v3/businesses/search?location=" + location + "&radius=20000&limit=26";
         }
@@ -92,20 +92,20 @@ public class ApiController {
         return "message sent";
     }
 
-        public void twilioMessage(String to, String from, String body, String Auth, String SID ){
-            Twilio.init(Auth, SID);
+    public void twilioMessage(String to, String from, String body, String Auth, String SID ){
+        Twilio.init(Auth, SID);
 
-            Message message = Message
-                    .creator(new PhoneNumber("+1"+to), // to
-                            new PhoneNumber("+13252550907"), // from
-                            body)
-                    .create();
-            System.out.println(message.getSid());
-        }
-        @GetMapping("/weather/{location}")
-        public ResponseEntity<String> Weather(@PathVariable String location){
-            return getLatLon(googleApi, location);
-        }
+        Message message = Message
+                .creator(new PhoneNumber("+1"+to), // to
+                        new PhoneNumber("+13252550907"), // from
+                        body)
+                .create();
+        System.out.println(message.getSid());
+    }
+    @GetMapping("/weather/{location}")
+    public ResponseEntity<String> Weather(@PathVariable String location){
+        return getLatLon(googleApi, location);
+    }
 
     private static ResponseEntity<String> getLatLon(String bearer, String location)
     {
