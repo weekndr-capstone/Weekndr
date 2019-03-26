@@ -23,6 +23,7 @@
     import store from '../store'
     import router from '../router'
     import axios from 'axios'
+    import Vue from 'vue'
 
     export default {
         name: "PastTrip",
@@ -30,21 +31,30 @@
             trip: Object,
         },
         methods:{
+            async getPlace(place, index){
+                await axios({
+                    method: 'GET',
+                    url: '/place',
+                    params: {
+                        id: place
+                    }
+                }).then(res => {
+                    console.log(res.data);
+                    Vue.set(this.trip.places,index,res.data)
+                })
+            },
+
             async routeSingle() {
-                await this.trip.places.forEach((place,index) => {
-                    axios({
-                        method: 'GET',
-                        url:'/place',
-                        params: {
-                            id: place
-                        }
-                    }).then(res=>{
-                        console.log(res.data);
-                    })
-                });
                 await store.commit('changeCurrentlyViewedTrip', this.trip);
                 router.push('/itenerary')
-            }
+            },
+        },
+        mounted(){
+             this.trip.places.forEach((place,index) => {
+                if (place.id === undefined) {
+                    this.getPlace(place, index);
+                }
+            });
         }
     }
 </script>

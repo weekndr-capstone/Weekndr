@@ -149,6 +149,18 @@
             }
         },
         methods: {
+            async getPlace(place, index){
+                await axios({
+                    method: 'GET',
+                    url: '/place',
+                    params: {
+                        id: user
+                    }
+                }).then(res => {
+                    console.log(res.data);
+                    Vue.set(temp.trips.places,index,res.data)
+                })
+            },
             signup(){
                   axios
                     .post('/signup', this.user)
@@ -171,8 +183,17 @@
                 })
                     .then(res => {
                         if (res.data.email != null) {
+                            let temp = res.data;
                             store.commit('changeLoggedIn', true);
+
+                             temp.trips.forEach((trip, index) => {
+                                 trip.users.forEach(user => {
+
+                                 })
+                             });
+
                             store.commit('changeUser', res.data);
+
                             this.Login = false;
                             console.log(store.state.user);
                             this.displayAvatar();
