@@ -1,7 +1,7 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<template>
     <div>
         <Banner/>
-        <div>
+        <v-container>
             <v-carousel light hide-delimiters :cycle="false" height="auto" class="carousel-transparent">
                 <v-carousel-item :key="i" v-for="i in 3">
                     <v-layout row>
@@ -12,7 +12,7 @@
                 </v-carousel-item>
             </v-carousel>
             <TripHistory v-if="userTrips.trips != null" :trips="userTrips.trips"/>
-        </div>
+        </v-container>
     </div>
 </template>
 
