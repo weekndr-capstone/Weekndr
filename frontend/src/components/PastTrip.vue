@@ -22,6 +22,7 @@
 <script>
     import store from '../store'
     import router from '../router'
+    import axios from 'axios'
 
     export default {
         name: "PastTrip",
@@ -30,6 +31,17 @@
         },
         methods:{
             async routeSingle() {
+                await this.trip.places.forEach((place,index) => {
+                    axios({
+                        method: 'GET',
+                        url:'/place',
+                        params: {
+                            id: place
+                        }
+                    }).then(res=>{
+                        console.log(res.data);
+                    })
+                });
                 await store.commit('changeCurrentlyViewedTrip', this.trip);
                 router.push('/itenerary')
             }
