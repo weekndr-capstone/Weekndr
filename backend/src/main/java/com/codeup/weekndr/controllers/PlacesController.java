@@ -48,7 +48,4 @@ public class PlacesController {
         placeDao.delete(placeToDelete);
     }
 
-
-
-//    Closes the class:
 }

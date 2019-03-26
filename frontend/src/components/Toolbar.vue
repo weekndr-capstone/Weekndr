@@ -48,52 +48,42 @@
                 </v-dialog>
                 <v-layout v-if="loggedIn" justify-end fill-height>
                     <v-avatar  id="avatar" class="avatar-margin" size="40px"/>
+                    <v-menu v-model="menu" :close-on-content-click="false">
+                        <template v-slot:activator="{ on }">
+                            <v-btn flat v-on="on">Menu</v-btn>
+                        </template>
+                        <v-card min-height="200px">
+                            <v-list>
+                                <v-list-tile avatar>
+                                    <v-list-tile-avatar>
+                                        <v-avatar  id="avatar" class="avatar-margin" size="40px"/>
+                                    </v-list-tile-avatar>
+                                    <v-list-tile-content>
+                                        <v-list-tile-title>username</v-list-tile-title>
+                                    </v-list-tile-content>
+                                </v-list-tile>
+                            </v-list>
+
+                            <v-divider></v-divider>
+                            <v-list>
+                                <v-list-tile>
+                                    <v-list-tile-action>
+                                        <router-link to="/current">
+                                            <v-btn flat>Current/Upcoming</v-btn>
+                                        </router-link>
+                                        <router-link to="/triphistory">
+                                            <v-btn flat>Past Trips</v-btn>
+                                        </router-link>
+                                        <v-btn flat @click="menu = false">Cancel</v-btn>
+                                    </v-list-tile-action>
+                                </v-list-tile>
+                            </v-list>
+                        </v-card>
+                    </v-menu>
                     <v-btn flat @click="logout()">Logout</v-btn>
                 </v-layout>
                 <v-dialog v-if="!loggedIn" v-model="Login" max-width="550px">
                     <template  v-slot:activator="{ on }">
-                        <div class="text-xs-center">
-                            <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x>
-                                <template v-slot:activator="{ on }">
-                                    <v-btn color="indigo" dark v-on="on">
-                                        Menu
-                                    </v-btn>
-                                </template>
-
-                                <v-card>
-                                    <v-list>
-                                        <v-list-tile avatar>
-                                            <v-list-tile-avatar>
-                                                <v-avatar  id="avatar" class="avatar-margin" size="40px"/>
-                                            </v-list-tile-avatar>
-                                            <v-list-tile-content>
-                                                <v-list-tile-title>username</v-list-tile-title>
-                                            </v-list-tile-content>
-                                        </v-list-tile>
-                                    </v-list>
-
-                                    <v-divider></v-divider>
-
-                                    <v-list>
-                                        <v-list-tile avatar>
-                                            <v-list-tile-avatar>
-                                                <v-avatar  id="avatar" class="avatar-margin" size="40px"/>
-                                            </v-list-tile-avatar>
-                                            <v-list-tile-action>
-                                                <v-btn>Current/Upcoming Trips</v-btn>
-                                                <v-btn>Past Trips</v-btn>
-                                            </v-list-tile-action>
-                                        </v-list-tile>
-                                    </v-list>
-
-                                    <v-card-actions>
-                                        <v-spacer></v-spacer>
-
-                                        <v-btn flat @click="menu = false">Cancel</v-btn>
-                                    </v-card-actions>
-                                </v-card>
-                            </v-menu>
-                        </div>
                         <v-btn flat v-on="on">Login</v-btn>
                     </template>
                     <v-card>
@@ -209,7 +199,7 @@
                         console.log(res);
                         this.user.img_path = res.filesUploaded[0].handle;
                     }
-                }
+                };
                 client.picker(options).open();
             },
             displayAvatar(){
@@ -217,7 +207,6 @@
                 const client = filestack.init(apikey);
 
                 let handler = store.state.user.img_path;
-                console.log(handler);
 
                 client.retrieve(handler).then((blob) => {
                     let imgLocation = document.getElementById('avatar');
@@ -247,4 +236,9 @@
         width: 50px;
         height: 50px;
     }
+
+    a {
+        text-decoration: none;
+    }
+
 </style>
