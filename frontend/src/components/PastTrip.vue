@@ -12,9 +12,7 @@
                         <p v-if="trip.start_date !== null && trip.end_date !== null">{{trip.start_date.split('T')[0] +"  -  " + trip.end_date.split('T')[0]}}</p>
                     </v-flex>
                     <v-avatar  class="avatar-margin" size="36px" v-for="n in trip.users" :key="n">
-
-                        <div :id="store.state.user.id"></div>
-
+                        <div :id="trip.users.user_id"></div>
                     </v-avatar>
                 </v-flex>
         </v-layout>
@@ -24,45 +22,55 @@
 <script>
     import store from '../store'
     import router from '../router'
+    import * as filestack from 'filestack-js'
 
     export default {
         name: "PastTrip",
+        user: {
+            id: store.state.user.id,
+            img_path: store.state.user.img_path,
+        },
         props:{
-            trip: Object,
-            user: Object
+            trip: Object
         },
         methods:{
             async routeSingle() {
                 await store.commit('changeCurrentlyViewedTrip', this.trip);
                 router.push('/itenerary')
-            },
-            mounted() {
-                this.photos.forEach(user => {
-                    console.log("INSIDE DISPLAY PICTURES");
-
-                    const apikey = 'AsNx10Lk3SEiGRvMmw223z';
-                    const client = filestack.init(apikey);
-
-                    let handler = store.state.user.img_path;
-                    console.log(handler
-                    client.retrieve(handler).then((blob) => {
-                        console.log("HERE")
-                        let imgLocation = document.getElementById(`${store.state.user.id}`);
-                        const urlCreator = window.URL || window.webkitURL;
-                        const img = document.createElement('img');
-                        console.log("HERS")
-                        img.src = urlCreator.createObjectURL(blob);
-                        img.style.height = '36px';
-                        img.style.width = '36px';
-                        imgLocation.appendChild(img);
-                        console.log("HIS")
-
-                    }).catch((error) => {
-                        console.error(error);
-                    });
-                })
             }
-        }
+        },
+        mounted() {
+            console.log(this.trip);
+            this.trip.users.forEach(user => {
+
+
+
+                console.log("INSIDE DISPLAY AVATARS FOR EACH");
+                console.log(user);
+
+                const apikey = 'AsNx10Lk3SEiGRvMmw223z';
+                const client = filestack.init(apikey);
+
+                let handler = user.img_path;
+                console.log(handler);
+
+                client.retrieve(handler).then((blob) => {
+                    console.log("Handler:" + handler);
+                    let imgLocation = document.getElementById(`${trip.users.user_id}`);
+                    const urlCreator = window.URL || window.webkitURL;
+                    const img = document.createElement('img');
+                    console.log("HERE");
+                    img.src = urlCreator.createObjectURL(blob);
+                    img.style.height = '36px';
+                    img.style.width = '36px';
+                    imgLocation.appendChild(img);
+                    console.log(imgLocation.appendChild(img));
+
+            }).catch((error) => {
+                console.error(error);
+            });
+            })
+        },
     }
 </script>
 

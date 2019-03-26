@@ -153,6 +153,7 @@
                 password: '',
             }
         }),
+
         computed:{
             loggedIn() {
                 return store.getters.loggedIn
@@ -232,9 +233,6 @@
                 });
             }
         },
-        mounted () {
-
-        }
     }
 </script>
 
