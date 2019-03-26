@@ -12,7 +12,9 @@
                         <p v-if="trip.start_date !== null && trip.end_date !== null">{{trip.start_date.split('T')[0] +"  -  " + trip.end_date.split('T')[0]}}</p>
                     </v-flex>
                     <v-avatar  class="avatar-margin" size="36px" v-for="n in trip.users" :key="n">
-                        <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+
+                        <div :id="store.state.user.id"></div>
+
                     </v-avatar>
                 </v-flex>
         </v-layout>
@@ -27,11 +29,38 @@
         name: "PastTrip",
         props:{
             trip: Object,
+            user: Object
         },
         methods:{
             async routeSingle() {
                 await store.commit('changeCurrentlyViewedTrip', this.trip);
                 router.push('/itenerary')
+            },
+            mounted() {
+                this.photos.forEach(user => {
+                    console.log("INSIDE DISPLAY PICTURES");
+
+                    const apikey = 'AsNx10Lk3SEiGRvMmw223z';
+                    const client = filestack.init(apikey);
+
+                    let handler = store.state.user.img_path;
+                    console.log(handler
+                    client.retrieve(handler).then((blob) => {
+                        console.log("HERE")
+                        let imgLocation = document.getElementById(`${store.state.user.id}`);
+                        const urlCreator = window.URL || window.webkitURL;
+                        const img = document.createElement('img');
+                        console.log("HERS")
+                        img.src = urlCreator.createObjectURL(blob);
+                        img.style.height = '36px';
+                        img.style.width = '36px';
+                        imgLocation.appendChild(img);
+                        console.log("HIS")
+
+                    }).catch((error) => {
+                        console.error(error);
+                    });
+                })
             }
         }
     }
