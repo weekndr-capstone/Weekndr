@@ -30,11 +30,20 @@
   .v-btn:hover {
     transform: scale(1.07);
   }
+
   .v-input, .v-text-field, .v-timeline-item, .v-timeline-item__opposite, small {
     font-family: 'Nunito Sans', sans-serif;
   }
   body {
     background-color: white;
+  }
+
+  h1 {
+    color: #E96445;
+  }
+
+  .button-color {
+    color: #E96445;
   }
 
 </style>

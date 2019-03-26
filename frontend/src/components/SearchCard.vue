@@ -43,7 +43,7 @@
                                 </v-menu>
                             </v-flex>
                             <v-flex offset-xs8>
-                                <v-btn @click="searchLocation()" color="info">Search</v-btn>
+                                <v-btn @click="searchLocation()" class="white--text" color="#E96445">Search</v-btn>
                             </v-flex>
                         </v-card-text>
                     </v-layout>
