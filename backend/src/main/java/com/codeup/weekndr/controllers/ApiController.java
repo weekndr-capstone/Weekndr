@@ -143,16 +143,4 @@ public class ApiController {
 
         return result;
     }
-
-    @GetMapping("/api/weather")
-    public ResponseEntity<String> Weather(@RequestParam String lat, @RequestParam String lon){
-        return getWeatherResults(weatherApi,lat, lon);
-    }
-
-    private static ResponseEntity<String> getWeatherResults(String bearer, String lat, String lon)
-    {
-        String uri = "https://api.darksky.net/forecast/"+ bearer +"/"+ lat + "," + lon;
-
-        return getStringResponseEntity(bearer, uri);
-    }
 }
