@@ -12,7 +12,7 @@
                         <p v-if="trip.start_date !== null && trip.end_date !== null">{{trip.start_date.split('T')[0] +"  -  " + trip.end_date.split('T')[0]}}</p>
                     </v-flex>
                     <v-avatar  class="avatar-margin" size="36px" v-for="n in trip.users" :key="n">
-                        <div :id="trip.users.user_id"></div>
+                        <div :id="user.id"></div>
                     </v-avatar>
                 </v-flex>
         </v-layout>
@@ -23,15 +23,15 @@
     import store from '../store'
     import router from '../router'
     import * as filestack from 'filestack-js'
+    import axios from 'axios'
 
     export default {
         name: "PastTrip",
         user: {
-            id: store.state.user.id,
-            img_path: store.state.user.img_path,
+            img_path: '',
         },
         props:{
-            trip: Object
+            trip: Object,
         },
         methods:{
             async routeSingle() {
@@ -39,36 +39,53 @@
                 router.push('/itenerary')
             }
         },
-        mounted() {
+        async mounted() {
+
+            console.log(store.state.user.trips.users);
             console.log(this.trip);
-            this.trip.users.forEach(user => {
+            this.trips.users.forEach(user => {
 
+            console.log("INSIDE DISPLAY AVATARS FOR EACH");
 
+                axios({
 
-                console.log("INSIDE DISPLAY AVATARS FOR EACH");
-                console.log(user);
+                    method: 'GET',
+                    url:'/user',
+                    headers: {'Content-Type' : 'application/json'},
+                    params:{
+                        id: user.user_id,
+                    }
 
-                const apikey = 'AsNx10Lk3SEiGRvMmw223z';
-                const client = filestack.init(apikey);
+                }).then(res => {
 
-                let handler = user.img_path;
-                console.log(handler);
+                    console.log(res.data);
 
-                client.retrieve(handler).then((blob) => {
-                    console.log("Handler:" + handler);
-                    let imgLocation = document.getElementById(`${trip.users.user_id}`);
-                    const urlCreator = window.URL || window.webkitURL;
-                    const img = document.createElement('img');
-                    console.log("HERE");
-                    img.src = urlCreator.createObjectURL(blob);
-                    img.style.height = '36px';
-                    img.style.width = '36px';
-                    imgLocation.appendChild(img);
-                    console.log(imgLocation.appendChild(img));
+                    this.user = res.data;
 
-            }).catch((error) => {
-                console.error(error);
-            });
+                        console.log(this.user);
+
+                        const apikey = 'AsNx10Lk3SEiGRvMmw223z';
+                        const client = filestack.init(apikey);
+
+                        let handler = user.img_path;
+                        console.log(handler);
+
+                        client.retrieve(handler).then((blob) => {
+                            console.log("Handler:" + handler);
+                            let imgLocation = document.getElementById(`${user.id}`);
+                            const urlCreator = window.URL || window.webkitURL;
+                            const img = document.createElement('img');
+                            console.log("HERE");
+                            img.src = urlCreator.createObjectURL(blob);
+                            img.style.height = '36px';
+                            img.style.width = '36px';
+                            imgLocation.appendChild(img);
+                            console.log(imgLocation.appendChild(img));
+
+                        }).catch((error) => {
+                            console.error(error);
+                        });
+                    });
             })
         },
     }
