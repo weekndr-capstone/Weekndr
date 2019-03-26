@@ -33,12 +33,13 @@ public class Trip {
     @OneToMany(mappedBy = "trip")
     private List<Place> places;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name="trips_users",
-            joinColumns={@JoinColumn(name="trip_id")},
-            inverseJoinColumns={@JoinColumn(name="user_id")}
-    )
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name="trips_users",
+//            joinColumns={@JoinColumn(name="trip_id")},
+//            inverseJoinColumns={@JoinColumn(name="user_id")}
+//    )
+    @ManyToMany(mappedBy = "trips")
     private List<User> users;
 
     public Trip() {}
