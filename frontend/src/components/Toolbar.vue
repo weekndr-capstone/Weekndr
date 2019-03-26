@@ -47,12 +47,53 @@
                     </v-card>
                 </v-dialog>
                 <v-layout v-if="loggedIn" justify-end fill-height>
-                    <v-avatar  id="avatar" class="avatar-margin" size="40px">
-                    </v-avatar>
+                    <v-avatar  id="avatar" class="avatar-margin" size="40px"/>
                     <v-btn flat @click="logout()">Logout</v-btn>
                 </v-layout>
                 <v-dialog v-if="!loggedIn" v-model="Login" max-width="550px">
                     <template  v-slot:activator="{ on }">
+                        <div class="text-xs-center">
+                            <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x>
+                                <template v-slot:activator="{ on }">
+                                    <v-btn color="indigo" dark v-on="on">
+                                        Menu
+                                    </v-btn>
+                                </template>
+
+                                <v-card>
+                                    <v-list>
+                                        <v-list-tile avatar>
+                                            <v-list-tile-avatar>
+                                                <v-avatar  id="avatar" class="avatar-margin" size="40px"/>
+                                            </v-list-tile-avatar>
+                                            <v-list-tile-content>
+                                                <v-list-tile-title>username</v-list-tile-title>
+                                            </v-list-tile-content>
+                                        </v-list-tile>
+                                    </v-list>
+
+                                    <v-divider></v-divider>
+
+                                    <v-list>
+                                        <v-list-tile avatar>
+                                            <v-list-tile-avatar>
+                                                <v-avatar  id="avatar" class="avatar-margin" size="40px"/>
+                                            </v-list-tile-avatar>
+                                            <v-list-tile-action>
+                                                <v-btn>Current/Upcoming Trips</v-btn>
+                                                <v-btn>Past Trips</v-btn>
+                                            </v-list-tile-action>
+                                        </v-list-tile>
+                                    </v-list>
+
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+
+                                        <v-btn flat @click="menu = false">Cancel</v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-menu>
+                        </div>
                         <v-btn flat v-on="on">Login</v-btn>
                     </template>
                     <v-card>
@@ -98,6 +139,7 @@
         data: () => ({
             SignUp: false,
             Login: false,
+            menu: false,
             user:{
                 username: '',
                 email:'',
