@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
@@ -13,6 +13,7 @@ export default new Vuex.Store({
     experiencesResults: '',
     weatherResults: '',
     singleResult: '',
+      minDate: '',
     user: {
         id: '',
         username: '',
@@ -80,6 +81,9 @@ export default new Vuex.Store({
       },
       changeEndDate(state, end_date){
           state.dates.end_date = end_date;
+      },
+      changeMinDate(state, minDate){
+        state.minDate = minDate;
       },
       changeDates(state, dates){
           state.dates = dates;

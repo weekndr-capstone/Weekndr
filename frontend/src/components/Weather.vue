@@ -1,23 +1,15 @@
 <template>
-    <v-container  grid-list-md text-xs-center>
+    <v-container grid-list-md text-xs-center>
         <h1 class="align-center">{{this.direction.formatted_address}}</h1>
         <v-divider></v-divider>
-        <h2 class="align-center">Weather Forecast</h2>
-        <v-layout row wrap v-if="weatherLoaded">
-            <v-flex v-if="forecastArr.length > 1" v-for="day in forecastArr" :key="forecastArr">
-                <v-card dark color="secondary" xs1>
-                    <v-card-text class="px-0">
-                            <span class="top-row">
-                            <span class="weather-desc">
-                                <h3>{{day.time}}</h3>
-                                <span class="temp"><h4>High</h4>{{` ${day.apparentTemperatureHigh}&#176;F `}}</span>
-                                <i :class="weatherIconClass"></i>
-                                <span class="temp"><h4>Low</h4>{{` ${day.apparentTemperatureLow}&#176;F `}}</span>
-                                <i :class="weatherIconClass"></i>
-                            </span>
-                        </span>
-                        <p>{{day.summary}}</p>
-                    </v-card-text>
+        <h2 class="align-center">Current Weather Forecast</h2>
+        <v-layout row wrap justify-center v-if="weatherLoaded">
+            <v-flex v-if="forecastArr.length > 1" v-for="(day, index) in forecastArr" :key="index" xs4 md2>
+                <v-card dark>
+                        <v-card-text class="px-0 headline">{{timeConverter(day.time)}}</v-card-text>
+                        <v-card-text class="px-0 subheading">High {{` ${day.apparentTemperatureHigh}&#176;F `}}</v-card-text>
+                        <v-card-text class="px-0 subheading">Low {{` ${day.apparentTemperatureLow}&#176;F `}}</v-card-text>
+                        <v-card-text class="px-0 px-0 pr-4 pl-4 subheading">{{day.summary}}</v-card-text>
                 </v-card>
             </v-flex>
         </v-layout>
@@ -72,21 +64,20 @@
                 const lon = this.direction.geometry.location.lng;
                 const address = this.direction.formatted_address;
                 const location = store.state.location;
-                const Start = store.state.dates.start_date;
+                const minDate = store.state.minDate;
                 const options = {
                     params: {
                         lat: lat,
                         lon: lon,
                         location: location,
                         address: address,
-                        Start: Start
+                        minDate: minDate
                     }
                 };
                 console.log(options);
                 axios.get('/api/weather/', options).then((res) => {
                     console.log('success');
                     console.log(res);
-                    console.log(Start);
                     this.onSuccess(res.data);
                 }).catch(err => {
                     console.log(err);
@@ -98,18 +89,27 @@
                 this.condition = this.setCondition(data.currently.icon);
                 this.summary = data.daily.summary;
                 this.forecastArr = data.daily.data;
-                this.forecastArr.forEach(function(element){
-                    for(let i =0; i < this.forecastArr.length; i++){
-                        this.weatherIconClass[1] = this.setWeatherIcon(data.currently.icon);
-                    }
-                });
+                this.forecastArr.length = 5;
+                this.weatherIconClass[1] = this.setWeatherIcon(data.currently.icon);
             },
             setWeatherIcon: function (icon) {
                 return this.weatherConditions[icon][0];
             },
             setCondition: function (icon) {
                 return this.weatherConditions[icon][1];
-            }
+            },
+            timeConverter: function(UNIX_timestamp){
+            let a = new Date(UNIX_timestamp * 1000);
+            let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            let year = a.getFullYear();
+            let month = months[a.getMonth()];
+            let date = a.getDate();
+            // let hour = a.getHours();
+            // let min = a.getMinutes();
+            // let sec = a.getSeconds();
+            let time = date + ' ' + month + ' ' + year;
+            return time;
+    }
         }
     }
 </script>
