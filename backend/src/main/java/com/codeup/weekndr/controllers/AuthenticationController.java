@@ -52,4 +52,10 @@ public class AuthenticationController {
         }
         return dbUser;
     }
+
+    @GetMapping("/test.json")
+    @ResponseBody
+    public User PrintUser(){
+        return userDao.findById(2);
+    }
 }
