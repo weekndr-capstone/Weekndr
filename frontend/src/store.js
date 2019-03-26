@@ -13,13 +13,7 @@ export default new Vuex.Store({
     experiencesResults: '',
     weatherResults: '',
     singleResult: '',
-    user: {
-        id: '',
-        username: '',
-        img_path:'',
-        email: '',
-        phone_number: ''
-    },
+    user: {},
     currentViewedTrip: '',
     loggedIn: false,
     parentComment: null,

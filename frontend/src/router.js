@@ -4,8 +4,10 @@ import Home from './views/Home.vue'
 import singleView from './views/singleView'
 import Itenerary from './views/Itenerary'
 import TripHistory from './views/TripHistory'
+import CurrentPastTrips from './views/CurrentPastTrips'
+import Search from './views/Search'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   mode: 'history',
@@ -21,7 +23,7 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Search.vue')
+      component: Search
     },
     {
       path: '/single',
@@ -38,6 +40,11 @@ export default new Router({
       path: '/triphistory',
       name: 'triphistory',
       component: TripHistory
+    },
+    {
+      path: '/current',
+      name: 'current',
+      component: CurrentPastTrips
     }
   ]
 })
