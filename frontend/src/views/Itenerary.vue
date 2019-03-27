@@ -2,20 +2,33 @@
     <div>
         <Toolbar/>
         <v-item-group>
-            <v-container grid-list-md>
-                <v-layout style="overflow-x: scroll;">
-                    <v-flex v-for="t in tabs" :key="t.id">
-                        <v-item>
-                            <FHEBlock :place="t"/>
-                        </v-item>
+            <v-container>
+                <v-layout row>
+                    <v-flex class="box" text-xs-center xs12 sm8 offset-sm2 md10 lg8 offset-lg2 offset-md1>
+                        <h1 text-xs-center>{{trip.title}}</h1>
+                        <h4 text-xs-center>{{trip.location}}</h4>
                     </v-flex>
                 </v-layout>
             </v-container>
         </v-item-group>
-        <Timeline/>
-        <h1>Trip Suggestions</h1>
+        <v-container>
+            <Timeline class="itinerary" />
+        </v-container>
+        <v-container grid-list-md>
+            <h2>What else would you like to add?</h2>
+            <br/>
+            <v-layout style="overflow-x: scroll;">
+                <v-flex v-for="t in tabs" :key="t.id">
+                    <v-item>
+                        <FHEBlock :place="t"/>
+                    </v-item>
+                </v-flex>
+            </v-layout>
+        </v-container>
         <v-item-group>
             <v-container grid-list-md>
+                <h2>Trip Suggestions</h2>
+                <br/>
                 <v-layout row style="overflow-x: scroll;">
                     <v-flex xs12 md4 v-for="n in suggested" :key="n.id">
                         <v-item>
@@ -63,6 +76,7 @@
                         url: 'experience.jpg'
                     }
                 ],
+                trip: store.state.currentViewedTrip,
             }
         },
         computed:{
@@ -93,5 +107,7 @@
 </script>
 
 <style scoped>
-
+    .itinerary{
+        background-color: white;
+    }
 </style>

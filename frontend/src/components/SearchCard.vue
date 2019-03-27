@@ -45,7 +45,8 @@
                                 </v-menu>
                             </v-flex>
                             <v-flex offset-xs8>
-                                <v-btn @click="searchLocation()" color="info">Search</v-btn>
+                                <v-btn @click="searchLocation()" class="white--text" color="#E96445">Search</v-btn>
+                                <!--<v-btn @click="searchLocation()" v-ripple="{class: '#89B6BE&#45;&#45;text'}" color="#E96445" depressed>Search</v-btn>-->
                             </v-flex>
                         </v-card-text>
                         </v-form>
@@ -130,5 +131,7 @@
 </script>
 
 <style scoped>
-
+v-btn:hover {
+    color: #E96445;
+}
 </style>

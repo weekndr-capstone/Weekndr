@@ -36,6 +36,15 @@
   body {
     background-color: white;
   }
+
+  h1 {
+    color: #E96445;
+  }
+
+  .button-color {
+    color: #E96445;
+  }
+
   @media only screen and (min-width: 1264px) {
       .container {
           max-width: 1000px !important;
@@ -46,4 +55,5 @@
           max-width: 1200px !important;
       }
   }
+
 </style>
