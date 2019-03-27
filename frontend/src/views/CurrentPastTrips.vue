@@ -2,14 +2,20 @@
 
     <div>
         <Toolbar/>
-        <div>
-            <h1>Current</h1>
-            <PastTrip v-for="n in userCurrent" :key="n.id" :trip="n"/>
-        </div>
-        <div>
-            <h1>Upcoming</h1>
-            <PastTrip v-for="n in userUpcoming" :key="n.id" :trip="n"/>
-        </div>
+        <v-container>
+            <v-layout row>
+                <v-flex class="box" xs12 sm8 offset-sm2 md10 lg8 offset-lg2 offset-md1>
+                        <h1>Current</h1>
+                        <PastTrip v-for="n in userCurrent" :key="n.id" :trip="n"/>
+                </v-flex>
+            </v-layout>
+            <v-layout row>
+                <v-flex class="box" xs12 sm8 offset-sm2 md10 lg8 offset-lg2 offset-md1>
+                        <h1>Upcoming</h1>
+                        <PastTrip v-for="n in userUpcoming" :key="n.id" :trip="n"/>
+                </v-flex>
+            </v-layout>
+        </v-container>
     </div>
 
 </template>

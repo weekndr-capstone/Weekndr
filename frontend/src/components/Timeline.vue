@@ -1,6 +1,6 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
 
-    <v-tabs v-model="active" light slider-color="black">
+    <v-tabs v-model="active" light slider-color="#E96445">
         <v-tab v-for="(d, index) in dates" :key="index" ripple>
             {{d}}
         </v-tab>
@@ -8,9 +8,12 @@
             <v-timeline>
                 <v-timeline-item v-for="n in placesByDate[index]" :key="n.id" color="black lighten-2" small>
                     <template v-slot:opposite>
-                        <span>{{n.name}}</span>
+                        <h2 class="font-color">{{n.name}}</h2>
+                        <h3>{{time(n.event_date)}}</h3>
                     </template>
-                    <CardItem :card="n" />
+                    <v-container>
+                        <CardItem :card="n" />
+                    </v-container>
                 </v-timeline-item>
             </v-timeline>
         </v-tab-item>
@@ -26,7 +29,30 @@
         name: "Timeline",
         components: {CardItem},
         data(){
-            return{}
+            return{
+            }
+        },
+        methods: {
+            time(event_date){
+                let firstSplit = event_date.split('T')[1];
+                let secondSplit = firstSplit.split('.')[0];
+                let thirdSplit = secondSplit.split(':');
+
+                let hours = Number(thirdSplit[0]);
+                let minutes = Number(thirdSplit[1]);
+
+                //not displaying seconds but they're here if we need them:
+                let seconds = Number(thirdSplit[2]);
+
+                let amPm = "AM";
+
+                if(hours > 12){
+                    hours -= 12;
+                    amPm = " PM";
+                }
+
+                return (hours + ":" + minutes).toString() + amPm;
+            }
         },
         computed: {
             trip(){
@@ -95,5 +121,7 @@
 </script>
 
 <style scoped>
-
+    .font-color {
+        color: #E96445;
+    }
 </style>

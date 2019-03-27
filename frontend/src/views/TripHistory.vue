@@ -1,11 +1,9 @@
 <template>
-    <!--TODO: need a map at the top that has pins dropped in all of the locations you've visited-->
-    <!--TODO: list of all of your past trips with a button that will take you to that trips page-->
-    <div>
-        <Toolbar/>
-        <GoogleMap :trips="userTrips"/>
-        <PastTrip v-for="n in userTrips" :key="n" :trip="n"/>
-    </div>
+        <div>
+            <Toolbar/>
+            <GoogleMap/>
+            <PastTrip v-for="n in userTrips" :key="n" :trip="n"/>
+        </div>
 </template>
 
 <script>
