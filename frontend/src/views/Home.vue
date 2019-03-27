@@ -11,7 +11,7 @@
                     </v-layout>
                 </v-carousel-item>
             </v-carousel>
-        </div>
+        </v-container>
     </div>
 </template>
 
