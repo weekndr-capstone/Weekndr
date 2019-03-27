@@ -48,7 +48,7 @@
 
                 if(hours > 12){
                     hours -= 12;
-                    amPm = " PM";
+                    amPm = "PM";
                 }
 
                 return (hours + ":" + minutes).toString() + amPm;
