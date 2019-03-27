@@ -2,10 +2,8 @@
         <div>
             <Toolbar/>
             <GoogleMap/>
+            <PastTrip v-for="n in userTrips" :key="n" :trip="n"/>
         </div>
-        <v-container>
-             <PastTrip v-for="n in userTrips" :key="n" :trip="n"/>
-        </v-container>
 </template>
 
 <script>

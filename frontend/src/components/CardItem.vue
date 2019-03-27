@@ -50,25 +50,17 @@
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
-
-
-
-                    <v-dialog v-model="dialogue5" max-width="600px">
-                                <template v-slot:activator="{ on }">
-                                    <v-btn :ripple="false" icon v-on="on">
-                                        <i  :class=photoIconClasses></i>
-                                    </v-btn>
-                                </template>
+                <v-dialog v-model="dialogue5" max-width="600px">
+                          <template v-slot:activator="{ on }">
+                                <v-btn :ripple="false" icon v-on="on">
+                                    <i  :class=photoIconClasses></i>
+                                </v-btn>
+                            </template>
                             <v-card>
                                 <v-card-actions>
-                                    <v-layout align-end>
-                                        <v-flex xs12 align-end>
-                                            <v-btn  flat v-on:click="dialogue5 = false"><i class="fas fa-times"></i></v-btn>
-                                        </v-flex>
-                                    </v-layout>
                                     <v-layout>
-                                        <v-flex xs12>
-                                            <h2>{{ card.name }}</h2>
+                                        <v-flex xs12 text-xs-center>
+                                            <h1>{{ card.name }}</h1>
                                         </v-flex>
                                     </v-layout>
                                 </v-card-actions>
@@ -76,6 +68,9 @@
                                 <v-layout justify-content-center>
                                     <v-flex>
                                         <FileUpload :card="this.card" :pictureLocation="'placePicture'"></FileUpload>
+                                    </v-flex>
+                                    <v-flex xs12 align-end>
+                                        <v-btn  flat v-on:click="dialogue5 = false">Close</v-btn>
                                     </v-flex>
                                 </v-layout>
                                 <v-spacer> </v-spacer>

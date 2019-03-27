@@ -1,5 +1,5 @@
 <template>
-            <v-btn align-self-center class="white--text" color="#E96445" id="upload" v-on:click="fileUpload()">Upload Photo</v-btn>
+            <v-btn id="upload" v-on:click="fileUpload()">Upload Photo</v-btn>
 </template>
 
 
