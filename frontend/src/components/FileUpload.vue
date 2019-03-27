@@ -53,6 +53,7 @@
                                     }
                                 }
                             }).then(res => {
+                                this.card.photos.push(res.data);
                                 console.log(res.data);
                         }).catch(err => {
                             console.log(err)
