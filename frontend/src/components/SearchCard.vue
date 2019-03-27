@@ -1,7 +1,7 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
 <v-container fill-height fluid>
         <v-layout justify-center>
-            <v-card height="400px" xs12>
+            <v-card height="400px" xs12 light flat>
                 <v-container fill-height>
                     <v-layout align-center justify-center>
                         <v-form

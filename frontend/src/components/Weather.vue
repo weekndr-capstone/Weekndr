@@ -1,11 +1,12 @@
 <template>
     <v-container grid-list-md text-xs-center>
-        <h1 class="align-center">{{this.direction.formatted_address}}</h1>
-        <v-divider></v-divider>
-        <h2 class="align-center">Current Weather Forecast</h2>
-        <v-layout row wrap justify-center v-if="weatherLoaded">
-            <v-flex v-if="forecastArr.length > 1" v-for="(day, index) in forecastArr" :key="index" xs4 md2>
-                <v-card dark>
+        <h1 class="h1color">{{this.direction.formatted_address}}</h1>
+        <br>
+        <h2>Current Weather Forecast</h2>
+        <br>
+        <v-layout row wrap justify-center v-if="weatherLoaded" fill-height>
+            <v-flex v-if="forecastArr.length > 1" v-for="(day, index) in forecastArr" :key="index" xs4 md2 fill-height>
+                <v-card light flat>
                         <v-card-text class="px-0 headline">{{timeConverter(day.time)}}</v-card-text>
                         <v-card-text class="px-0 subheading">High {{` ${day.apparentTemperatureHigh}&#176;F `}}</v-card-text>
                         <v-card-text class="px-0 subheading">Low {{` ${day.apparentTemperatureLow}&#176;F `}}</v-card-text>
@@ -55,7 +56,7 @@
         },
         computed: {
             direction() {
-                return store.state.weatherResults
+                return store.getters.weather
             },
         },
         methods: {
@@ -115,5 +116,7 @@
 </script>
 
 <style scoped>
-
+    .h1color {
+        color: #E96445;
+    }
 </style>

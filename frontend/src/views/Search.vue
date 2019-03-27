@@ -3,10 +3,23 @@
         <Toolbar/>
         <v-container>
             <Weather :results= "weather"/>
+            <v-divider></v-divider>
+            <br>
+            <h2>Suggestions</h2>
+            <br>
             <CardCarousel  :results = "suggested" :hotel="false"/>
+            <br>
+            <h2>Hotels</h2>
+            <br>
             <CardCarousel  :results = "hotels" :hotel="true" />
-            <CardCarousel  :results = "food" :hotel="false"/>
+            <br>
+            <h2>Food</h2>
+            <br>
             <CardCarousel  :results = "experiences" :hotel="false"/>
+            <br>
+            <h2>Experiences</h2>
+            <br>
+            <CardCarousel  :results = "food" :hotel="false"/>
         </v-container>
     </div>
 </template>
