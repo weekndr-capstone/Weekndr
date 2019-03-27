@@ -69,6 +69,6 @@
         height: 37px;
     }
     .mb-0 {
-        width: 12em;
+        width: 10em;
     }
 </style>
