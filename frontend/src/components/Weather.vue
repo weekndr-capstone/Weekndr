@@ -6,11 +6,11 @@
         <br>
         <v-layout row wrap justify-center v-if="weatherLoaded" fill-height>
             <v-flex v-if="forecastArr.length > 1" v-for="(day, index) in forecastArr" :key="index" xs4 md2 fill-height>
-                <v-card light flat>
+                <v-card light>
                         <v-card-text class="px-0 headline">{{timeConverter(day.time)}}</v-card-text>
                         <v-card-text class="px-0 subheading">High {{` ${day.apparentTemperatureHigh}&#176;F `}}</v-card-text>
                         <v-card-text class="px-0 subheading">Low {{` ${day.apparentTemperatureLow}&#176;F `}}</v-card-text>
-                        <v-card-text class="px-0 px-0 pr-4 pl-4 subheading">{{day.summary}}</v-card-text>
+                        <v-card-text class="px-0 px-0 pr-4 pl-4 subheading summary">{{day.summary}}</v-card-text>
                 </v-card>
             </v-flex>
         </v-layout>
@@ -118,5 +118,8 @@
 <style scoped>
     .h1color {
         color: #E96445;
+    }
+    .summary {
+        height: 10em;
     }
 </style>

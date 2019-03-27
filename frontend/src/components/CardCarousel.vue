@@ -46,7 +46,4 @@
     border-color: transparent;
     box-shadow: none;
 }
-.v-carousel__next {
-    color: #E96445;
-}
 </style>
