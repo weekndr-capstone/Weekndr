@@ -30,8 +30,7 @@
   .v-btn:hover {
     transform: scale(1.07);
   }
-
-  .v-input, .v-text-field, .v-timeline-item, .v-timeline-item__opposite, small {
+  .v-input, .v-text-field, .v-timeline-item, .v-timeline-item__opposite, small, .v-card__text {
     font-family: 'Nunito Sans', sans-serif;
   }
   body {
@@ -44,6 +43,17 @@
 
   .button-color {
     color: #E96445;
+  }
+
+  @media only screen and (min-width: 1264px) {
+      .container {
+          max-width: 1000px !important;
+      }
+  }
+  @media only screen and (min-width: 1904px) {
+      .container {
+          max-width: 1200px !important;
+      }
   }
 
 </style>

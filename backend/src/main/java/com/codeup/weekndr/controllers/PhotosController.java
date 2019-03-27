@@ -24,13 +24,9 @@ public class PhotosController {
     }
 
     @PostMapping("/placePhoto")
-    public void savePhoto(@RequestBody Photo photo){
-        System.out.println(photo.getImg_path());
-        System.out.println(photo.getCreated_at());
-        System.out.println(photo.getId());
-        System.out.println(photo.getUser());
-        System.out.println(photo.getPlace());
+    public Photo savePhoto(@RequestBody Photo photo){
         photoDao.save(photo);
+        return photoDao.findById(photo.getId());
     }
 
     @GetMapping("/placePhotos")

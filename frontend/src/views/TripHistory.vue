@@ -21,15 +21,11 @@
         computed: {
             userTrips() {
                 let all = store.getters.user.trips;
-                console.log(all);
                 let current = new Date();
-                console.log(current);
 
                 return all.filter(t => {
-                    let temp = new Date(t.end_date)
-                    console.log(temp)
+                    let temp = new Date(t.end_date);
                     if (temp < current){
-                        console.log("HERE");
                         return t;
                     }
                 });

@@ -115,7 +115,6 @@ public class ApiController {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Authorization", "Bearer " + bearer);
 
-        System.out.println(headers + " HEADERS");
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
         ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
 
@@ -127,7 +126,7 @@ public class ApiController {
     public ResponseEntity<String> Weather(@RequestParam String lat, @RequestParam String lon){
         return getWeatherResults(weatherApi,lat, lon);
     }
-  
+
     private static ResponseEntity<String> getWeatherResults(String bearer, String lat, String lon)
     {
         String uri = "https://api.darksky.net/forecast/"+ bearer +"/"+ lat + "," + lon;

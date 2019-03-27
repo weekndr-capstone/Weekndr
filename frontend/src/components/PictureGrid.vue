@@ -36,25 +36,19 @@
         },
         mounted() {
             this.photos.forEach(photo => {
-                console.log("INSIDE DISPLAY PICTURES");
-
                 const apikey = 'AsNx10Lk3SEiGRvMmw223z';
                 const client = filestack.init(apikey);
 
                 let handler = photo.img_path;
-                console.log(handler);
 
                 client.retrieve(handler).then((blob) => {
-                    console.log("HERE")
                     let imgLocation = document.getElementById(`${photo.id}`);
                     const urlCreator = window.URL || window.webkitURL;
                     const img = document.createElement('img');
-                    console.log("HERS")
                     img.src = urlCreator.createObjectURL(blob);
                     img.style.height = '100%';
                     img.style.width = '100%';
                     imgLocation.appendChild(img);
-                    console.log("HIS")
 
                 }).catch((error) => {
                     console.error(error);

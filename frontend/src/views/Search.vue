@@ -1,12 +1,27 @@
 <template>
-  <div>
-    <Toolbar/>
-    <Weather :results= "weather"/>
-    <CardCarousel  :results = "suggested" :hotel="false"/>
-    <CardCarousel  :results = "hotels" :hotel="true" />
-    <CardCarousel  :results = "food" :hotel="false"/>
-    <CardCarousel  :results = "experiences" :hotel="false"/>
-  </div>
+    <div>
+        <Toolbar/>
+        <v-container>
+            <Weather :results= "weather"/>
+            <v-divider></v-divider>
+            <br>
+            <h2>Suggestions</h2>
+            <br>
+            <CardCarousel  :results = "suggested" :hotel="false"/>
+            <br>
+            <h2>Hotels</h2>
+            <br>
+            <CardCarousel  :results = "hotels" :hotel="true" />
+            <br>
+            <h2>Food</h2>
+            <br>
+            <CardCarousel  :results = "experiences" :hotel="false"/>
+            <br>
+            <h2>Experiences</h2>
+            <br>
+            <CardCarousel  :results = "food" :hotel="false"/>
+        </v-container>
+    </div>
 </template>
 
 <script>
@@ -18,8 +33,8 @@
 
     export default {
         components: {
-          Weather,
-          LoadingScreen,
+            Weather,
+            LoadingScreen,
 
             CardCarousel,
             Toolbar
