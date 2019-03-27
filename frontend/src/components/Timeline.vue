@@ -33,25 +33,34 @@
             }
         },
         methods: {
-            time(event_date){
-                let firstSplit = event_date.split('T')[1];
-                let secondSplit = firstSplit.split('.')[0];
-                let thirdSplit = secondSplit.split(':');
+            time(event_date) {
+                if (event_date !== null) {
+                    let firstSplit = event_date.split('T')[1];
+                    let secondSplit = firstSplit.split('.')[0];
+                    let thirdSplit = secondSplit.split(':');
 
-                let hours = Number(thirdSplit[0]);
-                let minutes = Number(thirdSplit[1]);
+                    let hours = Number(thirdSplit[0]);
+                    let minutes = Number(thirdSplit[1]);
 
-                //not displaying seconds but they're here if we need them:
-                let seconds = Number(thirdSplit[2]);
+                    //not displaying seconds but they're here if we need them:
+                    let seconds = Number(thirdSplit[2]);
 
-                let amPm = "AM";
+                    let amPm = "AM";
 
+<<<<<<< HEAD
                 if(hours > 12){
                     hours -= 12;
                     amPm = "PM";
                 }
+=======
+                    if (hours > 12) {
+                        hours -= 12;
+                        amPm = "PM";
+                    }
+>>>>>>> master
 
-                return (hours + ":" + minutes).toString() + amPm;
+                    return (hours + ":" + minutes).toString() + amPm;
+                }
             }
         },
         computed: {
@@ -78,12 +87,16 @@
                 this.dates.forEach(date => {
                     let tempArray = [];
                     store.state.currentViewedTrip.places.filter(place => {
-                        if (place.checkin_date === null){
-                            if (place.event_date.includes(date)){
+                        console.log(place);
+                        if (place.checkin_date === null && !place.suggested){
+                            if (place.event_date.split('T')[0].includes(date)){
+                                console.log("Not Suggested");
                                 tempArray.push(place);
                             }
-                        } else {
-                            if (place.checkin_date.includes(date) || place.checkout_date.includes(date)){
+                        }else if (place.checkin_date === null && place.suggested) {
+
+                        }else  {
+                            if ((place.checkin_date.includes(date) || place.checkout_date.includes(date)) && !place.suggested){
                                 tempArray.push(place);
                             }
                         }

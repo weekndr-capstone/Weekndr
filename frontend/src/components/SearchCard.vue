@@ -1,9 +1,14 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
 <v-container fill-height fluid>
         <v-layout justify-center>
-            <v-card height="400px" xs12>
+            <v-card height="400px" xs12 light>
                 <v-container fill-height>
                     <v-layout align-center justify-center>
+                        <v-form
+                                ref="form"
+                                v-model="valid"
+                                lazy-validation
+                        >
                         <v-card-text>
                             <v-flex offset-xs1 class="mt-2">
                             <h1>Search a Destination</h1>
@@ -11,17 +16,14 @@
                             <v-flex xs10 offset-xs1>
                                 <v-divider></v-divider>
                                 <h4 class="font-weight-bold mt-3 mb-4">Where</h4>
-                                <v-text-field :ref="autocomplete" class="search-location"onfocus="value = ''"  v-model="Where" placeholder="Where" required solo
-                                ></v-text-field>
+                                <v-text-field :ref="autocomplete" class="search-location"onfocus="value = ''"  v-model="Where" placeholder="Where" required solo :rules="whereRules"></v-text-field>
                             </v-flex>
                             <v-flex xs5 offset-xs1 class="d-inline-block">
                                 <v-menu v-model="menu1" :close-on-content-click="false" :nudge-right="40"
                                         lazy transition="scale-transition" offset-y full-width min-width="290px">
                                     <template v-slot:activator="{ on }">
-
                                         <p class="font-weight-bold">Start Date</p>
-                                        <v-text-field v-model="Dates.Start" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
-
+                                        <v-text-field v-model="Dates.Start" label="yyyy/mm/dd" readonly v-on="on" solo required></v-text-field>
                                     </template>
                                     <v-date-picker :min="minDate" v-model="Dates.Start" @input="menu1 = false"></v-date-picker>
                                 </v-menu>
@@ -37,7 +39,7 @@
                                                 readonly
                                                 v-on="on"
                                                 solo
-                                        ></v-text-field>
+                                        required></v-text-field>
                                     </template>
                                     <v-date-picker :min="Dates.Start" v-model="Dates.End" @input="menu2 = false"></v-date-picker>
                                 </v-menu>
@@ -47,6 +49,7 @@
                                 <!--<v-btn @click="searchLocation()" v-ripple="{class: '#89B6BE&#45;&#45;text'}" color="#E96445" depressed>Search</v-btn>-->
                             </v-flex>
                         </v-card-text>
+                        </v-form>
                     </v-layout>
                 </v-container>
             </v-card>
@@ -87,31 +90,32 @@
                 menu2: false,
                 fadeout: 'fade-out',
                 isLoading: false,
-                color: '#89B6BE',
+                valid: true,
+                whereRules: [
+                    v => !!v || 'Location is required'
+                ]
             }
         },
         methods: {
             async searchLocation(){
                 this.isLoading = true;
-                setTimeout(() => {
-                    this.fadeout = "fade-out";
-                }, 3000);
                 store.commit('changeLocation', this.Where);
                 store.commit('changeStartDate', this.Dates.Start);
                 store.commit('changeEndDate', this.Dates.End);
+                store.commit('changeMinDate', this.minDate);
                 await axios.all([
                     axios.get('/yelpList/'+ store.state.location + "/4"),
                     axios.get('/yelpList/'+ store.state.location + "/1"),
                     axios.get('/yelpList/' + store.state.location + "/2"),
                     axios.get('/yelpList/' + store.state.location + "/3"),
-                    axios.get('/weather/' + store.state.location)
-                    ]).then(axios.spread((suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes) =>{
+                    // axios.get('/weather/' + store.state.location)
+                    ]).then(axios.spread((suggestedRes, experiencesRes, foodRes, hotelRes) =>{
                     store.commit('changeSuggestedResults', suggestedRes.data.businesses);
                     store.commit('changeFoodResults', experiencesRes.data.businesses);
                     store.commit('changeExperiencesResults', foodRes.data.businesses);
                     store.commit('changeHotelResults', hotelRes.data.businesses);
-                    store.commit('changeWeatherResults', weatherRes.data.results[0]);
-                    console.log(suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes)
+                    // store.commit('changeWeatherResults', weatherRes.data.results[0]);
+                    console.log(suggestedRes, experiencesRes, foodRes, hotelRes)
                 }));
                 store.commit('changeMainUser', true);
                 router.push('/search');

@@ -207,7 +207,6 @@
                     parent_comment: null,
                 },
                 comments: '',
-                // mainUser: store.state.mainUser
 
             }
         },
@@ -274,7 +273,6 @@
                     })
             },
             async deletePlace(){
-
                 await axios (
                     {
                         method: 'POST',
@@ -286,7 +284,12 @@
 
                     }).then(res => {
                     this.dialogue3 = false;
-                    console.log(res.data)
+                    store.state.currentViewedTrip.places.filter((place,index) => {
+                        if (place.id === this.card.id){
+                            store.state.currentViewedTrip.places.splice(index,1)
+                        }
+                    })
+                    // console.log(res.data)
                 }).catch(err =>{
                     console.log(err);
                 })
