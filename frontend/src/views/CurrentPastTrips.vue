@@ -28,32 +28,24 @@
         computed: {
         userCurrent() {
             let all = store.getters.user.trips;
-            console.log(all);
             let current = new Date();
 
             return all.filter(t => {
                 let tempEnd = new Date(t.end_date);
                 let tempStart = new Date(t.start_date);
-                console.log(tempEnd);
-                console.log(tempStart);
                 if (tempEnd > current && tempStart < current){
-                    console.log("HERE");
                     return t;
                 }
             });
         },
         userUpcoming() {
             let all = store.getters.user.trips;
-            console.log(all);
             let current = new Date();
 
             return all.filter(t => {
                 let tempEnd = new Date(t.end_date);
                 let tempStart = new Date(t.start_date);
-                console.log(tempEnd);
-                console.log(tempStart);
                 if (tempEnd > current && tempStart > current){
-                    console.log("HERE");
                     return t;
                 }
             });

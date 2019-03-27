@@ -41,14 +41,10 @@ public class TripsController {
 
         List<User> users = new ArrayList<>();
         users.add(userDao.findById(trip.getUser().getId()));
-        User temp = userDao.findById(trip.getUser().getId());
-        temp.getTrips().add(trip);
         if (trip.getUsers().toArray().length >= 1){
             for(User user : trip.getUsers()) {
                 System.out.println(user.getPhoneNumber());
                 users.add(userDao.findByPhoneNumber(user.getPhoneNumber().trim()));
-                User u = userDao.findByPhoneNumber(user.getPhoneNumber().trim());
-                u.getTrips().add(trip);
             }
         }
 

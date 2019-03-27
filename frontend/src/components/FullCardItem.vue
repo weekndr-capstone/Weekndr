@@ -175,7 +175,6 @@
                  rating: store.state.singleResult.rating,
                  suggested: false,
                  description: '',
-                 // trip: store.state.currentViewedTrip.id,
                  user: store.state.user.id
                 }
             }
@@ -191,9 +190,6 @@
                     return null
                 }
             },
-            // testTrip(){
-            //     return store.getters.currentViewedTrip
-            // }
         },
 
         methods:{
@@ -220,6 +216,7 @@
                         })
                     .then(res => {
                         this.trip = res.data;
+                        store.state.user.trips.push(res.data);
                         store.commit('changeCurrentlyViewedTrip', res.data);
                         console.log(res.data)
                     }).catch(err => {
@@ -246,10 +243,10 @@
                         fromNumber: store.state.user.phone_number
                     }
                 })
-                    .then(function (response) {
+                    .then(response => {
                         console.log(response);
                     })
-                    .catch(function (error) {
+                    .catch(error => {
                         console.log(error);
                     });
             })},
@@ -284,6 +281,11 @@
                     })
                     .then(res => {
                         this.experience = res.data;
+                        store.state.user.trips.filter((trip,index) => {
+                            if (trip.id === store.getters.currentViewedTrip.id ) {
+                               store.state.user.trips[index].places.push(res.data);
+                            }
+                        });
                         this.dialog = false;
                     }).catch(err => {
                         console.log(store.state.currentViewedTrip);

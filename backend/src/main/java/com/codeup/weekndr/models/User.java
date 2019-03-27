@@ -26,13 +26,7 @@ public class User {
     @Column(nullable = false)
     private String password;
     private LocalDateTime created_at;
-//    @ManyToMany(mappedBy = "users")
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name="users_trips",
-            joinColumns={@JoinColumn(name="user_id")},
-            inverseJoinColumns={@JoinColumn(name="trip_id")}
-    )
+    @ManyToMany(mappedBy = "users")
     private List<Trip> trips;
 
     public User(){}

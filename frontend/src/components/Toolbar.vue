@@ -2,7 +2,7 @@
     <v-toolbar flat class="Navbar">
         <v-flex xs5 sm3 md2 xl1>
             <router-link :to="'/'">
-                <v-img :src="require ('../assets/weekdnr_logo.svg')" class="icon"></v-img>
+                <v-img :src="require('../assets/weekdnr_logo.svg')" class="icon"></v-img>
             </router-link>
         </v-flex>
         <v-layout justify-end fill-height>

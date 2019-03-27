@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,16 +32,15 @@ public class Trip {
     private User user;
 
     @OneToMany(mappedBy = "trip")
-    private List<Place> places;
+    private List<Place> places = new ArrayList<>();
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name="trips_users",
-//            joinColumns={@JoinColumn(name="trip_id")},
-//            inverseJoinColumns={@JoinColumn(name="user_id")}
-//    )
-    @ManyToMany(mappedBy = "trips")
-    private List<User> users;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="trips_users",
+            joinColumns={@JoinColumn(name="trip_id")},
+            inverseJoinColumns={@JoinColumn(name="user_id")}
+    )
+    private List<User> users = new ArrayList<>();
 
     public Trip() {}
 

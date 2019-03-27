@@ -40,6 +40,7 @@
                     }
                 }).then(res => {
                     console.log(res.data);
+                    console.log(this.trip);
                     Vue.set(this.trip.places,index,res.data)
                 })
             },
