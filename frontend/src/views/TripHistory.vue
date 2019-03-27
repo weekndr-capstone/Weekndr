@@ -3,7 +3,7 @@
     <!--TODO: list of all of your past trips with a button that will take you to that trips page-->
     <div>
         <Toolbar/>
-        <GoogleMap/>
+        <GoogleMap :trips="userTrips"/>
         <PastTrip v-for="n in userTrips" :key="n" :trip="n"/>
     </div>
 </template>
