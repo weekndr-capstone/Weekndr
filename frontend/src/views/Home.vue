@@ -1,7 +1,7 @@
 <template>
     <div>
         <Banner/>
-        <div>
+        <v-container>
             <v-carousel light hide-delimiters :cycle="false" height="auto" class="carousel-transparent">
                 <v-carousel-item :key="i" v-for="i in 3">
                     <v-layout row>

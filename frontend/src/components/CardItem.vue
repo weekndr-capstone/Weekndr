@@ -4,7 +4,7 @@
                     <v-container fill-height fluid>
                         <v-layout fill-height>
                             <v-flex xs12 align-end flexbox>
-                                <span class="headline">"{{card.name}}</span>
+                                <span class="headline">{{card.name}}</span>
                             </v-flex>
                         </v-layout>
                     </v-container>

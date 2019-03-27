@@ -1,18 +1,17 @@
 <template>
-    <v-card>
-        <v-img class="white--text" height="200px" :src="card.image_url">
-            <v-container fill-height fluid>
-                <v-layout fill-height>
+    <v-card light flat>
+        <v-img
+                height="200px" :src="card.image_url"
+        ></v-img>
+        <v-card-title>
+                <v-layout justify-start row>
+                    <span class="title mb-0 ml-2 vCardText" @click="routeSingle()">{{card.name}}</span>
+                    <v-icon half-icon half-increment readonly color="green" class="ml-2">{{card.price}}</v-icon>
                 </v-layout>
-            </v-container>
-        </v-img>
-        <v-card-actions>
-            <v-flex xs12 align-end flexbox>
-                <span @click="routeSingle()">"{{card.name}}</span>
-                <v-icon half-icon half-increment readonly color="green">{{card.price}}</v-icon>
-                <v-rating v-model="card.rating" readonly background-color="pink lighten-3" color="pink"></v-rating>
-            </v-flex>
-        </v-card-actions>
+                <v-layout justify-end row>
+                    <v-rating v-model="card.rating" readonly background-color="#E96445" color="#E96445"></v-rating>
+                </v-layout>
+        </v-card-title>
     </v-card>
 </template>
 
@@ -54,5 +53,14 @@
 </script>
 
 <style scoped>
-
+    .vCardText {
+        font-family: 'Nunito Sans', sans-serif;
+        cursor: pointer;
+    }
+    .v-card__title--primary, .v-card__title {
+        padding: 0 !important;
+    }
+    .v-icon {
+        height: 15px;
+    }
 </style>
