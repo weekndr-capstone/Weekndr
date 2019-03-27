@@ -24,18 +24,14 @@ public class PhotosController {
     }
 
     @PostMapping("/placePhoto")
-    public void savePhoto(@RequestBody Photo photo){
-        System.out.println(photo.getImg_path());
-        System.out.println(photo.getCreated_at());
-        System.out.println(photo.getId());
-        System.out.println(photo.getUser());
-        System.out.println(photo.getPlace());
+    public Photo savePhoto(@RequestBody Photo photo){
         photoDao.save(photo);
+        return photoDao.findById(photo.getId());
     }
-//
-//    @PostMapping("/profilePicture")
-//    public void saveProfilePhoto(@RequestBody Photo photo){
-//        photoDao.save(photo);
-//    }
+
+    @GetMapping("/placePhotos")
+    public Iterable<Photo> placePhotos(@RequestParam (name="place") Place place) {
+        return photoDao.findAllByPlaceId(place.getId());
+    }
 
 }

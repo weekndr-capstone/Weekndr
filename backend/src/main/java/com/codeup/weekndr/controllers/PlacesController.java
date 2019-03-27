@@ -26,10 +26,6 @@ public class PlacesController {
 
    @PostMapping("/place")
     public Place savePlace(@RequestBody Place place){
-//        System.out.println(place.getTrip());
-//        Trip trip = tripDao.findById(place.getTrip().getId());
-//        System.out.println(trip.getPlaces());
-//        trip.getPlaces().add(place);
         placeDao.save(place);
 
         return placeDao.findById(place.getId());
@@ -52,7 +48,4 @@ public class PlacesController {
         placeDao.delete(placeToDelete);
     }
 
-
-
-//    Closes the class:
 }

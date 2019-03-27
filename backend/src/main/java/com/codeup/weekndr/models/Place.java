@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,13 +47,13 @@ public class Place {
     private Trip trip;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
-    private List<Vote> votes;
+    private List<Vote> votes = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
-    private List<Photo> photos;
+    private List<Photo> photos = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
     public Place(){}
 

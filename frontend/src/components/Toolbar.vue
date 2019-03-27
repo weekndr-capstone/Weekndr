@@ -2,7 +2,7 @@
     <v-toolbar flat class="Navbar">
         <v-flex xs5 sm3 md2 xl1>
             <router-link :to="'/'">
-                <v-img :src="require ('../assets/weekdnr_logo.svg')" class="icon"></v-img>
+                <v-img :src="require('../assets/weekdnr_logo.svg')" class="icon"></v-img>
             </router-link>
         </v-flex>
         <v-layout justify-end fill-height>
@@ -47,8 +47,39 @@
                     </v-card>
                 </v-dialog>
                 <v-layout v-if="loggedIn" justify-end fill-height>
-                    <v-avatar  id="avatar" class="avatar-margin" size="40px">
-                    </v-avatar>
+                    <v-avatar  id="avatar" class="avatar-margin" size="40px"/>
+                    <v-menu v-model="menu" :close-on-content-click="false">
+                        <template v-slot:activator="{ on }">
+                            <v-btn flat v-on="on">Menu</v-btn>
+                        </template>
+                        <v-card min-height="200px">
+                            <v-list>
+                                <v-list-tile avatar>
+                                    <v-list-tile-avatar>
+                                        <v-avatar  id="avatar" class="avatar-margin" size="40px"/>
+                                    </v-list-tile-avatar>
+                                    <v-list-tile-content>
+                                        <v-list-tile-title>username</v-list-tile-title>
+                                    </v-list-tile-content>
+                                </v-list-tile>
+                            </v-list>
+
+                            <v-divider></v-divider>
+                            <v-list>
+                                <v-list-tile>
+                                    <v-list-tile-action>
+                                        <router-link to="/current">
+                                            <v-btn flat>Current/Upcoming</v-btn>
+                                        </router-link>
+                                        <router-link to="/triphistory">
+                                            <v-btn flat>Past Trips</v-btn>
+                                        </router-link>
+                                        <v-btn flat @click="menu = false">Cancel</v-btn>
+                                    </v-list-tile-action>
+                                </v-list-tile>
+                            </v-list>
+                        </v-card>
+                    </v-menu>
                     <v-btn flat @click="logout()">Logout</v-btn>
                 </v-layout>
                 <v-dialog v-if="!loggedIn" v-model="Login" max-width="550px">
@@ -98,6 +129,7 @@
         data: () => ({
             SignUp: false,
             Login: false,
+            menu: false,
             user:{
                 username: '',
                 email:'',
@@ -117,11 +149,24 @@
             }
         },
         methods: {
+            async getPlace(place, index){
+                await axios({
+                    method: 'GET',
+                    url: '/place',
+                    params: {
+                        id: user
+                    }
+                }).then(res => {
+                    console.log(res.data);
+                    Vue.set(temp.trips.places,index,res.data)
+                })
+            },
             signup(){
                   axios
                     .post('/signup', this.user)
                       .then(res => {
                           this.SignUp = false;
+                          this.displayAvatar();
                           console.log(res.data)
                       }).catch(err => {
                           console.log(err.data)
@@ -138,10 +183,19 @@
                 })
                     .then(res => {
                         if (res.data.email != null) {
+                            let temp = res.data;
                             store.commit('changeLoggedIn', true);
+
+                             temp.trips.forEach((trip, index) => {
+                                 trip.users.forEach(user => {
+
+                                 })
+                             });
+
                             store.commit('changeUser', res.data);
+
                             this.Login = false;
-                            console.log(store.state.user)
+                            console.log(store.state.user);
                             this.displayAvatar();
                         }
                     }).catch(err => {
@@ -166,7 +220,7 @@
                         console.log(res);
                         this.user.img_path = res.filesUploaded[0].handle;
                     }
-                }
+                };
                 client.picker(options).open();
             },
             displayAvatar(){
@@ -174,7 +228,6 @@
                 const client = filestack.init(apikey);
 
                 let handler = store.state.user.img_path;
-                console.log(handler);
 
                 client.retrieve(handler).then((blob) => {
                     let imgLocation = document.getElementById('avatar');
@@ -204,4 +257,9 @@
         width: 50px;
         height: 50px;
     }
+
+    a {
+        text-decoration: none;
+    }
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-            <v-btn id="upload" color="info" v-on:click="fileUpload()">Upload Photo</v-btn>
+            <v-btn align-self-center class="white--text" color="#E96445" id="upload" v-on:click="fileUpload()">Upload Photo</v-btn>
 </template>
 
 
@@ -53,6 +53,7 @@
                                     }
                                 }
                             }).then(res => {
+                                this.card.photos.push(res.data);
                                 console.log(res.data);
                         }).catch(err => {
                             console.log(err)

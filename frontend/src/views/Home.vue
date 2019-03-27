@@ -11,15 +11,13 @@
                     </v-layout>
                 </v-carousel-item>
             </v-carousel>
-            <TripHistory v-if="userTrips.trips != null" :trips="userTrips.trips"/>
-        </v-container>
+        </div>
     </div>
 </template>
 
 <script>
     import Banner from '../components/Banner'
     import store from '../store'
-    import TripHistory from "./TripHistory";
     import RecommendedDestinations from "../components/RecommendedDestinations";
 
   export default {
@@ -48,7 +46,6 @@
       },
     components: {
         RecommendedDestinations,
-        TripHistory,
         Banner,
     },
     computed: {
