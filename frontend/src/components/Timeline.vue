@@ -8,14 +8,8 @@
             <v-timeline>
                 <v-timeline-item v-for="n in placesByDate[index]" :key="n.id" color="black lighten-2" small>
                     <template v-slot:opposite>
-                        <span>{{n.name}}</span>
-                        <br/>
-                        <span>{{time(n.event_date)}}</span>
-                        <!--<span>{{(n.event_date.split('T')[1]).split('.')[0]}}</span>-->
-
-
-                       <!--{{this.time = n.event_date}}-->
-                        <!--<span>{{this.timeDisplay}}</span>-->
+                        <h2 class="font-color">{{n.name}}</h2>
+                        <h3>{{time(n.event_date)}}</h3>
                     </template>
                     <v-container>
                         <CardItem :card="n" />
@@ -123,5 +117,7 @@
 </script>
 
 <style scoped>
-
+    .font-color {
+        color: #E96445;
+    }
 </style>

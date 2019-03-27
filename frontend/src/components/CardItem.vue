@@ -4,12 +4,12 @@
                     <v-container fill-height fluid>
                         <v-layout fill-height>
                             <v-flex xs12 align-end flexbox>
-                                <span class="headline">"{{card.name}}</span>
                             </v-flex>
                         </v-layout>
                     </v-container>
                 </v-img>
                 <v-card-actions>
+                    <v-layout row wrap>
                     <v-btn :ripple="false" icon v-on:click="redHeartAndIncrement()">
                         <i  :class=heartIconClasses></i>
                         <span> {{ counter }}</span>
@@ -163,6 +163,7 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
+                  </v-layout>
                 </v-card-actions>
             </v-card>
 </template>
