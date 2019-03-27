@@ -33,11 +33,10 @@
   .v-input, .v-text-field, .v-timeline-item, .v-timeline-item__opposite, small, .v-card__text {
     font-family: 'Nunito Sans', sans-serif;
   }
-  .v-carousel__next, .v-carousel__prev {
-    color: #E96445;
-    background-color: #E96445;
-    border-radius: 100px;
-  }
+  /*.v-carousel__next, .v-carousel__prev {*/
+    /*background-color: black;*/
+    /*border-radius: 100px;*/
+  /*}*/
   body {
     background-color: white;
   }
