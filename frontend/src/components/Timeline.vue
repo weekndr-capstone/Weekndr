@@ -52,12 +52,16 @@
                 this.dates.forEach(date => {
                     let tempArray = [];
                     store.state.currentViewedTrip.places.filter(place => {
-                        if (place.checkin_date === null){
-                            if (place.event_date.includes(date)){
+                        console.log(place);
+                        if (place.checkin_date === null && !place.suggested){
+                            if (place.event_date.split('T')[0].includes(date)){
+                                console.log("Not Suggested");
                                 tempArray.push(place);
                             }
-                        } else {
-                            if (place.checkin_date.includes(date) || place.checkout_date.includes(date)){
+                        }else if (place.checkin_date === null && place.suggested) {
+
+                        }else  {
+                            if ((place.checkin_date.includes(date) || place.checkout_date.includes(date)) && !place.suggested){
                                 tempArray.push(place);
                             }
                         }

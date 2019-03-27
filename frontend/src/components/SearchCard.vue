@@ -98,9 +98,6 @@
         methods: {
             async searchLocation(){
                 this.isLoading = true;
-                setTimeout(() => {
-                    this.fadeout = "fade-out";
-                }, 3000);
                 store.commit('changeLocation', this.Where);
                 store.commit('changeStartDate', this.Dates.Start);
                 store.commit('changeEndDate', this.Dates.End);

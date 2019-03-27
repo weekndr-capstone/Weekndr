@@ -52,4 +52,9 @@ public class TripsController {
         tripDao.save(trip);
         return trip;
     }
+
+    @GetMapping("/testtrip{id}")
+    public Trip gettrip(@RequestParam long id){
+        return tripDao.findById(id);
+    }
 }
