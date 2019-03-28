@@ -17,9 +17,9 @@
         <v-container grid-list-md>
             <h2>What else would you like to add?</h2>
             <br/>
-            <v-layout style="overflow-x: scroll;">
+            <v-layout row wrap>
                 <v-flex v-for="t in tabs" :key="t.id">
-                    <v-item>
+                    <v-item xs6>
                         <FHEBlock :place="t"/>
                     </v-item>
                 </v-flex>

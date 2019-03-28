@@ -1,16 +1,14 @@
 <template>
-        <!--<v-card>-->
             <v-container>
-                <v-layout row wrap class="white-background"  elevation-1>
-                    <v-flex  class="zero-padding" xs6>
+                <v-layout row class="white-background"  elevation-1>
+                    <v-flex  class="zero-padding" mr-4 xs5>
                         <v-img :src="getImgUrl(place.url)" right height="100px" width="100px"  />
                     </v-flex>
-                    <v-flex class="zero-padding" xs5 align-self-center>
+                    <v-flex xs7 align-self-center>
                         <h2 @click="search(place)">{{place.name}}</h2>
                     </v-flex>
                 </v-layout>
             </v-container>
-        <!--</v-card>-->
 </template>
 
 
