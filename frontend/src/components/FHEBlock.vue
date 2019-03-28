@@ -47,6 +47,8 @@
                             console.log(err)
                         })
                 }
+                store.commit('changeStartDate', store.state.currentViewedTrip.start_date);
+                store.commit('changeEndDate', store.state.currentViewedTrip.end_date);
                 router.push('/search');
             },
         }
