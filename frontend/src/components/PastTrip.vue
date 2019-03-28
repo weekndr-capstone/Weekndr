@@ -2,7 +2,7 @@
     <v-container>
         <v-layout row wrap class="white-background" elevation-1>
                 <v-flex class="zero-margin" xs3 sm2 md2 lg2 xl1>
-                    <v-img right max-height="100px" min-height="100px"  src="https://picsum.photos/300"></v-img>
+                    <v-img right max-height="100px" min-height="100px"  src="https://picsum.photos/300?random"></v-img>
                 </v-flex>
                 <v-flex class="margin" xs8 sm7 md8 lg8 xl10>
                     <v-flex xs5>
