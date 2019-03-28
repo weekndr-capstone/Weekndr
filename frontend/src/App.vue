@@ -13,6 +13,11 @@
     data () {
       return {
       }
+    },
+    watch: {
+        $route(to, from) {
+            document.title = to.meta.title || 'Weekndr';
+        },
     }
 }
 </script>

@@ -8,6 +8,11 @@ import '@fortawesome/fontawesome-free/css/all.css';
 Vue.config.productionTip = false;
 Vue.config.devtools = true;
 
+const DEFAULT_TITLE = 'Weekndr';
+router.afterEach((to, from) => {
+    document.title = to.meta.title || DEFAULT_TITLE;
+});
+
 new Vue({
   router,
   store,

@@ -15,11 +15,13 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {title: 'Weekndr'}
     },
     {
       path: '/search',
       name: 'search',
+      meta: {title: 'Search'},
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -29,22 +31,26 @@ export default new Router({
       path: '/single',
       name: 'single',
       component: singleView,
-      props: true
+      props: true,
+      meta: {title: 'Weekndr'}
     },
     {
       path: '/itenerary',
       name: 'itenerary',
-      component: Itenerary
+      component: Itenerary,
+      meta: {title: 'Itenerary'}
     },
     {
       path: '/triphistory',
       name: 'triphistory',
-      component: TripHistory
+      component: TripHistory,
+      meta: {title: 'TripHistory'}
     },
     {
       path: '/current',
       name: 'current',
-      component: CurrentPastTrips
+      component: CurrentPastTrips,
+      meta: {title: 'Current'}
     }
   ]
 })
