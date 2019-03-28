@@ -1,32 +1,35 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <v-container>
         <v-layout row>
-           <v-flex>
-              <v-img :src="place.image_url"/>
-           </v-flex>
-           <v-flex>
-              <v-card-title primary-title><span class="title"><a :href="place.url" target="_blank">{{place.name}}</a></span></v-card-title>
-              <v-card-title>Address:{{place.location.address1}} City: {{place.location.city}}</v-card-title>
-              <v-card-text>Phone: {{place.phone}}</v-card-text>
-              <v-icon half-icon half-increment readonly color="green">{{place.price}}</v-icon>
-              <v-rating v-model="place.rating" readonly background-color="pink lighten-3" color="pink"></v-rating>
-              <v-card-text>I am a really awesome Description</v-card-text>
-              <v-card-text>{{this.hotel}}</v-card-text>
-           </v-flex>
+            <v-flex xs12>
+                <v-img :src="place.image_url" aspect-ratio="2"/>
+            </v-flex>
         </v-layout>
-            <v-layout row justify-center>
-                <v-dialog v-model="dialog" persistent max-width="600px">
-                    <template v-slot:activator="{ on }">
-                        <v-btn outline color="indigo" dark v-on="on">Add to Itinerary</v-btn>
-                    </template>
-                    <v-tabs v-model="active">
-                        <v-tab v-if="currentViewedTrip === ''" ripple>Create Trip</v-tab>
-                        <v-tab ripple>Add to Itinerary</v-tab>
-                        <v-tab-item v-if="currentViewedTrip === ''">
-                    <v-card>
-                        <v-card-title class="pb-0">
-                            <span class="headline">New Trip</span>
-                        </v-card-title>
+        <v-layout row>
+            <v-flex xs12>
+                <v-card-title primary-title><span class="display-1"><a :href="place.url" target="_blank">{{place.name}}</a></span></v-card-title>
+                <v-card-title><span class="headline">Address: </span><br><span class="title font-weight-light"> {{place.location.address1}}</span><br>
+                </v-card-title>
+                <v-card-title><span class="headline">City: </span><br><span class="title font-weight-light"> {{place.location.city}}</span></v-card-title>
+                <v-card-text><span class="headline">Phone: </span><span class="title font-weight-light"> {{place.phone}}</span></v-card-text>
+                <v-rating v-model="place.rating" readonly background-color="#F6EFE4" color="#E96445" class="ml-1"></v-rating>
+                <v-icon half-icon half-increment readonly color="green" class="ml-3">{{place.price}}</v-icon>
+                <br>
+            </v-flex>
+        </v-layout>
+        <v-layout row xs12>
+            <v-dialog v-model="dialog" persistent max-width="600px">
+                <template v-slot:activator="{ on }">
+                    <v-btn outline color="indigo" dark v-on="on">Add to Itinerary</v-btn>
+                </template>
+                <v-tabs v-model="active">
+                    <v-tab v-if="currentViewedTrip === ''" ripple>Create Trip</v-tab>
+                    <v-tab ripple>Add to Itinerary</v-tab>
+                    <v-tab-item v-if="currentViewedTrip === ''">
+                        <v-card>
+                            <v-card-title class="pb-0">
+                                <span class="headline">New Trip</span>
+                            </v-card-title>
                             <v-container grid-list-md class="pt-0">
                                 <v-card-text class="pl-0">We have the dates now we just need a little more information!</v-card-text>
                                 <v-layout wrap>
@@ -47,86 +50,86 @@
                                 </v-layout>
                             </v-container>
                             <small>*indicates required field</small>
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-                            <v-btn color="blue darken-1" flat @click="next">Next</v-btn>
-                        </v-card-actions>
-                    </v-card>
-                   </v-tab-item>
-                        <v-tab-item>
-                            <v-card>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
+                                <v-btn color="blue darken-1" flat @click="next">Next</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-tab-item>
+                    <v-tab-item>
+                        <v-card>
                             <v-layout column justify-center>
-                               <v-card-title>
-                                   <span class="headline">New Experience</span>
-                               </v-card-title>
-                               <v-card-text>
-                                   <v-container grid-list-md>
-                                       <v-layout wrap>
-                                           <v-flex xs12>
-                                               <v-text-field v-model="experience.description" label="Description*" required></v-text-field>
-                                           </v-flex>
-                                           <!-- NOT HOTEL-->
-                                           <v-flex v-if="hotel === false" xs12>
-                                               <v-flex xs5 class="d-inline-block">
-                                                   <v-menu v-model="menu1" :close-on-content-click="false" :nudge-right="40"
-                                                           lazy transition="scale-transition" offset-y full-width min-width="290px">
-                                                       <template v-slot:activator="{ on }">
-                                                           <p>Date</p>
-                                                           <v-text-field v-model="eDate" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
-                                                       </template>
-                                                       <v-date-picker :min="Dates.start_date" :max="Dates.end_date" v-model="eDate" @input="menu1 = false"></v-date-picker>
-                                                   </v-menu>
-                                               </v-flex>
-                                               <v-flex xs5 class="d-inline-block">
-                                                   <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40"
-                                                           lazy transition="scale-transition" offset-y full-width min-width="290px">
-                                                       <template v-slot:activator="{ on }">
-                                                           <p>Time</p>
-                                                           <v-text-field v-model="eTime" label="00:00" readonly v-on="on" solo></v-text-field>
-                                                       </template>
-                                                       <v-time-picker  v-model="eTime" type="month" width="290" @input="menu2 = false"></v-time-picker>
-                                                   </v-menu>
-                                               </v-flex>
-                                           </v-flex>
-                                           <!--HOTEL-->
-                                           <v-flex v-if="hotel === true" xs12>
-                                               <v-flex xs5 class="d-inline-block">
-                                                   <v-menu v-model="menu3" :close-on-content-click="false" :nudge-right="40"
-                                                           lazy transition="scale-transition" offset-y full-width min-width="290px">
-                                                       <template v-slot:activator="{ on }">
-                                                           <p>Check-In Date</p>
-                                                           <v-text-field v-model="checkIn" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
-                                                       </template>
-                                                       <v-date-picker :min="Dates.start_date" :max="Dates.end_date" v-model="checkIn" @input="menu3 = false"></v-date-picker>
-                                                   </v-menu>
-                                               </v-flex>
-                                               <v-flex xs5 class="d-inline-block">
-                                                   <v-menu v-model="menu4" :close-on-content-click="false" :nudge-right="40"
-                                                           lazy transition="scale-transition" offset-y full-width min-width="290px">
-                                                       <template v-slot:activator="{ on }">
-                                                           <p>Check-Out Date</p>
-                                                           <v-text-field v-model="checkOut" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
-                                                       </template>
-                                                       <v-date-picker :min="checkIn" :max="Dates.end_date"  v-model="checkOut"  @input="menu4 = false"></v-date-picker>
-                                                   </v-menu>
-                                               </v-flex>
-                                           </v-flex>
-                                       </v-layout>
-                                   </v-container>
-                                   <small>*indicates required field</small>
-                               </v-card-text>
-                               <v-card-actions>
-                                   <v-spacer></v-spacer>
-                                   <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-                                   <v-btn color="blue darken-1" flat @click="saveExperience()">Save</v-btn>
-                               </v-card-actions>
+                                <v-card-title>
+                                    <span class="headline">New Experience</span>
+                                </v-card-title>
+                                <v-card-text>
+                                    <v-container grid-list-md>
+                                        <v-layout wrap>
+                                            <v-flex xs12>
+                                                <v-text-field v-model="experience.description" label="Description*" required></v-text-field>
+                                            </v-flex>
+                                            <!-- NOT HOTEL-->
+                                            <v-flex v-if="hotel === false" xs12>
+                                                <v-flex xs5 class="d-inline-block">
+                                                    <v-menu v-model="menu1" :close-on-content-click="false" :nudge-right="40"
+                                                            lazy transition="scale-transition" offset-y full-width min-width="290px">
+                                                        <template v-slot:activator="{ on }">
+                                                            <p>Date</p>
+                                                            <v-text-field v-model="eDate" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
+                                                        </template>
+                                                        <v-date-picker :min="Dates.start_date" :max="Dates.end_date" v-model="eDate" @input="menu1 = false"></v-date-picker>
+                                                    </v-menu>
+                                                </v-flex>
+                                                <v-flex xs5 class="d-inline-block">
+                                                    <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40"
+                                                            lazy transition="scale-transition" offset-y full-width min-width="290px">
+                                                        <template v-slot:activator="{ on }">
+                                                            <p>Time</p>
+                                                            <v-text-field v-model="eTime" label="00:00" readonly v-on="on" solo></v-text-field>
+                                                        </template>
+                                                        <v-time-picker  v-model="eTime" type="month" width="290" @input="menu2 = false"></v-time-picker>
+                                                    </v-menu>
+                                                </v-flex>
+                                            </v-flex>
+                                            <!--HOTEL-->
+                                            <v-flex v-if="hotel === true" xs12>
+                                                <v-flex xs5 class="d-inline-block">
+                                                    <v-menu v-model="menu3" :close-on-content-click="false" :nudge-right="40"
+                                                            lazy transition="scale-transition" offset-y full-width min-width="290px">
+                                                        <template v-slot:activator="{ on }">
+                                                            <p>Check-In Date</p>
+                                                            <v-text-field v-model="checkIn" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
+                                                        </template>
+                                                        <v-date-picker :min="Dates.start_date" :max="Dates.end_date" v-model="checkIn" @input="menu3 = false"></v-date-picker>
+                                                    </v-menu>
+                                                </v-flex>
+                                                <v-flex xs5 class="d-inline-block">
+                                                    <v-menu v-model="menu4" :close-on-content-click="false" :nudge-right="40"
+                                                            lazy transition="scale-transition" offset-y full-width min-width="290px">
+                                                        <template v-slot:activator="{ on }">
+                                                            <p>Check-Out Date</p>
+                                                            <v-text-field v-model="checkOut" label="yyyy/mm/dd" readonly v-on="on" solo></v-text-field>
+                                                        </template>
+                                                        <v-date-picker :min="checkIn" :max="Dates.end_date"  v-model="checkOut"  @input="menu4 = false"></v-date-picker>
+                                                    </v-menu>
+                                                </v-flex>
+                                            </v-flex>
+                                        </v-layout>
+                                    </v-container>
+                                    <small>*indicates required field</small>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
+                                    <v-btn color="blue darken-1" flat @click="saveExperience()">Save</v-btn>
+                                </v-card-actions>
                             </v-layout>
-                           </v-card>
-                        </v-tab-item>
-                    </v-tabs>
-                </v-dialog>
-            </v-layout>
+                        </v-card>
+                    </v-tab-item>
+                </v-tabs>
+            </v-dialog>
+        </v-layout>
     </v-container>
 </template>
 
@@ -165,17 +168,17 @@
                     user: store.state.user.id
                 },
                 experience:{
-                 name: store.state.singleResult.name,
-                 address: store.state.singleResult.location.address1,
-                 image_url: store.state.singleResult.image_url,
-                 phone_number: store.state.singleResult.phone,
-                 yelp_uniq: store.state.singleResult.id,
-                 websiteurl: store.state.singleResult.url,
-                 price: store.state.singleResult.price,
-                 rating: store.state.singleResult.rating,
-                 suggested: false,
-                 description: '',
-                 user: store.state.user.id
+                    name: store.state.singleResult.name,
+                    address: store.state.singleResult.location.address1,
+                    image_url: store.state.singleResult.image_url,
+                    phone_number: store.state.singleResult.phone,
+                    yelp_uniq: store.state.singleResult.id,
+                    websiteurl: store.state.singleResult.url,
+                    price: store.state.singleResult.price,
+                    rating: store.state.singleResult.rating,
+                    suggested: false,
+                    description: '',
+                    user: store.state.user.id
                 }
             }
         },
@@ -197,23 +200,23 @@
                 const active = parseInt(this.active);
                 this.active = (active < 2 ? active + 1 : 0);
                 await axios(
-                        {
-                            method: 'POST',
-                            url:'/trip',
-                            headers: {'Content-Type': 'application/json'},
-                            data: {
-                                title: this.trip.title,
-                                location: store.state.location,
-                                trip_description: this.trip.trip_description,
-                                start_date: store.state.dates.start_date,
-                                end_date:store.state.dates.end_date,
-                                created_at: new Date(),
-                                user: {
-                                    id: store.state.user.id,
-                                },
-                                users:this.friends
-                            }
-                        })
+                    {
+                        method: 'POST',
+                        url:'/trip',
+                        headers: {'Content-Type': 'application/json'},
+                        data: {
+                            title: this.trip.title,
+                            location: store.state.location,
+                            trip_description: this.trip.trip_description,
+                            start_date: store.state.dates.start_date,
+                            end_date:store.state.dates.end_date,
+                            created_at: new Date(),
+                            user: {
+                                id: store.state.user.id,
+                            },
+                            users:this.friends
+                        }
+                    })
                     .then(res => {
                         this.trip = res.data;
                         store.state.user.trips.push(res.data);
@@ -234,22 +237,22 @@
 
             inviteFriends(){
                 this.friends.forEach((e) => {
-                axios({
-                    method: 'POST',
-                    url:'/twilio',
-                    headers: {'Content-Type': 'application/json'},
-                    params: {
-                        friends: e.phone_number,
-                        fromNumber: store.state.user.phone_number
-                    }
-                })
-                    .then(response => {
-                        console.log(response);
+                    axios({
+                        method: 'POST',
+                        url:'/twilio',
+                        headers: {'Content-Type': 'application/json'},
+                        params: {
+                            friends: e.phone_number,
+                            fromNumber: store.state.user.phone_number
+                        }
                     })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            })},
+                        .then(response => {
+                            console.log(response);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                })},
             async saveExperience(){
                 await axios(
                     {
@@ -283,7 +286,7 @@
                         this.experience = res.data;
                         store.state.user.trips.filter((trip,index) => {
                             if (trip.id === store.getters.currentViewedTrip.id ) {
-                               store.state.user.trips[index].places.push(res.data);
+                                store.state.user.trips[index].places.push(res.data);
                             }
                         });
                         this.dialog = false;
@@ -298,5 +301,8 @@
 </script>
 
 <style scoped>
-
+    a {
+        color: #E96445;
+        text-decoration: none;
+    }
 </style>

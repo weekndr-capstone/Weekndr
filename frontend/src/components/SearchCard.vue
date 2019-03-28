@@ -109,13 +109,13 @@
                     axios.get('/yelpList/' + store.state.location + "/2"),
                     axios.get('/yelpList/' + store.state.location + "/3"),
                     axios.get('/weather/' + store.state.location)
-                    ]).then(axios.spread((suggestedRes, experiencesRes, foodRes, hotelRes) =>{
+                    ]).then(axios.spread((suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes) =>{
                     store.commit('changeSuggestedResults', suggestedRes.data.businesses);
                     store.commit('changeFoodResults', experiencesRes.data.businesses);
                     store.commit('changeExperiencesResults', foodRes.data.businesses);
                     store.commit('changeHotelResults', hotelRes.data.businesses);
                     store.commit('changeWeatherResults', weatherRes.data.results[0]);
-                    console.log(suggestedRes, experiencesRes, foodRes, hotelRes)
+                    console.log(weatherRes)
                 }));
                 store.commit('changeMainUser', true);
                 router.push('/search');
