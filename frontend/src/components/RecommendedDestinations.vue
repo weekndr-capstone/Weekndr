@@ -1,12 +1,14 @@
 <template>
-        <v-card color="white">
+
             <v-layout row>
-                 <v-flex><v-img :src="getImgUrl(place.url)" height="80px" width="80px" contain /></v-flex>
-                     <v-flex  align-self-center class="text-xs-center">
-                             <h2 @click="search(place.name)">{{place.name}}</h2>
+                 <v-flex class="zero-padding">
+                     <v-img :src="getImgUrl(place.url)"  contain  width="135px" height="90px" />
+                 </v-flex>
+                 <v-flex  align-self-center class="text-xs-center">
+                     <h2 @click="search(place.name)">{{place.name}}</h2>
                  </v-flex>
              </v-layout>
-         </v-card>
+
 </template>
 
 <script>
@@ -51,6 +53,9 @@
         background-color: red;
     }
 
+    .zero-padding{
+        padding: 0 !important;
+    }
 </style>
 
 
