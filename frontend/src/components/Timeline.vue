@@ -47,19 +47,12 @@
 
                     let amPm = "AM";
 
-<<<<<<< HEAD
-                if(hours > 12){
-                    hours -= 12;
-                    amPm = "PM";
-                }
-=======
                     if (hours > 12) {
                         hours -= 12;
                         amPm = "PM";
-                    }
->>>>>>> master
 
-                    return (hours + ":" + minutes).toString() + amPm;
+                        return (hours + ":" + minutes).toString() + amPm;
+                    }
                 }
             }
         },

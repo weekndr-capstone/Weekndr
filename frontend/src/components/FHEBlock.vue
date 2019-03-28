@@ -1,13 +1,19 @@
 <template>
-    <v-card color="white">
-        <v-layout row>
-            <v-flex><v-img :src="getImgUrl(place.url)" height="80px" width="80px" contain /></v-flex>
-            <v-flex  align-self-center class="text-xs-center">
-                <h2 @click="search(place)">{{place.name}}</h2>
-            </v-flex>
-        </v-layout>
-    </v-card>
+        <!--<v-card>-->
+            <v-container>
+                <v-layout row wrap class="white-background"  elevation-1>
+                    <v-flex  class="zero-padding" xs6>
+                        <v-img :src="getImgUrl(place.url)" right height="100px" width="100px"  />
+                    </v-flex>
+                    <v-flex class="zero-padding" xs5 align-self-center>
+                        <h2 @click="search(place)">{{place.name}}</h2>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+        <!--</v-card>-->
 </template>
+
+
 
 <script>
     import store from '../store'
@@ -54,5 +60,11 @@
 </script>
 
 <style scoped>
+    .white-background{
+        background-color: white;
+    }
 
+    .zero-padding {
+        padding: 0 !important;
+    }
 </style>

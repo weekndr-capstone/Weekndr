@@ -63,17 +63,17 @@
                     {
                         id: 1,
                         name: 'Food',
-                        url: 'food.jpg'
+                        url: 'donut.jpg'
                     },
                     {
                         id:2,
                         name: 'Hotel',
-                        url: 'hotel.jpg'
+                        url: 'hotel-pic.jpg'
                     },
                     {
                         id:3,
                         name: 'Experience',
-                        url: 'experience.jpg'
+                        url: 'art-balloon.jpg'
                     }
                 ],
                 trip: store.state.currentViewedTrip,
