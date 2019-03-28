@@ -232,7 +232,6 @@
                                 store.commit('changeLoggedIn', true);
                                 store.commit('changeUser', res.data);
                                 this.username = res.data.username;
-                                console.log(res.data);
                                 this.Login = false;
                                 this.displayAvatar();
                             } else {

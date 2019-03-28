@@ -2,7 +2,7 @@
     <div>
         <Toolbar/>
         <v-container>
-            <Weather v-if="weather.length >= 1" :results= "weather"/>
+            <Weather v-if="weather !== null" :results= "weather"/>
             <v-divider></v-divider>
             <div v-if="suggested.length >= 1">
                 <br>
@@ -43,7 +43,6 @@
         components: {
             Weather,
             LoadingScreen,
-
             CardCarousel,
             Toolbar
         },
@@ -55,7 +54,6 @@
                 food: store.state.foodResults,
                 experiences: store.state.experiencesResults,
                 weather: store.state.weatherResults,
-                fadeout: 'fade-out'
             }
         },
     }

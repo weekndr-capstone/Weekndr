@@ -112,7 +112,7 @@
                         axios.get('/yelpList/' + store.state.location + "/1"),
                         axios.get('/yelpList/' + store.state.location + "/2"),
                         axios.get('/yelpList/' + store.state.location + "/3"),
-                        axios.get('/weather/' + store.state.location)
+                        axios.get("https://maps.googleapis.com/maps/api/geocode/json?address="+ store.state.location +"&key=" + "AIzaSyAih6iqhzWmzLIe11sF9yMDuwPhVyFYP2w")
                     ]).then(axios.spread((suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes) => {
                         store.commit('changeSuggestedResults', suggestedRes.data.businesses);
                         store.commit('changeFoodResults', experiencesRes.data.businesses);
