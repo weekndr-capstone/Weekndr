@@ -90,7 +90,7 @@
                 this.condition = this.setCondition(data.currently.icon);
                 this.summary = data.daily.summary;
                 this.forecastArr = data.daily.data;
-                this.forecastArr.length = 5;
+                this.forecastArr.length = 6;
                 this.weatherIconClass[1] = this.setWeatherIcon(data.currently.icon);
             },
             setWeatherIcon: function (icon) {
