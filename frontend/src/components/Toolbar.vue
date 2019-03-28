@@ -50,7 +50,6 @@
                     </v-card>
                 </v-dialog>
                 <v-layout v-if="loggedIn" justify-end fill-height>
-                    <v-avatar  id="avatar" class="avatar-margin" size="40px"/>
                     <v-menu v-model="menu" :close-on-content-click="false">
                         <template v-slot:activator="{ on }">
                             <v-btn flat v-on="on">Menu</v-btn>

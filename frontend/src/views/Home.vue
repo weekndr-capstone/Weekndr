@@ -61,11 +61,6 @@
           this.randomIndex1 = Math.floor(Math.random() * 4);
           this.randomIndex2 = Math.floor(Math.random() * 4) + 4;
           this.randomIndex3 = Math.floor(Math.random() * 4) + 8;
-          console.log('index: ' + this.randomIndex1);
-          console.log('index: ' + this.randomIndex2);
-          console.log('index: ' + this.randomIndex3);
-
-
       },
     components: {
         RecommendedDestinations,
