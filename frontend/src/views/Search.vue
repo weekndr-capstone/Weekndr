@@ -2,24 +2,32 @@
     <div>
         <Toolbar/>
         <v-container>
-            <Weather :results= "weather"/>
+            <Weather v-if="weather !== null" :results= "weather"/>
             <v-divider></v-divider>
-            <br>
-            <h2>Suggestions</h2>
-            <br>
-            <CardCarousel  :results = "suggested" :hotel="false"/>
-            <br>
-            <h2>Hotels</h2>
-            <br>
-            <CardCarousel  :results = "hotels" :hotel="true" />
-            <br>
-            <h2>Food</h2>
-            <br>
-            <CardCarousel  :results = "experiences" :hotel="false"/>
-            <br>
-            <h2>Experiences</h2>
-            <br>
-            <CardCarousel  :results = "food" :hotel="false"/>
+            <div v-if="suggested.length >= 1">
+                <br>
+                <h2>Suggestions</h2>
+                <br>
+                <CardCarousel :results = "suggested" :hotel="false"/>
+            </div>
+            <div v-if="hotels.length >= 1">
+                <br>
+                <h2>Hotels</h2>
+                <br>
+                <CardCarousel :results = "hotels" :hotel="true" />
+                <br>
+            </div>
+            <div v-if="experiences.length >= 1" >
+                <h2>Food</h2>
+                <br>
+                <CardCarousel :results = "experiences" :hotel="false"/>
+                <br>
+            </div>
+            <div v-if="food.length >= 1">
+                <h2>Experiences</h2>
+                <br>
+                <CardCarousel :results = "food" :hotel="false"/>
+            </div>
         </v-container>
     </div>
 </template>
@@ -35,7 +43,6 @@
         components: {
             Weather,
             LoadingScreen,
-
             CardCarousel,
             Toolbar
         },
@@ -47,7 +54,6 @@
                 food: store.state.foodResults,
                 experiences: store.state.experiencesResults,
                 weather: store.state.weatherResults,
-                fadeout: 'fade-out'
             }
         },
     }

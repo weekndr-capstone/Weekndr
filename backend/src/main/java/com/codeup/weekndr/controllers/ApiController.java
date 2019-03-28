@@ -100,27 +100,6 @@ public class ApiController {
                 .create();
         System.out.println(message.getSid());
     }
-    @GetMapping("/weather/{location}")
-    public ResponseEntity<String> Weather(@PathVariable String location){
-        return getLatLon(googleApi, location);
-    }
-
-    private static ResponseEntity<String> getLatLon(String bearer, String location)
-    {
-        String uri = "https://maps.googleapis.com/maps/api/geocode/json?address="+ location +"&key=" + bearer;
-        System.out.println(uri);
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_JSON }));
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer " + bearer);
-
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-        ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-
-        System.out.println(result);
-        return result;
-    }
 
     @GetMapping("/api/weather")
     public ResponseEntity<String> Weather(@RequestParam String lat, @RequestParam String lon){

@@ -16,24 +16,26 @@
                             <v-container grid-list-md>
                                 <v-toolbar-title class="display-1">Sign Up</v-toolbar-title>
                                 <br>
-                                <v-layout wrap>
-                                    <v-flex xs12>
-                                        <v-text-field v-model="user.phoneNumber" label="Phone Number*" required solo></v-text-field>
-                                    </v-flex>
-                                    <v-flex xs12>
-                                        <v-text-field v-model="user.email" label="Email Address*" required solo></v-text-field>
-                                    </v-flex>
-                                    <v-flex xs12>
-                                        <v-text-field v-model="user.username" label="Username*" required solo></v-text-field>
-                                    </v-flex>
-                                    <v-flex xs12>
-                                        <v-text-field v-model="user.password" label="Password*" type="password" required solo></v-text-field>
-                                    </v-flex>
-                                    <v-flex xs12>
-                                        <v-btn id="upload" color="info" v-on:click="fileUpload()">Upload Photo</v-btn>
-                                    </v-flex>
-                                    <v-layout justify-start>
-                                    <small>*indicates required field</small>
+                                <v-form ref="form" v-model="valid" lazy-validation>
+                                    <v-layout wrap>
+                                        <v-flex xs12>
+                                            <v-text-field v-model="user.phoneNumber" label="Phone Number*" required solo :rules="phoneRules"></v-text-field>
+                                        </v-flex>
+                                        <v-flex xs12>
+                                            <v-text-field v-model="user.email" label="Email Address*" required solo :rules="emailRules"></v-text-field>
+                                        </v-flex>
+                                        <v-flex xs12>
+                                            <v-text-field v-model="user.username" label="Username*" required solo :rules="userRules"></v-text-field>
+                                        </v-flex>
+                                        <v-flex xs12>
+                                            <v-text-field v-model="user.password" label="Password*" type="password" required solo :rules="passRules"></v-text-field>
+                                        </v-flex>
+                                        <v-flex xs12>
+                                            <v-btn id="upload" color="info" v-on:click="fileUpload()">Upload Photo</v-btn>
+                                        </v-flex>
+
+                                        <v-layout justify-start>
+                                        <small>*indicates required field</small>
                                     </v-layout>
                                     <v-layout justify-end>
                                         <v-card-actions>
@@ -42,6 +44,7 @@
                                         </v-card-actions>
                                     </v-layout>
                                     </v-layout>
+                                </v-form>
                             </v-container>
                         </v-card-text>
                     </v-card>
@@ -59,7 +62,7 @@
                                         <v-avatar  id="avatar" class="avatar-margin" size="40px"/>
                                     </v-list-tile-avatar>
                                     <v-list-tile-content>
-                                        <v-list-tile-title>username</v-list-tile-title>
+                                        <v-list-tile-title>{{username}}</v-list-tile-title>
                                     </v-list-tile-content>
                                 </v-list-tile>
                             </v-list>
@@ -91,14 +94,17 @@
                             <v-container grid-list-md>
                                 <v-toolbar-title class="display-1">Login</v-toolbar-title>
                                 <br>
-                                <v-layout wrap>
-                                    <v-flex xs12>
-                                        <v-text-field v-model="userLogin.username" label="Username" required solo></v-text-field>
-                                    </v-flex>
-                                    <v-flex xs12>
-                                        <v-text-field v-model="userLogin.password" label="Password" type="password" required solo></v-text-field>
-                                    </v-flex>
-                                </v-layout>
+                                <v-form ref="form2" v-model="valid2" lazy-validation>
+                                    <v-layout wrap>
+                                        <v-flex xs12>
+                                            <v-text-field v-model="userLogin.username" label="Username" required solo :rules="loginUsernameRules"></v-text-field>
+                                        </v-flex>
+                                        <v-flex xs12>
+                                            <v-text-field v-model="userLogin.password" label="Password" type="password" required solo :rules="passLoginRules"></v-text-field>
+                                        </v-flex>
+                                        <v-card-text class="red--text">{{loginRules}}</v-card-text>
+                                    </v-layout>
+                                </v-form>
                                 <v-layout justify-end>
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
@@ -130,6 +136,32 @@
             SignUp: false,
             Login: false,
             menu: false,
+            valid: true,
+            valid2:true,
+            username: '',
+            phoneRules: [
+                v => !!v || 'Phone Number is required',
+                v => (v && v.length === 10) || 'Phone Number must be 10 numbers excluding dashes - '
+            ],
+            emailRules: [
+                v => !!v || 'Email is required',
+                v => /.+@.+/.test(v) || 'E-mail must be valid'
+            ],
+            userRules: [
+                v => !!v || 'Username is required',
+                v => (v && v.length >= 5) || 'Username must be greater than 5 characters'
+            ],
+            passRules: [
+                v => !!v || 'Password is required',
+                v => (v && v.length >= 5) || 'Password must be greater than 5 characters'
+            ],
+            passLoginRules: [
+                v => !!v || 'Password is required',
+            ],
+            loginUsernameRules: [
+                v => !!v || 'Username is required',
+            ],
+            loginRules:'',
             user:{
                 username: '',
                 email:'',
@@ -149,6 +181,12 @@
             }
         },
         methods: {
+            validate () {
+                this.valid = !!this.$refs.form.validate();
+            },
+            validate2 () {
+                this.valid2 = !!this.$refs.form2.validate();
+            },
             async getPlace(place, index){
                 await axios({
                     method: 'GET',
@@ -162,51 +200,55 @@
                 })
             },
             signup(){
-                  axios
-                    .post('/signup', this.user)
-                      .then(res => {
-                          this.SignUp = false;
-                          this.displayAvatar();
-                          console.log(res.data)
-                      }).catch(err => {
-                          console.log(err.data)
-                  })
+                this.validate();
+                console.log(this.valid);
+                console.log(this.valid2);
+                if (this.valid) {
+                    axios
+                        .post('/signup', this.user)
+                        .then(res => {
+                            this.SignUp = false;
+                            this.displayAvatar();
+                            console.log(res.data)
+                        }).catch(err => {
+                        console.log(err.data)
+                    })
+                }
             },
             login(){
-                axios({
-                    method: 'POST',
-                    url:'/async-login',
-                    params: {
-                        username:this.userLogin.username,
-                        password:this.userLogin.password
-                    }
-                })
-                    .then(res => {
-                        if (res.data.email != null) {
-                            let temp = res.data;
-                            store.commit('changeLoggedIn', true);
-
-                             temp.trips.forEach((trip, index) => {
-                                 trip.users.forEach(user => {
-
-                                 })
-                             });
-
-                            store.commit('changeUser', res.data);
-
-                            this.Login = false;
-                            console.log(store.state.user);
-                            this.displayAvatar();
+                this.validate2();
+                if (this.valid2) {
+                    axios({
+                        method: 'POST',
+                        url: '/async-login',
+                        params: {
+                            username: this.userLogin.username,
+                            password: this.userLogin.password
                         }
-                    }).catch(err => {
-                    console.log(err)
-                })
+                    })
+                        .then(res => {
+                            if (res.data.email != null) {
+                                let temp = res.data;
+                                store.commit('changeLoggedIn', true);
+                                store.commit('changeUser', res.data);
+                                this.username = res.data.username;
+                                this.Login = false;
+                                this.displayAvatar();
+                            } else {
+                                this.loginRules = 'Incorrect Login Try Again'
+                            }
+                        }).catch(err => {
+                        this.loginRules = 'Our Gnomes have stopped working try again';
+                        console.log(err)
+                    })
+                }
             },
             logout(){
                 store.commit('changeUser', '');
                 store.commit('changeLoggedIn', false);
                 store.commit('changeCurrentlyViewedTrip', '');
                 this.Login = false;
+                router.push('/');
             },
             fileUpload() {
                 const apikey = 'AsNx10Lk3SEiGRvMmw223z';
