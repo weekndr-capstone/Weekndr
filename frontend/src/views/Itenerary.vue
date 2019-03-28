@@ -17,9 +17,9 @@
         <v-container grid-list-md>
             <h2>What else would you like to add?</h2>
             <br/>
-            <v-layout style="overflow-x: scroll;">
+            <v-layout row wrap>
                 <v-flex v-for="t in tabs" :key="t.id">
-                    <v-item>
+                    <v-item xs6>
                         <FHEBlock :place="t"/>
                     </v-item>
                 </v-flex>
@@ -63,17 +63,17 @@
                     {
                         id: 1,
                         name: 'Food',
-                        url: 'food.jpg'
+                        url: 'donut.jpg'
                     },
                     {
                         id:2,
                         name: 'Hotel',
-                        url: 'hotel.jpg'
+                        url: 'hotel-pic.jpg'
                     },
                     {
                         id:3,
                         name: 'Experience',
-                        url: 'experience.jpg'
+                        url: 'art-balloon.jpg'
                     }
                 ],
                 trip: store.state.currentViewedTrip,
