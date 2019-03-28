@@ -7,7 +7,7 @@
             <div>
                 <h3 class="headline mb-0 text-truncate"><span class="title mb-0 ml-2 vCardText text-truncate" @click="routeSingle()">{{card.name}}</span>
                     <v-icon half-icon half-increment readonly color="green" class="ml-2">{{card.price}}</v-icon></h3>
-                <div><v-rating v-model="card.rating" readonly background-color="#89B6BE" color="#E96445" height="20px"></v-rating></div>
+                <div><v-rating v-model="card.rating" readonly background-color="#F6EFE4" color="#E96445" height="20px"></v-rating></div>
             </div>
         </v-card-title>
     </v-card>
