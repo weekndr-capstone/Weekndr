@@ -7,14 +7,14 @@
         </v-flex>
         <v-layout justify-end fill-height>
             <v-toolbar-items>
-                    <router-link :to="'/about'">
+                    <router-link v-if="!loggedIn" :to="'/about'">
                         <v-flex fill-height>
-                        <v-btn flat>About</v-btn>
+                        <v-btn class="font-weight-bold" flat>About</v-btn>
                         </v-flex>
                     </router-link>
                 <v-dialog v-if="!loggedIn" v-model="SignUp" max-width="550px">
                     <template v-slot:activator="{ on }">
-                        <v-btn flat v-on="on">Sign Up</v-btn>
+                        <v-btn flat v-on="on" class="font-weight-bold">Sign Up</v-btn>
                     </template>
                     <v-card>
                         <v-card-text>
@@ -55,9 +55,9 @@
                     </v-card>
                 </v-dialog>
                 <v-layout v-if="loggedIn" justify-end fill-height>
-                    <v-menu v-model="menu" :close-on-content-click="false">
+                    <v-menu v-model="menu" :close-on-content-click="false" transition="slide-x-transition">
                         <template v-slot:activator="{ on }">
-                            <v-btn flat v-on="on">Menu</v-btn>
+                                <v-btn flat v-on="on"><i class="fas fa-bars"></i></v-btn>
                         </template>
                         <v-card min-height="200px">
                             <v-list>
@@ -66,32 +66,33 @@
                                         <v-avatar  id="avatar" class="avatar-margin" size="40px"/>
                                     </v-list-tile-avatar>
                                     <v-list-tile-content>
-                                        <v-list-tile-title>{{username}}</v-list-tile-title>
+                                        <v-list-tile-title class="orange-title font-style font-weight-bold">{{username}}</v-list-tile-title>
                                     </v-list-tile-content>
                                 </v-list-tile>
                             </v-list>
 
                             <v-divider></v-divider>
                             <v-list>
-                                <v-list-tile>
-                                    <v-list-tile-action>
+                                <v-flex column class="padding">
                                         <router-link to="/current">
-                                            <v-btn flat>Current/Upcoming</v-btn>
+                                            <p class="menu-item text-xs-right">Current & Upcoming</p>
                                         </router-link>
                                         <router-link to="/triphistory">
-                                            <v-btn flat>Past Trips</v-btn>
+                                            <p class="menu-item text-xs-right">Trip History</p>
                                         </router-link>
-                                        <v-btn flat @click="menu = false">Cancel</v-btn>
-                                    </v-list-tile-action>
-                                </v-list-tile>
+                                        <router-link :to="'/about'">
+                                                <p class="menu-item  text-xs-right">About</p>
+                                        </router-link>
+                                         <p class="text-xs-right" @click="logout()" class="menu-item text-xs-right">Logout</p>
+                                </v-flex>
                             </v-list>
                         </v-card>
                     </v-menu>
-                    <v-btn flat @click="logout()">Logout</v-btn>
                 </v-layout>
                 <v-dialog v-if="!loggedIn" v-model="Login" max-width="550px">
                     <template  v-slot:activator="{ on }">
-                        <v-btn flat v-on="on">Login</v-btn>
+                        <v-btn flat v-on="on" class="font-weight-bold">Login</v-btn>
+
                     </template>
                     <v-card>
                         <v-card-text>
@@ -310,6 +311,21 @@
     }
     .orange-title {
         color: #E96445;
+    }
+
+
+    .font-style {
+        font-family: 'Quicksand', sans-serif;
+    }
+
+    .menu-item{
+        font-size: 1em;
+        color: gray;
+    }
+
+    .padding{
+        padding-left: 8px;
+        padding-right: 8px;
     }
 
 </style>

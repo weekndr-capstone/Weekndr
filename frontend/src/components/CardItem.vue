@@ -11,8 +11,8 @@
                 <v-card-actions>
                     <v-layout row wrap>
                     <v-btn :ripple="false" icon v-on:click="redHeartAndIncrement()">
-                        <i  :class=heartIconClasses></i>
-                        <span> {{ counter }}</span>
+                        <i :class=heartIconClasses></i>
+                        <span class="pl-1"> {{ counter }}</span>
                     </v-btn>
                     <v-dialog v-model="dialogue" max-width="600px">
                     <template v-slot:activator="{ on }">
@@ -417,8 +417,6 @@
                         if(v.user === store.state.user.id){
                             this.heartIconClasses = "fas fa-heart color-red";
                         }
-
-                        console.log("in the votes foreach");
                         this.counter++;
                     }
                 })
