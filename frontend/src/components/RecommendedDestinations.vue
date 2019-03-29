@@ -35,12 +35,14 @@
                     axios.get('/yelpList/'+ store.state.location + "/1"),
                     axios.get('/yelpList/' + store.state.location + "/2"),
                     axios.get('/yelpList/' + store.state.location + "/3"),
-                ]).then(axios.spread((suggestedRes, experiencesRes, foodRes, hotelRes) =>{
+                    axios.get("https://maps.googleapis.com/maps/api/geocode/json?address="+ store.state.location +"&key=" + "AIzaSyAih6iqhzWmzLIe11sF9yMDuwPhVyFYP2w")
+                ]).then(axios.spread((suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes) =>{
                     store.commit('changeSuggestedResults', suggestedRes.data.businesses);
                     store.commit('changeFoodResults', experiencesRes.data.businesses);
                     store.commit('changeExperiencesResults', foodRes.data.businesses);
                     store.commit('changeHotelResults', hotelRes.data.businesses);
-                    console.log(suggestedRes, experiencesRes, foodRes, hotelRes)
+                    store.commit('changeWeatherResults', weatherRes.data.results[0]);
+                    console.log(suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes)
                 }));
                 router.push('/search');
               },
