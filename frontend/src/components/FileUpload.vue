@@ -1,5 +1,5 @@
 <template>
-            <v-btn id="upload" v-on:click="fileUpload()">Upload Photo</v-btn>
+            <v-btn outline color="#E96445" flat id="upload" v-on:click="fileUpload()">Upload Photo</v-btn>
 </template>
 
 

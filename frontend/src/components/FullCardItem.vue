@@ -20,9 +20,9 @@
         <v-layout row xs12>
             <v-dialog v-model="dialog" persistent max-width="600px">
                 <template v-slot:activator="{ on }">
-                    <v-btn outline color="indigo" dark v-on="on">Add to Itinerary</v-btn>
+                    <v-btn outline color="#E96445" flat v-on="on">Add to Itinerary</v-btn>
                 </template>
-                <v-tabs v-model="active">
+                <v-tabs v-model="active" slider-color="#E96445">
                     <v-tab v-if="currentViewedTrip === ''" ripple>Create Trip</v-tab>
                     <v-tab ripple>Add to Itinerary</v-tab>
                     <v-tab-item v-if="currentViewedTrip === ''">
@@ -43,8 +43,8 @@
                                         <v-flex xs12>
                                             <h2>Send Invites</h2>
                                             <v-text-field v-for="f in friends" :key="f" label="Friends Number*" hint="We will shoot them a text and help them join in on the fun" v-model="f.phoneNumber" :rules="phoneRules"></v-text-field>
-                                            <v-btn @click="addFriend()"><v-icon>person_add</v-icon></v-btn>
-                                            <v-btn @click="inviteFriends()" solo>Invite all Friends</v-btn>
+                                            <v-btn outline color="#E96445" flat @click="addFriend()"><v-icon>person_add</v-icon></v-btn>
+                                            <v-btn outline color="#E96445" flat @click="inviteFriends()" solo>Invite all Friends</v-btn>
                                             <small v-if="!premium">*Add another friend</small>
                                             <small class="red--text" v-if="premium">*beyond 6 friends requires a premium account</small>
                                         </v-flex>
@@ -54,8 +54,8 @@
                             <small>*indicates required field</small>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-                                <v-btn color="blue darken-1" flat @click="next">Next</v-btn>
+                                <v-btn outline color="#E96445" flat @click="dialog = false">Close</v-btn>
+                                <v-btn outline color="#E96445" flat @click="next">Next</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-tab-item>
@@ -131,8 +131,8 @@
                                </v-card-text>
                                <v-card-actions>
                                    <v-spacer></v-spacer>
-                                   <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-                                   <v-btn color="blue darken-1" flat @click="saveExperience()">Save</v-btn>
+                                   <v-btn outline color="#E96445" flat @click="dialog = false">Close</v-btn>
+                                   <v-btn outline color="#E96445" flat @click="saveExperience()">Save</v-btn>
                                </v-card-actions>
                             </v-layout>
                         </v-card>
