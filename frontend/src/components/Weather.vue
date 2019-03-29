@@ -1,8 +1,8 @@
 <template>
-    <v-container grid-list-md text-xs-center>
+    <v-container v-if="forecastArr.length > 1" grid-list-md text-xs-center>
         <h1 class="h1color">{{this.direction.formatted_address}}</h1>
         <br>
-        <h2>Current Weather Forecast</h2>
+        <h2 >Current Weather Forecast</h2>
         <br>
         <v-layout row wrap justify-center v-if="weatherLoaded" fill-height>
             <v-flex v-if="forecastArr.length > 1" v-for="(day, index) in forecastArr" :key="index" xs4 md2 fill-height>

@@ -14,7 +14,7 @@
                     </router-link>
                 <v-dialog v-if="!loggedIn" v-model="SignUp" max-width="550px">
                     <template v-slot:activator="{ on }">
-                        <v-btn flat v-on="on">Sign Up</v-btn>
+                        <v-btn flat v-on="on" class="font-weight-bold">Sign Up</v-btn>
                     </template>
                     <v-card>
                         <v-card-text>
@@ -57,7 +57,7 @@
                 <v-layout v-if="loggedIn" justify-end fill-height>
                     <v-menu v-model="menu" :close-on-content-click="false">
                         <template v-slot:activator="{ on }">
-                            <v-btn flat v-on="on">Menu</v-btn>
+                            <v-btn flat v-on="on" class="font-weight-bold">Menu</v-btn>
                         </template>
                         <v-card min-height="200px">
                             <v-list>
@@ -87,11 +87,11 @@
                             </v-list>
                         </v-card>
                     </v-menu>
-                    <v-btn flat @click="logout()">Logout</v-btn>
+                    <v-btn flat @click="logout()" class="font-weight-bold">Logout</v-btn>
                 </v-layout>
                 <v-dialog v-if="!loggedIn" v-model="Login" max-width="550px">
                     <template  v-slot:activator="{ on }">
-                        <v-btn flat v-on="on">Login</v-btn>
+                        <v-btn flat v-on="on" class="font-weight-bold">Login</v-btn>
                     </template>
                     <v-card>
                         <v-card-text>

@@ -7,7 +7,7 @@
                         <v-form ref="form" v-model="valid" lazy-validation>
                         <v-card-text>
                             <v-flex offset-xs1 class="mt-2">
-                            <h1>Search a Destination</h1>
+                            <h1>Start Planning Your Trip</h1>
                             </v-flex>
                             <v-flex xs10 offset-xs1>
                                 <v-divider></v-divider>
