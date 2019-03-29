@@ -40,13 +40,6 @@ public class Comment {
         this.parentComment = parentComment;
     }
 
-//    public Comment(String comment, LocalDateTime created_at, User user, Place place) {
-//        this.comment = comment;
-//        this.created_at = created_at;
-//        this.user = user;
-//        this.place = place;
-//    }
-
     public long getId() {
         return id;
     }

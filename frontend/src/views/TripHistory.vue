@@ -1,7 +1,7 @@
 <template>
         <div>
             <Toolbar/>
-            <GoogleMap/>
+            <GoogleMap :trips="trips"/>
             <PastTrip v-for="n in userTrips" :key="n" :trip="n"/>
         </div>
 </template>
@@ -17,6 +17,11 @@
             GoogleMap,
             PastTrip,
             Toolbar
+        },
+        data(){
+            return{
+                trips: store.state.user.trips
+            }
         },
         computed: {
             userTrips() {

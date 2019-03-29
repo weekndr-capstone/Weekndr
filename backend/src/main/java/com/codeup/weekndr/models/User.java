@@ -19,7 +19,9 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String username;
+    @Column(nullable = false, unique = true)
     private String email;
+    @Column(nullable = false, unique = true)
     private String phoneNumber;
     @Column(length = 255)
     private String img_path;
