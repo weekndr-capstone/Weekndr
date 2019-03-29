@@ -18,11 +18,11 @@
             <h2>What else would you like to add?</h2>
             <br/>
             <v-layout row wrap>
-                <v-flex v-for="t in tabs" :key="t.id">
-                    <v-item xs6>
-                        <FHEBlock :place="t"/>
-                    </v-item>
-                </v-flex>
+                    <v-flex v-for="t in tabs" :key="t.id">
+                        <v-item xs6>
+                            <FHEBlock :place="t"/>
+                        </v-item>
+                    </v-flex>
             </v-layout>
         </v-container>
         <v-item-group>

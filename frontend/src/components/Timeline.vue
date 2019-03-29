@@ -40,8 +40,7 @@
                     let thirdSplit = secondSplit.split(':');
 
                     let hours = Number(thirdSplit[0]);
-                    let minutes = Number(thirdSplit[1]);
-
+                    let minutes = thirdSplit[1];
                     //not displaying seconds but they're here if we need them:
                     let seconds = Number(thirdSplit[2]);
 
@@ -51,8 +50,9 @@
                         hours -= 12;
                         amPm = "PM";
 
-                        return (hours + ":" + minutes).toString() + amPm;
+                        return (hours + ":" + minutes) + amPm;
                     }
+                    return (hours + ":" + minutes) + amPm;
                 }
             }
         },
@@ -70,8 +70,30 @@
                 let endsplit = store.state.currentViewedTrip.end_date.split('-')[2];
                 let secondendsplit = endsplit.split('T')[0];
                 let dates = [];
-                for (let i = secondstartsplit; i <= secondendsplit; i++) {
-                    dates.push(i);
+                var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+                var firstDate = new Date(store.state.currentViewedTrip.start_date);
+                var secondDate = new Date(store.state.currentViewedTrip.end_date);
+                var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+                for (let i = 0; i <= diffDays;) {
+                    let check = parseInt(secondstartsplit) + i;
+                    if (check - 10 < 0 && !check.toString().includes('0')){
+                        dates.push("0"+ check);
+                        i++;
+                    }else{
+                        if (check > 31){
+                            check -= 31;
+                            if (check - 10 < 0 && !check.toString().includes('0')){
+                                dates.push("0"+ check);
+                                i++;
+                            }else{
+                               dates.push(check);
+                               i++;
+                            }
+                        }else {
+                            dates.push(check);
+                            i++;
+                        }
+                    }
                 }
                 return dates;
             },
@@ -80,30 +102,29 @@
                 this.dates.forEach(date => {
                     let tempArray = [];
                     store.state.currentViewedTrip.places.filter(place => {
-                        console.log(place);
                         if (place.checkin_date === null && !place.suggested){
-                            if (place.event_date.split('T')[0].includes(date)){
-                                console.log("Not Suggested");
+                            if (place.event_date.split('T')[0].split('-')[2].includes(date)){
                                 tempArray.push(place);
                             }
                         }else if (place.checkin_date === null && place.suggested) {
-
                         }else  {
-                            if ((place.checkin_date.includes(date) || place.checkout_date.includes(date)) && !place.suggested){
+                            if ((place.checkin_date.split('T')[0].split('-')[2].includes(date) || place.checkout_date.split('T')[0].split('-')[2].includes(date)) && !place.suggested){
                                 tempArray.push(place);
                             }
                         }
                     });
                     tempArray.sort(function (a,b){
                         if (a.event_date !== null) {
-                          a = a.event_date.split('T')[1];
-                          a = a.split('+')[0]
-                          a = a.split(':')[0] + a.split(':')[1]
+                            a = new Date(a.event_date);
+                          // a = a.event_date.split('T')[1];
+                          // a = a.split('+')[0]
+                          // a = a.split(':')[0] + a.split(':')[1]
                         }
                         if (b.event_date !== null) {
-                          b = b.event_date.split('T')[1];
-                          b = b.split('+')[0]
-                          b = b.split(':')[0] + b.split(':')[1]
+                            b = new Date(b.event_date);
+                          // b = b.event_date.split('T')[1];
+                          // b = b.split('+')[0]
+                          // b = b.split(':')[0] + b.split(':')[1]
                         }
                         if (a.event_date === null ){
                             a = 0;
