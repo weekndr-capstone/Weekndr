@@ -8,10 +8,9 @@
         <v-layout row>
             <v-flex xs12>
                 <v-card-title primary-title><span class="display-1"><a :href="place.url" target="_blank">{{place.name}}</a></span></v-card-title>
-                <v-card-title><span class="headline">Address: </span><br><span class="title font-weight-light"> {{place.location.address1}}</span><br>
-                </v-card-title>
-                <v-card-title><span class="headline">City: </span><br><span class="title font-weight-light"> {{place.location.city}}</span></v-card-title>
-                <v-card-text><span class="headline">Phone: </span><span class="title font-weight-light"> {{place.phone}}</span></v-card-text>
+                <v-card-text class="headline">Address:</v-card-text><v-card-text class="title font-weight-light">{{place.location.address1}}</v-card-text>
+                <v-card-text class="headline">City:</v-card-text><v-card-text class="title font-weight-light"> {{place.location.city}}</v-card-text>
+                <v-card-text class="headline">Phone:</v-card-text><v-card-text class="title font-weight-light"> {{place.phone}}</v-card-text>
                 <v-rating v-model="place.rating" readonly background-color="#F6EFE4" color="#E96445" class="ml-1"></v-rating>
                 <v-icon half-icon half-increment readonly color="green" class="ml-3">{{place.price}}</v-icon>
                 <br>
