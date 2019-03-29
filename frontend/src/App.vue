@@ -26,7 +26,7 @@
   h1, h2, h3, h4, h5, h6, .v-btn__content, p, .v-toolbar__title, .v-tabs__item {
     font-family: 'Quicksand', sans-serif;
   }
-  .display-1 {
+  .display-1, .display-3 {
     font-family: 'Quicksand', sans-serif !important;
   }
   .v-btn__content {

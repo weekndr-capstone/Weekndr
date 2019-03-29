@@ -7,6 +7,11 @@
         </v-flex>
         <v-layout justify-end fill-height>
             <v-toolbar-items>
+                    <router-link :to="'/about'">
+                        <v-flex fill-height>
+                        <v-btn flat>About</v-btn>
+                        </v-flex>
+                    </router-link>
                 <v-dialog v-if="!loggedIn" v-model="SignUp" max-width="550px">
                     <template v-slot:activator="{ on }">
                         <v-btn flat v-on="on">Sign Up</v-btn>
@@ -301,6 +306,8 @@
 
     a {
         text-decoration: none;
+        color: black;
     }
+
 
 </style>
