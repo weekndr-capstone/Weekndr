@@ -45,8 +45,8 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer> </v-spacer>
-                            <v-btn flat v-on:click="dialogue = false">Close</v-btn>
-                            <v-btn flat v-on:click="userInput()">Add Comment</v-btn>
+                            <v-btn outline color="#E96445" flat v-on:click="dialogue = false">Close</v-btn>
+                            <v-btn outline color="#E96445" flat v-on:click="userInput()">Add Comment</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
@@ -65,15 +65,11 @@
                                     </v-layout>
                                 </v-card-actions>
                                 <PictureGrid :photos="this.card.photos"></PictureGrid>
-                                <v-layout justify-content-center>
-                                    <v-flex>
-                                        <FileUpload :card="this.card" :pictureLocation="'placePicture'"></FileUpload>
-                                    </v-flex>
-                                    <v-flex xs12 align-end>
-                                        <v-btn  flat v-on:click="dialogue5 = false">Close</v-btn>
-                                    </v-flex>
-                                </v-layout>
-                                <v-spacer> </v-spacer>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                                <FileUpload :card="this.card" :pictureLocation="'placePicture'"></FileUpload>
+                                                <v-btn outline color="#E96445" flat v-on:click="dialogue5 = false">Close</v-btn>
+                                    </v-card-actions>
                             </v-card>
                     </v-dialog>
 
@@ -103,7 +99,7 @@
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer> </v-spacer>
-                                <v-btn flat v-on:click="dialogue4 = false">Close</v-btn>
+                                <v-btn outline color="#E96445" flat v-on:click="dialogue4 = false">Close</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
@@ -130,8 +126,8 @@
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer> </v-spacer>
-                                <v-btn flat v-on:click="dialogue2 = false">Close</v-btn>
-                                <v-btn flat v-on:click="editPlace()">Save Changes</v-btn>
+                                <v-btn outline color="#E96445" flat v-on:click="dialogue2 = false">Close</v-btn>
+                                <v-btn outline color="#E96445" flat v-on:click="editPlace()">Save Changes</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
@@ -153,8 +149,8 @@
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer> </v-spacer>
-                                <v-btn flat v-on:click="dialogue3 = false">No</v-btn>
-                                <v-btn flat v-on:click="deletePlace()">Yes, Delete</v-btn>
+                                <v-btn outline color="#E96445" flat v-on:click="dialogue3 = false">No</v-btn>
+                                <v-btn outline color="#E96445" flat v-on:click="deletePlace()">Yes, Delete</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
