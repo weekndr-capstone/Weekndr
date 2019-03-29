@@ -6,6 +6,7 @@ import Itenerary from './views/Itenerary'
 import TripHistory from './views/TripHistory'
 import CurrentPastTrips from './views/CurrentPastTrips'
 import Search from './views/Search'
+import About from './views/About'
 
 Vue.use(Router);
 
@@ -51,6 +52,12 @@ export default new Router({
       name: 'current',
       component: CurrentPastTrips,
       meta: {title: 'Current'}
-    }
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: About,
+      meta: {title: 'About'}
+    },
   ]
 })

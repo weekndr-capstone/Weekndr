@@ -2,7 +2,7 @@
     <div class="comment-tree">
         <div :style="indent">
             {{label}}
-            <v-btn :ripple="false" icon @click="parent(id)">
+            <v-btn color="#E96445" flat :ripple="false" icon @click="parent(id)">
                 <i class="far fa-comment 10x"></i>
             </v-btn>
             <comment v-if="comments[index] != undefined"  v-for="(comment, index) in comments" :key="index" :comments="comment.childComments" :label="comment.comment" :id="comment.id" :depth="depth + 1">

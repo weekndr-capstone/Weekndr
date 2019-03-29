@@ -7,6 +7,11 @@
         </v-flex>
         <v-layout justify-end fill-height>
             <v-toolbar-items>
+                    <router-link :to="'/about'">
+                        <v-flex fill-height>
+                        <v-btn flat>About</v-btn>
+                        </v-flex>
+                    </router-link>
                 <v-dialog v-if="!loggedIn" v-model="SignUp" max-width="550px">
                     <template v-slot:activator="{ on }">
                         <v-btn flat v-on="on" class="font-weight-bold">Sign Up</v-btn>
@@ -14,7 +19,7 @@
                     <v-card>
                         <v-card-text>
                             <v-container grid-list-md>
-                                <v-toolbar-title class="display-1">Sign Up</v-toolbar-title>
+                                <v-toolbar-title class="display-1 orange-title">Sign Up</v-toolbar-title>
                                 <br>
                                 <v-form ref="form" v-model="valid" lazy-validation>
                                     <v-layout wrap>
@@ -31,7 +36,7 @@
                                             <v-text-field v-model="user.password" label="Password*" type="password" required solo :rules="passRules"></v-text-field>
                                         </v-flex>
                                         <v-flex xs12>
-                                            <v-btn id="upload" color="info" v-on:click="fileUpload()">Upload Photo</v-btn>
+                                            <v-btn id="upload" outline color="#E96445" flat  v-on:click="fileUpload()">Upload Photo</v-btn>
                                         </v-flex>
 
                                         <v-layout justify-start>
@@ -39,8 +44,8 @@
                                     </v-layout>
                                     <v-layout justify-end>
                                         <v-card-actions>
-                                            <v-btn flat @click="SignUp = false">Close</v-btn>
-                                            <v-btn flat @click="signup()">Sign Up</v-btn>
+                                            <v-btn outline color="#E96445" flat @click="SignUp = false">Close</v-btn>
+                                            <v-btn outline color="#E96445" flat  @click="signup()">Sign Up</v-btn>
                                         </v-card-actions>
                                     </v-layout>
                                     </v-layout>
@@ -91,7 +96,7 @@
                     <v-card>
                         <v-card-text>
                             <v-container grid-list-md>
-                                <v-toolbar-title class="display-1">Login</v-toolbar-title>
+                                <v-toolbar-title class="display-1 orange-title">Login</v-toolbar-title>
                                 <br>
                                 <v-form ref="form2" v-model="valid2" lazy-validation>
                                     <v-layout wrap>
@@ -107,8 +112,8 @@
                                 <v-layout justify-end>
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
-                                        <v-btn flat @click="Login = false">Close</v-btn>
-                                        <v-btn flat @click="login()">Login</v-btn>
+                                        <v-btn outline color="#E96445" flat @click="Login = false">Close</v-btn>
+                                        <v-btn outline color="#E96445" flat @click="login()">Login</v-btn>
                                     </v-card-actions>
                                 </v-layout>
                             </v-container>
@@ -301,6 +306,10 @@
 
     a {
         text-decoration: none;
+        color: black;
+    }
+    .orange-title {
+        color: #E96445;
     }
 
 </style>
