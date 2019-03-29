@@ -10,7 +10,7 @@
             </v-flex>
             <v-layout row wrap justify-center>
                 <v-flex xs8 md4>
-                    <v-card class="mx-1 mb-3 cardheight opacity">
+                    <v-card class="mx-1 mb-3 opacity">
                         <v-img
                                 src="https://files.slack.com/files-pri/T029BRGN0-FHFLFJ370/codeup_yz-18-0151.jpg"
                                 aspect-ratio="1"
@@ -29,7 +29,7 @@
                 </v-flex>
 
                 <v-flex xs8 md4>
-                    <v-card class="mx-1 mb-3 cardheight opacity">
+                    <v-card class="mx-1 mb-3 opacity">
                         <v-img
                                 src="https://files.slack.com/files-pri/T029BRGN0-FHF9QSSEB/screen_shot_2019-02-14_at_10.29.00_am.png"
                                 aspect-ratio="1"
@@ -47,7 +47,7 @@
                 </v-flex>
 
                 <v-flex xs8 md4>
-                    <v-card class="mx-1 mb-3 cardheight opacity">
+                    <v-card class="mx-1 mb-3 opacity">
                         <v-img
                                 src="https://files.slack.com/files-pri/T029BRGN0-FHFM620F7/vqnm9fbq.jpeg"
                                 aspect-ratio="1"
