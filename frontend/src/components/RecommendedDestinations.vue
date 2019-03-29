@@ -1,13 +1,13 @@
 <template>
 
-            <v-layout row>
-                 <v-flex class="zero-padding">
-                     <v-img :src="getImgUrl(place.url)"  contain  width="135px" height="90px" />
-                 </v-flex>
-                 <v-flex  align-self-center class="text-xs-center">
-                     <h2 @click="search(place.name)">{{place.name}}</h2>
-                 </v-flex>
-             </v-layout>
+     <v-layout row>
+          <v-flex class="zero-padding">
+              <v-img :src="getImgUrl(place.url)"  contain  width="135px" height="90px" />
+          </v-flex>
+          <v-flex  align-self-center class="text-xs-center">
+              <h2 @click="search(place.name)">{{place.name}}</h2>
+          </v-flex>
+      </v-layout>
 
 </template>
 
