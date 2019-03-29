@@ -10,7 +10,7 @@
                         <v-card-text class="px-0 headline">{{timeConverter(day.time)}}</v-card-text>
                         <v-card-text class="px-0 subheading">High {{` ${day.apparentTemperatureHigh}&#176;F `}}</v-card-text>
                         <v-card-text class="px-0 subheading">Low {{` ${day.apparentTemperatureLow}&#176;F `}}</v-card-text>
-                        <v-card-text class="px-0 px-0 pr-4 pl-4 subheading summary">{{day.summary}}</v-card-text>
+                        <v-card-text class="px-0 px-0 pr-4 pl-4 subheading summary overflow-y-hidden">{{day.summary}}</v-card-text>
                 </v-card>
             </v-flex>
         </v-layout>
