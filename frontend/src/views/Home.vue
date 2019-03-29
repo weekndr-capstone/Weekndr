@@ -49,7 +49,7 @@
                 {id: 8, name: 'Amsterdam', url: 'Amsterdam.jpg'},
 
                 {id: 9, name: 'Toronto', url: 'Toronto.jpg'},
-                {id: 10, name: 'New york', url: 'NewYork.jpg'},
+                {id: 10, name: 'New York', url: 'NewYork.jpg'},
                 {id: 11, name: 'Lisbon', url: 'Lisbon.jpg'},
                 {id: 12, name: 'Sayulita', url: 'Sayulita.jpg'},
             ],
