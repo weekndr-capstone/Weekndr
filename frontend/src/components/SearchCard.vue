@@ -79,8 +79,8 @@
                 menu1: false,
                 menu2: false,
                 fadeout: 'fade-out',
-                isLoading: false,
                 valid: true,
+                isLoading: false,
                 whereRules: [
                     v => !!v || 'Location is required'
                 ],
@@ -102,7 +102,7 @@
             async searchLocation(){
                 this.validate();
                 if (this.valid) {
-                    this.isLoading = true;
+                    // store.commit('changeIsLoading', true);
                     store.commit('changeLocation', this.Where);
                     store.commit('changeStartDate', this.Dates.Start);
                     store.commit('changeEndDate', this.Dates.End);
@@ -120,6 +120,7 @@
                         store.commit('changeHotelResults', hotelRes.data.businesses);
                         store.commit('changeWeatherResults', weatherRes.data.results[0]);
                         console.log(suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes);
+                        // store.commit('changeIsLoading', false)
                     }));
                     store.commit('changeMainUser', true);
                     router.push('/search');
