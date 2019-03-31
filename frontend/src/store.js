@@ -18,8 +18,7 @@ export default new Vuex.Store({
     loggedIn: false,
     parentComment: null,
     comments: [],
-    mainUser: false,
-      loader: false
+    mainUser: false
   },
 
   getters:{
@@ -64,15 +63,9 @@ export default new Vuex.Store({
       },
       mainUser: state => {
           return state.mainUser
-      },
-      isLoading: state => {
-          return state.loader
       }
   },
   mutations: {
-      isLoading(state, payload){
-        state.loader = payload;
-      },
       changeLocation(state, location){
           state.location = location;
       },

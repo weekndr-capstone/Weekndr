@@ -1,5 +1,6 @@
 <template>
     <div>
+        <LoadingScreen v-if="isLoading"/>
         <Toolbar/>
         <v-container>
             <Weather v-if="weather !== null" :results= "weather"/>

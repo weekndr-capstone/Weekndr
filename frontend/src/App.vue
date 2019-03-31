@@ -1,52 +1,20 @@
 <template>
   <v-app>
     <router-view></router-view>
-    <LoadingScreen v-if="isLoading"/>
   </v-app>
 </template>
 
 <script>
-
-  import LoadingScreen from "./components/LoadingScreen";
-  import {AxiosInstance as axios} from "axios";
-
   export default {
     name: 'App',
-    components: {
-      LoadingScreen
-    },
     data () {
       return {
       }
     },
-    computed:{ isLoading(){ return this.$store.getters.isLoading },
     watch: {
       $route(to, from) {
         document.title = to.meta.title || 'Weekndr';
       },
-    },
-      created(){
-        this.axios.interceptors.request.use(function (config) {
-          // Do something before request is sent
-          this.$store.commit('isLoading', true);
-          return config;
-        }, function (error) {
-          // Do something with request error
-          this.$store.commit('isLoading', false);
-          return Promise.reject(error);
-        });
-
-// Add a response interceptor
-        this.axios.interceptors.response.use(function (response) {
-          // Do something with response data
-          this.$store.commit('isLoading', false);
-          return response;
-        }, function (error) {
-          // Do something with response error
-          this.$store.commit('isLoading', false);
-          return Promise.reject(error);
-        });
-    }
     }
   }
 </script>
