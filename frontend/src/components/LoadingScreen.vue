@@ -1,8 +1,10 @@
 <template>
-    <span id="overlay" class="loading">
-        <v-layout align-center justify-center>
-            <WeekndrLogo/>
-        </v-layout>
+    <span>
+        <span id="overlay">
+            <v-layout align-center justify-center>
+                <WeekndrLogo/>
+            </v-layout>
+        </span>
     </span>
 </template>
 
@@ -11,20 +13,17 @@
     import WeekndrLogo from "./WeekndrLogo";
     export default {
         name: "LoadingScreen",
-        components: {WeekndrLogo}
+        components: {WeekndrLogo},
+        data() {
+            return {
+            }
+        }
     }
 </script>
 
 <style scoped>
     body {
         margin: 0;
-    }
-    #loading {
-        color: white;
-        font-size: 32px;
-        padding-top: 10vh;
-        height: 100vh;
-        text-align: center;
     }
     #overlay{
         position: fixed;

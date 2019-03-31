@@ -4,12 +4,12 @@
         <v-container>
             <v-flex xs12>
                 <v-card class="mx-1 mb-3 opacity">
-                <v-card-text class="display-3 text-xs-center orangeColor font-weight-bold">Weekndr</v-card-text>
-                <v-card-text class="display-1 mb-3 text-xs-center">An Application for all of your travel needs. Create travel groups and plan your whole travel itinerary in one place. Plan Hotels, Restaurants, and Experiences and communicate to your group with ease. (Spring Boot, Java , Vue , Vuetify, JavaScript, MySQL, HTML, CSS)</v-card-text>
+                <v-card-text class="display-1 text-xs-center orangeColor font-weight-bold">Weekndr</v-card-text>
+                <v-card-text class="title mb-3 text-xs-center">An Application for all of your travel needs. Create travel groups and plan your whole travel itinerary in one place. Plan Hotels, Restaurants, and Experiences and communicate to your group with ease. (Spring Boot, Java , Vue , Vuetify, JavaScript, MySQL, HTML, CSS)</v-card-text>
                 </v-card>
             </v-flex>
             <v-layout row wrap justify-center>
-                <v-flex xs8 md4>
+                <v-flex xs10 md4>
                     <v-card class="mx-1 mb-3 opacity">
                         <v-img
                                 src="https://files.slack.com/files-pri/T029BRGN0-FHFLFJ370/codeup_yz-18-0151.jpg"
@@ -28,7 +28,7 @@
                     </v-card>
                 </v-flex>
 
-                <v-flex xs8 md4>
+                <v-flex xs10 md4>
                     <v-card class="mx-1 mb-3 opacity">
                         <v-img
                                 src="https://files.slack.com/files-pri/T029BRGN0-FHF9QSSEB/screen_shot_2019-02-14_at_10.29.00_am.png"
@@ -46,7 +46,7 @@
                     </v-card>
                 </v-flex>
 
-                <v-flex xs8 md4>
+                <v-flex xs10 md4>
                     <v-card class="mx-1 mb-3 opacity">
                         <v-img
                                 src="https://files.slack.com/files-pri/T029BRGN0-FHFM620F7/vqnm9fbq.jpeg"

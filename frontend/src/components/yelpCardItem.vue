@@ -1,5 +1,5 @@
 <template>
-    <v-card light class="overflow-y-scroll">
+    <v-card light class="overflow-x-hidden">
         <v-img
                 height="13em" :src="card.image_url"
         ></v-img>
@@ -65,7 +65,7 @@
         width: 10em;
     }
     .v-card {
-        height: 24em;
+        height: 21em;
     }
     @media only screen and (max-width: 500px) {
         .v-card {
