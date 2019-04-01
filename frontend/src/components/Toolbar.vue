@@ -304,6 +304,9 @@
         width: 50px;
         height: 50px;
     }
+    .icon:hover {
+        transform: scale(1.05);
+    }
 
     a {
         text-decoration: none;
