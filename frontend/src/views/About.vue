@@ -15,16 +15,16 @@
                                 src="https://s3.amazonaws.com/alumni.codeup.com/AllenJustinBlanco.jpg"
                                 aspect-ratio="1"
                         ></v-img>
-                        <v-card-text class="px-0 text-xs-center display-1">Justin Blanco</v-card-text>
+                        <v-card-text class="px-0 text-xs-center display-1 scale">Justin Blanco</v-card-text>
                         <v-layout row wrap justify-center>
                             <v-flex xs12>
-                                <v-card-text class="px-0 text-xs-center display-1"><a href="https://alumni.codeup.com/students/605" target="_blank"><i class="fas fa-user"></i> Codeup</a></v-card-text>
+                                <v-card-text class="px-0 text-xs-center display-1 scale"><a href="https://alumni.codeup.com/students/605" target="_blank"><i class="fas fa-user"></i> Codeup</a></v-card-text>
                             </v-flex>
                         <v-flex xs12>
-                        <v-card-text class="px-0 text-xs-center display-1"><a href="https://www.linkedin.com/in/justin-blanco/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></v-card-text>
+                        <v-card-text class="px-0 text-xs-center display-1 scale"><a href="https://www.linkedin.com/in/justin-blanco/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></v-card-text>
                         </v-flex>
                         <v-flex xs12>
-                            <v-card-text class="px-0 text-xs-center display-1"><a href="https://github.com/allenjustinblanco" target="_blank"><i class="fab fa-github"></i> Github</a> </v-card-text>
+                            <v-card-text class="px-0 text-xs-center display-1 scale"><a href="https://github.com/allenjustinblanco" target="_blank"><i class="fab fa-github"></i> Github</a> </v-card-text>
                         </v-flex>
                         </v-layout>
                     </v-card>
@@ -39,13 +39,13 @@
                         <v-card-text class="px-0 text-xs-center display-1">Lexi Morgan</v-card-text>
                         <v-layout row wrap justify-center>
                             <v-flex xs12>
-                                <v-card-text class="px-0 text-xs-center display-1"><a href="https://alumni.codeup.com/students/602" target="_blank"><i class="fas fa-user"></i> Codeup</a></v-card-text>
+                                <v-card-text class="px-0 text-xs-center display-1 scale"><a href="https://alumni.codeup.com/students/602" target="_blank"><i class="fas fa-user"></i> Codeup</a></v-card-text>
                             </v-flex>
                             <v-flex xs12>
-                                <v-card-text class="px-0 text-xs-center display-1"><a href="https://www.linkedin.com/in/lexi-morgan/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></v-card-text>
+                                <v-card-text class="px-0 text-xs-center display-1 scale"><a href="https://www.linkedin.com/in/lexi-morgan/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></v-card-text>
                             </v-flex>
                             <v-flex xs12>
-                                <v-card-text class="px-0 text-xs-center display-1"><a href="https://github.com/LexiPedrottiMorgan" target="_blank"><i class="fab fa-github"></i> Github</a></v-card-text>
+                                <v-card-text class="px-0 text-xs-center display-1 scale"><a href="https://github.com/LexiPedrottiMorgan" target="_blank"><i class="fab fa-github"></i> Github</a></v-card-text>
                             </v-flex>
                         </v-layout>
                     </v-card>
@@ -61,14 +61,14 @@
                         <v-layout row wrap justify-center>
                             <v-flex xs12>
                                 <v-flex xs12>
-                                    <v-card-text class="px-0 text-xs-center display-1"><a href="https://alumni.codeup.com/students/599" target="_blank"><i class="fas fa-user"></i> Codeup</a></v-card-text>
+                                    <v-card-text class="px-0 text-xs-center display-1 scale"><a href="https://alumni.codeup.com/students/599" target="_blank"><i class="fas fa-user"></i> Codeup</a></v-card-text>
                                 </v-flex>
                             </v-flex>
                             <v-flex xs12>
-                                <v-card-text class="px-0 text-xs-center display-1"><a href="https://www.linkedin.com/in/landon-harvey/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></v-card-text>
+                                <v-card-text class="px-0 text-xs-center display-1 scale"><a href="https://www.linkedin.com/in/landon-harvey/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></v-card-text>
                             </v-flex>
                             <v-flex xs12>
-                                <v-card-text class="px-0 text-xs-center display-1"><a href="https://github.com/landon-harvey" target="_blank"><i class="fab fa-github"></i> Github</a></v-card-text>
+                                <v-card-text class="px-0 text-xs-center display-1 scale"><a href="https://github.com/landon-harvey" target="_blank"><i class="fab fa-github"></i> Github</a></v-card-text>
                             </v-flex>
                         </v-layout>
                     </v-card>
@@ -102,8 +102,8 @@
         color: #E96445;
         text-decoration: none;
     }
-    a:hover {
-        transform: scale(1.5);
+    .scale:hover {
+        transform: scale(1.05);
     }
     .orangeColor {
         color: #E96445;
