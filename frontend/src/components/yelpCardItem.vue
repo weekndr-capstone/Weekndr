@@ -6,7 +6,7 @@
         <v-card-title class="overflow-y-hidden">
             <h3 class="title vCardText ml-2 mt-2" @click="routeSingle()">{{card.name}}</h3>
             <v-icon half-icon half-increment readonly color="green" class="ml-2">{{card.price}}</v-icon>
-            <v-rating v-model="card.rating" readonly background-color="#F6EFE4" color="#E96445" height="20px" class="overflow-x-hidden mt-2"></v-rating>
+            <v-rating v-model="card.rating" readonly background-color="#F6EFE4" color="#E96445" height="20px" class="overflow-x-hidden mt-2 ml-1"></v-rating>
         </v-card-title>
     </v-card>
 </template>
@@ -61,6 +61,10 @@
     }
     .v-icon {
         height: 37px;
+    }
+
+    .v-rating .v-icon {
+        padding: .1rem;
     }
     .mb-0 {
         width: 10em;
