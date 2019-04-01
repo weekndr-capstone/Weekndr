@@ -1,14 +1,12 @@
 <template>
-    <v-card light class="overflow-y-scroll">
+    <v-card light class="overflow-x-hidden">
         <v-img
                 height="13em" :src="card.image_url"
         ></v-img>
         <v-card-title class="overflow-y-hidden">
-            <div>
-                <h3 class="headline mb-0"><span class="title mb-0 ml-2 vCardText" @click="routeSingle()">{{card.name}}</span>
-                    <v-icon half-icon half-increment readonly color="green" class="ml-2">{{card.price}}</v-icon></h3>
-                <div><v-rating v-model="card.rating" readonly background-color="#F6EFE4" color="#E96445" height="20px" class="overflow-x-hidden"></v-rating></div>
-            </div>
+            <h3 class="title vCardText ml-2 mt-2" @click="routeSingle()">{{card.name}}</h3>
+            <v-icon half-icon half-increment readonly color="green" class="ml-2">{{card.price}}</v-icon>
+            <v-rating v-model="card.rating" readonly background-color="#F6EFE4" color="#E96445" height="20px" class="overflow-x-hidden mt-2 ml-1"></v-rating>
         </v-card-title>
     </v-card>
 </template>
@@ -55,17 +53,24 @@
         font-family: 'Nunito Sans', sans-serif;
         cursor: pointer;
     }
+    .vCardText:hover {
+        transform: scale(1.05);
+    }
     .v-card__title--primary, .v-card__title {
         padding: 0 !important;
     }
     .v-icon {
         height: 37px;
     }
+
+    .v-rating .v-icon {
+        padding: .1rem;
+    }
     .mb-0 {
         width: 10em;
     }
     .v-card {
-        height: 24em;
+        height: 21em;
     }
     @media only screen and (max-width: 500px) {
         .v-card {

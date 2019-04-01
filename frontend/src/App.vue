@@ -5,28 +5,25 @@
 </template>
 
 <script>
-
   export default {
     name: 'App',
-    components: {
-    },
     data () {
       return {
       }
     },
     watch: {
-        $route(to, from) {
-            document.title = to.meta.title || 'Weekndr';
-        },
+      $route(to, from) {
+        document.title = to.meta.title || 'Weekndr';
+      },
     }
-}
+  }
 </script>
 <style>
   @import url("https://fonts.googleapis.com/css?family=Nunito+Sans|Quicksand");
   h1, h2, h3, h4, h5, h6, .v-btn__content, p, .v-toolbar__title, .v-tabs__item {
     font-family: 'Quicksand', sans-serif;
   }
-  .display-1, .display-3 {
+  .display-1, .display-3, .title, .headline {
     font-family: 'Quicksand', sans-serif !important;
   }
   .v-btn__content {
