@@ -7,19 +7,19 @@
         </v-layout>
         <v-layout row>
             <v-flex xs12>
-                <v-card-title primary-title><span class="display-1"><a :href="place.url" target="_blank">{{place.name}}</a></span></v-card-title>
-                <v-card-text class="headline">Address:</v-card-text><v-card-text class="title font-weight-light">{{place.location.address1}}</v-card-text>
-                <v-card-text class="headline">City:</v-card-text><v-card-text class="title font-weight-light"> {{place.location.city}}</v-card-text>
-                <v-card-text class="headline">Phone:</v-card-text><v-card-text class="title font-weight-light"> {{place.phone}}</v-card-text>
-                <v-rating v-model="place.rating" readonly background-color="#F6EFE4" color="#E96445" class="ml-1"></v-rating>
-                <v-icon half-icon half-increment readonly color="green" class="ml-3">{{place.price}}</v-icon>
+                <v-card-title primary-title><span class="display-1 font-weight-bold"><a :href="place.url" target="_blank">{{place.name}}</a></span></v-card-title>
+                <v-card-text class="headline header-font">Address:</v-card-text><v-card-text class="title font-weight-light pt-0">{{place.location.address1}}</v-card-text>
+                <v-card-text class="headline header-font">City:</v-card-text><v-card-text class="title font-weight-light pt-0"> {{place.location.city}}</v-card-text>
+                <v-card-text class="headline header-font">Phone:</v-card-text><v-card-text class="title font-weight-light pt-0"> {{place.phone}}</v-card-text>
+                <v-card-text class="headline header-font">Rating:</v-card-text><v-rating v-model="place.rating" readonly background-color="#F6EFE4" color="#E96445" class="ml-1 pt-0"></v-rating>
+                <v-card-text class="headline header-font">Price:</v-card-text><v-icon half-icon half-increment readonly color="green" class="ml-3 pt-0 pb-4">{{place.price}}</v-icon>
                 <br>
             </v-flex>
         </v-layout>
         <v-layout row xs12>
             <v-dialog v-model="dialog" persistent max-width="600px">
                 <template v-slot:activator="{ on }">
-                    <v-btn outline color="#E96445" flat v-on="on">Add to Itinerary</v-btn>
+                    <v-btn outline color="#E96445" flat v-on="on" >Add to Itinerary</v-btn>
                 </template>
                 <v-tabs v-model="active" slider-color="#E96445">
                     <v-tab v-if="currentViewedTrip === ''" ripple>Create Trip</v-tab>
@@ -351,4 +351,13 @@
         color: #E96445;
         text-decoration: none;
     }
+
+    .header-font{
+        font-family: 'Quicksand', sans-serif !important;
+        font-weight: bold;
+        color: black;
+                /*#E96445*/
+    }
+
+
 </style>
