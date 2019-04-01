@@ -1,5 +1,5 @@
 <template>
-
+<span>
      <v-layout row>
           <v-flex class="zero-padding">
               <v-img :src="getImgUrl(place.url)"  contain  width="135px" height="90px" />
@@ -8,16 +8,24 @@
               <h2 @click="search(place.name)" class="scale">{{place.name}}</h2>
           </v-flex>
       </v-layout>
-
+        <LoadingScreen v-if="isLoading"/>
+</span>
 </template>
 
 <script>
     import store from '../store'
     import router from '../router'
     import axios from 'axios'
+    import LoadingScreen from "./LoadingScreen";
 
     export default {
         name: "RecommendedDestinations",
+        components: {LoadingScreen},
+        data() {
+          return{
+              isLoading: false
+          }
+        },
         props:{
             place: Object,
         },
@@ -30,6 +38,7 @@
             },
             async search(searchCity){
                 store.commit('changeLocation', searchCity);
+                this.isLoading = true;
                 await axios.all([
                     axios.get('/yelpList/'+ store.state.location + "/4"),
                     axios.get('/yelpList/'+ store.state.location + "/1"),
@@ -42,6 +51,7 @@
                     store.commit('changeExperiencesResults', foodRes.data.businesses);
                     store.commit('changeHotelResults', hotelRes.data.businesses);
                     store.commit('changeWeatherResults', weatherRes.data.results[0]);
+                    this.isLoading = false;
                     console.log(suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes)
                 }));
                 router.push('/search');
