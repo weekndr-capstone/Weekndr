@@ -56,7 +56,18 @@
                 }
             });
            }
-        }
+        },
+        //TODO: Finish Unique users
+        // uniqueUsers(){
+        //     let all = store.getters.user.trips;
+        //     let uniqueUsers = [];
+        //     all.filter(t => {
+        //         t.users.filter(u => {
+        //             if (u.id in uniqueUsers){
+        //             }
+        //         })
+        //     })
+        // }
     }
 </script>
 

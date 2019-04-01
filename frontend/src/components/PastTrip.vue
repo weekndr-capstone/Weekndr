@@ -11,8 +11,9 @@
                     <v-flex xs5>
                         <p v-if="trip.start_date !== null && trip.end_date !== null">{{trip.start_date.split('T')[0] +"  -  " + trip.end_date.split('T')[0]}}</p>
                     </v-flex>
-                    <v-avatar  class="avatar-margin" size="36px" v-for="n in trip.users" :key="n">
-                        <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+                    <v-avatar  class="avatar-margin" size="36px" v-for="(n,index) in trip.users" :key="index" :class="'id--' + n.id">
+                        <!--<v-avatar  id="avatar" class="avatar-margin" size="40px"/>-->
+                        <!--<img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">-->
                     </v-avatar>
                 </v-flex>
         </v-layout>
@@ -24,6 +25,7 @@
     import router from '../router'
     import axios from 'axios'
     import Vue from 'vue'
+    import * as filestack from 'filestack-js'
 
     export default {
         name: "PastTrip",
@@ -39,10 +41,47 @@
                         id: place
                     }
                 }).then(res => {
-                    // console.log(res.data);
-                    // console.log(this.trip);
                     Vue.set(this.trip.places,index,res.data)
                 })
+            },
+
+            async getUser(user, index){
+                await axios({
+                    method: 'GET',
+                    url: '/user',
+                    params: {
+                        id: user
+                    }
+                }).then(res => {
+                    Vue.set(this.trip.users,index,res.data);
+                    // if(res.data.img_path !== "") {
+                    //     this.displayAvatar(res.data, index)
+                    // }
+                })
+            },
+
+            displayAvatar(user, index){
+                const apikey = 'AsNx10Lk3SEiGRvMmw223z';
+                const client = filestack.init(apikey);
+
+                // let handler = userPath;
+
+                client.retrieve(user.img_path).then((blob) => {
+                    let imgLocation = document.getElementsByClassName('id--'+ `${user.id}`);
+                    console.log(imgLocation);
+                    const urlCreator = window.URL || window.webkitURL;
+                    const img = document.createElement('img');
+                    img.src = urlCreator.createObjectURL(blob);
+                    img.height = 36;
+                    img.width = 36;
+                    [...imgLocation].forEach((loc,index) => {
+                        console.log("attempt");
+                        console.log(loc);
+                        loc.appendChild(img);
+                    })
+                }).catch((error) => {
+                    console.error(error);
+                });
             },
 
             async routeSingle() {
@@ -54,6 +93,11 @@
              this.trip.places.forEach((place,index) => {
                 if (place.id === undefined) {
                     this.getPlace(place, index);
+                }
+            });
+            this.trip.users.forEach((user,index) => {
+                if (user.id === undefined){
+                    this.getUser(user, index);
                 }
             });
         }

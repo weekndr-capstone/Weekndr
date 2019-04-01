@@ -143,7 +143,7 @@
             menu: false,
             valid: true,
             valid2:true,
-            username: '',
+            username: store.state.user.username,
             phoneRules: [
                 v => !!v || 'Phone Number is required',
                 v => (v && v.length === 10) || 'Phone Number must be 10 numbers excluding dashes - '
@@ -290,7 +290,9 @@
             }
         },
         mounted () {
-
+            if (this.loggedIn){
+                this.displayAvatar();
+            }
         }
     }
 </script>
