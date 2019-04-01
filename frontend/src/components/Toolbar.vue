@@ -1,6 +1,6 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <v-toolbar flat class="Navbar">
-        <v-flex xs5 sm3 md2 xl1>
+        <v-flex xs1>
             <router-link :to="'/'">
                 <v-img :src="require('../assets/weekdnr_logo.svg')" class="icon"></v-img>
             </router-link>
