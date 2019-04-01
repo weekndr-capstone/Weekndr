@@ -28,7 +28,7 @@
         height: auto;
     }
     .svg path {
-        fill: #000;
+        fill: #000 !important;
     }
     .weekndr path {
         fill: #E96445;
