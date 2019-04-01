@@ -11,8 +11,8 @@
                     <v-flex xs5>
                         <p v-if="trip.start_date !== null && trip.end_date !== null">{{trip.start_date.split('T')[0] +"  -  " + trip.end_date.split('T')[0]}}</p>
                     </v-flex>
-                    <v-avatar  class="avatar-margin" size="36px" v-for="n in trip.users" :key="n">
-                        <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+                    <v-avatar  class="avatar-margin" size="36px" v-for="(n,index) in trip.users" :key="index" :id="'id--' + n.id + trip.id">
+                        <!--<v-avatar  id="avatar" class="avatar-margin" size="40px"/>-->
                     </v-avatar>
                 </v-flex>
         </v-layout>
@@ -24,6 +24,7 @@
     import router from '../router'
     import axios from 'axios'
     import Vue from 'vue'
+    import * as filestack from 'filestack-js'
 
     export default {
         name: "PastTrip",
@@ -39,10 +40,43 @@
                         id: place
                     }
                 }).then(res => {
-                    // console.log(res.data);
-                    // console.log(this.trip);
                     Vue.set(this.trip.places,index,res.data)
                 })
+            },
+
+            async getUser(user, index){
+                await axios({
+                    method: 'GET',
+                    url: '/user',
+                    params: {
+                        id: user
+                    }
+                }).then(res => {
+                    Vue.set(this.trip.users,index,res.data);
+                        this.displayAvatar(res.data);
+                })
+            },
+
+            displayAvatar(user){
+                if(user.img_path !== undefined && user.img_path !== "") {
+                    const apikey = 'AsNx10Lk3SEiGRvMmw223z';
+                    const client = filestack.init(apikey);
+
+                    let handler = user.img_path;
+                    console.log(handler);
+                    client.retrieve(handler).then((blob) => {
+                        let imgLocation = document.getElementById('id--' + user.id + this.trip.id);
+                        console.log(imgLocation);
+                        const urlCreator = window.URL || window.webkitURL;
+                        const img = document.createElement('img');
+                        img.src = urlCreator.createObjectURL(blob);
+                        img.height = 36;
+                        img.width = 36;
+                        imgLocation.appendChild(img);
+                    }).catch((error) => {
+                        console.error(error);
+                    });
+                }
             },
 
             async routeSingle() {
@@ -54,6 +88,11 @@
              this.trip.places.forEach((place,index) => {
                 if (place.id === undefined) {
                     this.getPlace(place, index);
+                }
+            });
+            this.trip.users.forEach((user,index) => {
+                if (user.id === undefined){
+                    this.getUser(user, index);
                 }
             });
         }

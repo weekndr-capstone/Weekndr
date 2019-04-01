@@ -278,13 +278,14 @@
 
             inviteFriends(){
                 this.friends.forEach((e) => {
+                    console.log(e);
                     axios({
                         method: 'POST',
                         url:'/twilio',
                         headers: {'Content-Type': 'application/json'},
                         params: {
-                            friends: e.phone_number,
-                            fromNumber: store.state.user.phone_number
+                            friends: e.phoneNumber,
+                            fromNumber: store.state.user.phoneNumber
                         }
                     })
                         .then(response => {
