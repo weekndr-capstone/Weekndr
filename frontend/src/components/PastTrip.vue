@@ -59,10 +59,8 @@
                     const client = filestack.init(apikey);
 
                     let handler = user.img_path;
-                    console.log(handler);
                     client.retrieve(handler).then((blob) => {
                         let imgLocation = document.getElementById('id--' + user.id + this.trip.id);
-                        console.log(imgLocation);
                         const urlCreator = window.URL || window.webkitURL;
                         const img = document.createElement('img');
                         img.src = urlCreator.createObjectURL(blob);
