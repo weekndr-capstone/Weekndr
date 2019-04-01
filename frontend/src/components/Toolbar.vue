@@ -83,7 +83,7 @@
                                         <router-link :to="'/about'">
                                                 <p class="menu-item  text-xs-right">About</p>
                                         </router-link>
-                                         <p class="text-xs-right" @click="logout()" class="menu-item text-xs-right">Logout</p>
+                                         <p @click="logout()" class="menu-item text-xs-right">Logout</p>
                                 </v-flex>
                             </v-list>
                         </v-card>

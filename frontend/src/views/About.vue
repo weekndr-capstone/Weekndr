@@ -12,12 +12,14 @@
                 <v-flex xs10 md4>
                     <v-card class="mx-1 mb-3 opacity">
                         <v-img
-                                src="https://files.slack.com/files-pri/T029BRGN0-FHFLFJ370/codeup_yz-18-0151.jpg"
+                                src="https://s3.amazonaws.com/alumni.codeup.com/AllenJustinBlanco.jpg"
                                 aspect-ratio="1"
                         ></v-img>
                         <v-card-text class="px-0 text-xs-center display-1">Justin Blanco</v-card-text>
-                        <v-card-text class="px-0 text-xs-center display-1"><a href="https://justinblanco.dev">justinblanco.dev</a></v-card-text>
                         <v-layout row wrap justify-center>
+                            <v-flex xs12>
+                                <v-card-text class="px-0 text-xs-center display-1"><a href="https://alumni.codeup.com/students/605" target="_blank"><i class="fas fa-user"></i> Codeup</a></v-card-text>
+                            </v-flex>
                         <v-flex xs12>
                         <v-card-text class="px-0 text-xs-center display-1"><a href="https://www.linkedin.com/in/justin-blanco/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></v-card-text>
                         </v-flex>
@@ -31,11 +33,14 @@
                 <v-flex xs10 md4>
                     <v-card class="mx-1 mb-3 opacity">
                         <v-img
-                                src="https://files.slack.com/files-pri/T029BRGN0-FHF9QSSEB/screen_shot_2019-02-14_at_10.29.00_am.png"
+                                src="https://s3.amazonaws.com/alumni.codeup.com/LexiMorgan.jpg"
                                 aspect-ratio="1"
                         ></v-img>
                         <v-card-text class="px-0 text-xs-center display-1">Lexi Morgan</v-card-text>
                         <v-layout row wrap justify-center>
+                            <v-flex xs12>
+                                <v-card-text class="px-0 text-xs-center display-1"><a href="https://alumni.codeup.com/students/602" target="_blank"><i class="fas fa-user"></i> Codeup</a></v-card-text>
+                            </v-flex>
                             <v-flex xs12>
                                 <v-card-text class="px-0 text-xs-center display-1"><a href="https://www.linkedin.com/in/lexi-morgan/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></v-card-text>
                             </v-flex>
@@ -49,13 +54,15 @@
                 <v-flex xs10 md4>
                     <v-card class="mx-1 mb-3 opacity">
                         <v-img
-                                src="https://files.slack.com/files-pri/T029BRGN0-FHFM620F7/vqnm9fbq.jpeg"
+                                src="https://s3.amazonaws.com/alumni.codeup.com/LandonHarvey.jpg"
                                 aspect-ratio="1"
                         ></v-img>
                         <v-card-text class="px-0 text-xs-center display-1">Landon Harvey</v-card-text>
                         <v-layout row wrap justify-center>
                             <v-flex xs12>
-                                <v-card-text class="px-0 text-xs-center display-1"><a href="https://landon-harvey.com" target="_blank">landon-harvey.com</a></v-card-text>
+                                <v-flex xs12>
+                                    <v-card-text class="px-0 text-xs-center display-1"><a href="https://alumni.codeup.com/students/599" target="_blank"><i class="fas fa-user"></i> Codeup</a></v-card-text>
+                                </v-flex>
                             </v-flex>
                             <v-flex xs12>
                                 <v-card-text class="px-0 text-xs-center display-1"><a href="https://www.linkedin.com/in/landon-harvey/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></v-card-text>
