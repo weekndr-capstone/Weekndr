@@ -2,14 +2,16 @@
     <v-container v-if="forecastArr.length > 1" grid-list-md text-xs-center>
         <h1 class="h1color">{{this.direction.formatted_address}}</h1>
         <br>
-        <h2 >Current Weather Forecast</h2>
+        <h2>Current Weather Forecast</h2>
         <br>
         <v-layout row wrap justify-center v-if="weatherLoaded" fill-height>
             <v-flex v-if="forecastArr.length > 1" v-for="(day, index) in forecastArr" :key="index" xs4 md2 fill-height>
                 <v-card light>
                         <v-card-text class="px-0 headline">{{timeConverter(day.time)}}</v-card-text>
-                        <v-card-text class="px-0 subheading">High {{` ${day.apparentTemperatureHigh}&#176;F `}}</v-card-text>
-                        <v-card-text class="px-0 subheading">Low {{` ${day.apparentTemperatureLow}&#176;F `}}</v-card-text>
+                    <v-card-text class="font-weight-bold px-0">High </v-card-text>
+                        <v-card-text class="px-0 subheading">{{` ${day.apparentTemperatureHigh}&#176;F `}}</v-card-text>
+                    <v-card-text class="font-weight-bold px-0">Low </v-card-text>
+                    <v-card-text class="px-0 subheading">{{` ${day.apparentTemperatureLow}&#176;F `}}</v-card-text>
                         <v-card-text class="px-0 px-0 pr-4 pl-4 subheading summary overflow-y-hidden">{{day.summary}}</v-card-text>
                 </v-card>
             </v-flex>
@@ -25,7 +27,7 @@
     export default {
         name: "Weather",
         components: {CardItem},
-        props:{
+        props: {
             Results: Array
         },
         data() {
@@ -84,7 +86,7 @@
                     console.log(err);
                 })
             },
-            onSuccess: function (data){
+            onSuccess: function (data) {
                 this.weatherLoaded = true;
                 this.temp = Math.round(data.currently.temperature);
                 this.condition = this.setCondition(data.currently.icon);
@@ -99,18 +101,18 @@
             setCondition: function (icon) {
                 return this.weatherConditions[icon][1];
             },
-            timeConverter: function(UNIX_timestamp){
-            let a = new Date(UNIX_timestamp * 1000);
-            let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-            let year = a.getFullYear();
-            let month = months[a.getMonth()];
-            let date = a.getDate();
-            // let hour = a.getHours();
-            // let min = a.getMinutes();
-            // let sec = a.getSeconds();
-            let time = date + ' ' + month + ' ' + year;
-            return time;
-    }
+            timeConverter: function (UNIX_timestamp) {
+                let a = new Date(UNIX_timestamp * 1000);
+                let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                let year = a.getFullYear();
+                let month = months[a.getMonth()];
+                let date = a.getDate();
+                // let hour = a.getHours();
+                // let min = a.getMinutes();
+                // let sec = a.getSeconds();
+                let time = month + ' ' + date;
+                return time;
+            }
         }
     }
 </script>
@@ -120,6 +122,9 @@
         color: #E96445;
     }
     .summary {
-        height: 10em;
+        height: 8em;
+    }
+    .v-card__text {
+        padding: 6px;
     }
 </style>

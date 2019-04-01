@@ -4,11 +4,9 @@
                 height="13em" :src="card.image_url"
         ></v-img>
         <v-card-title class="overflow-y-hidden">
-            <div>
-                <h3 class="headline mb-0"><span class="title mb-0 ml-2 vCardText" @click="routeSingle()">{{card.name}}</span>
+                <h3 class="headline mb-0 vCardText"><span class="title mb-0 ml-2" @click="routeSingle()">{{card.name}}</span>
                     <v-icon half-icon half-increment readonly color="green" class="ml-2">{{card.price}}</v-icon></h3>
-                <div><v-rating v-model="card.rating" readonly background-color="#F6EFE4" color="#E96445" height="20px" class="overflow-x-hidden"></v-rating></div>
-            </div>
+                <v-rating v-model="card.rating" readonly background-color="#F6EFE4" color="#E96445" height="20px" class="overflow-x-hidden"></v-rating>
         </v-card-title>
     </v-card>
 </template>
@@ -54,6 +52,9 @@
     .vCardText {
         font-family: 'Nunito Sans', sans-serif;
         cursor: pointer;
+    }
+    .vCardText:hover {
+        transform: scale(1.05);
     }
     .v-card__title--primary, .v-card__title {
         padding: 0 !important;
