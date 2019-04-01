@@ -1,5 +1,7 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-<v-container fill-height fluid>
+    <span>
+    <LoadingScreen v-if="isLoading"/>
+    <v-container fill-height fluid>
         <v-layout justify-center>
             <v-card height="400px" xs12 light>
                 <v-container fill-height>
@@ -44,12 +46,14 @@
             </v-card>
         </v-layout>
 </v-container>
+        </span>
 </template>
 
 <script>
     import store from '../store'
     import router from '../router'
     import axios from 'axios'
+    import LoadingScreen from "./LoadingScreen";
 
 
     let today= new Date();
@@ -67,6 +71,7 @@
 
     export default {
         name: "SearchCard",
+        components: {LoadingScreen},
         data(){
             return{
                 Where: '',
@@ -79,8 +84,8 @@
                 menu1: false,
                 menu2: false,
                 fadeout: 'fade-out',
-                isLoading: false,
                 valid: true,
+                isLoading: false,
                 whereRules: [
                     v => !!v || 'Location is required'
                 ],
@@ -99,14 +104,18 @@
             validate () {
                 this.valid = !!this.$refs.form.validate();
             },
+            doneLoading(){
+                this.isLoading = false
+            }
+            ,
             async searchLocation(){
                 this.validate();
                 if (this.valid) {
-                    this.isLoading = true;
                     store.commit('changeLocation', this.Where);
                     store.commit('changeStartDate', this.Dates.Start);
                     store.commit('changeEndDate', this.Dates.End);
                     store.commit('changeMinDate', this.minDate);
+                    this.isLoading = true;
                     await axios.all([
                         axios.get('/yelpList/' + store.state.location + "/4"),
                         axios.get('/yelpList/' + store.state.location + "/1"),
@@ -119,7 +128,8 @@
                         store.commit('changeExperiencesResults', foodRes.data.businesses);
                         store.commit('changeHotelResults', hotelRes.data.businesses);
                         store.commit('changeWeatherResults', weatherRes.data.results[0]);
-                        console.log(suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes)
+                        this.doneLoading();
+                        console.log(suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes);
                     }));
                     store.commit('changeMainUser', true);
                     router.push('/search');
@@ -130,7 +140,7 @@
 </script>
 
 <style scoped>
-v-btn:hover {
-    color: #E96445;
-}
+    v-btn:hover {
+        color: #E96445;
+    }
 </style>
