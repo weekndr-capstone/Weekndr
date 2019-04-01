@@ -238,7 +238,9 @@
                                 store.commit('changeUser', res.data);
                                 this.username = res.data.username;
                                 this.Login = false;
-                                this.displayAvatar();
+                                if (store.state.user.img_path !== undefined && store.state.user.img_path !== "") {
+                                    this.displayAvatar();
+                                }
                             } else {
                                 this.loginRules = 'Incorrect Login Try Again'
                             }
@@ -291,7 +293,9 @@
         },
         mounted () {
             if (this.loggedIn){
-                this.displayAvatar();
+                if (store.state.user.img_path !== undefined && store.state.user.img_path !== "") {
+                    this.displayAvatar();
+                }
             }
         }
     }
