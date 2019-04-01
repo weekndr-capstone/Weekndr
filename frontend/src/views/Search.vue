@@ -55,7 +55,6 @@
                 food: store.state.foodResults,
                 experiences: store.state.experiencesResults,
                 weather: store.state.weatherResults,
-                isLoading: store.state.isLoading
             }
         },
     }
