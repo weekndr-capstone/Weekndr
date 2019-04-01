@@ -93,6 +93,8 @@
             this.trip.users.forEach((user,index) => {
                 if (user.id === undefined){
                     this.getUser(user, index);
+                }else {
+                    this.displayAvatar(user)
                 }
             });
         }
