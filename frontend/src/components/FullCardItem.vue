@@ -1,25 +1,39 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <v-container>
-        <v-layout row>
-            <v-flex xs12>
+        <v-layout>
+            <v-flex xs12 sm10 offset-sm1>
                 <v-img :src="place.image_url" aspect-ratio="2"/>
             </v-flex>
         </v-layout>
         <v-layout row>
-            <v-flex xs12>
-                <v-card-title primary-title><span class="display-1 font-weight-bold"><a :href="place.url" target="_blank">{{place.name}}</a></span></v-card-title>
-                <v-card-text class="headline header-font">Address:</v-card-text><v-card-text class="title font-weight-light pt-0">{{place.location.address1}}</v-card-text>
-                <v-card-text class="headline header-font">City:</v-card-text><v-card-text class="title font-weight-light pt-0"> {{place.location.city}}</v-card-text>
-                <v-card-text class="headline header-font">Phone:</v-card-text><v-card-text class="title font-weight-light pt-0"> {{place.phone}}</v-card-text>
-                <v-card-text class="headline header-font">Rating:</v-card-text><v-rating v-model="place.rating" readonly background-color="#F6EFE4" color="#E96445" class="ml-1 pt-0"></v-rating>
-                <v-card-text class="headline header-font">Price:</v-card-text><v-icon half-icon half-increment readonly color="green" class="ml-3 pt-0 pb-4">{{place.price}}</v-icon>
-                <br>
-            </v-flex>
+                <v-flex xs10 offset-sm1 offset-xs-1>
+                    <v-card-title primary-title><span class="display-1 font-weight-bold text-xs-center align-content-center"><a :href="place.url" target="_blank">{{place.name}}</a></span></v-card-title>
+                </v-flex>
         </v-layout>
-        <v-layout row xs12>
+            <v-layout row wrap>
+                <v-flex xs12 sm5 offset-sm1 offset-xs-2>
+                    <v-card-text class="title header-font">Address:</v-card-text><v-card-text class="subheading font-weight-light pt-0">{{place.location.address1}}</v-card-text>
+                </v-flex>
+                <v-flex xs12 sm5 offset-xs-2>
+                    <v-card-text class="title header-font">City:</v-card-text><v-card-text class="subheading font-weight-light pt-0"> {{place.location.city}}</v-card-text>
+                </v-flex>
+                <v-flex xs12 sm5 offset-sm1 offset-xs-2>
+                    <v-card-text class="title header-font">Phone:</v-card-text><v-card-text class="subheading font-weight-light pt-0"> {{place.phone}}</v-card-text>
+                </v-flex>
+                <v-flex xs12 sm5 offset-xs-2>
+                    <v-card-text class="title header-font">Rating:</v-card-text><v-rating v-model="place.rating" readonly background-color="#F6EFE4" color="#E96445" class="ml-1 pt-0"></v-rating>
+                </v-flex>
+                <v-flex xs12 sm5 offset-sm1 offset-xs-2>
+                    <v-card-text class="title header-font">Price:</v-card-text><v-icon half-icon half-increment readonly color="green" class="ml-3 pt-0 pb-4">{{place.price}}</v-icon>
+                </v-flex>
+
+            </v-layout>
+        <v-layout row xs10 sm6>
             <v-dialog v-model="dialog" persistent max-width="600px">
                 <template v-slot:activator="{ on }">
-                    <v-btn outline color="#E96445" flat v-on="on" >Add to Itinerary</v-btn>
+                    <v-flex xs12 sm5 offset-sm1 offset-xs-2>
+                        <v-btn outline color="#E96445" flat v-on="on" >Add to Itinerary</v-btn>
+                    </v-flex>
                 </template>
                 <v-tabs v-model="active" slider-color="#E96445">
                     <v-tab v-if="currentViewedTrip === ''" ripple>Create Trip</v-tab>
