@@ -5,7 +5,7 @@
               <v-img :src="getImgUrl(place.url)"  contain  width="135px" height="90px" />
           </v-flex>
           <v-flex  align-self-center class="text-xs-center">
-              <h2 @click="search(place.name)">{{place.name}}</h2>
+              <h2 @click="search(place.name)" class="scale">{{place.name}}</h2>
           </v-flex>
       </v-layout>
 
@@ -57,6 +57,12 @@
 
     .zero-padding{
         padding: 0 !important;
+    }
+    .scale {
+        cursor: pointer;
+    }
+    .scale:hover {
+        transform: scale(1.05);
     }
 </style>
 
