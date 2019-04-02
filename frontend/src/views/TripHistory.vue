@@ -1,7 +1,7 @@
 <template>
         <div>
             <Toolbar/>
-            <GoogleMap :trips="trips"/>
+            <GoogleMap :trips="userTrips"/>
             <PastTrip v-for="n in userTrips" :key="n" :trip="n"/>
         </div>
 </template>
@@ -25,11 +25,12 @@
         },
         computed: {
             userTrips() {
-                let all = store.getters.user.trips;
+                let all = this.trips;
                 let current = new Date();
 
                 return all.filter(t => {
                     let temp = new Date(t.end_date);
+                    console.log(temp);
                     if (temp < current){
                         return t;
                     }
