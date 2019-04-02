@@ -70,5 +70,6 @@
 
     .scale:hover {
         transform: scale(1.05);
+        cursor: pointer;
     }
 </style>
