@@ -2,7 +2,6 @@
 
     <div>
         <Toolbar/>
-        <v-container>
             <v-layout row>
                 <v-flex class="box" xs12 sm8 offset-sm2 md10 lg8 offset-lg2 offset-md1>
                         <h1>Current</h1>
@@ -15,7 +14,6 @@
                         <PastTrip v-for="n in userUpcoming" :key="n.id" :trip="n"/>
                 </v-flex>
             </v-layout>
-        </v-container>
     </div>
 
 </template>
