@@ -10,15 +10,15 @@
         props: {
             trips: Object,
         },
+        methods:{
+        },
         async mounted(){
             try {
-
-
                 const google = await gmapsInit();
                 const geocoder = new google.maps.Geocoder();
                 var latlng = new google.maps.LatLng(-0.397, 5.644);
                 var options = {
-                    zoom: 1,
+                    zoom: 3,
                     center: latlng,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
@@ -26,37 +26,30 @@
 
                 for (var i = 0; i < this.trips.length; i++) {
                     var address = this.trips[i].location;
-                    codeAddress(address);
-                    console.log(address);
+                    codeAddress(address, this.trips[i]);
                 }
-            function codeAddress(address) {
+
+            function codeAddress(address, trip) {
                 geocoder.geocode({ 'address': address }, function(results, status) {
-                    console.log(results);
                     if (status === google.maps.GeocoderStatus.OK) {
                         map.setCenter(results[0].geometry.location);
                         var marker = new google.maps.Marker({
                             map: map,
-                            position: results[0].geometry.location
+                            position: results[0].geometry.location,
+                            title: trip.location
+                        });
+                        var infowindow = new google.maps.InfoWindow({
+                            content: "<h1>Trip: " + trip.location + '</h1>' + '<br>Description: ' +
+                                    trip.trip_description + '<br><br>Ended: ' + trip.end_date.split('T')[0]
+                        });
+                        google.maps.event.addListener(marker, 'click', function() {
+                            infowindow.open(map,marker);
                         });
                     } else {
                         alert("Geocode unsuccessful");
                     }
-                    // map.setCenter(results[0].geometry.location);
-                    // map.fitBounds(results[0].geometry.viewport);
                 });
             }
-
-                // geocoder.geocode({ address: 'Austria' }, (results, status) => {
-                //     if (status !== 'OK' || !results[0]) {
-                //         throw new Error(status);
-                //     }
-                //
-                //     map.setCenter(results[0].geometry.location);
-                //     map.fitBounds(results[0].geometry.viewport);
-                // });
-                //
-                // const markers = locations
-                //     .map(x => new google.maps.Marker({ ...x, map }));
             } catch (error) {
                 console.error(error);
             }
