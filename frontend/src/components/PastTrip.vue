@@ -2,7 +2,7 @@
     <v-container>
         <v-layout row wrap class="white-background" elevation-1>
                 <v-flex class="zero-margin" xs3 sm2 md2 lg2 xl1>
-                    <v-img right max-height="100px" min-height="100px"  src="https://picsum.photos/300?random"></v-img>
+                    <v-img v-if="trip.places[0].image_url" right max-height="100px" min-height="100px"  :src="pastTripPhoto()"></v-img>
                 </v-flex>
                 <v-flex xs8>
                     <h4 @click="routeSingle()" class="pl-3">{{trip.title}}</h4>
@@ -77,6 +77,13 @@
                 await store.commit('changeCurrentlyViewedTrip', this.trip);
                 router.push('/itenerary')
             },
+            pastTripPhoto() {
+                if (this.trip.places[0].image_url !== undefined && this.trip.places[0].image_url !== null){
+                    return this.trip.places[0].image_url;
+                } else {
+                    return "https://picsum.photos/100/100/?random";
+                }
+            }
         },
         mounted(){
              this.trip.places.forEach((place,index) => {
