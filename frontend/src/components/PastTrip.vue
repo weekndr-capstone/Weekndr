@@ -4,17 +4,13 @@
                 <v-flex class="zero-margin" xs3 sm2 md2 lg2 xl1>
                     <v-img right max-height="100px" min-height="100px"  src="https://picsum.photos/300?random"></v-img>
                 </v-flex>
-                <v-flex class="margin" xs8 sm7 md8 lg8 xl10>
-                    <v-flex xs5>
-                    <h4 @click="routeSingle()">{{trip.title}}</h4>
-                    </v-flex>
-                    <v-flex xs5>
-                        <p v-if="trip.start_date !== null && trip.end_date !== null">{{trip.start_date.split('T')[0] +"  -  " + trip.end_date.split('T')[0]}}</p>
-                    </v-flex>
-                    <v-avatar  class="avatar-margin" size="36px" v-for="(n,index) in trip.users" :key="index" :id="'id--' + n.id + trip.id">
-                        <!--<v-avatar  id="avatar" class="avatar-margin" size="40px"/>-->
+                <v-flex xs8>
+                    <h4 @click="routeSingle()" class="pl-3">{{trip.title}}</h4>
+                    <p class="pl-3" v-if="trip.start_date !== null && trip.end_date !== null">{{trip.start_date.split('T')[0] +"  -  " + trip.end_date.split('T')[0]}}</p>
+                    <v-avatar class="pl-4" size="36px" v-for="(n,index) in trip.users" :key="index" :id="'id--' + n.id + trip.id">
                     </v-avatar>
                 </v-flex>
+
         </v-layout>
     </v-container>
 </template>
@@ -63,10 +59,8 @@
                     const client = filestack.init(apikey);
 
                     let handler = user.img_path;
-                    console.log(handler);
                     client.retrieve(handler).then((blob) => {
                         let imgLocation = document.getElementById('id--' + user.id + this.trip.id);
-                        console.log(imgLocation);
                         const urlCreator = window.URL || window.webkitURL;
                         const img = document.createElement('img');
                         img.src = urlCreator.createObjectURL(blob);

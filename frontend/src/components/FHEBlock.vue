@@ -5,7 +5,7 @@
                 <v-img :src="getImgUrl(place.url)" right height="100px" width="100px"  />
             </v-flex>
             <v-flex xs7 align-self-center>
-                <h2 @click="search(place)">{{place.name}}</h2>
+                <h2 @click="search(place)" class="scale">{{place.name}}</h2>
             </v-flex>
         </v-layout>
     </v-container>
@@ -51,7 +51,7 @@
                             console.log(err)
                         })
                 }
-                store.commit('changeStartDate', store.state.currentViewedTrip.start_date);
+                store.commit('changeStartDate', store.state.currentViewedTrip.start_date.split('T')[0]);
                 store.commit('changeEndDate', store.state.currentViewedTrip.end_date);
                 router.push('/search');
             },
@@ -66,5 +66,9 @@
 
     .zero-padding {
         padding: 0 !important;
+    }
+
+    .scale:hover {
+        transform: scale(1.05);
     }
 </style>
