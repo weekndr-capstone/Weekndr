@@ -7,7 +7,7 @@
                 <v-flex xs8>
                     <h4 @click="routeSingle()" class="pl-3">{{trip.title}}</h4>
                     <p class="pl-3" v-if="trip.start_date !== null && trip.end_date !== null">{{trip.start_date.split('T')[0] +"  -  " + trip.end_date.split('T')[0]}}</p>
-                    <v-avatar class="pl-4" size="36px" v-for="(n,index) in trip.users" :key="index" :id="'id--' + n.id + trip.id">
+                    <v-avatar class="ml-2" size="36px" v-for="(n,index) in trip.users" :key="index" :id="'id--' + n.id + trip.id">
                     </v-avatar>
                 </v-flex>
 
@@ -49,12 +49,13 @@
                     }
                 }).then(res => {
                     Vue.set(this.trip.users,index,res.data);
+                    if(res.data.img_path !== undefined && res.data.img_path !== "") {
                         this.displayAvatar(res.data);
+                    }
                 })
             },
 
             displayAvatar(user){
-                if(user.img_path !== undefined && user.img_path !== "") {
                     const apikey = 'AsNx10Lk3SEiGRvMmw223z';
                     const client = filestack.init(apikey);
 
@@ -70,7 +71,6 @@
                     }).catch((error) => {
                         console.error(error);
                     });
-                }
             },
 
             async routeSingle() {

@@ -12,13 +12,14 @@
                     <v-layout row wrap>
                     <v-btn :ripple="false" icon v-on:click="redHeartAndIncrement()">
                         <i :class=heartIconClasses></i>
-                        <span class="pl-1"> {{ counter }}</span>
+                        <span class="pl-1">{{ counter }}</span>
                     </v-btn>
                     <v-dialog v-model="dialogue" max-width="600px">
                     <template v-slot:activator="{ on }">
                         <v-spacer>
                             <v-btn :ripple="false" icon v-on="on">
                                 <i class="far fa-comment 10x"></i>
+                                <span class="pl-1">{{comments.length}}</span>
                             </v-btn>
                         </v-spacer>
                     </template>
@@ -33,6 +34,7 @@
                                                      :comments="comment.childComments"
                                                      :label="comment.comment"
                                                      :id="comment.id"
+                                                     :username="comment.user.username"
                                                      :depth="0">
                                             </comment>
                                         </div>
