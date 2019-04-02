@@ -19,13 +19,13 @@
                 <br>
             </div>
             <div v-if="experiences.length >= 1" >
-                <h2>Food</h2>
+                <h2>Experiences</h2>
                 <br>
                 <CardCarousel :results = "experiences" :hotel="false"/>
                 <br>
             </div>
             <div v-if="food.length >= 1">
-                <h2>Experiences</h2>
+                <h2>Food</h2>
                 <br>
                 <CardCarousel :results = "food" :hotel="false"/>
             </div>
