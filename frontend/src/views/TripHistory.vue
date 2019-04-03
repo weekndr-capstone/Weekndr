@@ -30,7 +30,6 @@
 
                 return all.filter(t => {
                     let temp = new Date(t.end_date);
-                    console.log(temp);
                     if (temp < current){
                         return t;
                     }
