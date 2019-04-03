@@ -37,7 +37,7 @@
                         .then( res => {
                             store.commit('changeFoodResults', res.data.businesses);
                             store.commit('changeHotelResults', '');
-                            store.commit('changeExperiencesResults', res.data.businesses);
+                            store.commit('changeExperiencesResults', '');
                             store.commit('changeSuggestedResults', '');
                         })
                         .catch(err => {
