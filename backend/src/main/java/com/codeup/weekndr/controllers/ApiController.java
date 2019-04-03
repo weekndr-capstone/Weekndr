@@ -85,7 +85,7 @@ public class ApiController {
 
     @PostMapping("/twilio")
     public String twilio(@RequestParam("friends") String friends, @RequestParam("fromNumber") String fromNumber){
-        String body = "You have been invited on a trip. Click the link to join in on the fun!";
+        String body = "You have been invited on a trip. Click the link to join in on the fun! https://weekndr.world";
         twilioMessage(friends, fromNumber, body, authtwilio, twilioSID);
         return "message sent";
     }

@@ -28,6 +28,7 @@ public class User {
     @Column(nullable = false)
     private String password;
     private LocalDateTime created_at;
+
     @ManyToMany(mappedBy = "users")
     private List<Trip> trips;
 
