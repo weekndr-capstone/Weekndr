@@ -124,8 +124,8 @@
                         axios.get("https://maps.googleapis.com/maps/api/geocode/json?address="+ store.state.location +"&key=" + "AIzaSyAih6iqhzWmzLIe11sF9yMDuwPhVyFYP2w")
                     ]).then(axios.spread((suggestedRes, experiencesRes, foodRes, hotelRes, weatherRes) => {
                         store.commit('changeSuggestedResults', suggestedRes.data.businesses);
-                        store.commit('changeFoodResults', experiencesRes.data.businesses);
-                        store.commit('changeExperiencesResults', foodRes.data.businesses);
+                        store.commit('changeExperiencesResults', experiencesRes.data.businesses);
+                        store.commit('changeFoodResults', foodRes.data.businesses);
                         store.commit('changeHotelResults', hotelRes.data.businesses);
                         store.commit('changeWeatherResults', weatherRes.data.results[0]);
                         this.doneLoading();
