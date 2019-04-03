@@ -34,19 +34,34 @@
                 store.commit('changeLocation', store.state.currentViewedTrip.location);
                 if (search.name === 'Food'){
                     await axios.get('/yelpList/' + store.state.location + "/2")
-                        .then( res => {store.commit('changeFoodResults', res.data.businesses)})
+                        .then( res => {
+                            store.commit('changeFoodResults', res.data.businesses);
+                            store.commit('changeHotelResults', '');
+                            store.commit('changeExperiencesResults', res.data.businesses);
+                            store.commit('changeSuggestedResults', '');
+                        })
                         .catch(err => {
                             console.log(err)
                         })
                 } else if (search.name === "Hotel"){
                     await axios.get('/yelpList/' + store.state.location + "/3")
-                        .then( res => { store.commit('changeHotelResults', res.data.businesses)})
+                        .then( res => {
+                            store.commit('changeHotelResults', res.data.businesses);
+                            store.commit('changeExperiencesResults', '');
+                            store.commit('changeFoodResults', '');
+                            store.commit('changeSuggestedResults', '');
+                        })
                         .catch(err => {
                             console.log(err)
                         })
                 } else {
                     await axios.get('/yelpList/'+ store.state.location + "/1")
-                        .then( res => { store.commit('changeExperiencesResults', res.data.businesses);})
+                        .then( res => {
+                            store.commit('changeExperiencesResults', res.data.businesses);
+                            store.commit('changeHotelResults', '');
+                            store.commit('changeSuggestedResults', '');
+                            store.commit('changeFoodResults', '');
+                        })
                         .catch(err => {
                             console.log(err)
                         })
