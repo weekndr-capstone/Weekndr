@@ -24,12 +24,16 @@
             place: Object,
         },
         methods:{
+
+            //if image is not available use weekndr logo as placeholder
             getImgUrl(pic) {
                 if (pic == null){
                     return require('../assets/weekdnr_logo.svg')
                 }
                 return require('../assets/'+ pic)
             },
+
+            //search based on which button type was clicked and clear state for all other result types and then route to search view
             async search(search){
                 store.commit('changeLocation', store.state.currentViewedTrip.location);
                 if (search.name === 'Food'){

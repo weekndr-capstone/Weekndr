@@ -161,6 +161,7 @@
     import FileUpload from "./FileUpload";
     import axios from 'axios'
     import router from '../router'
+    //TODO: drastically reduce components size
 
     export default {
         name: "FullCardItem",
@@ -233,6 +234,8 @@
             hotel: Boolean
         },
         computed:{
+
+            //returns current even format
             event_date(){
                 if (this.eDate !== null) {
                     return this.eDate +"T" + this.eTime
@@ -242,12 +245,18 @@
             },
         },
         methods:{
+
+            //validates inputs
             validate () {
                 this.valid = !!this.$refs.form.validate();
             },
+
+            //validates inputs
             validate2 () {
                 this.valid2 = !!this.$refs.form2.validate();
             },
+
+            //validates inputs on trip creation
             async next () {
                 this.validate();
                 if (this.valid) {
@@ -281,6 +290,8 @@
                         })
                 }
             },
+
+            //adds a friend input up to a certain value
             addFriend(){
                 if (this.friends.length < 6){
                     this.friends.push({phoneNumber: ''});
@@ -290,6 +301,8 @@
                 }
             },
 
+            //sends twilio request for each phone number
+            //TODO:rework how this is running
             inviteFriends(){
                 this.friends.forEach((e) => {
                     console.log(e);
@@ -309,6 +322,8 @@
                             console.log(error);
                         });
                 })},
+
+            //saves experience to database using post request
             async saveExperience(){
                 this.validate2();
                 if (this.valid2) {

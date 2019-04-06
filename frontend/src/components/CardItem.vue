@@ -170,6 +170,8 @@
     import FileUpload from '../components/FileUpload'
     import PictureGrid from '../components/PictureGrid'
 
+    //TODO: Drastically minimize component size
+
     export default {
         name: "CardItem",
         components:{
@@ -217,6 +219,8 @@
             card: Object
         },
         methods: {
+
+            //increments the hear based on a post request
                 async redHeartAndIncrement(){
                     await axios(
                    {
@@ -249,8 +253,9 @@
                    })
                  },
 
+            //edits specified place's description by sending a post request
+            //TODO: change to put request
             async editPlace(){
-
                     await axios (
                         {
                             method: 'POST',
@@ -270,6 +275,9 @@
                         console.log(err);
                     })
             },
+
+            //deletes a place
+            //TODO: change to delete request
             async deletePlace(){
                 await axios (
                     {
@@ -293,6 +301,7 @@
                 })
             },
 
+            //posts a comment based on parent relationship
             async userInput(){
                 await axios(
                     {
@@ -363,6 +372,8 @@
             }
         },
         async mounted(){
+
+            //generates the comments in correct nesting order
             function childF(child){
                 child.forEach((c)=> {
                     axios ({
@@ -413,15 +424,16 @@
                  })
             }));
 
-                this.card.votes.forEach((v)=>{
-                    if(v.upvote === true){
+            //if user has voted on something already turn the heart red
+            this.card.votes.forEach((v)=>{
+                if(v.upvote === true){
 
-                        if(v.user === store.state.user.id){
-                            this.heartIconClasses = "fas fa-heart color-red";
-                        }
-                        this.counter++;
+                    if(v.user === store.state.user.id){
+                        this.heartIconClasses = "fas fa-heart color-red";
                     }
-                })
+                    this.counter++;
+                }
+            })
         }
     }
 

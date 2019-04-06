@@ -13,6 +13,8 @@
         methods:{
         },
         async mounted(){
+
+            //creates google map
             try {
                 const google = await gmapsInit();
                 const geocoder = new google.maps.Geocoder();
@@ -29,6 +31,7 @@
                     codeAddress(address, this.trips[i]);
                 }
 
+            //finds locations lat and long and displays pin on the map for each location
             function codeAddress(address, trip) {
                 geocoder.geocode({ 'address': address }, function(results, status) {
                     if (status === google.maps.GeocoderStatus.OK) {

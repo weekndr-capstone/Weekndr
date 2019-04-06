@@ -70,6 +70,8 @@
 
 <script>
     import FileUpload from "./FileUpload";
+
+    //TODO:fix the way this is done
     let today = new Date();
     let dd = today.getDate();
     let mm = today.getMonth() + 1; //January is 0!
@@ -84,6 +86,7 @@
     }
 
     today = yyyy + '-' + mm + '-' + dd;
+
     export default {
         name: "CustomDestinationModal",
         components: {FileUpload},

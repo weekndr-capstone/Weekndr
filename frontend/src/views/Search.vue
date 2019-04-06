@@ -50,6 +50,7 @@
 
         data(){
             return {
+                // Returns all needed information for Search Results and are used to pass as props
                 hotels: store.state.hotelResults,
                 suggested: store.state.suggestedResults,
                 food: store.state.foodResults,

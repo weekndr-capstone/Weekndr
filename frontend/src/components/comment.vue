@@ -23,9 +23,10 @@
             }
         },
         methods:{
+
+            //gets parent id and commits it to store so comment can be registered in the right order
             parent(id){
                 store.commit('changeParentComment',id);
-                console.log(store.state.parentComment)
             }
         }
     }

@@ -21,15 +21,11 @@
             YelpCardItem,
             CardItem
         },
-        props:{
+        props: {
             Results: Array,
             hotel: Boolean
         },
-        data() {
-            return {
-                }
-            }
-        }
+    }
 
 </script>
 

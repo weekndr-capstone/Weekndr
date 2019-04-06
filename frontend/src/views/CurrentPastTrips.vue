@@ -30,31 +30,35 @@
             PastTrip
         },
         computed: {
-        userCurrent() {
-            let all = store.getters.user.trips;
-            let current = new Date();
 
-            return all.filter(t => {
-                let tempEnd = new Date(t.end_date);
-                let tempStart = new Date(t.start_date);
-                if (tempEnd > current && tempStart < current){
-                    return t;
-                }
-            });
-        },
-        userUpcoming() {
-            let all = store.getters.user.trips;
-            let current = new Date();
+            //filters out whether a trip is current based on the start date having past but the end date not yet passing and passes results as props
+            userCurrent() {
+                let all = store.getters.user.trips;
+                let current = new Date();
 
-            return all.filter(t => {
-                let tempEnd = new Date(t.end_date);
-                let tempStart = new Date(t.start_date);
-                if (tempEnd > current && tempStart > current){
-                    return t;
-                }
-            });
-           },
-        },
+                return all.filter(t => {
+                    let tempEnd = new Date(t.end_date);
+                    let tempStart = new Date(t.start_date);
+                    if (tempEnd > current && tempStart < current){
+                        return t;
+                    }
+                });
+            },
+
+            //filters out whether a trip is upcoming based on the start date having not past and passes results as props
+            userUpcoming() {
+                let all = store.getters.user.trips;
+                let current = new Date();
+
+                return all.filter(t => {
+                    let tempEnd = new Date(t.end_date);
+                    let tempStart = new Date(t.start_date);
+                    if (tempEnd > current && tempStart > current){
+                        return t;
+                    }
+                });
+               },
+            },
     }
 </script>
 

@@ -21,6 +21,8 @@
             card: Object
         },
         methods: {
+
+            //used to upload a new file to filestack's api
             fileUpload() {
                 const apikey = 'AsNx10Lk3SEiGRvMmw223z';
                 const client = filestack.init(apikey);

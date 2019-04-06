@@ -24,6 +24,8 @@
             }
         },
         computed: {
+
+            //filters out whether a trip has ended and passes those trips as props
             userTrips() {
                 let all = this.trips;
                 let current = new Date();
