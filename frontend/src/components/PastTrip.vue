@@ -28,6 +28,8 @@
             trip: Object,
         },
         methods:{
+
+            //gets all places belonging to a trip, needed for all itenarary items
             async getPlace(place, index){
                 await axios({
                     method: 'GET',
@@ -40,6 +42,7 @@
                 })
             },
 
+            //gets users in order to get avatar displayable
             async getUser(user, index){
                 await axios({
                     method: 'GET',
@@ -55,6 +58,7 @@
                 })
             },
 
+            //takes just recieved users and runs filestacks api
             displayAvatar(user){
                     const apikey = 'AsNx10Lk3SEiGRvMmw223z';
                     const client = filestack.init(apikey);
@@ -73,10 +77,13 @@
                     });
             },
 
+            //routes to a view of a singular trip
             async routeSingle() {
                 await store.commit('changeCurrentlyViewedTrip', this.trip);
                 router.push('/itenerary')
             },
+
+            //gets first yelp photo based on whether a place in on the trip, if not then it places a placeholder
             pastTripPhoto() {
                 if (this.trip.places[0].image_url !== undefined && this.trip.places[0].image_url !== null){
                     return this.trip.places[0].image_url;
