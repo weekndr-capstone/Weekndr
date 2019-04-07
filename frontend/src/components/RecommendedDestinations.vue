@@ -30,12 +30,16 @@
             place: Object,
         },
         methods:{
+
+            //if picture is available else will put a placeholder
             getImgUrl(pic) {
                 if (pic == null){
                     return require('../assets/weekdnr_logo.svg')
                 }
                 return require('../assets/'+ pic)
             },
+
+            //searches the city that corresponds with the name passed as prop
             async search(searchCity){
                 store.commit('changeLocation', searchCity);
                 this.isLoading = true;

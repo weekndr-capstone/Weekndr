@@ -101,13 +101,18 @@
 
         },
         methods: {
+
+            //validates user input
             validate () {
                 this.valid = !!this.$refs.form.validate();
             },
+
+            //checks whether axios requests are running
             doneLoading(){
                 this.isLoading = false
-            }
-            ,
+            },
+
+            //searches location that the user has typed, then routes to search view
             async searchLocation(){
                 this.validate();
                 if (this.valid) {

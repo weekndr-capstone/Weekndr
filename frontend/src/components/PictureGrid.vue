@@ -35,6 +35,8 @@
             photos: Object
         },
         mounted() {
+
+            //for each photo in a place it will run filestack and display images only when button has been clicked and this is mounted
             this.photos.forEach(photo => {
                 const apikey = 'AsNx10Lk3SEiGRvMmw223z';
                 const client = filestack.init(apikey);

@@ -93,11 +93,15 @@
             }
         },
         mounted(){
+
+            //runs the method for getting places on mount
              this.trip.places.forEach((place,index) => {
                 if (place.id === undefined) {
                     this.getPlace(place, index);
                 }
             });
+
+            //runs the method for getting users on mount
             this.trip.users.forEach((user,index) => {
                 if (user.id === undefined){
                     this.getUser(user, index);

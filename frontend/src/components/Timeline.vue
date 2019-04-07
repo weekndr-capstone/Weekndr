@@ -33,6 +33,9 @@
             }
         },
         methods: {
+
+            //display currect time for individual places
+            //TODO: FIX THIS
             time(event_date) {
                 if (event_date !== null) {
                     let firstSplit = event_date.split('T')[1];
@@ -57,6 +60,8 @@
             }
         },
         computed: {
+
+            //filters out places based on whether they are not suggested
             trip(){
                 return store.state.currentViewedTrip.places.filter(place => {
                     if (place.suggested === false){
@@ -64,6 +69,9 @@
                     }
                 })
             },
+
+            //current way of getting all date tabs to be correct, only for 31 day months
+            //TODO: REALLY FIX THIS
             dates(){
                 let startsplit = store.state.currentViewedTrip.start_date.split('-')[2];
                 let secondstartsplit = startsplit.split('T')[0];
@@ -97,6 +105,8 @@
                 }
                 return dates;
             },
+
+            //filters out places based on there dates
             placesByDate(){
                 let places = [];
                 this.dates.forEach(date => {
