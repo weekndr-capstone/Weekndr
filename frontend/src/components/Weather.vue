@@ -53,15 +53,13 @@
                 weatherIconClass: ['fa', ''],
             }
         },
-        mounted() {
-            this.getWeatherCall();
-        },
         computed: {
             direction() {
                 return store.getters.weather
             },
         },
         methods: {
+            //sends axios request to darksky api
             getWeatherCall: function () {
                 const lat = this.direction.geometry.location.lat;
                 const lon = this.direction.geometry.location.lng;
@@ -86,6 +84,8 @@
                     console.log(err);
                 })
             },
+
+            //updates data on weather conditions
             onSuccess: function (data) {
                 this.weatherLoaded = true;
                 this.temp = Math.round(data.currently.temperature);
@@ -101,6 +101,7 @@
             setCondition: function (icon) {
                 return this.weatherConditions[icon][1];
             },
+            //converts UNIX time stamp into readable date
             timeConverter: function (UNIX_timestamp) {
                 let a = new Date(UNIX_timestamp * 1000);
                 let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -113,7 +114,10 @@
                 let time = month + ' ' + date;
                 return time;
             }
-        }
+        },
+        mounted() {
+            this.getWeatherCall();
+        },
     }
 </script>
 

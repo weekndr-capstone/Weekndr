@@ -27,6 +27,8 @@
             hotel: Boolean
         },
         methods: {
+
+            //routes to single view depending on if clicked, also determines if component clicked is a hotel
             async routeSingle() {
                 if (this.hotel === true){
                     await store.commit('changeSingleResult', this.card);

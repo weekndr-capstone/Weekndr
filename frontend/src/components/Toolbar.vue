@@ -192,6 +192,9 @@
             validate2 () {
                 this.valid2 = !!this.$refs.form2.validate();
             },
+
+            //current method for recieving places after initial login
+            //TODO: UPDATE HOW PLACES ARE GATHERED, JAVA SIDE
             async getPlace(place, index){
                 await axios({
                     method: 'GET',
@@ -204,6 +207,8 @@
                     Vue.set(temp.trips.places,index,res.data)
                 })
             },
+
+            //sends axios post request for a user to sign in
             signup(){
                 this.validate();
                 console.log(this.valid);
@@ -220,6 +225,9 @@
                     })
                 }
             },
+
+            //sends an axios post request to login user
+            //TODO: ADD MORE ERROR FUNCTIONALITY
             login(){
                 this.validate2();
                 if (this.valid2) {
@@ -257,6 +265,8 @@
                 this.Login = false;
                 router.push('/');
             },
+
+            //on signup if user elects to have a profile picture, sends requests to filestack api
             fileUpload() {
                 const apikey = 'AsNx10Lk3SEiGRvMmw223z';
                 const client = filestack.init(apikey);
@@ -272,6 +282,8 @@
                 };
                 client.picker(options).open();
             },
+
+            //after login display avatar
             displayAvatar(){
                 const apikey = 'AsNx10Lk3SEiGRvMmw223z';
                 const client = filestack.init(apikey);
