@@ -21,9 +21,6 @@
                 </v-flex>
             </v-layout>
         </v-container>
-        <!--<h2>Food</h2>-->
-        <!--<br>-->
-        <!--<CardCarousel :results = "test" :hotel="false"/>-->
     </div>
 </template>
 
