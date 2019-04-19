@@ -21,6 +21,9 @@
                 </v-flex>
             </v-layout>
         </v-container>
+        <!--<h2>Food</h2>-->
+        <!--<br>-->
+        <!--<CardCarousel :results = "test" :hotel="false"/>-->
     </div>
 </template>
 
@@ -28,14 +31,40 @@
 <script>
     import Banner from '../components/Banner'
     import store from '../store'
-    import RecommendedDestinations from "../components/RecommendedDestinations";
+    import RecommendedDestinations from "../components/RecommendedDestinations"
+    import CardCarousel from "../components/CardCarousel"
 
   export default {
+    components: {
+        RecommendedDestinations,
+        Banner,
+        CardCarousel
+    },
     data(){
         return {
             randomIndex1: null,
             randomIndex2: null,
             randomIndex3: null,
+            test:[
+                  {name: 'TEST1', image_url: 'g', id: 11, price: '$$', rating: 4.5},
+                  {name: 'TEST2', image_url: 'g', id: 12, price: '$$', rating: 4.5},
+                  {name: 'TEST3', image_url: 'g', id: 13, price: '$$', rating: 4.5},
+                  {name: 'TEST1', image_url: 'g', id: 14, price: '$$', rating: 4.5},
+                  {name: 'TEST2', image_url: 'g', id: 15, price: '$$', rating: 4.5},
+                  {name: 'TEST3', image_url: 'g', id: 16, price: '$$', rating: 4.5},
+                  {name: 'TEST1', image_url: 'g', id: 17, price: '$$', rating: 4.5},
+                  {name: 'TEST2', image_url: 'g', id: 18, price: '$$', rating: 4.5},
+                  {name: 'TEST3', image_url: 'g', id: 19, price: '$$', rating: 4.5},
+                  {name: 'TEST1', image_url: 'g', id: 10, price: '$$', rating: 4.5},
+                  {name: 'TEST2', image_url: 'g', id: 1, price: '$$', rating: 4.5},
+                  {name: 'TEST3', image_url: 'g', id: 2, price: '$$', rating: 4.5},
+                  {name: 'TEST1', image_url: 'g', id: 3, price: '$$', rating: 4.5},
+                  {name: 'TEST2', image_url: 'g', id: 4, price: '$$', rating: 4.5},
+                  {name: 'TEST3', image_url: 'g', id: 5, price: '$$', rating: 4.5},
+                  {name: 'TEST1', image_url: 'g', id: 6, price: '$$', rating: 4.5},
+                  {name: 'TEST2', image_url: 'g', id: 7, price: '$$', rating: 4.5},
+                  {name: 'TEST3', image_url: 'g', id: 8, price: '$$', rating: 4.5},
+                ],
 
             places:[
                 {id: 1, name: 'London', url: 'London.jpg'},
@@ -55,21 +84,17 @@
             ],
         }
     },
-      mounted () {
-          store.commit('changeCurrentlyViewedTrip', '');
-
-          this.randomIndex1 = Math.floor(Math.random() * 4);
-          this.randomIndex2 = Math.floor(Math.random() * 4) + 4;
-          this.randomIndex3 = Math.floor(Math.random() * 4) + 8;
-      },
-    components: {
-        RecommendedDestinations,
-        Banner,
-    },
     computed: {
         userTrips(){
             return store.getters.user
         }
+    },
+    mounted () {
+        store.commit('changeCurrentlyViewedTrip', '');
+
+        this.randomIndex1 = Math.floor(Math.random() * 4);
+        this.randomIndex2 = Math.floor(Math.random() * 4) + 4;
+        this.randomIndex3 = Math.floor(Math.random() * 4) + 8;
     }
   }
 </script>

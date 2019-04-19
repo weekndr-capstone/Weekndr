@@ -76,11 +76,11 @@
     .v-card {
         height: 21em;
     }
-    @media only screen and (max-width: 430px) {
-        .v-card {
-            width: 7em;
-        }
-    }
+    /*@media only screen and (max-width: 430px) {*/
+        /*.v-card {*/
+            /*width: 7em;*/
+        /*}*/
+    /*}*/
     @media only screen and (min-width: 430px) and (max-width: 500px) {
         .v-card {
             width: 9em;
