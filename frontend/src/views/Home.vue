@@ -29,13 +29,11 @@
     import Banner from '../components/Banner'
     import store from '../store'
     import RecommendedDestinations from "../components/RecommendedDestinations"
-    import CardCarousel from "../components/CardCarousel"
 
   export default {
     components: {
         RecommendedDestinations,
-        Banner,
-        CardCarousel
+        Banner
     },
     data(){
         return {
