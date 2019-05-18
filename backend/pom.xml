@@ -71,6 +71,8 @@
                                         <include>static/</include>
                                         <include>index.html</include>
                                         <include>favicon.ico</include>
+                                        <include>manifest.json</include>
+                                        <include>service-worker.js</include>
                                     </includes>
                                 </resource>
                             </resources>

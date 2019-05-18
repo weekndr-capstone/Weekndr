@@ -1,0 +1,26 @@
+{
+  "dir" : "ltr",
+  "lang" : "en",
+  "name" : "Weekndr",
+  "scope" : "/",
+  "display" : "browser",
+  "start_url" : "https://weekndr.world/",
+  "short_name" : "Weekndr",
+  "theme_color" : "transparent",
+  "description" : "",
+  "orientation" : "any",
+  "background_color" : "transparent",
+  "related_applications" : "",
+  "prefer_related_applications" : "false",
+  "generated" : "true",
+  "icons" : [
+    {
+      "src": "https://weekndr.world/favicon.ico",
+      "sizes": "16x16"
+    },
+    {
+      "src": "https://weekndr.world/favicon.ico",
+      "sizes": "16x16"
+    }
+  ]
+}
