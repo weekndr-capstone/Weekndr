@@ -6,10 +6,10 @@
   "display" : "standalone",
   "start_url" : "https://weekndr.world/",
   "short_name" : "Weekndr",
-  "theme_color" : "transparent",
+  "theme_color": "#E96445",
   "description" : "",
   "orientation" : "any",
-  "background_color" : "transparent",
+  "background_color" : "white",
   "related_applications" : "",
   "prefer_related_applications" : "false",
   "generated" : "true",
@@ -23,13 +23,12 @@
       "sizes": "16x16"
     },
     {
-      "src": "https://weekndr.world/static/img/Weekndr192.png",
+      "src": "https://weekndr.world/weekndr192.png",
       "sizes": "192x192"
     },
     {
-      "src": "https://weekndr.world/static/img/Weekndr512.png",
+      "src": "https://weekndr.world/weekndr512.png",
       "sizes": "512x512"
     }
-
   ]
 }

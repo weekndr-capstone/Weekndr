@@ -73,6 +73,8 @@
                                         <include>favicon.ico</include>
                                         <include>manifest.json</include>
                                         <include>service-worker.js</include>
+                                        <include>weekndr192.png</include>
+                                        <include>weekndr512.png</include>
                                     </includes>
                                 </resource>
                             </resources>
