@@ -4,7 +4,7 @@
   "name" : "Weekndr",
   "scope" : "/",
   "display" : "standalone",
-  "start_url" : "https://localhost:8080",
+  "start_url" : "https://weekndr.world/",
   "short_name" : "Weekndr",
   "theme_color": "#E96445",
   "description" : "",

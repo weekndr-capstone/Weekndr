@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <button class="ad2hs-prompt">Install Web App</button>
     <router-view></router-view>
   </v-app>
 </template>
@@ -58,6 +59,24 @@
       .container {
           max-width: 1200px !important;
       }
+  }
+
+  .ad2hs-prompt {
+    background-color: #E96445; /* Blue */
+    border: none;
+    display: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    position: absolute;
+    margin: 0 1rem 1rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: calc(100% - 32px);
+    z-index: 2;
   }
 
 </style>
